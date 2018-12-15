@@ -229,7 +229,7 @@
 
                     <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
                         <div class="sidebar-user-avatar">
-                            <a href="page_ready_user_profile.php">
+                            <a href="../home/perfil.php">
                                 <img src="../../img/usuario/<?= $_SESSION['imagen'] ?>" alt="avatar">
                             </a>
                         </div>

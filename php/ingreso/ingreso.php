@@ -77,7 +77,7 @@
 
  <div class="modal fade modal-side-fall" id="md_cambiar_contra" aria-hidden="true"
       aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">

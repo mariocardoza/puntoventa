@@ -18,3 +18,17 @@ Stack trace:
 [22-Nov-2018 14:15:11 UTC] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/gentedecaa19a/sys/Conexion/administracion/data_json.php on line 37
 [22-Nov-2018 14:15:13 UTC] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/gentedecaa19a/sys/Conexion/administracion/data_json.php on line 37
 [22-Nov-2018 14:15:21 UTC] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/gentedecaa19a/sys/Conexion/administracion/data_json.php on line 37
+[11-Dec-2018 10:37:26 America/El_Salvador] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'estudjl6_puntoventa.persona' doesn't exist in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empleado.php:90
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empleado.php(90): PDOStatement->execute()
+#1 /home1/estudjl6/public_html/sys/puntoventa/Conexion/administracion/data_json.php(21): Empleado::modal_editar('1')
+#2 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empleado.php on line 90
+[11-Dec-2018 10:45:57 America/El_Salvador] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'estudjl6_puntoventa.persona' doesn't exist in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empleado.php:90
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empleado.php(90): PDOStatement->execute()
+#1 /home1/estudjl6/public_html/sys/puntoventa/Conexion/administracion/data_json.php(21): Empleado::modal_editar('8')
+#2 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empleado.php on line 90
+[11-Dec-2018 10:48:26 America/El_Salvador] PHP Parse error:  syntax error, unexpected '}', expecting ';' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empleado.php on line 194
+[11-Dec-2018 10:48:40 America/El_Salvador] PHP Parse error:  syntax error, unexpected '}', expecting ';' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empleado.php on line 194

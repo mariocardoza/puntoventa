@@ -2,26 +2,26 @@
 	@session_start();
 	include_once("../../Conexion/Conexion.php");
     if(isset($_POST["data_id"]) && $_POST['data_id'] == 'cambiar_contra'){
-        $sql="UPDATE `tb_usuarios` SET `estado` = 1, `contrasena` = password('$_POST[contra]') WHERE `codigo` = '$_POST[codigo]'";
+        $sql="UPDATE `tb_usuario` SET `estado` = 1, `pass` = password('$_POST[contra]') WHERE `id` = '$_POST[codigo]'";
         $contando=$codigo=$email=$level=$nombre=$telefono="";
         try {
             $comando = "";
             $comando = Conexion::getInstance()->getDb()->prepare($sql);
             $comando->execute();
             $sql=" SELECT
-                    p.codigo AS cod_persona,
+                    p.id AS cod_persona,
                     p.nombre,
                     p.telefono,
                     p.email,
                     u.nivel,
                     u.estado,
-                    u.contrasena,
-                    u.codigo AS cod_usuario,
-                    u.imagen
+                    u.pass,
+                    u.id AS cod_usuario,
+                    p.imagen
                 FROM
                     tb_persona AS p
-                    INNER JOIN tb_usuarios AS u ON p.email = u.email_persona
-                WHERE u.codigo='$_POST[codigo]';";
+                    INNER JOIN tb_usuario AS u ON p.email = u.email
+                WHERE u.id='$_POST[codigo]';";
             $comando = "";
             $comando = Conexion::getInstance()->getDb()->prepare($sql);
             $comando->execute();
@@ -66,7 +66,8 @@
                 u.nivel,
                 u.estado,
                 u.pass,
-                p.imagen
+                p.imagen,
+                u.id as cod_usuario
             FROM
                 tb_persona AS p
                 INNER JOIN tb_usuario AS u ON p.email = u.email

@@ -94,7 +94,7 @@ if($result[0] == 1)$datos = $result[1];
                   <td nowrap class="text-center actions">
                     <div class="btn-group">
                       <a onclick="<?php echo "editar(".$row[id].")" ?>" class="btn btn-warning btn-xs" href="#"><span class="fa fa-edit"></span></a>
-                    <a onclick="<?php echo "eliminar(".$row[id].")" ?>" class="btn btn-danger btn-xs" href="#"><span class="fa fa-remove"></span></a>
+                    <a onclick="<?php echo "darbaja(".$row[id].",'tb_persona','la persona')" ?>" class="btn btn-danger btn-xs" href="#"><span class="fa fa-remove"></span></a>
                     </div>
                   </td>
                 </tr>
@@ -140,8 +140,6 @@ if($result[0] == 1)$datos = $result[1];
                         <label class="control-label" for="rol">Dirección(*):</label>
                         <textarea name="direccion" required class="form-control" id="n_direccion" cols="30" rows="4"></textarea>
                     </div>
-                </div>
-                <div class="col-md-6">
                     <div class="form-group"> 
                         <label class="control-label" for="rol">DUI(*):</label>
                         <input type="text" required name="dui" id="n_dui" class="form-control dui">
@@ -149,6 +147,13 @@ if($result[0] == 1)$datos = $result[1];
                     <div class="form-group"> 
                         <label class="control-label" for="rol">NIT(*):</label>
                         <input type="text" required name="nit" id="n_nit" class="form-control nit">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" class="control-label">¿Usuario del sistema?</label>
+                      <label for="">No</label><input type="radio" name="es_usuario" value="no" checked>
+                      <label for="">Si</label><input type="radio" name="es_usuario" value="si">
                     </div>
                     <div class="form-group"> 
                         <label class="control-label" for="rol">Fecha de nacimiento(*):</label>
@@ -272,6 +277,20 @@ if($result[0] == 1)$datos = $result[1];
                 esto.removeClass("hide");
             }
         });*/
+        $(document).on("blur","#n_nit", function(e){
+          e.preventDefault();
+          var valor=$(this);
+          if(valor.val() != ""){
+            validar_nit(valor.val(),"tb_persona",valor);
+          }
+        });
+        $(document).on("blur","#n_dui", function(e){
+          e.preventDefault();
+          var valor=$(this);
+          if(valor.val() != ""){
+            validar_dui(valor.val(),"tb_persona",valor);
+          }
+        });
         $(document).on('blur', '#n_email', function(event) {
             event.preventDefault();
             var valor = $(this);
@@ -346,22 +365,6 @@ if($result[0] == 1)$datos = $result[1];
                 });
             }
         });
-
-        //validacion del formulario
-        /*$("form[name='fm_nuevo_empleado']").validate({
-            ignore: ":hidden:not(select)",
-            rules: {
-                n_nombre: "required",
-            },
-            
-            messages: {
-                n_nombre: "Complete este campo por favor",            
-            },
-            submitHandler: function(form) {
-              //form.submit();
-              guardar();
-            }
-        });*/
 
         $(document).on("click", "#btn_nuevo", function (e) {
             $(".guarda1").addClass("hide");
@@ -603,68 +606,4 @@ if($result[0] == 1)$datos = $result[1];
       });
     }
 
-    // funcion eliminar usuario
-    function eliminar(id){
-      /*swal({
-        title: '¿Está seguro de eliminar el empleado?',
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'si, continuar!'
-      }).then((result) => {
-        if (result.value) {
-          console.log("aqui");
-          $.ajax({
-              url:'../../Conexion/administracion/data_json.php',
-              type:'GET',
-              dataType:'json',
-              data:{data_id:'eliminar_empleado',id:id},
-              success: function(json){
-                if(json[0]=='1'){
-                      iziToast.success({
-                          title: '<?php echo EXITO; ?>',
-                          message: '<?php echo ELIMINAR_MENSAJE;?>',
-                          timeout: 3000,
-                      });
-                      var timer=setInterval(function(){
-                          location.reload();
-                          clearTimeout(timer);
-                      },3500);
-                  }else
-                    iziToast.error({
-                        title: '<?php echo ERROR; ?>',
-                        message: '<?php echo ERROR_MENSAJE;?>',
-                        timeout: 3000,
-                    });
-               }
-          });
-        }
-      })
-      */
-      $.ajax({
-              url:'../../Conexion/administracion/data_json.php',
-              type:'GET',
-              dataType:'json',
-              data:{data_id:'eliminar_empleado',id:id},
-              success: function(json){
-                if(json[0]=='1'){
-                      iziToast.success({
-                          title: '<?php echo EXITO; ?>',
-                          message: '<?php echo ELIMINAR_MENSAJE;?>',
-                          timeout: 3000,
-                      });
-                      var timer=setInterval(function(){
-                          location.reload();
-                          clearTimeout(timer);
-                      },3500);
-                  }else
-                    iziToast.error({
-                        title: '<?php echo ERROR; ?>',
-                        message: '<?php echo ERROR_MENSAJE;?>',
-                        timeout: 3000,
-                    });
-               }
-          });
-    }
 </script>

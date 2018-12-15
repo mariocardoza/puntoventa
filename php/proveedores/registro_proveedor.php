@@ -56,7 +56,7 @@ include_once("../../Conexion/Empleado.php");
 
     <!-- Product Edit Content -->
         <!-- General Data Content -->
-        <form action="#" method="post" name="fm_cliente" id="fm_cliente" class="form-horizontal form-bordered">
+        <form action="#" method="post" name="fm_proveedor" id="fm_proveedor" class="form-horizontal form-bordered">
             <div class="row">
         <div class="col-lg-12">
             <div class="block">
@@ -68,8 +68,9 @@ include_once("../../Conexion/Empleado.php");
             <div class="form-group">
                 <label class="col-md-3 control-label" for="nombre">Nombre</label>
                 <div class="col-md-9">
-                    <input type="hidden" name="data_id" value="nuevo_cliente">
-                    <input required type="text" id="nombre" name="nombre" class="form-control" placeholder="Digite el nombre del nombre">
+                    <input type="hidden" name="data_id" value="nuevo_proveedor">
+                    <input type="hidden" name="codigo_oculto" value="<?php echo date('Yidisus') ?>">
+                    <input required type="text" id="nombre" name="nombre" class="form-control" placeholder="Digite el nombre del proveedor">
                 </div>
             </div>
             <div class="form-group">
@@ -81,30 +82,29 @@ include_once("../../Conexion/Empleado.php");
             <div class="form-group">
                 <label class="col-md-3 control-label" for="categoria">NIT</label>
                 <div class="col-md-9">
-                    <input type="text" name="nit" id="nit" class="form-control nit">
+                    <input type="text" required name="nit" id="nit" class="form-control nit">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="telefono">Número de teléfono</label>
+                <div class="col-md-9">
+                    <input type="text" required name="telefono" id="telefono" class="form-control telefono">
                 </div>
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <label class="col-md-3 control-label" for="telefono">Número de teléfono</label>
-                <div class="col-md-9">
-                    <input type="text" name="telefono" id="telefono" class="form-control telefono">
-                </div>
-            </div>
-
-            <div class="form-group">
                 <label class="col-md-3 control-label" for="email">Email</label>
                 <div class="col-md-9">
                     <div class="form-group">
-                        <input type="email" id="email" name="email" class="form-control" >
+                        <input type="email" required id="email" name="email" class="form-control" >
                     </div>
                 </div>
             </div>
               <div class="form-group">
                         <label for="" class="col-md-3 control-label">Número de registro</label>
                         <div class="col-md-9">
-                            <input type="text" name="nrc" id="nrc" class="form-control">
+                            <input type="text" required name="nrc" id="nrc" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
@@ -177,7 +177,7 @@ include_once("../../Conexion/Empleado.php");
 <!-- END Page Content -->
 <?php include '../../inc/page_footer.php'; ?>
 <?php include '../../inc/template_scripts.php'; ?>
-<script src="cliente.js?cod=<?=$cod?>"></script>
+<script src="proveedor.js?cod=<?=$cod?>"></script>
 
 <!-- Load and execute javascript code used only in this page -->
 <script src="../../js/helpers/ckeditor/ckeditor.js"></script>      

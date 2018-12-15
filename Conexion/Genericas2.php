@@ -35,7 +35,10 @@
 			try {
 				$comando = Conexion::getInstance()->getDb()->prepare($sql);
 	       		$comando->execute();
-	       		$resultado = $comando->fetchAll();
+	       		while ($row=$comando->fetch(PDO::FETCH_ASSOC)) {
+	       			$resultado=$row;
+	       		}
+	       		//$resultado = $comando->fetchAll(PDO::FETCH_ASSOC);
 	       		return array("1",$resultado,$sql);
 				//echo json_encode(array("exito" => $exito));
 			} catch (Exception $e) {
@@ -229,7 +232,7 @@
 		public static function encriptar_datos($datos, $key){
 
 		}
-		public static function insertar_generica($array_values){
+		public static function insertar_generica($tablita,$array_values){
 			$tabla = "";
 	 		$values = "";
 	 		$llaves = "";
@@ -248,21 +251,35 @@
 					}
 				}
 	 		}
-			$sql ="INSERT INTO $tabla($llaves)values($values)";;
+			$sql ="INSERT INTO $tablita($llaves)values($values)";
+			//return array(1,$sql);
 			try {
 				$comando = Conexion::getInstance()->getDb()->prepare($sql);
 	       		$comando->execute();
-	       		return array("1","Insertado");
+	       		return array(1,"Insertado");
 				//echo json_encode(array("exito" => $exito));
 			} catch (Exception $e) {
-				return array("0","error",$e->getMessage(),$e->getLine(),$sql);
+				return array(-1,"error",$e->getMessage(),$e->getLine(),$sql);
 	            //echo json_encode(array("error" => $error));
 			}
 		}
+//funcion para dar de baja (cambiar estado a 2)
+		public static function darbaja($tabla,$id){
+		$sql="UPDATE $tabla SET estado=2 WHERE id=$id";
+		try{
+			$comando=Conexion::getInstance()->getDb()->prepare($sql);
+			$comando->execute();
+			return array(1,"exito",$sql);
+		}catch(Exception $e){
+			return array(-1,$e->getMessage(),$e->getLine(),$sql);
+		}
+
+		
+	}
 
 		//insert into table ()values()
 		//update table set campo = value()
-		public static function actualizar_generica($array_values){
+		public static function actualizar_generica($tablita,$array_values){
 			//preparo variables
 			$tabla = "";
 			$wherid="";
@@ -293,7 +310,7 @@
 				}
 	 		}
 
-	 		$sql ="UPDATE $tabla SET $sentencia_update WHERE $wherid = '$valor_whereid'";//String de update creada
+	 		$sql ="UPDATE $tablita SET $sentencia_update WHERE $wherid = '$valor_whereid'";//String de update creada
 	 		/*return array("1","2",$sql,$as,$agregando_as);
 	 		exit();*/
 			try {

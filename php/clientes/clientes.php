@@ -96,7 +96,7 @@ if($juridicos[0] == 1)$datos2 = $juridicos[1];
                     <div class="btn-group">
                       <a class="btn btn-warning" onclick="<?php echo "editar(".$persona['id'].")" ?>" href="#"><i class="fa fa-edit"></i></a>
                       <!--a id="btn_editar" data-id="<?php echo $persona[id] ?>" class="btn btn-warning" href="#"><i class="fa fa-edit"></i></a-->
-                      <a onclick="<?php echo "eliminar(".$persona['id'].")" ?>" class="btn btn-danger" href="#"><i class="fa fa-remove"></i></a>
+                      <a onclick="<?php echo "darbaja(".$persona['id'].",'tb_cliente','el cliente')" ?>"  class="btn btn-danger" href="#"><i class="fa fa-remove"></i></a>
                     </div>
                   </td>
                 </tr>

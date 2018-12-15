@@ -51,6 +51,7 @@
 </style>
 
 <script type="text/javascript">
+  var val_tel=false;
   var EXITO="Excelente";
   var EXITO_MENSAJE="Datos almacenados correctamente";
   var EXITO_ACTUALIZAR="Datos Actualizados";
@@ -86,7 +87,7 @@
       equalTo: "Por favor, escribe el mismo valor de nuevo.",
       accept: "Por favor, escribe un valor con una extensión aceptada.",
       maxlength: jQuery.validator.format("Por favor, no escribas más de {0} caracteres."),
-      minlength: jQuery.validator.format("Por favor, no escribas menos de {0} caracteres."),
+      minlength: jQuery.validator.format("Por favor, digita al menos {0} caracteres."),
       rangelength: jQuery.validator.format("Por favor, escribe un valor entre {0} y {1} caracteres."),
       range: jQuery.validator.format("Por favor, escribe un valor entre {0} y {1}."),
       max: jQuery.validator.format("Por favor, escribe un valor menor o igual a {0}."),
@@ -253,6 +254,236 @@
       "bInfo": false
     });
   }
+
+  // funcion eliminar usuario
+    function darbaja(id,tabla,nombre){
+      swal({
+       title: '¿Desea continuar?',
+       text: "¡Se deshabilitará "+nombre+"!",
+       type: 'warning',
+       showCancelButton: true,
+       cancelButtonText:"Cancelar",
+       confirmButtonColor: 'red',
+       cancelButtonColor: '#3085d6',
+       confirmButtonText: '¡Si, continuar!'
+   }).then(function () {
+    $.ajax({
+      url:'../json/json_generico.php',
+      type:'POST',
+      dataType:'json',
+      data:{data_id:'dar_baja',id:id,tabla:tabla},
+      success: function(json){
+        if(json[0]==1){
+              iziToast.success({
+                  title: ELIMINAR,
+                  message: ELIMINAR_MENSAJE,
+                  timeout: 3000,
+              });
+              var timer=setInterval(function(){
+                  location.reload();
+                  clearTimeout(timer);
+              },3500);
+          }else
+            iziToast.error({
+                title: ERROR,
+                message: ERROR_MENSAJE,
+                timeout: 3000,
+            });
+       }
+      });
+   });
+}
+
+//funcion para validar nit
+function validar_nit(nit,tabla,valor){
+  $.ajax({
+    url: "../json/json_generico.php",
+    dataType: "json",
+    data: { data_id: "val_nit", nit: nit,tabla:tabla },
+    method: "POST",
+    success: function(json) {
+        console.log(json);
+        if (json[1]) {
+            val_nrc = false;
+            swal({
+                title: '¡Advertencia!',
+                html: $('<div>')
+                    .addClass('some-class')
+                    .text('El NIT ingresado ya fue registrado. Por favor ingrese uno diferente'),
+                animation: false,
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                customClass: 'animated tada',
+                //timer: 2000
+            }).then(function(result) {
+                //$("#md_cantidad").focus();
+                valor.val("");
+                valor.focus();
+            });
+        } else {
+            val_email = true;
+            $(".valida1").trigger("click");
+        }
+
+    }
+});
+}
+
+function validar_correo(email,tabla,valor){
+  $.ajax({
+    url: "../json/json_generico.php",
+    dataType: "json",
+    data: { data_id: "val_email", email: email,tabla:tabla},
+    method: "POST",
+    success: function(json) {
+        console.log(json);
+        if (json[1]) {
+            val_email = false;
+            swal({
+                title: '¡Advertencia!',
+                html: $('<div>')
+                    .addClass('some-class')
+                    .text('El E-mail ingresado ya fue registrado. Por favor ingrese uno diferente'),
+                animation: false,
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                customClass: 'animated tada',
+                //timer: 2000
+            }).then(function(result) {
+                //$("#md_cantidad").focus();
+                valor.val("");
+                valor.focus();
+            });
+        } else {
+            val_email = true;
+            $(".valida1").trigger("click");
+        }
+
+    }
+});
+}
+
+function validar_telefono(telefono,tabla,valor){
+  $.ajax({
+    url: "../json/json_generico.php",
+    dataType: "json",
+    data: { data_id: "val_tel", telefono: telefono,tabla:tabla },
+    method: "POST",
+    success: function(json) {
+        console.log(json);
+        if (json[1]) {
+            val_tel = false;
+            swal({
+                title: '¡Advertencia!',
+                html: $('<div>')
+                    .addClass('some-class')
+                    .text('El teléfono ingresado ya fue registrado. Por favor ingrese uno diferente'),
+                animation: false,
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                customClass: 'animated tada',
+                //timer: 2000
+            }).then(function(result) {
+                //$("#md_cantidad").focus();
+                valor.val("");
+                valor.focus();
+            });
+        } else {
+            val_tel = true;
+            $(".validar").trigger("click");
+        }
+
+    }
+});
+}
+
+function validar_nrc(nrc,tabla,valor){
+  $.ajax({
+    url: "../json/json_generico.php",
+    dataType: "json",
+    data: { data_id: "val_nrc", nrc: nrc,tabla:tabla },
+    method: "POST",
+    success: function(json) {
+        console.log(json);
+        if (json[1]) {
+            val_nrc = false;
+            swal({
+                title: '¡Advertencia!',
+                html: $('<div>')
+                    .addClass('some-class')
+                    .text('El NRC ingresado ya fue registrado. Por favor ingrese uno diferente'),
+                animation: false,
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                customClass: 'animated tada',
+                //timer: 2000
+            }).then(function(result) {
+                //$("#md_cantidad").focus();
+                valor.val("");
+                valor.focus();
+            });
+        } else {
+            val_email = true;
+            $(".valida1").trigger("click");
+        }
+
+    }
+});
+}
+
+function validar_dui(dui,tabla,valor){
+  $.ajax({
+    url: "../json/json_generico.php",
+    dataType: "json",
+    data: { data_id: "val_dui", dui: dui,tabla:tabla },
+    method: "POST",
+    success: function(json) {
+        console.log(json);
+        if (json[1]) {
+            val_nrc = false;
+            swal({
+                title: '¡Advertencia!',
+                html: $('<div>')
+                    .addClass('some-class')
+                    .text('El DUI ingresado ya fue registrado. Por favor ingrese uno diferente'),
+                animation: false,
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                customClass: 'animated tada',
+                //timer: 2000
+            }).then(function(result) {
+                //$("#md_cantidad").focus();
+                valor.val("");
+                valor.focus();
+            });
+        } else {
+            val_email = true;
+            $(".valida1").trigger("click");
+        }
+
+    }
+});
+}
+
+function guardar_exito(redireccion){
+  iziToast.success({
+    title: EXITO,
+    message: EXITO_MENSAJE,
+    timeout: 3000,
+  });
+  var timer=setInterval(function(){
+  location.href = redireccion+".php"
+  clearTimeout(timer);
+  },3500);
+}
+function guardar_error(){
+  swal.close();
+      iziToast.error({
+        title: ERROR,
+        message: ERROR_MENSAJE,
+        timeout: 3000,
+      });
+}
   jQuery('img.svg').each(function(){
   var $img = jQuery(this);
   var imgID = $img.attr('id');

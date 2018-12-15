@@ -86,8 +86,8 @@ if($proveedores[0] == 1)$datos = $proveedores[2];
                   <td><?php echo $proveedor['email'] ?></td>
                   <td>
                     <div class="btn-group">
-                      <a class="btn btn-warning" onclick="<?php echo "editarj(".$proveedor['id'].")" ?>" href="#"><i class="fa fa-edit"></i></a>
-                      <a onclick="<?php echo "eliminar(".$proveedor['id'].")" ?>" class="btn btn-danger" href="#"><i class="fa fa-remove"></i></a>
+                      <a class="btn btn-warning" onclick="<?php echo "editar(".$proveedor['id'].")" ?>" href="#"><i class="fa fa-edit"></i></a>
+                      <a onclick="<?php echo "darbaja(".$proveedor['id'].",'tb_proveedor','el proveedor')" ?>" class="btn btn-danger" href="#"><i class="fa fa-remove"></i></a>
                     </div>
                   </td>
                 </tr>

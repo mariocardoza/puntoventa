@@ -37,6 +37,7 @@ date_default_timezone_set('America/El_Salvador');
         <!-- Stylesheets -->
         <!-- Bootstrap is included in its original form, unaltered -->
         <link rel="stylesheet" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../css/icheck-bootstrap.min.css">
 
         <!-- Related styles of various icon packs and plugins -->
         <link rel="stylesheet" href="../../css/plugins.css">

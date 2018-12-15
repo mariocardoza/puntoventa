@@ -84,7 +84,13 @@ $primary_nav = array(
                 'name'  => 'Usuarios',
                 'url'   => '../../php/administrar/usuarios.php',
                 'url_real'=> 'usuarios.php'
+            ),
+            array(
+                'name'  => 'Cargos de empleados',
+                'url'   => '../../php/administrar/cargos.php',
+                'url_real'=> 'cargos.php'
             )
+
         )
     ),
      array(

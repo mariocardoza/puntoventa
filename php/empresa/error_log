@@ -1,0 +1,38 @@
+[14-Dec-2018 15:40:15 UTC] PHP Warning:  json_encode() expects parameter 2 to be integer, array given in /home1/estudjl6/public_html/sys/puntoventa/php/empresa/json_empresa.php on line 4
+[14-Dec-2018 11:36:36 America/El_Salvador] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 20
+[14-Dec-2018 11:37:06 America/El_Salvador] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 20
+[14-Dec-2018 11:40:33 America/El_Salvador] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 20
+[14-Dec-2018 11:42:10 America/El_Salvador] PHP Warning:  Illegal string offset 'numero' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 20
+[14-Dec-2018 11:42:10 America/El_Salvador] PHP Warning:  Illegal string offset 'numero' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 20
+[14-Dec-2018 11:43:04 America/El_Salvador] PHP Warning:  Illegal string offset 'numero' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 20
+[14-Dec-2018 11:43:04 America/El_Salvador] PHP Warning:  Illegal string offset 'numero' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 20
+[14-Dec-2018 11:43:38 America/El_Salvador] PHP Warning:  Illegal string offset 'numero' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 21
+[14-Dec-2018 11:43:38 America/El_Salvador] PHP Warning:  Illegal string offset 'numero' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 21
+[14-Dec-2018 11:44:10 America/El_Salvador] PHP Warning:  Illegal string offset 'numero' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 21
+[14-Dec-2018 11:44:10 America/El_Salvador] PHP Warning:  Illegal string offset 'numero' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 21
+[14-Dec-2018 17:45:20 UTC] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 20
+[14-Dec-2018 17:46:23 UTC] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 20
+[14-Dec-2018 15:52:08 America/El_Salvador] PHP Fatal error:  Cannot use try without catch or finally in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 101
+[14-Dec-2018 15:53:29 America/El_Salvador] PHP Fatal error:  Cannot use try without catch or finally in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 101
+[14-Dec-2018 16:02:36 America/El_Salvador] PHP Parse error:  syntax error, unexpected '$row' (T_VARIABLE) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 108
+[14-Dec-2018 16:03:16 America/El_Salvador] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting variable (T_VARIABLE) or '{' or '$' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 120
+[14-Dec-2018 16:04:33 America/El_Salvador] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting variable (T_VARIABLE) or '{' or '$' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 120
+[14-Dec-2018 16:04:42 America/El_Salvador] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting variable (T_VARIABLE) or '{' or '$' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 120
+[14-Dec-2018 16:05:24 America/El_Salvador] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting variable (T_VARIABLE) or '{' or '$' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 121
+[14-Dec-2018 16:06:53 America/El_Salvador] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting variable (T_VARIABLE) or '{' or '$' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 121
+[14-Dec-2018 16:07:33 America/El_Salvador] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 107
+[14-Dec-2018 16:07:55 America/El_Salvador] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 107
+[14-Dec-2018 16:08:19 America/El_Salvador] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting variable (T_VARIABLE) or '{' or '$' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 110
+[14-Dec-2018 16:08:47 America/El_Salvador] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting variable (T_VARIABLE) or '{' or '$' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 110
+[14-Dec-2018 16:10:29 America/El_Salvador] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting variable (T_VARIABLE) or '{' or '$' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 121
+[14-Dec-2018 16:12:15 America/El_Salvador] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting variable (T_VARIABLE) or '{' or '$' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 121
+[14-Dec-2018 16:13:16 America/El_Salvador] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting variable (T_VARIABLE) or '{' or '$' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 122
+[14-Dec-2018 16:13:24 America/El_Salvador] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting variable (T_VARIABLE) or '{' or '$' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 122
+[14-Dec-2018 16:14:03 America/El_Salvador] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting variable (T_VARIABLE) or '{' or '$' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 122
+[14-Dec-2018 16:14:14 America/El_Salvador] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting variable (T_VARIABLE) or '{' or '$' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 122
+[14-Dec-2018 16:16:43 America/El_Salvador] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting variable (T_VARIABLE) or '{' or '$' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 122
+[14-Dec-2018 16:18:14 America/El_Salvador] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting variable (T_VARIABLE) or '{' or '$' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 122
+[14-Dec-2018 16:18:50 America/El_Salvador] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting variable (T_VARIABLE) or '{' or '$' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 122
+[14-Dec-2018 16:20:27 America/El_Salvador] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting variable (T_VARIABLE) or '{' or '$' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 120
+[14-Dec-2018 16:22:02 America/El_Salvador] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting variable (T_VARIABLE) or '{' or '$' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 117
+[14-Dec-2018 16:25:08 America/El_Salvador] PHP Parse error:  syntax error, unexpected '$row' (T_VARIABLE) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Empresa.php on line 107

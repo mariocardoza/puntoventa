@@ -5,7 +5,7 @@
 	///echo json_encode(array("exito" => $email ));
 	  
 	if ($email=='-1') {
-		echo json_encode(array("error" => "error en el comando"));
+		echo json_encode(array("-1","error", "error en el comando"));
 	}else if($email=='1') {
 
 		$exito = array("1",$email,"2","Actualizado");

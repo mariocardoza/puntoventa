@@ -1,6 +1,7 @@
 <?php 
 require_once("Conexion.php");
 require_once("Genericas2.php");
+require_once("Envios.php");
 @session_start();
 define('__ROOT__', dirname(dirname(__FILE__))); 
 date_default_timezone_set('America/El_Salvador');
@@ -58,13 +59,27 @@ class Empleado
 		}
 	}
 	public static function nuevo_empleado($data){
-		$id_persona=Genericas2::retonrar_id_insertar("persona");
+		//$id_persona=Genericas2::retonrar_id_insertar("persona");
+		$pass=Genericas2::generarpass();
+		$fecha_aux=explode("/",$data['fecha_nacimiento']);
+		$fechan=$fecha_aux[2]."-".$fecha_aux[1]."-".$fecha_aux[0];
 		$oculto=date("Yisisus");
-		$sql="INSERT INTO `persona`(`nombre`, `telefono`, `email`, `codigo_oculto`, `dui`, `nit`, `genero`, `direccion`,`fecha_nacimiento`) VALUES ('$data[nombre]','$data[telefono]','$data[email]','$oculto','$data[dui]','$data[nit]','$data[genero]','$data[direccion]','1990-12-03')";
+		if($data['es_usuario']=="no"){
+			$sql="INSERT INTO `tb_persona`(`nombre`, `telefono`, `email`, `codigo_oculto`, `dui`, `nit`, `genero`, `direccion`,`fecha_nacimiento`) VALUES ('$data[nombre]','$data[telefono]','$data[email]','$oculto','$data[dui]','$data[nit]','$data[genero]','$data[direccion]','$fechan')";
+		}else{
+			$sql="INSERT INTO `tb_persona`(`nombre`, `telefono`, `email`, `codigo_oculto`, `dui`, `nit`, `genero`, `direccion`,`fecha_nacimiento`) VALUES ('$data[nombre]','$data[telefono]','$data[email]','$oculto','$data[dui]','$data[nit]','$data[genero]','$data[direccion]','$fechan');
+
+		INSERT INTO `tb_usuario`(`email`, `pass`, `nivel`,`codigo_oculto`, `estado`) VALUES ( '$data[email]', PASSWORD('$pass'), 2,'$oculto', 2)";
+		}
+
 		try{
 			$comando=Conexion::getInstance()->getDb()->prepare($sql);
 			$comando->execute();
 			$datos = array($oculto);
+			if($data['es_usuario']=='si'){
+				$email = Envios::correobienvenida($data['email'],$pass);
+			}
+			
 	 		return array("1",$datos,$sql);
 	 		exit();
 		}catch(Exception $e){
@@ -78,7 +93,7 @@ class Empleado
 
 	//funcion editar empleado
 	public static function editar_empleado($data){
-		$sql="UPDATE `persona` SET `nombre`='$data[nombre]',`telefono`='$data[telefono]',`email`='$data[email]',`dui`='$data[dui]',`nit`='$data[nit]',`genero`='$data[genero]',`direccion`='$data[direccion]',`fecha_nacimiento`='$data[fecha_nacimiento]' WHERE $data[id]";
+		$sql="UPDATE `persona` SET `nombre`='$data[nombre]',`telefono`='$data[telefono]',`email`='$data[email]',`dui`='$data[dui]',`nit`='$data[nit]',`genero`='$data[genero]',`direccion`='$data[direccion]' WHERE id= $data[id]";
 		return array("1","exito",$sql);
 	}
 
@@ -110,8 +125,8 @@ class Empleado
                 <div class="col-md-6">
                     <div class="form-group">
                       <label for="">Nombre(*)</label>
-                      <input type="hidden" name="id_empleado" value="'.$empleado[id].'"
-                      <input type="text" class="form-control" id="n_nombre" name="nombre" required="" placeholder="Ingrese el nombre" value="'.$empleado[nombre].'" >
+                      <input type="hidden" name="id" value="'.$empleado[id].'">
+                      <input type="text" class="form-control" id="n_nombre" name="nombre" required placeholder="Ingrese el nombre" value="'.$empleado[nombre].'" >
                     </div>
                     <div class="form-group">
                       <label for="n_precio">Email(*)</label>

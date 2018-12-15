@@ -100,7 +100,7 @@ if($juridicos[0] == 1)$datos2 = $juridicos[1];
                   <td>
                     <div class="btn-group">
                       <a class="btn btn-warning" onclick="<?php echo "editarj(".$persona['id'].")" ?>" href="#"><i class="fa fa-edit"></i></a>
-                      <a onclick="<?php echo "eliminar(".$persona['id'].")" ?>" class="btn btn-danger" href="#"><i class="fa fa-remove"></i></a>
+                      <a onclick="<?php echo "darbaja(".$persona['id'].",'tb_cliente','el cliente')" ?>"  class="btn btn-danger" href="#"><i class="fa fa-remove"></i></a>
                     </div>
                   </td>
                 </tr>

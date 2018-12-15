@@ -207,6 +207,18 @@ class Usuarios
 	    return array("1","exito",$sql);
 	    exit();
 	}
+
+	public static function cambiar_contra($pass,$email){
+		$sql="UPDATE tb_usuario SET pass=PASSWORD('$pass') WHERE email='$email'";
+
+		try{
+			$comando=Conexion::getInstance()->getDb()->prepare($sql);
+			$comando->execute();
+			return array(1,"exito",$sql);
+		}catch(Exception $e){
+			return array(-1,"error",$e->getMessage(),$sql);
+		}
+	}
 }
 
 ?>
