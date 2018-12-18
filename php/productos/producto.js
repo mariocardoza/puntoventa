@@ -7,10 +7,14 @@ $(document).ready(function(e){
         // Hacer algo si el checkbox ha sido seleccionado
         $("#venci").show();
         $("#vencimiento").removeAttr("disabled");
+        $("#lotito").show();
+        $("#lote").removeAttr("disabled");
     } else {
         // Hacer algo si el checkbox ha sido deseleccionado
         $("#venci").hide();
         $("#vencimiento").prop("disabled", true);
+        $("#lotito").hide();
+        $("#lote").prop("disabled",true);
     }
     });
 
@@ -57,6 +61,8 @@ $(document).ready(function(e){
                 },
                	proveedor: "required",
                	vencimiento: "required",
+                lote: "required",
+                ganancia:"required"
             },
             
             messages: {
@@ -70,7 +76,9 @@ $(document).ready(function(e){
                 cantidad: "Digite la cantidad",
                 subcategoria: "Seleccione una subcategoria",
                 proveedor: "Seleccione un proveedor",
-               vencimiento: "Seleccione la fecha de vencimiento"
+               vencimiento: "Seleccione la fecha de vencimiento",
+               lote:"Digite el n° de lote",
+               ganancia:"Digite el porcentaje de ganacia"
                       
             },
             submitHandler: function(form) {
@@ -130,6 +138,7 @@ function guardar(){
 		url:'json_productos.php',
 		data:datos,
 		success: function(json){
+      console.log(json);
 			if(json[0]==1){
         if ($("#file_1").val()!="") {
           insertar_imagen($("#file_1"),json[1]);
@@ -265,6 +274,21 @@ function validar_archivo(file){
 
             }
         });
+    }
+
+    function editar(id){
+      $.ajax({
+        url:'json_productos.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'modal_editar',id:id},
+        success:function(json){
+          console.log(json);
+          $("#aqui_modal").html(json[3]);
+          $('.select-chosen').chosen({width: "100%"});
+          $("#md_editar").modal("show");
+        }
+      });
     }
 
     

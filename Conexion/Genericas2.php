@@ -117,6 +117,15 @@
 			return date("Yidisus").'-'.($resultado[0]+1);
 		}
 
+		public static function retornar_correlativo($tabla,$codigo){
+			$comando=Conexion::getInstance()->getDb()->prepare("SELECT COUNT(*) as suma FROM $tabla WHERE codigo='$codigo'");
+			$comando->execute();
+			while($row=$comando->fetch(PDO::FETCH_ASSOC)){
+				$resultado=$row['suma'];
+			}
+			return $codigo.'-'.($resultado+1);
+		}
+
 		public static function retornar_imagen($array_imagen){
 			$tabla = $campo_buscar = $valor_campo_buscar = $campo_comparar = "";
 			$as=0;

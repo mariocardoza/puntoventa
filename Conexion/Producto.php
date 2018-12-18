@@ -1,5 +1,10 @@
 <?php 
 include_once('Conexion.php');
+include_once('Genericas2.php');
+include_once('Proveedor.php');
+include_once('Departamento.php');
+include_once('Categoria.php');
+include_once('Subcategoria.php');
  class Producto
  {
  	
@@ -17,10 +22,16 @@ include_once('Conexion.php');
 			p.codigo_barra,
 			p.cantidad,
 			p.imagen,
+			CASE
+				WHEN p.fecha_vencimiento='' THEN 'Producto no perecedero'
+				ELSE DATE_FORMAT(p.fecha_vencimiento,'%d/%m/%Y') 
+			END AS vencimiento,
 			p.precio_unitario,
 			d.nombre AS departamento,
 			c.nombre AS categoria,
-			s.nombre AS sub
+			s.nombre AS sub,
+			p.ganancia,
+			(((p.ganancia/100)*p.precio_unitario)+p.precio_unitario) as precio_venta
 		FROM
 			tb_producto AS p
 		INNER JOIN tb_departamento AS d ON d.id = p.departamento
@@ -77,82 +88,62 @@ include_once('Conexion.php');
  		$sku = date("Yidisus").rand(1,100);
  		$last_insert = "";
  		if($data['fecha_vencimiento']==''){
- 			$sql="INSERT INTO `tb_producto`(`nombre`, `departamento`, `categoria`, `subcategoria`, `descripcion`, `precio_unitario`, `cantidad`, `proveedor`, `sku`, `codigo_barra`, `porcentaje_ganancia`, `codigo_oculto`) VALUES ('$data[nombre]','$data[departamento]','$data[categoria]','$data[subcategoria]','$data[descripcion]','$data[precio]','$data[cantidad]','$data[proveedor]','$sku','$codigo_barra',0.4,'$oculto')";
+ 			$sql="INSERT INTO `tb_producto`(`nombre`, `departamento`, `categoria`, `subcategoria`, `descripcion`, `precio_unitario`, `cantidad`, `proveedor`, `sku`, `codigo_barra`, `ganancia`, `codigo_oculto`) VALUES ('$data[nombre]','$data[departamento]','$data[categoria]','$data[subcategoria]','$data[descripcion]','$data[precio]','$data[cantidad]','$data[proveedor]','$sku','$codigo_barra',0.4,'$oculto',$data[ganancia])";
  		}else{
- 			$sql="INSERT INTO `tb_producto`(`nombre`, `departamento`, `categoria`, `subcategoria`, `descripcion`, `precio_unitario`, `cantidad`, `fecha_vencimiento`, `proveedor`, `sku`, `codigo_barra`, `porcentaje_ganancia`, `codigo_oculto`) VALUES ('$data[nombre]','$data[departamento]','$data[categoria]','$data[subcategoria]','$data[descripcion]','$data[precio]','$data[cantidad]','$data[fecha_vencimiento]','$data[proveedor]','$sku','$codigo_barra',0.4,'$oculto')";
+ 			$sql="INSERT INTO `tb_producto`(`nombre`, `departamento`, `categoria`, `subcategoria`, `descripcion`, `precio_unitario`, `cantidad`, `fecha_vencimiento`, `proveedor`, `sku`, `codigo_barra`, `porcentaje_ganancia`, `codigo_oculto`,lote,ganancia) VALUES ('$data[nombre]','$data[departamento]','$data[categoria]','$data[subcategoria]','$data[descripcion]','$data[precio]','$data[cantidad]','$data[fecha_vencimiento]','$data[proveedor]','$sku','$codigo_barra',0.4,'$oculto','$data[lote]',$data[ganancia])";
  		}
  		try{
  			$comando=Conexion::getInstance()->getDb()->prepare($sql);
  			$comando->execute();
  			if($comando){
- 				$sql_select="SELECT p.id,p.cantidad,p.precio_unitario FROM tb_producto as p WHERE p.codigo_oculto='$oculto'";
- 				$comando4=Conexion::getInstance()->getDb()->prepare($sql_select);
- 				$comando4->execute();
- 				while ($row=$comando4->fetch(PDO::FETCH_ASSOC)) {
- 					$last_insert=$row;
- 				}
- 				$fech=date("Y-m-d");
- 				$sql1="INSERT INTO `tb_inventario`(`fecha`, `producto`, `cantidad`, `precio_unitario`, `tipo`) VALUES ('$fech','$last_insert[id]','$data[cantidad]','$data[precio]',1)";
- 				try{
- 					$comando2=Conexion::getInstance()->getDb()->prepare($sql1);
- 					$comando2->execute();
- 				}catch(Exception $e){
- 					return array("-1","error2",$e->getMessage(),$sql);
+ 				for($i=0;$i<$data['cantidad'];$i++){
+ 					$correlativo=Genericas2::retornar_correlativo("tb_producto_detalle",$oculto);
+ 					$sql2="INSERT INTO tb_producto_detalle (codigo,correlativo,lote) VALUES('$oculto','$correlativo',$data[lote])";
+
+ 					$comando3=Conexion::getInstance()->getDb()->prepare($sql2);
+ 					$comando3->execute();
+
  				}
 
- 				
+
  			}
- 			return array("1",$oculto,$sql);
+ 			return array("1",$oculto,$sql,$sql2);
  		}catch(Exception $e){
  			return array("-1","error",$e->getMessage(),$sql);
  		}
  	}
 
  	//actualizar inventario
- 	public static function actualizar_inventario($producto,$cantidad,$precio,$tipo){
- 		$fecha=date("Y-m-d");
- 		$productito="";
- 		$sql_producto="";
- 		$sql="INSERT INTO `tb_inventario`(`fecha`, `producto`, `cantidad`, `precio_unitario`, `tipo`) VALUES ('$fecha','$producto','$cantidad','$precio','$tipo')";
+ 	public static function actualizar_inventario($producto,$cantidad,$precio){
+ 		$sql_producto="SELECT p.cantidad,p.precio_unitario,p.codigo_oculto FROM tb_producto as p WHERE p.id=$producto";
  		try{
- 			$comando=Conexion::getInstance()->getDb()->prepare($sql);
+ 			$comando=Conexion::getInstance()->getDb()->prepare($sql_producto);
  			$comando->execute();
- 			if($comando){
- 				$sql_producto="SELECT p.cantidad,p.precio_unitario FROM tb_producto as p WHERE p.id=$producto";
- 				$comando2=Conexion::getInstance()->getDb()->prepare($sql_producto);
- 				$comando2->execute();
- 				while ($row=$comando2->fetch(PDO::FETCH_ASSOC)) {
- 					$productito=$row;
- 				}
-
- 				if($productito){
- 					if($tipo==1){
- 						$canti=$productito['cantidad'];
-		 				$canti=$canti+$cantidad;
-		 				$preci=$productito['precio_unitario'];
-		 				$preci=($preci+$precio)/2;
- 					}else{
- 						$canti=$productito['cantidad'];
-		 				$canti=$canti-$cantidad;
-		 				$preci=$productito['precio_unitario'];
- 					}
-
-	 				$sql_update="UPDATE tb_producto SET cantidad=$canti, precio_unitario=$preci WHERE id=$producto";
-
-	 				try{
-	 					$comando3=Conexion::getInstance()->getDb()->prepare($sql_update);
-	 					$comando3->execute();
-	 					return array("1",$sql,$productito,$sql_update);
-	 				}catch(Exception $e){
-	 					return array("-1","error2",$e->getMessage(),$sql,$sql_producto);
-	 				}
- 				}
-
-
+ 			while ($row=$comando->fetch(PDO::FETCH_ASSOC)) {
+ 				$cantidad_base=$row['cantidad'];
+ 				$precio_base=$row['precio_unitario'];
+ 				$oculto=$row['codigo_oculto'];
+ 				$lote=$row['lote'];
  			}
- 			return array("1",$sql,$productito,$sql_update);
+ 			$canti_aux=$cantidad_base+$cantidad;
+ 			$precio_aux=($precio_base+$precio)/2;
+ 			$sql_update="UPDATE tb_producto SET cantidad=$canti_aux, precio_unitario=$precio_aux WHERE id=$producto";
+ 			$comando_update=Conexion::getInstance()->getDb()->prepare($sql_update);
+ 			if($comando_update->execute()){
+ 				for($i=0;$i<$cantidad;$i++){
+ 					$correlativo=Genericas2::retornar_correlativo("tb_producto_detalle",$oculto);
+ 					$sql2="INSERT INTO tb_producto_detalle (codigo,correlativo,lote) VALUES('$oculto','$correlativo','$lote')";
+
+ 					$comando3=Conexion::getInstance()->getDb()->prepare($sql2);
+ 					$comando3->execute();
+
+ 				}
+ 			}
+
+ 	
+ 			return array("1",$sql_producto,$sql_update);
  		}catch(Exception $e){
- 			return array("-1","error",$e->getMessage(),$sql,$sql_producto);
+ 			return array("-1","error",$e->getMessage(),$sql_producto,$e->getLine());
  		}
  	}
 
@@ -292,6 +283,211 @@ include_once('Conexion.php');
 		} catch (Exception $e) {
 			return array("-1",$e->getMessage(),$e->getLine(),$sql);
 			exit();
+		}
+	}
+
+	public function modal_editar($id){
+		$proveedores=Proveedor::obtener_proveedores();
+		$categorias=Categoria::obtener_categorias();
+		$departamentos=Departamento::obtener_departamentos();
+		$subcategorias=Subcategoria::obtener_subcategorias();
+		$sql="SELECT
+ 			p.id,
+			p.nombre,
+			p.descripcion,
+			p.sku,
+			p.codigo_barra,
+			p.cantidad,
+			p.imagen,
+			p.precio_unitario,
+			p.ganancia,
+			p.fecha_vencimiento,
+			p.lote,
+			d.id AS departamento,
+			c.id AS categoria,
+			s.id AS subcategoria,
+			prov.id as proveedor
+		FROM
+			tb_producto AS p
+		INNER JOIN tb_departamento AS d ON d.id = p.departamento
+		INNER JOIN tb_proveedor as prov ON prov.id=p.proveedor
+		INNER JOIN tb_categoria AS c ON c.id = p.categoria
+		INNER JOIN tb_subcategoria AS s ON s.id = p.subcategoria
+		WHERE
+			p.estado = 1
+		AND p.id=$id
+		ORDER BY
+			p.nombre ASC";
+
+		try{
+			$comando=Conexion::getInstance()->getDb()->prepare($sql);
+			$comando->execute();
+			while ($row=$comando->fetch(PDO::FETCH_ASSOC)) {
+				$producto=$row;
+			}
+		$modal.='<div class="modal fade modal-side-fall" id="md_editar" aria-hidden="true"
+      aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          	<div class="modal-body">
+               <form action="#" method="post" name="form-producto" id="form-producto" class="form-horizontal form-bordered">
+            <!-- Product Edit Content -->
+        <div class="row">
+            <div class="col-lg-6">
+                <!-- General Data Block -->
+                <div class="block">
+                    <!-- General Data Title -->
+                    <div class="block-title">
+                        <h2><i class="fa fa-pencil"></i> <strong>Información</strong> general</h2>
+                    </div>
+                    <!-- END General Data Title -->
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="nombre">Nombre</label>
+                            <div class="col-md-9">
+                                <input type="hidden" name="data_id" value="nuevo_producto">
+                                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Digite el nombre del nombre">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="descripcion">Descripción</label>
+                            <div class="col-md-9">
+                                <textarea  id="descripcion" name="descripcion" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="departamento">Departamento</label>
+                            <div class="col-md-9">
+                                <!-- Chosen plugin (class is initialized in js/app.js -> uiInit()), for extra usage examples you can check out http://harvesthq.github.io/chosen/ -->
+                                <select id="departamento" name="departamento" class="select-chosen" data-placeholder="Seleccione un departamento" style="width: 250px;">
+                                    <option></option>';
+                                    foreach ($departamentos[1] as $departamento){
+                                    	if($departamento[id]==$producto[departamento]){
+                                    		 $modal.='<option selected value="'.$departamento[id].'">'.$departamento[nombre].'</option>';
+                                    	}else{
+                                    		 $modal.='<option value="'.$departamento[id].'">'.$departamento[nombre].'</option>';
+                                    	}
+                                       
+                                    } 
+                                $modal.='</select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="categoria">Categoría</label>
+                            <div class="col-md-9">
+                                <!-- Chosen plugin (class is initialized in js/app.js -> uiInit()), for extra usage examples you can check out http://harvesthq.github.io/chosen/ -->
+                                <select id="categoria" name="categoria" class="select-chosen" data-placeholder="Seleccione un categoría" style="width: 250px;">
+                                    <option></option>';
+                                    foreach ($categorias[2] as $categoria){
+                                    	if($categoria[id]==$producto[categoria]){
+                                    		 $modal.='<option selected value="'.$categoria[id].'">'.$categoria[nombre].'</option>';
+                                    	}else{
+                                    		 $modal.='<option value="'.$categoria[id].'">'.$categoria[nombre].'</option>';
+                                    	}
+                                       
+                                    } 
+                                $modal.='</select>
+                            </div>
+                        </div>
+                        
+                        
+                    <!-- END General Data Content -->
+                </div>
+                <!-- END General Data Block -->
+            </div>
+            <div class="col-lg-6">
+                <!-- Meta Data Block -->
+                <div class="block">
+                    <!-- Meta Data Title -->
+                    <div class="block-title">
+                        <h2><i class="fa fa-google"></i> <strong>Información</strong> Adicional</h2>
+                    </div>
+
+                    <div class="form-group">
+                            <label class="col-md-3 control-label" for="subcategoria">Subcategoría</label>
+                            <div class="col-md-9">
+                                <select name="subcategoria" id="subcategoria" class="select-chosen" data-placeholder="Seleccione un departamento" style="width: 250px;">
+                                     <option></option>';
+                                       foreach ($subcategorias[2] as $subcategoria){
+                                    	if($subcategoria[id]==$producto[subcategoria]){
+                                    		 $modal.='<option selected value="'.$subcategoria[id].'">'.$subcategoria[nombre].'</option>';
+                                    	}else{
+                                    		 $modal.='<option value="'.$subcategoria[id].'">'.$subcategoria[nombre].'</option>';
+                                    	}
+                                       
+                                    } 
+                                $modal.='</select>
+                            </div>
+                        </div>';
+                        if($producto[fecha_vencimiento]!=''){
+                        	$modal.='<div class="form-group">
+                            <label for="" class="col-md-3 control-label">Fecha de vencimiento</label>
+                            <div class="col-md-9">
+                                <input type="date" disabled name="fecha_vencimiento" id="vencimiento" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group" id="lotito">
+                            <label for="" class="col-md-3 control-label">Lote N°</label>
+                            <div class="col-md-9">
+                                <input type="text" id="lote" value="'.$producto[lote].'" name="lote" class="form-control">
+                            </div>
+                        </div>';
+                        }
+
+                        
+                        $modal.='<div class="form-group">
+                            <label class="col-md-3 control-label" for="product-meta-keywords">Proveedor</label>
+                            <div class="col-md-9">
+                                <select name="proveedor" id="proveedor" class="select-chosen" data-placeholder="Seleccione un proveedor" style="width: 250px;">
+                                    <option></option>';
+                                    foreach ($proveedores[2] as $proveedor){
+                                    	if($proveedor[id]==$producto[proveedor]){
+                                    		 $modal.='<option selected value="'.$proveedor[id].'">'.$proveedor[nombre].'</option>';
+                                    	}else{
+                                    		 $modal.='<option value="'.$proveedor[id].'">'.$proveedor[nombre].'</option>';
+                                    	}
+                                       
+                                    } 
+                                $modal.='</select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-md-3 control-label">Porcentaje de ganancia</label>
+                            <div class="col-md-9">
+                                <input type="number" max="100" value="'.$producto[ganancia].'" id="ganancia" name="ganancia" class="form-control">
+                            </div>
+                        </div>
+                    <!-- END Meta Data Content -->
+                </div>
+                <!-- END Meta Data Block -->
+            </div>
+            <div class="col-lg-12">
+                <div class="block">
+                    <div class="form-group">
+                    <div class="col-md-10">
+                        <center>
+                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Guardar</button>
+                        <button type="button" data-dismiss="modal" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Cerrar</button>
+                        </center>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </form>
+			</div>
+        </div>
+      </div>
+    </div>';
+
+            return array("1",$producto,$sql,$modal);
+		}catch(Exception $e){
+			return array(-1,"error",$sql,$e->getMessage());
 		}
 	}
  } 

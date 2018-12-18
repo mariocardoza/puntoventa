@@ -45,6 +45,9 @@ $result = Producto::obtener_productos();
             <li>
                 <a href="../../php/productos/registro_producto.php"><i class="gi gi-pencil"></i> Registrar</a>
             </li>
+            <li>
+                <a href="../../php/politicas/registro_politica.php"><i class="gi gi-pencil"></i> Registrar política de inventario</a>
+            </li>
         </ul>
     </div>
     <!-- END eCommerce Products Header -->
@@ -105,7 +108,8 @@ $result = Producto::obtener_productos();
                     <th>Nombre del producto</th>
                     <th class="text-right">Precio</th>
                     <th>Estado</th>
-                    <th class="text-center">Código de barras</th>
+                    <th>Porcentaje de ganancia</th>
+                    <th class="text-right">Precio de venta</th>
                     <th class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -136,12 +140,12 @@ $result = Producto::obtener_productos();
                                 
                         </span>
                     </td>
-                    <td class="text-center"><img src="../../lib/Barcode/barcode.php?text=<?php echo $producto[codigo_barra] ?>&print=true" width="220" height="70" alt=""></td>
+                    <td><?php echo $producto['ganancia'] ?>%</td>
+                    <td class="text-right">$<?php echo number_format($producto['precio_venta'],2) ?></td>
                     <td class="text-center">
                         <div class="btn-group btn-group-xs">
                             <a data-id="<?php echo $producto[id] ?>" data-nombre="<?php echo $producto[nombre] ?>" id="asignar_mas" href="javascript:void(0)" data-toggle="tooltip" title="Más existencias" class="btn btn-xs btn-success"><i class="fa fa-plus"></i></a>
-                            <a href="#" data-toggle="tooltip" title="Edit" class="btn btn-default"><i class="fa fa-pencil"></i></a>
-                            <a href="inventario.php?id=<?php echo $producto[id] ?>" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-default"><i class="fa fa-eye"></i></a>
+                            <a href="javascript:void(0)" onclick="<?php echo "editar(".$producto['id'].")" ?>" data-toggle="tooltip" title="Edit" class="btn btn-default"><i class="fa fa-pencil"></i></a>
                             <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
                         </div>
                     </td>
@@ -152,60 +156,12 @@ $result = Producto::obtener_productos();
         <!-- END All Products Content -->
     </div>
     <!-- END All Products Block -->
+    <div id="aqui_modal"></div>
+    <?php include("modales.html") ?>
 </div>
-<div id="aqui_modal"></div>
+
 <!-- modales -->
-<div class="modal fade modal-side-fall" id="md_agregar_mercaderia" aria-hidden="true"
-      aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">
-              <span aria-hidden="true">×</span>
-            </button>
-            <h4 class="modal-title">Agregar mercadería</h4>
-          </div>
-          <div class="modal-body">
-            <form method="POST" action="#" class="form-horizontal form-bordered">
-                <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="" class="col-md-4 col-md-offset-2">Producto</label>
-                        <div class="col-md-6">
-                            <b><span id="md_titulo"></span></b>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="col-md-4 col-md-offset-2">Cantidad a agregar</label>
-                        <div class="col-md-6">
-                            <input type="hidden" id="id_producto">
-                            <input type="number" id="canti" name="canti" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="col-md-4 col-md-offset-2">Precio</label>
-                        <div class="col-md-6">
-                            <input type="number" id="precio" name="precio" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-3">
-                            <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Cerrar</button>
-                            <button type="button" id="agregar_existencia" class="btn btn-primary btn-pure">Guardar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </form>
-          </div>
-          <!--div class="modal-footer">
-            <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-default btn-pure">Guardar</button>
-          </div-->
-          
-        </div>
-      </div>
-    </div>
+
 
 <!-- END Page Content -->
 <?php include '../../inc/page_footer.php'; ?>

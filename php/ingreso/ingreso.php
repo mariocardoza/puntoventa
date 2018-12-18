@@ -191,6 +191,7 @@ $(function(){
                 $("#nom_span").empty().html(msg.exito[1]);
                 $("#n_codigo").val(msg.exito[2]);
                 $("#n_nombre").val(msg.exito[1]);
+                //window.location.href="cambiar_contra.php";
 
                 $("#md_cambiar_contra").modal({show: 'false'}); 
             }
