@@ -302,6 +302,7 @@ include_once('Subcategoria.php');
 			p.precio_unitario,
 			p.ganancia,
 			p.fecha_vencimiento,
+			DATE_FORMAT(p.fecha_vencimiento,'%d/%m/%Y') as venci,
 			p.lote,
 			d.id AS departamento,
 			c.id AS categoria,
@@ -351,13 +352,13 @@ include_once('Subcategoria.php');
                             <label class="col-md-3 control-label" for="nombre">Nombre</label>
                             <div class="col-md-9">
                                 <input type="hidden" name="data_id" value="nuevo_producto">
-                                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Digite el nombre del nombre">
+                                <input type="text" id="nombre" name="nombre" value="'.$producto[nombre].'" class="form-control" placeholder="Digite el nombre del nombre">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="descripcion">Descripción</label>
                             <div class="col-md-9">
-                                <textarea  id="descripcion" name="descripcion" class="form-control" rows="3"></textarea>
+                                <textarea  id="descripcion" name="descripcion" class="form-control" rows="3">'.$producto[descripcion].'</textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -428,7 +429,7 @@ include_once('Subcategoria.php');
                         	$modal.='<div class="form-group">
                             <label for="" class="col-md-3 control-label">Fecha de vencimiento</label>
                             <div class="col-md-9">
-                                <input type="date" disabled name="fecha_vencimiento" id="vencimiento" class="form-control">
+                                <input type="date" disabled name="fecha_vencimiento" id="vencimiento" value="'.$producto[venci].'" class="form-control">
                             </div>
                         </div>
                         <div class="form-group" id="lotito">
