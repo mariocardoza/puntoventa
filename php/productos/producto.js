@@ -18,6 +18,28 @@ $(document).ready(function(e){
     }
     });
 
+   $(document).on("click","#btn_guardar", function(e){
+      var valid=$("#form-producto").valid();
+      if(valid){
+        var datos=$("#form-producto").serialize();
+        modal_cargando();
+        $.ajax({
+          url:'json_productos.php',
+          type:'POST',
+          dataType:'json',
+          data:datos,
+          success: function(json){
+            if(json[0]==1){
+              guardar_exito("productos");
+            }else{
+              swal.chose();
+              guardar_error();
+            }
+          }
+        });
+      }
+   });
+
 	 //eventos para la imagen
 	$(document).on("click", "#img_file", function (e) {
         $("#file_1").click();
@@ -86,6 +108,39 @@ $(document).ready(function(e){
               guardar();
             }
         });
+
+    $(document).on("click","#btn_editar", function(e){
+        var valid=$("#form-producto").valid();
+        datos=$("#form-producto").serialize();
+        if(valid){
+          $.ajax({
+            url:'json_productos.php',
+            type:'POST',
+            dataType:'json',
+            data: datos,
+            success: function(json){
+              console.log(json);
+              if(json[0]=="1"){
+                guardar_exito('productos');
+              }else{
+                guardar_error();
+              }
+            }
+          });
+        }
+    });
+
+    $(document).on("click","#subir_imagen", function(e){
+      var codigo=$("#codiguito").val();
+      insertar_imagen($("#file_1"),codigo);
+    });
+
+    //cambiar imagen
+    $(document).on("click","#cambiar_imagen", function(e){
+        $("#md_cambiar_imagen").modal("show");
+        var codigo=$(this).data('codigo');
+        $("#codiguito").val(codigo);
+    });
 
     //asignar más mercadería
     $(document).on("click","#asignar_mas", function(e){

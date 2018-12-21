@@ -1,0 +1,3 @@
+[20-Dec-2018 08:35:57 America/El_Salvador] PHP Parse error:  syntax error, unexpected 'obtener_ordenes' (T_STRING), expecting variable (T_VARIABLE) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Orden.php on line 13
+[20-Dec-2018 08:38:13 America/El_Salvador] PHP Parse error:  syntax error, unexpected 'obtener_ordenes' (T_STRING), expecting variable (T_VARIABLE) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Orden.php on line 13
+[20-Dec-2018 10:06:21 America/El_Salvador] PHP Parse error:  syntax error, unexpected '?>' in /home1/estudjl6/public_html/sys/puntoventa/php/ordenes/modales.php on line 16

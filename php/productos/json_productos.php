@@ -1,5 +1,6 @@
 <?php 
 include_once("../../Conexion/Producto.php");
+include_once("../../Conexion/Genericas2.php");
 if($_POST['data_id']=="nuevo_producto"){
 	$resultado = Producto::guardar($_POST);
 	echo json_encode($resultado);
@@ -18,6 +19,11 @@ if($_POST['data_id']=='agregar_existencia'){
 if($_POST['data_id']=='modal_editar'){
 	$resultado=Producto::modal_editar($_POST['id']);
 	echo json_encode($resultado);
+	exit();
+}
+if($_POST['data_id']=='editar_producto'){
+	$result=Genericas2::actualizar_generica("tb_producto",$_POST);
+	echo json_encode($result);
 	exit();
 }
 ?>

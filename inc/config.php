@@ -69,9 +69,9 @@ $primary_nav = array(
         'name'  => 'Home',
         'url'   => '../../php/home/index.php',
         'url_real'=> 'index.php',
-        'icon'  => 'hi hi-home'
+        'icon'  => 'inicio.svg'
     ),
-    array(
+    /*array(
         'name'  => 'Administración',
         'icon'  => 'gi gi-table',
         'sub'   => array(
@@ -92,71 +92,72 @@ $primary_nav = array(
             )
 
         )
-    ),
+    ),*/
      array(
-        'name'  => 'Productos',
-        'icon'  => 'gi gi-shopping_bag',
-        'sub'   => array(
-            array(
-                'name' => 'Administración',
-                'url' => '../../php/productos/productos.php',
-                'url_real' => 'productos.php'
-            ),
-            array(
-                'name'  => 'Registro de productos',
-                'url'   => '../../php/productos/registro_producto.php',
-                'url_real'=> 'registro_producto.php'
-            ),
-            array(
-                'name' => 'Registro de activo fijo',
-                'url' => '../../php/productos/registro_activo.php',
-                'url_real' => 'registro_activo.php'
-            )
-        )
+        'name'  => 'Inventario',
+        'icon'  => 'inventario.svg',
+        'url'   => '../../php/productos/productos.php',
+        'url_real' => 'productos.php'
     ),
-      array(
-        'name'  => 'Ventas',
-        'icon'  => 'gi gi-shopping_cart',
-        'sub'   => array(
-            array(
-                'name'  => 'Realizar venta',
-                'url'   => '#',
-                'url_real'=> 'registro_venta.php'
-            )
-        )
+         array(
+        'name'  => 'Servicios',
+        'icon'  => 'servicios.svg',
+        'url'   => '../../php/servicios/servicios.php',
+        'url_real'=> 'servicios.php',
     ),
        array(
         'name'  => 'Clientes',
-        'icon'  => 'gi gi-user',
-        'sub'   => array(
-            array(
-                'name'  => 'Administración de clientes',
-                'url'   => '../../php/clientes/clientes.php',
-                'url_real'=> 'clientes.php',
-            ),
-            array(
-                'name'  => 'Registro de cliente',
-                'url'   => '../../php/clientes/registro.php',
-                'url_real'=> 'registro.php'
-            )
-        )
+        'icon'  => 'clientes.svg',
+        'url'   => '../../php/clientes/clientes.php',
+        'url_real'=> 'clientes.php',
     ),
-       array(
+    array(
         'name'  => 'Proveedores',
+        'icon'  => 'proveedores.svg',
+        'url'   => '../../php/proveedores/proveedores.php',
+        'url_real'=> 'proveedores.php',
+    ),
+      array(
+        'name'  => 'Ventas',
+        'icon'  => 'ventas.svg',
+        'url'   => '../../php/ventas/ventas.php',
+        'url_real'=> 'ventas.php',
+    ),
+     
+   
+
+    /*array(
+        'name'  => 'mesas',
         'icon'  => 'gi gi-user',
         'sub'   => array(
             array(
-                'name'  => 'Administración de proveedores',
-                'url'   => '../../php/proveedores/proveedores.php',
-                'url_real'=> 'proveedores.php',
+                'name'  => 'Administración de mesas',
+                'url'   => '../../php/mesas/mesas.php',
+                'url_real'=> 'mesas.php',
             ),
             array(
-                'name'  => 'Registro de proveedor',
-                'url'   => '../../php/proveedores/registro_proveedor.php',
-                'url_real'=> 'registro_proveedor.php'
+                'name'  => 'Registro de mesas',
+                'url'   => '../../php/mesas/registro_mesa.php',
+                'url_real'=> 'registro_mesa.php'
             )
         )
     ),
+    array(
+        'name'  => 'ordenes',
+        'icon'  => 'gi gi-user',
+        'sub'   => array(
+            array(
+                'name'  => 'Administración de ordenes',
+                'url'   => '../../php/ordenes/ordenes.php',
+                'url_real'=> 'ordenes.php',
+            ),
+            array(
+                'name'  => 'Registro de ordenes',
+                'url'   => '../../php/ordenes/registro_orden.php',
+                'url_real'=> 'registro_orden.php'
+            )
+        )
+    ),*/
     array(
         'name'  => 'Salir',
         'url'   => '../../php/home/destruir.php',

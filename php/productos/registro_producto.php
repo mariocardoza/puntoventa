@@ -40,28 +40,7 @@ include_once("../../Conexion/Proveedor.php");
 $proveedores=Proveedor::obtener_proveedores();
 ?>
 
-<div id="page-content">
-    <!-- eCommerce Product Edit Header -->
-    <div class="content-header">
-        <ul class="nav-horizontal text-center">
-            <li>
-                <a href="../../php/home.index.php"><i class="fa fa-bar-chart"></i> Dashboard</a>
-            </li>
-            <li>
-                <a href="../../php/productos/productos.php"><i class="gi gi-shopping_bag"></i> Products</a>
-            </li>
-            <li class="active">
-                <a href="#"><i class="gi gi-pencil"></i> Registro de producto</a>
-            </li>
-            <li>
-                <a href="#"><i class="gi gi-user"></i> Clientes</a>
-            </li>
-        </ul>
-    </div>
-    <!-- END eCommerce Product Edit Header -->
-
-    
-        <!-- General Data Content -->
+<div id="page-content">    
     <form action="#" method="post" name="form-producto" id="form-producto" class="form-horizontal form-bordered">
             <!-- Product Edit Content -->
         <div class="row">

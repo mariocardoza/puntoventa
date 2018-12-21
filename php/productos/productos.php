@@ -33,75 +33,55 @@ $result = Producto::obtener_productos();
 
 <!-- Page content -->
 <div id="page-content">
-    <!-- eCommerce Products Header -->
-    <div class="content-header">
-        <ul class="nav-horizontal text-center">
-            <li>
-                <a href="../home/index.php"><i class="fa fa-bar-chart"></i> Dashboard</a>
-            </li>
-            <li class="active">
-                <a href="#"><i class="gi gi-shopping_bag"></i> Productos</a>
-            </li>
-            <li>
-                <a href="../../php/productos/registro_producto.php"><i class="gi gi-pencil"></i> Registrar</a>
-            </li>
-            <li>
-                <a href="../../php/politicas/registro_politica.php"><i class="gi gi-pencil"></i> Registrar política de inventario</a>
-            </li>
-        </ul>
-    </div>
-    <!-- END eCommerce Products Header -->
-
     <!-- Quick Stats -->
     <div class="row text-center">
-        <div class="col-sm-6 col-lg-3">
-            <a href="../../php/productos/registro_producto.php" class="widget widget-hover-effect2">
-                <div class="widget-extra themed-background-success">
-                    <h4 class="widget-content-light"><strong>Agregar</strong> Producto</h4>
-                </div>
-                <div class="widget-extra-full"><span class="h2 text-success animation-expandOpen"><i class="fa fa-plus"></i></span></div>
-            </a>
+        <div class="col-sm-4 col-lg-4">
+            <input type="text" class="form-control" placeholder="Buscar">
         </div>
-        <div class="col-sm-6 col-lg-3">
-            <a href="javascript:void(0)" class="widget widget-hover-effect2">
-                <div class="widget-extra themed-background-danger">
-                    <h4 class="widget-content-light"><strong>Fuera</strong>  de existencia</h4>
-                </div>
-                <div class="widget-extra-full"><span class="h2 text-danger animation-expandOpen">71</span></div>
-            </a>
+        <div class="col-sm-4 col-lg-4">
+            <select name="" id="" class="select-chosen">
+                <option value="">Todos</option>
+            </select>
         </div>
-        <div class="col-sm-6 col-lg-3">
-            <a href="javascript:void(0)" class="widget widget-hover-effect2">
-                <div class="widget-extra themed-background-dark">
-                    <h4 class="widget-content-light"><strong>Más</strong> vendidos</h4>
-                </div>
-                <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">20</span></div>
-            </a>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <a href="javascript:void(0)" class="widget widget-hover-effect2">
-                <div class="widget-extra themed-background-dark">
-                    <h4 class="widget-content-light"><strong>Todos</strong> los productos</h4>
-                </div>
-                <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen"><?=count($result[1])?></span></div>
-            </a>
+        <div class="col-sm-4 col-lg-4">
+            <a href="registro_producto.php" class="btn btn-info btn-block">Nuevo producto</a>
         </div>
     </div>
     <!-- END Quick Stats -->
 
     <!-- All Products Block -->
     <div class="block full">
-        <!-- All Products Title -->
-        <div class="block-title">
-            <div class="block-options pull-right">
-                <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
+        <div class="row"  style='overflow:scroll;overflow-x:hidden;max-height:200px;'>
+            <?php foreach($result[1] as $producto) { ?>
+            <div class="col-sm-6 col-lg-6" style="border:solid 0.50px;">
+                <div class="widget">
+                  <div class="widget-simple">
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <td width="15%"><a href="javascript:void(0)" onclick="<?php echo "editar(".$producto['id'].")" ?>" data-toggle="tooltip" title="Edit" class="btn btn-info"><i class="fa fa-pencil"></i></a></td>
+                                <td width="15%" rowspan="3"><center><img src="../../img/productos/<?php echo $producto[imagen] ?>" alt="avatar" class="widget-image img-circle"></center></td>
+                                <td><?php echo $producto[nombre] ?></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>En inventario: <b><?php echo $producto[cantidad] ?></b></td>
+                                
+                            </tr>
+                            <tr>
+                                <td width="15%"><a href="javascript:void(0)" onclick="<?php echo "darbaja(".$producto['id'].",'tb_producto','el producto')" ?>" data-toggle="tooltip" title="Delete" class="btn btn-info"><i class="fa fa-trash"></i></a></td>
+                                <td>Precio $ <?php echo number_format($producto[precio_unitario],2) ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+              </div>
             </div>
-            <h2><strong>Productos</strong></h2>
+        <?php } ?>
         </div>
-        <!-- END All Products Title -->
 
         <!-- All Products Content -->
-        <table id="productos_table" class="table table-bordered table-striped table-vcenter">
+        <!--table id="productos_table" class="table table-bordered table-striped table-vcenter">
             <thead>
                 <tr>
                     <th class="text-center">SKU</th>
@@ -109,6 +89,7 @@ $result = Producto::obtener_productos();
                     <th class="text-right">Precio</th>
                     <th>Estado</th>
                     <th>Porcentaje de ganancia</th>
+                    <th>Departamento</th>
                     <th class="text-right">Precio de venta</th>
                     <th class="text-center">Acciones</th>
                 </tr>
@@ -124,8 +105,8 @@ $result = Producto::obtener_productos();
                 ?>
                 <?php foreach($result[1] as $producto) { ?>
                 <tr>
-                    <td class="text-center"><a onclick="<?php echo "verproducto(".$producto[id].")" ?>" href="#"><strong><?php echo $producto[sku]; ?></strong></a></td>
-                    <td><a onclick="<?php echo "verproducto(".$producto[id].")" ?>" href="#"><?php echo $producto[nombre]; ?></a></td>
+                    <td class="text-center"><a onclick="<?php echo "verproducto(".$producto[id].")" ?>" href="javascript:void(0)"><strong><?php echo $producto[sku]; ?></strong></a></td>
+                    <td><a onclick="<?php echo "verproducto(".$producto[id].")" ?>" href="javascript:void(0)"><?php echo $producto[nombre]; ?></a></td>
                     <td class="text-right"><strong>$<?php echo number_format($producto[precio_unitario],2) ?></strong></td>
                     <td>
                         <?php if($producto[cantidad]>10){ $rand=0;
@@ -141,18 +122,20 @@ $result = Producto::obtener_productos();
                         </span>
                     </td>
                     <td><?php echo $producto['ganancia'] ?>%</td>
+                    <td><?php echo $producto['departamento'] ?></td>
                     <td class="text-right">$<?php echo number_format($producto['precio_venta'],2) ?></td>
                     <td class="text-center">
                         <div class="btn-group btn-group-xs">
                             <a data-id="<?php echo $producto[id] ?>" data-nombre="<?php echo $producto[nombre] ?>" id="asignar_mas" href="javascript:void(0)" data-toggle="tooltip" title="Más existencias" class="btn btn-xs btn-success"><i class="fa fa-plus"></i></a>
                             <a href="javascript:void(0)" onclick="<?php echo "editar(".$producto['id'].")" ?>" data-toggle="tooltip" title="Edit" class="btn btn-default"><i class="fa fa-pencil"></i></a>
-                            <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                            <a href="javascript:void(0)" id="cambiar_imagen" data-codigo="<?php echo $producto[codigo_oculto] ?>" class="btn btn-info btn-sx"><i class="fa fa-image"></i></a>
+                            <a href="javascript:void(0)" onclick="<?php echo "darbaja(".$producto['id'].",'tb_producto','el producto')" ?>" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
                         </div>
                     </td>
                 </tr>
                 <?php } ?>
             </tbody>
-        </table>
+        </table-->
         <!-- END All Products Content -->
     </div>
     <!-- END All Products Block -->

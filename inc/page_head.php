@@ -91,130 +91,7 @@
         }
     ?>
     <div id="page-container"<?php if ($page_classes) { echo ' class="' . $page_classes . '"'; } ?>>
-        <!-- Alternative Sidebar -->
-        <div id="sidebar-alt">
-            <!-- Wrapper for scrolling functionality -->
-            <div id="sidebar-alt-scroll">
-                <!-- Sidebar Content -->
-                <div class="sidebar-content">
-                    <!-- Falla de Equipo -->
-
-                    <a href="page_ready_chat.php" class="sidebar-title">
-                        <i class="fa fa-wrench pull-right"></i> <strong>Falla de Equipo</strong>
-                    </a>
-                    <!-- Chat Users -->
-                    <ul class="chat-users clearfix">
-                        <li>
-                            <a href="javascript:void(0)" class="chat-user-online">
-                                <span></span>
-                                <img src="../../img/placeholders/avatars/avatar12.jpg" alt="avatar" class="img-circle">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="chat-user-online">
-                                <span></span>
-                                <img src="../../img/placeholders/avatars/avatar15.jpg" alt="avatar" class="img-circle">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="chat-user-online">
-                                <span></span>
-                                <img src="../../img/placeholders/avatars/avatar10.jpg" alt="avatar" class="img-circle">
-                            </a>
-                        </li>
-                         
-                    </ul>
-                    <!-- END Falla de Equipo -->
-                    <!-- Alerta de Falla -->
-                    <a href="page_ready_chat.php" class="sidebar-title">
-                        <i class="fa fa-exclamation-triangle pull-right"></i> <strong>Alerta de Falla</strong>
-                    </a>
-                    
-                    <ul class="chat-users clearfix">
-                        <li>
-                            <a href="javascript:void(0)" class="chat-user-online">
-                                <span></span>
-                                <img src="../../img/placeholders/avatars/avatar12.jpg" alt="avatar" class="img-circle">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="chat-user-online">
-                                <span></span>
-                                <img src="../../img/placeholders/avatars/avatar15.jpg" alt="avatar" class="img-circle">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="chat-user-online">
-                                <span></span>
-                                <img src="../../img/placeholders/avatars/avatar10.jpg" alt="avatar" class="img-circle">
-                            </a>
-                        </li>
-                         
-                    </ul>
-                    <!-- Mantenimiento rutinario -->
-                    <a href="page_ready_chat.php" class="sidebar-title">
-                        <i class="gi gi-stopwatch pull-right"></i> <strong>M. Rutinario</strong>
-                    </a>
-                    
-                    <ul class="chat-users clearfix">
-                        <li>
-                            <a href="javascript:void(0)" class="chat-user-online">
-                                <span></span>
-                                <img src="../../img/placeholders/avatars/avatar12.jpg" alt="avatar" class="img-circle">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="chat-user-online">
-                                <span></span>
-                                <img src="../../img/placeholders/avatars/avatar15.jpg" alt="avatar" class="img-circle">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="chat-user-online">
-                                <span></span>
-                                <img src="../../img/placeholders/avatars/avatar10.jpg" alt="avatar" class="img-circle">
-                            </a>
-                        </li>
-                         
-                    </ul>
-                    <!-- END Mantenimiento Rutinario -->
-
-
-                    <!-- Otros -->
-                    <a href="page_ready_chat.php" class="sidebar-title">
-                        <i class="fa fa-child pull-right"></i> <strong>Otros</strong>
-                    </a>
-                    
-                    <ul class="chat-users clearfix">
-                        <li>
-                            <a href="javascript:void(0)" class="chat-user-online">
-                                <span></span>
-                                <img src="../../img/placeholders/avatars/avatar12.jpg" alt="avatar" class="img-circle">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="chat-user-online">
-                                <span></span>
-                                <img src="../../img/placeholders/avatars/avatar15.jpg" alt="avatar" class="img-circle">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="chat-user-online">
-                                <span></span>
-                                <img src="../../img/placeholders/avatars/avatar10.jpg" alt="avatar" class="img-circle">
-                            </a>
-                        </li>
-                         
-                    </ul>
-                    <!-- END Otros -->
-
- 
-                </div>
-                <!-- END Sidebar Content -->
-            </div>
-            <!-- END Wrapper for scrolling functionality -->
-        </div>
-        <!-- END Alternative Sidebar -->
+    
 
         <!-- Main Sidebar -->
         <div id="sidebar">
@@ -222,18 +99,13 @@
             <div id="sidebar-scroll">
                 <!-- Sidebar Content -->
                 <div class="sidebar-content">
-                    
-                    <!-- <a href="../home/index.php?date=<?php echo date("Yidisus"); ?>" class="sidebar-brand" style="text-align: center;height: 71px;background: #fff !important;">
-                        <img src="../../img/Recurso 1.png" alt="" style="height: 67px; margin: 0 auto;">
-                    </a> -->
-
-                    <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
+                    <div class="sidebar-section sidebar-user clearfix">
                         <div class="sidebar-user-avatar">
                             <a href="../home/perfil.php">
                                 <img src="../../img/usuario/<?= $_SESSION['imagen'] ?>" alt="avatar">
                             </a>
                         </div>
-                        <div class="sidebar-user-name"><?= $_SESSION['nombre'] ?></div>
+                        <div class="sidebar-user-name">nombre del negocio</div>
                     </div>
 
                     <!--div class="sidebar-section sidebar-logo clearfix sidebar-nav-mini-hide">
@@ -269,7 +141,8 @@
                             // Get 1st level link's vital info
                             $url        = (isset($link['url']) && $link['url']) ? $link['url'] : '#';
                             $active     = (isset($link['url_real']) && ($template['active_page'] == $link['url_real'])) ? ' active' : '';
-                            $icon       = (isset($link['icon']) && $link['icon']) ? '<i class="' . $link['icon'] . ' sidebar-nav-icon"></i>' : '';
+                            //$icon       = (isset($link['icon']) && $link['icon']) ? '<i class="' . $link['icon'] . ' sidebar-nav-icon"></i>' : '';
+                            $icon       = (isset($link['icon']) && $link['icon']) ? '<i class=" fa sidebar-nav-icon menusito"><img class="svg '.$template['active_page'].'" src="../../img/menus/' . $link['icon'] . '" style="width: 50px;"></i>' : '';
 
                             // Check if the link has a submenu
                             if (isset($link['sub']) && $link['sub']) {
@@ -409,9 +282,9 @@
                     <!-- Main Sidebar Toggle Button -->
                     <ul class="nav navbar-nav-custom">
                         <li>
-                            <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">
+                            <!--a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">
                                 <i class="fa fa-bars fa-fw"></i>
-                            </a>
+                            </a-->
                         </li>
                     </ul>
                     <!-- END Main Sidebar Toggle Button -->
@@ -486,9 +359,9 @@
                 <ul class="nav navbar-nav-custom">
                     <!-- Main Sidebar Toggle Button -->
                     <li>
-                        <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">
+                        <!--a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">
                             <i class="fa fa-bars fa-fw"></i>
-                        </a>
+                        </a-->
                     </li>
                     <!-- END Main Sidebar Toggle Button -->
 
@@ -499,15 +372,10 @@
                  
                 <!-- Right Header Navigation -->
                 <ul class="nav navbar-nav-custom pull-right">
-                    <li class="dropdown" id="notif_alert3">
-                        <a href="javascript:detener_alerta(3)" id="dropdown-notificaciones3"  class="dropdown-toggle notificaciones_dashbord" data-toggle="dropdown">
-                             <i class="fa fa-bell"></i> <span class="badge pull-right" id="n_notif3"></span><span style=" width: 100%; display: block; margin: 0px !important; padding: 0px !important; margin-top: -23px !important;">Notificaciones</span> </a>
-                        <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
-                            <li class="dropdown-header text-center">0 notificaciones</li>
-                            <li id="notificaciones4">
-                                
-                            </li>
-                        </ul>
+                    <li class="" id="venti">
+                        <a href="javascript:void(0)" id="">
+                             <img src="../../img/menus/dolar.svg" alt=""></a>
+            
                     </li>
                     <!-- END User Dropdown -->
                     <!-- END User Dropdown -->

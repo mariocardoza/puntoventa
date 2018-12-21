@@ -62,6 +62,7 @@
     text-align: center;
 }
 
+
 .preloader-spinner {
     width: 24px;
     height: 24px;
@@ -110,7 +111,12 @@ body {
 #page-container,
 #sidebar,
 #sidebar-alt {
-    background-color: #444242;
+    background-color: #333333;
+}
+
+#venti{
+    background-color: #365D66;
+    border-radius: 7px;
 }
 
 #sidebar,
@@ -346,14 +352,13 @@ header.navbar-inverse.navbar-fixed-bottom {
 .nav.navbar-nav-custom > li.open > a,
 .nav.navbar-nav-custom > li > a:hover,
 .nav.navbar-nav-custom > li > a:focus {
-    background-color: #1bbae1;
+    background-color: #365D66;
     color: #ffffff;
 }
 
 .nav.navbar-nav-custom > li > a > img {
     width: 40px;
     height: 40px;
-    border: 2px solid #fff;
     border-radius: 20px;
     vertical-align: top;
 }
@@ -475,7 +480,7 @@ a.sidebar-title:focus {
 /* Sidebar User */
 .sidebar-user {
     padding-left: 88px;
-    background: #4c5471;
+    background: #333333;
 }
 
 .sidebar-user-avatar {
@@ -693,9 +698,15 @@ a.sidebar-title:focus {
 .sidebar-nav a {
     display: block;
     color: #eaedf1;
-    padding: 0 10px;
+    padding: 10px;
     min-height: 35px;
     line-height: 35px;
+    text-align: center;
+}
+
+.svg {
+    width: 50px;
+    margin: 0 auto;
 }
 
 .sidebar-nav a:hover,
@@ -1946,7 +1957,7 @@ a[data-toggle="lightbox-image"]:hover img {
 }
 
 .navbar.navbar-inverse {
-    background-color: #4c5471;
+    background-color: #40BAB3;
 }
 
 .navbar-fixed-top,
@@ -2118,6 +2129,13 @@ input[type="password"].form-control,
 input[type="email"].form-control,
 textarea.form-control {
     -webkit-appearance: none;
+}
+
+.menusito{
+    text-align: center;
+    display: block !important;
+    margin-right: 0px !important;
+    width: initial !important;
 }
 
 .form-control {
@@ -2962,8 +2980,8 @@ fieldset[disabled] .btn-default.active:focus {
 }
 
 .btn-primary {
-    background-color: #6ad2eb;
-    border-color: #1bbae1;
+    background-color: #007bff !important;;
+    border-color: #007bff;
     color: #ffffff;
 }
 

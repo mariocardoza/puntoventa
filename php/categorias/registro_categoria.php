@@ -123,6 +123,7 @@ $departamentos=Departamento::obtener_departamentos();
 <script>
     $(document).ready(function(e){
         $(document).on("click","#btn_guardar", function(e){
+            modal_cargando();
             var valid=$("#fm_categoria").valid();
             if(valid){
                 var datos=$("#fm_categoria").serialize();
@@ -135,6 +136,7 @@ $departamentos=Departamento::obtener_departamentos();
                         if(json[0]==1){
                             guardar_exito("categorias");
                         }else{
+                            swal.close();
                             guardar_error();
                         }
                     }

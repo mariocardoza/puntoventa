@@ -277,14 +277,7 @@ $(document).ready(function(e){
 	 	var valid=$("#fm_cliente").valid();
 	 	if(valid){
 	 		datos = $("#fm_cliente").serialize();
-	 		swal({
-                title: '¡Cargando!',
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-                onOpen: function() {
-                    swal.showLoading()
-                }
-            });
+	 		modal_cargando();
 	 		$.ajax({
 	 			url:'json_clientes.php',
 	 			type:'POST',

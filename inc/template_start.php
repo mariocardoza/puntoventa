@@ -50,6 +50,7 @@ date_default_timezone_set('America/El_Salvador');
 
         <!-- END Stylesheets -->
         <link rel="stylesheet" type="text/css" href="../../css/izitoast/iziToast.min.css?v=130c">
+        <link rel="stylesheet" type="text/css" href="../../css/themes.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.3/css/rowReorder.dataTables.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
@@ -177,6 +178,9 @@ date_default_timezone_set('America/El_Salvador');
         .btn-group.dropup.text-left.open .dropdown-menu i{display: contents;}
         .dataTable {
             width: 100% !important;
+        }
+        .cls-1 {
+            fill: #fff !important;
         }
    </style>
 

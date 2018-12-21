@@ -25,12 +25,12 @@
     }
 </style>
 <?php include '../../inc/page_head.php'; 
-include_once("../../Conexion/Categoria.php");
+include_once("../../Conexion/Servicio.php");
 $datos = null;
-$categorias = Categoria::obtener_categorias();
+$servicios = Servicio::obtener_servicios();
 
 //print_r($departamentos);
-if($categorias[0] == 1)$datos = $categorias[2];
+
 // else print_r($result);
 ?>
 
@@ -45,7 +45,7 @@ if($categorias[0] == 1)$datos = $categorias[2];
                 <a href="#">Categorias (<?=count($datos)?>)</a>
               </li>
               <li class="pull-right">
-              <a href="registro_categoria.php" class="btn btn-lg bg-white"><i class="fa pull-left" style="width: 20px;"><img src="../../img/icon_mas.svg" class="svg" alt=""></i> Agregar categoría</a>
+              <a href="registro_servicio.php" class="btn btn-primary"><span class="fa fa-plus-circle pull-left"></span> Agregar servicio</a>
               </li>
             </ul>
           </div>
@@ -56,7 +56,9 @@ if($categorias[0] == 1)$datos = $categorias[2];
                   <th>#</th>
                   <th>Nombre</th>
                   <th>Descripción</th>
-                  <th>Departamento</th>
+                  <th>Precio</th>
+                  <th>Duración</th>
+                  <th>Empleado</th>
                   <th class="text-center">Acciones</th>
                 </tr>
               </thead>
@@ -65,22 +67,26 @@ if($categorias[0] == 1)$datos = $categorias[2];
                   <th>#</th>
                   <th>Nombre</th>
                   <th>Descripción</th>
-                  <th>Departamento</th>
+                  <th>Precio</th>
+                  <th>Duración</th>
+                  <th>Empleado</th>
                   <th class="text-center">Acciones</th>
                 </tr>
               </tfoot>
               <tbody>
-                <?php foreach ($datos as $key => $categoria) { ?>
+                <?php foreach ($servicios as $key => $servicio) { ?>
                   <tr>
                   <td><?php echo $key+1 ?></td>
-                  <td><?php echo $categoria[nombre] ?></td>
-                  <td><?php echo $categoria[descripcion] ?></td>
-                  <td><?php echo $categoria[departamento] ?></td>
+                  <td><?php echo $servicio[nombre] ?></td>
+                  <td><?php echo $servicio[descripcion] ?></td>
+                  <td class="text-right">$<?php echo $servicio[precio] ?></td>
+                  <td><?php echo $servicio[duracion] ?></td>
+                  <td><?php echo $servicio[empleado] ?></td>
                   <td>
                     <div class="btn-group">
-                      <a class="btn btn-warning" onclick="<?php echo "editar(".$categoria['id'].")" ?>" href="#"><i class="fa fa-edit"></i></a>
+                      <a class="btn btn-warning" onclick="<?php echo "editar(".$servicio['id'].")" ?>" href="#"><i class="fa fa-edit"></i></a>
                       <!--a id="btn_editar" data-id="<?php echo $persona[id] ?>" class="btn btn-warning" href="#"><i class="fa fa-edit"></i></a-->
-                      <a onclick="<?php echo "darbaja(".$categoria['id'].",'tb_categoria','la categoria')" ?>"  class="btn btn-danger" href="#"><i class="fa fa-remove"></i></a>
+                      <a onclick="<?php echo "darbaja(".$servicio['id'].",'tb_servicio','el servicio')" ?>"  class="btn btn-danger" href="#"><i class="fa fa-remove"></i></a>
                     </div>
                   </td>
                 </tr>
@@ -105,17 +111,17 @@ if($categorias[0] == 1)$datos = $categorias[2];
     $(document).ready(function(e){
       $(document).on("click","#btn_guardar", function(e){
         modal_cargando();
-            var valid=$("#fm_categoria").valid();
+            var valid=$("#fm_servicios").valid();
             if(valid){
-                var datos=$("#fm_categoria").serialize();
+                var datos=$("#fm_servicios").serialize();
                 $.ajax({
-                    url:'json_categorias.php',
+                    url:'json_servicios.php',
                     type:'POST',
                     dataType:'json',
                     data:datos,
                     success:function(json){
                         if(json[0]==1){
-                            guardar_exito("categorias");
+                            guardar_exito("servicios");
                         }else{
                           swal.close();
                             guardar_error();
@@ -128,7 +134,7 @@ if($categorias[0] == 1)$datos = $categorias[2];
 
     function editar(id){
       $.ajax({
-        url:'json_categorias.php',
+        url:'json_servicios.php',
         type:'POST',
         dataType:'json',
         data:{data_id:'modal_editar',id:id},

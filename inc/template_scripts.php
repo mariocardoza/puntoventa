@@ -43,6 +43,7 @@
 
   <script src="../../js/mask/jquery.inputmask.bundle.js" type="text/javascript"></script>
   <script src="../../js/moment.min.js" type="text/javascript"></script>
+  <script src="../../js/plus-minus-input.js" type="text/javascript"></script>
 
 <style type="text/css" media="screen">
   header .dropdown-menu.dropdown-custom > li {
@@ -92,6 +93,53 @@
       range: jQuery.validator.format("Por favor, escribe un valor entre {0} y {1}."),
       max: jQuery.validator.format("Por favor, escribe un valor menor o igual a {0}."),
       min: jQuery.validator.format("Por favor, escribe un valor mayor o igual a {0}.")
+    });
+
+    ///quantity plus
+    $(document).on("click","#plus",function(e){
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        fieldName = $(this).attr('data-field');
+        // Get its current value
+        var currentVal = parseInt($('input[name='+fieldName+']').val());
+        var max = parseInt($('input[name='+fieldName+']').attr("max"));
+        // If is not undefined
+        if (!isNaN(currentVal)) {
+            // Increment
+            $('input[name='+fieldName+']').val(currentVal + 1);
+            if(max <= currentVal)$('input[name='+fieldName+']').val(max);
+            $('input[name='+fieldName+']').trigger("input");
+        } else {
+            // Otherwise put a 0 there
+            $('input[name='+fieldName+']').val(0);
+            $('input[name='+fieldName+']').trigger("input");
+        }
+    });
+
+    //quuantity minus
+    $(document).on("click","#minus",function(e) {
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        fieldName = $(this).attr('data-field');
+        // Get its current value
+        var currentVal = parseInt($('input[name='+fieldName+']').val());
+        var min = parseInt($('input[name='+fieldName+']').attr("min"));
+        // If it isn't undefined or its greater than 0
+        if(min >= currentVal ){
+             $('input[name='+fieldName+']').val(min);
+             $('input[name='+fieldName+']').trigger("input");
+         }
+        else if (!isNaN(currentVal) && currentVal > 0) {
+            // Decrement one
+            $('input[name='+fieldName+']').val(currentVal - 1);
+            $('input[name='+fieldName+']').trigger("input");
+        } else {
+            // Otherwise put a 0 there
+            $('input[name='+fieldName+']').val(0);
+            $('input[name='+fieldName+']').trigger("input");
+        }
     });
   });
   function cargar_tabla(elem){
@@ -327,6 +375,19 @@ function validar_nit(nit,tabla,valor){
 
     }
 });
+}
+
+function modal_cargando(){
+  swal({
+    title: 'Cargando!',
+    text: 'Este diálogo se cerrará al completar la operación.',
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    showConfirmButton: false,
+    onOpen: function () {
+      swal.showLoading()
+    }
+  });
 }
 
 function validar_correo(email,tabla,valor){

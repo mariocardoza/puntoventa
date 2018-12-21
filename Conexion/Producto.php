@@ -31,6 +31,7 @@ include_once('Subcategoria.php');
 			c.nombre AS categoria,
 			s.nombre AS sub,
 			p.ganancia,
+            p.codigo_oculto,
 			(((p.ganancia/100)*p.precio_unitario)+p.precio_unitario) as precio_venta
 		FROM
 			tb_producto AS p
@@ -302,7 +303,6 @@ include_once('Subcategoria.php');
 			p.precio_unitario,
 			p.ganancia,
 			p.fecha_vencimiento,
-			DATE_FORMAT(p.fecha_vencimiento,'%d/%m/%Y') as venci,
 			p.lote,
 			d.id AS departamento,
 			c.id AS categoria,
@@ -351,7 +351,8 @@ include_once('Subcategoria.php');
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="nombre">Nombre</label>
                             <div class="col-md-9">
-                                <input type="hidden" name="data_id" value="nuevo_producto">
+                                <input type="hidden" name="data_id" value="editar_producto">
+                                <input type="hidden" name="id" value="'.$producto[id].'" >
                                 <input type="text" id="nombre" name="nombre" value="'.$producto[nombre].'" class="form-control" placeholder="Digite el nombre del nombre">
                             </div>
                         </div>
@@ -424,23 +425,7 @@ include_once('Subcategoria.php');
                                     } 
                                 $modal.='</select>
                             </div>
-                        </div>';
-                        if($producto[fecha_vencimiento]!=''){
-                        	$modal.='<div class="form-group">
-                            <label for="" class="col-md-3 control-label">Fecha de vencimiento</label>
-                            <div class="col-md-9">
-                                <input type="date" disabled name="fecha_vencimiento" id="vencimiento" value="'.$producto[venci].'" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group" id="lotito">
-                            <label for="" class="col-md-3 control-label">Lote N°</label>
-                            <div class="col-md-9">
-                                <input type="text" id="lote" value="'.$producto[lote].'" name="lote" class="form-control">
-                            </div>
-                        </div>';
-                        }
-
-                        
+                        </div>';     
                         $modal.='<div class="form-group">
                             <label class="col-md-3 control-label" for="product-meta-keywords">Proveedor</label>
                             <div class="col-md-9">
@@ -472,7 +457,7 @@ include_once('Subcategoria.php');
                     <div class="form-group">
                     <div class="col-md-10">
                         <center>
-                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Guardar</button>
+                            <button type="button" id="btn_guardar" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Guardar</button>
                         <button type="button" data-dismiss="modal" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Cerrar</button>
                         </center>
                     </div>
