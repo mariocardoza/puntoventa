@@ -1,6 +1,52 @@
 var table_procesos = cargar_tabla2("productos_table"); //inicializar tabla
 $(document).ready(function(e){
-  
+  /// *** funcion para cargar todos los productos *** ///
+  swal({
+    title: 'Consultando datos!',
+    text: 'Este diálogo se cerrará al cargar los datos.',
+    showConfirmButton: false,
+    onOpen: function () {
+    swal.showLoading()
+   }
+  });
+  $.ajax({
+        url:'json_productos.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto:'',departamento:'0'},
+        success: function(json){
+          console.log(json);
+          $("#aqui_busqueda").empty();
+          $("#aqui_busqueda").html(json[2]);
+          swal.closeModal();
+        }
+      });
+
+  /// ****** Fin cargar todos los productos **** ///
+
+  /// *** buscar segun departamento *** ///
+    $(document).on("change","#depart", function(e){
+      var iddepar=$(this).val();
+      $("#busqueda").val("");
+      $.ajax({
+        url:'json_productos.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto:'',departamento:iddepar},
+        success: function(json){
+          console.log(json);
+          var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
+          if(json[2]){
+            $("#aqui_busqueda").empty();
+          $("#aqui_busqueda").html(json[2]);
+        }else{
+          $("#aqui_busqueda").empty();
+          $("#aqui_busqueda").html(html);
+          //swal.closeModal();
+        }
+        }
+      });
+    });
 	//habilitar elemento de fecha de caducidad
 	 $('#perecedero').change(function() {
         if( $(this).is(':checked') ){
@@ -140,6 +186,29 @@ $(document).ready(function(e){
         $("#md_cambiar_imagen").modal("show");
         var codigo=$(this).data('codigo');
         $("#codiguito").val(codigo);
+    });
+
+    //buscar con funcion input
+    $(document).on("input","#busqueda", function(e){
+      var esto=$(this).val();
+      var departamento=$("#depart").val();
+      $.ajax({
+        url:'json_productos.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto,departamento},
+        success: function(json){
+          console.log(json);
+          var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
+          if(json[2]){
+            $("#aqui_busqueda").empty();
+          $("#aqui_busqueda").html(json[2]);
+        }else{
+          $("#aqui_busqueda").empty();
+          $("#aqui_busqueda").html(html);
+        }
+        }
+      });
     });
 
     //asignar más mercadería

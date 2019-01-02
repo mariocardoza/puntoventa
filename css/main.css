@@ -3217,6 +3217,24 @@ fieldset[disabled] .btn-success.active:focus {
     color: #ffffff;
 }
 
+.btn-mio {
+    background-color: #40BAB3;
+    border-color: #40BAB3;
+    color: #ffffff;
+}
+
+.btn-mio-inverso {
+    background-color: #ffffff;
+    border-color:#40BAB3;
+    color: #40BAB3;
+}
+
+.btn-mio:hover {
+    background-color: #365D66;
+    border-color: #40BAB5;
+    color: #ffffff;
+}
+
 .btn-info.btn-alt {
     background-color: #ffffff;
     color: #3498db;

@@ -76,8 +76,30 @@ $productos=Producto::obtener_productos();
                                 </div>
                                 <div class="row">
                                     <?php foreach ($productos[1] as $producto): ?>
-                                    <div class="col-xs-6 col-sm-4 col-lg-3">
-                                      <div class="widget">
+                                    <div class="col-xs-12 col-sm-12 col-lg-12">
+                                        <div class="widget">
+                                          <div class="widget-simple">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="15%"></td>
+                                                        <td width="15%" rowspan="3"><center><img src="../../img/productos/<?php echo $producto[imagen] ?>" id="cambiar_imagen" data-codigo="'.$producto[codigo_oculto].'" alt="avatar" class="widget-image img-circle"></center></td>
+                                                        <td><?php echo $producto[nombre] ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a class="btn btn-mio" id="asignar_mas" data-id="'.$producto[id].'" data-nombre="'.$producto[nombre].'" href="javascript:void(0)"><i class="fa fa-plus"></i></a></td>
+                                                        <td>En inventario: <b><?php echo $producto[cantidad] ?></b></td>
+                                                        
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="15%"></td>
+                                                        <td>Precio <?php echo $number_format($producto[precio_unitario],2) ?></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                          </div>
+                                        </div>
+                                      <!--div class="widget hide">
                                           <div class="widget-simple">
                                               <a data-nombre="<?php echo $producto[nombre] ?>" data-codigo="<?php echo $producto[codigo_oculto] ?>" data-precio="<?php echo $producto[precio_unitario] ?>" data-existencia="<?php echo $producto[cantidad] ?>" href="#" id="agrega_img">
                                                   <img src="../../img/productos/<?php echo $producto[imagen] ?>" alt="avatar" class="widget-image img-circle pull-left">
@@ -86,7 +108,7 @@ $productos=Producto::obtener_productos();
                                                     <strong><?php echo $producto[nombre] ?></strong>
                                                   </a>
                                           </div>
-                                      </div>
+                                      </div-->
                                     </div>
                                     <?php endforeach ?>
                                 </div>

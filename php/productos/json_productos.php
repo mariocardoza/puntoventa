@@ -26,4 +26,9 @@ if($_POST['data_id']=='editar_producto'){
 	echo json_encode($result);
 	exit();
 }
+if($_POST['data_id']=='busqueda'){
+	$result=Producto::busqueda($_POST['esto'],$_POST['departamento']);
+	echo json_encode($result);
+	exit();
+}
 ?>

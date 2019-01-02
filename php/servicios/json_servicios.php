@@ -18,5 +18,9 @@ if(isset($_POST) || isset($_GET)){
 	echo json_encode($result);
 	exit();
 	}
+	if($_POST['data_id']=='busqueda'){
+		$result=Servicio::busqueda($_POST['esto']);
+		echo json_encode($result);exit();
+	}
 }
 ?>

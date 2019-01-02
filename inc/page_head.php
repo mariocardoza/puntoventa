@@ -282,9 +282,9 @@
                     <!-- Main Sidebar Toggle Button -->
                     <ul class="nav navbar-nav-custom">
                         <li>
-                            <!--a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">
+                            <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">
                                 <i class="fa fa-bars fa-fw"></i>
-                            </a-->
+                            </a>
                         </li>
                     </ul>
                     <!-- END Main Sidebar Toggle Button -->
@@ -358,10 +358,10 @@
 
                 <ul class="nav navbar-nav-custom">
                     <!-- Main Sidebar Toggle Button -->
-                    <li>
-                        <!--a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">
+                    <li class="hidden-lg">
+                        <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">
                             <i class="fa fa-bars fa-fw"></i>
-                        </a-->
+                        </a>
                     </li>
                     <!-- END Main Sidebar Toggle Button -->
 
@@ -373,7 +373,7 @@
                 <!-- Right Header Navigation -->
                 <ul class="nav navbar-nav-custom pull-right">
                     <li class="" id="venti">
-                        <a href="javascript:void(0)" id="">
+                        <a href="javascript:void(0)" id="cobrar">
                              <img src="../../img/menus/dolar.svg" alt=""></a>
             
                     </li>
@@ -383,4 +383,23 @@
                 <!-- END Right Header Navigation -->
                 <?php } ?>
             </header>
+<div class="modal fade" id="modal_cobrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div>
+        <center><h1 style="color:#fff"><b>¿Qué desea cobrar?</b></h1></center>
+    </div>
+    <div>
+        <table width="100%">
+        <td width="40%"><p align="center" style="width: 300px; height: 300px; background-image: url('../../img/menus/fondo.svg');"><img id="cobrar_producto" src="../../img/menus/productos.svg" width="250px" height="250px" alt=""></p></td>
+        <td width="20%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td width="40%"><p align="center" style="width: 300px; height: 300px; background-image: url('../../img/menus/fondo.svg');"><img id="cobrar_servicio" src="../../img/menus/servicios.svg" width="250px" height="250px" alt=""></p></td>
+    </table>
+    </div>
+    <div>
+        <center>
+            <button type="button" class="btn btn-mio-inverso btn-lg" data-dismiss="modal">Atrás</button>
+        </center>
+    </div>
+  </div>
+</div>
             <!-- END Header -->

@@ -1,0 +1,68 @@
+[11-Dec-2018 11:51:29 America/El_Salvador] PHP Fatal error:  Uncaught Error: Call to undefined function execute() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php:18
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/php/proveedores/proveedores.php(29): Proveedor::obtener_proveedores()
+#1 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php on line 18
+[11-Dec-2018 11:51:45 America/El_Salvador] PHP Fatal error:  Uncaught Error: Call to undefined function execute() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php:18
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/php/proveedores/proveedores.php(29): Proveedor::obtener_proveedores()
+#1 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php on line 18
+[11-Dec-2018 11:53:07 America/El_Salvador] PHP Fatal error:  Uncaught Error: Call to undefined function execute() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php:18
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/php/proveedores/proveedores.php(29): Proveedor::obtener_proveedores()
+#1 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php on line 18
+[11-Dec-2018 11:53:44 America/El_Salvador] PHP Fatal error:  Uncaught Error: Call to undefined function execute() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php:18
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/php/proveedores/proveedores.php(29): Proveedor::obtener_proveedores()
+#1 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php on line 18
+[11-Dec-2018 11:54:06 America/El_Salvador] PHP Fatal error:  Uncaught Error: Call to undefined function execute() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php:18
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/php/proveedores/proveedores.php(29): Proveedor::obtener_proveedores()
+#1 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php on line 18
+[11-Dec-2018 11:56:11 America/El_Salvador] PHP Fatal error:  Uncaught Error: Call to undefined function execute() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php:19
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/php/proveedores/proveedores.php(29): Proveedor::obtener_proveedores()
+#1 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php on line 19
+[11-Dec-2018 11:56:56 America/El_Salvador] PHP Fatal error:  Uncaught Error: Call to undefined function execute() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php:20
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/php/proveedores/proveedores.php(29): Proveedor::obtener_proveedores()
+#1 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php on line 20
+[11-Dec-2018 11:58:08 America/El_Salvador] PHP Fatal error:  Uncaught Error: Call to undefined function execute() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php:20
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/php/proveedores/proveedores.php(29): Proveedor::obtener_proveedores()
+#1 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php on line 20
+[11-Dec-2018 13:02:31 America/El_Salvador] PHP Fatal error:  Uncaught Error: Call to undefined function execute() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php:20
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/php/proveedores/proveedores.php(29): Proveedor::obtener_proveedores()
+#1 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php on line 20
+[11-Dec-2018 13:03:19 America/El_Salvador] PHP Fatal error:  Uncaught Error: Call to undefined function execute() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php:20
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/php/proveedores/proveedores.php(29): Proveedor::obtener_proveedores()
+#1 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php on line 20
+[11-Dec-2018 13:03:43 America/El_Salvador] PHP Fatal error:  Uncaught Error: Call to undefined function execute() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php:20
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/php/proveedores/proveedores.php(29): Proveedor::obtener_proveedores()
+#1 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php on line 20
+[11-Dec-2018 13:05:30 America/El_Salvador] PHP Fatal error:  Uncaught Error: Call to undefined function execute() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php:20
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/php/proveedores/proveedores.php(29): Proveedor::obtener_proveedores()
+#1 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php on line 20
+[12-Dec-2018 08:47:03 America/El_Salvador] PHP Warning:  array_keys() expects parameter 1 to be array, string given in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Genericas2.php on line 237
+[12-Dec-2018 08:47:03 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Genericas2.php on line 237
+[02-Jan-2019 13:03:11 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/proveedores/proveedores.php on line 46
+[02-Jan-2019 13:09:12 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/proveedores/proveedores.php on line 46
+[02-Jan-2019 13:25:43 America/El_Salvador] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php on line 52
+[02-Jan-2019 13:28:38 America/El_Salvador] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php on line 52
+[02-Jan-2019 13:29:27 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/proveedores/proveedores.php on line 46
+[02-Jan-2019 13:29:36 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/proveedores/proveedores.php on line 46

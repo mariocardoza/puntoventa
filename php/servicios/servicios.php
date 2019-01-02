@@ -36,10 +36,27 @@ $servicios = Servicio::obtener_servicios();
 
 <!-- Page content -->
 <div id="page-content">
+  <div class="row">
+        <div class="col-sm-4 col-lg-4">
+            <div class="input-group">
+                <input type="search" class="form-control" id="busqueda" placeholder="Buscar servicio">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            </div>
+        </div>
+        <div class="col-sm-4 col-lg-4">
+            <select name="" id="depart" class="select-chosen">
+                <option value="0">Todos</option>
+            </select>
+        </div>
+        <div class="col-sm-4 col-lg-4">
+            <a href="registro_servicio.php" class="btn btn-mio btn-block">Nuevo servicio</a>
+        </div>
+    </div>
     <div class="row">
       <div class="col-xs-12">
         <div class="block full">
-          <div class="block-title">
+          <div class="row" id="aqui_busqueda" style="overflow:scroll;overflow-x:hidden;max-height:700px;"></div>
+          <!--div class="block-title">
             <ul class="nav-horizontal">
               <li class="active">
                 <a href="#">Categorias (<?=count($datos)?>)</a>
@@ -48,8 +65,8 @@ $servicios = Servicio::obtener_servicios();
               <a href="registro_servicio.php" class="btn btn-primary"><span class="fa fa-plus-circle pull-left"></span> Agregar servicio</a>
               </li>
             </ul>
-          </div>
-          <div class="">
+          </div-->
+          <!--div class="">
             <table id="exampleTableSearch" class="table table-vcenter table-condensed table-bordered" >
               <thead>
                 <tr>
@@ -85,7 +102,7 @@ $servicios = Servicio::obtener_servicios();
                   <td>
                     <div class="btn-group">
                       <a class="btn btn-warning" onclick="<?php echo "editar(".$servicio['id'].")" ?>" href="#"><i class="fa fa-edit"></i></a>
-                      <!--a id="btn_editar" data-id="<?php echo $persona[id] ?>" class="btn btn-warning" href="#"><i class="fa fa-edit"></i></a-->
+                      <a id="btn_editar" data-id="<?php echo $persona[id] ?>" class="btn btn-warning" href="#"><i class="fa fa-edit"></i></a>
                       <a onclick="<?php echo "darbaja(".$servicio['id'].",'tb_servicio','el servicio')" ?>"  class="btn btn-danger" href="#"><i class="fa fa-remove"></i></a>
                     </div>
                   </td>
@@ -93,7 +110,7 @@ $servicios = Servicio::obtener_servicios();
                 <?php } ?>
               </tbody>
             </table>
-          </div>
+          </div-->
         </div>
       </div>
     </div>
@@ -104,7 +121,7 @@ $servicios = Servicio::obtener_servicios();
 <?php include '../../inc/page_footer.php'; ?>
 <?php include '../../inc/template_scripts.php'; ?>
 <?php include '../../inc/template_end.php'; ?>
-<!--script src="cliente.js?cod=<?php echo date("Yidisus") ?>"></script-->
+<script src="servicios.js?cod=<?php echo date("Yidisus") ?>"></script>
 <script type="text/javascript">
     var table_procesos = cargar_tabla2("exampleTableSearch"); //inicializar tabla
 

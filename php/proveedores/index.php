@@ -32,30 +32,10 @@ if($proveedores[0] == 1)$datos = $proveedores[2];
 
 <!-- Page content -->
 <div id="page-content">
-     <!-- Quick Stats -->
-    <div class="row">
-        <div class="col-sm-4 col-lg-4">
-            <div class="input-group">
-                <input type="search" class="form-control" id="busqueda" placeholder="Buscar proveedor">
-                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-            </div>
-        </div>
-        <div class="col-sm-4 col-lg-4">
-            <select name="" id="depart" class="select-chosen">
-                <option value="0">Todos</option>
-            </select>
-        </div>
-        <div class="col-sm-4 col-lg-4">
-            <a href="registro_proveedor.php" class="btn btn-mio btn-block">Nuevo proveedor</a>
-        </div>
-    </div>
     <div class="row">
       <div class="col-xs-12">
         <div class="block full">
-          <div class="row" id="aqui_busqueda" style="overflow:scroll;overflow-x:hidden;max-height:700px;">
-            
-          </div>
-          <!--div class="block-title">
+          <div class="block-title">
             <ul class="nav-horizontal">
               <li class="active">
                 <a href="#">Proveedores (<?=count($datos)?>)</a>
@@ -64,8 +44,8 @@ if($proveedores[0] == 1)$datos = $proveedores[2];
               <a href="registro_proveedor.php" class="btn btn-lg bg-white"><i class="fa pull-left" style="width: 20px;"><img src="../../img/icon_mas.svg" class="svg" alt=""></i> Agregar proveedor</a>
               </li>
             </ul>
-          </div-->
-          <!--div class="">
+          </div>
+          <div class="">
             <table id="exampleTableSearch" class="table table-vcenter table-condensed table-bordered" >
               <thead>
                 <tr>
@@ -107,14 +87,14 @@ if($proveedores[0] == 1)$datos = $proveedores[2];
                   <td>
                     <div class="btn-group">
                       <a class="btn btn-warning" onclick="<?php echo "editar(".$proveedor['id'].")" ?>" href="#"><i class="fa fa-edit"></i></a>
-                      <a onclick="<?php echo "darbaja(".$proveedor['id'].",'tb_proveedor','el proveedor')" ?>" class="btn btn-danger" href="#"><i class="fa fa-remove"></i></a>
+                      <a onclick="<?php echo "darbaja(".$proveedor['id'].",'tb_proveedor','proveedor')" ?>" class="btn btn-danger" href="#"><i class="fa fa-remove"></i></a>
                     </div>
                   </td>
                 </tr>
                 <?php } ?>
               </tbody>
             </table>
-          </div-->
+          </div>
         </div>
       </div>
     </div>
@@ -125,7 +105,7 @@ if($proveedores[0] == 1)$datos = $proveedores[2];
 <?php include '../../inc/page_footer.php'; ?>
 <?php include '../../inc/template_scripts.php'; ?>
 <?php include '../../inc/template_end.php'; ?>
-<script src="proveedor.js?cod=<?php echo $cod ?>"></script>
+<script src="proveedor.js"></script>
 
 <script type="text/javascript">
   var table_procesos = cargar_tabla2("exampleTableSearch");   </script>

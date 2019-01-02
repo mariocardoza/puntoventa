@@ -117,6 +117,8 @@
         }
     });
 
+
+
     //quuantity minus
     $(document).on("click","#minus",function(e) {
         // Stop acting like a button
@@ -140,6 +142,21 @@
             $('input[name='+fieldName+']').val(0);
             $('input[name='+fieldName+']').trigger("input");
         }
+    });
+
+    //cargar modal de cobrar
+    $(document).on("click","#cobrar", function(e){
+            $("#modal_cobrar").modal("show");
+        });
+
+    //cobrar producto : acciones
+    $(document).on("click","#cobrar_producto", function(e){
+      alert("producto");
+    });
+
+    //cobrar servicio : acciones
+    $(document).on("click","#cobrar_servicio", function(e){
+      alert("servicio");
     });
   });
   function cargar_tabla(elem){

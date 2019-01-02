@@ -28,56 +28,39 @@
 </style>
 <?php include '../../inc/page_head.php'; 
 include_once("../../Conexion/Producto.php");
+include_once("../../Conexion/Departamento.php");
 $result = Producto::obtener_productos();
+$depart = Departamento::obtener_departamentos();
 ?>
 
 <!-- Page content -->
 <div id="page-content">
     <!-- Quick Stats -->
-    <div class="row text-center">
+    <div class="row">
         <div class="col-sm-4 col-lg-4">
-            <input type="text" class="form-control" placeholder="Buscar">
+            <div class="input-group">
+                <input type="search" class="form-control" id="busqueda" placeholder="Buscar producto">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            </div>
         </div>
         <div class="col-sm-4 col-lg-4">
-            <select name="" id="" class="select-chosen">
-                <option value="">Todos</option>
+            <select name="" id="depart" class="select-chosen">
+                <option value="0">Todos</option>
+                <?php foreach ($depart[1] as $departamento): ?>
+                    <option value="<?php echo $departamento[id] ?>"><?php echo $departamento[nombre] ?></option>
+                <?php endforeach ?>
             </select>
         </div>
         <div class="col-sm-4 col-lg-4">
-            <a href="registro_producto.php" class="btn btn-info btn-block">Nuevo producto</a>
+            <a href="registro_producto.php" class="btn btn-mio btn-block">Nuevo producto</a>
         </div>
     </div>
     <!-- END Quick Stats -->
 
     <!-- All Products Block -->
     <div class="block full">
-        <div class="row"  style='overflow:scroll;overflow-x:hidden;max-height:200px;'>
-            <?php foreach($result[1] as $producto) { ?>
-            <div class="col-sm-6 col-lg-6" style="border:solid 0.50px;">
-                <div class="widget">
-                  <div class="widget-simple">
-                    <table width="100%">
-                        <tbody>
-                            <tr>
-                                <td width="15%"><a href="javascript:void(0)" onclick="<?php echo "editar(".$producto['id'].")" ?>" data-toggle="tooltip" title="Edit" class="btn btn-info"><i class="fa fa-pencil"></i></a></td>
-                                <td width="15%" rowspan="3"><center><img src="../../img/productos/<?php echo $producto[imagen] ?>" alt="avatar" class="widget-image img-circle"></center></td>
-                                <td><?php echo $producto[nombre] ?></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>En inventario: <b><?php echo $producto[cantidad] ?></b></td>
-                                
-                            </tr>
-                            <tr>
-                                <td width="15%"><a href="javascript:void(0)" onclick="<?php echo "darbaja(".$producto['id'].",'tb_producto','el producto')" ?>" data-toggle="tooltip" title="Delete" class="btn btn-info"><i class="fa fa-trash"></i></a></td>
-                                <td>Precio $ <?php echo number_format($producto[precio_unitario],2) ?></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                  </div>
-              </div>
-            </div>
-        <?php } ?>
+        <div class="row"  style='overflow:scroll;overflow-x:hidden;max-height:700px;' id="aqui_busqueda">
+            
         </div>
 
         <!-- All Products Content -->

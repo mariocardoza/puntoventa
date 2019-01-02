@@ -37,10 +37,31 @@ if($juridicos[0] == 1)$datos2 = $juridicos[1];
 
 <!-- Page content -->
 <div id="page-content">
+  <div class="row">
+        <div class="col-sm-4 col-lg-4">
+            <div class="input-group">
+                <input type="search" class="form-control" id="busqueda" placeholder="Buscar cliente">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            </div>
+        </div>
+        <div class="col-sm-4 col-lg-4">
+            <select name="" id="tipos" class="select-chosen">
+                <option value="0">Todos</option>
+                <option value="1">Naturales</option>
+                <option value="2">Jurídicos</option>
+            </select>
+        </div>
+        <div class="col-sm-4 col-lg-4">
+            <a href="registro.php" class="btn btn-mio btn-block">Nuevo cliente</a>
+        </div>
+    </div>
     <div class="row">
       <div class="col-xs-12">
         <div class="block full">
-          <div class="block-title">
+          <div class="row" id="aqui_busqueda" style="overflow:scroll;overflow-x:hidden;max-height:700px;">
+            
+          </div>
+          <!--div class="block-title">
             <ul class="nav-horizontal">
               <li class="active">
                 <a href="#">Naturales (<?=count($datos)?>)</a>
@@ -52,8 +73,8 @@ if($juridicos[0] == 1)$datos2 = $juridicos[1];
               <a href="registro.php" class="btn btn-lg bg-white"><i class="fa pull-left" style="width: 20px;"><img src="../../img/icon_mas.svg" class="svg" alt=""></i> Agregar cliente</a>
               </li>
             </ul>
-          </div>
-          <div class="">
+          </div-->
+          <!--div class="">
             <table id="exampleTableSearch" class="table table-vcenter table-condensed table-bordered" >
               <thead>
                 <tr>
@@ -95,7 +116,7 @@ if($juridicos[0] == 1)$datos2 = $juridicos[1];
                   <td>
                     <div class="btn-group">
                       <a class="btn btn-warning" onclick="<?php echo "editar(".$persona['id'].")" ?>" href="#"><i class="fa fa-edit"></i></a>
-                      <!--a id="btn_editar" data-id="<?php echo $persona[id] ?>" class="btn btn-warning" href="#"><i class="fa fa-edit"></i></a-->
+                      <a id="btn_editar" data-id="<?php echo $persona[id] ?>" class="btn btn-warning" href="#"><i class="fa fa-edit"></i></a>
                       <a onclick="<?php echo "darbaja(".$persona['id'].",'tb_cliente','el cliente')" ?>"  class="btn btn-danger" href="#"><i class="fa fa-remove"></i></a>
                     </div>
                   </td>
@@ -103,7 +124,7 @@ if($juridicos[0] == 1)$datos2 = $juridicos[1];
                 <?php } ?>
               </tbody>
             </table>
-          </div>
+          </div-->
         </div>
       </div>
     </div>

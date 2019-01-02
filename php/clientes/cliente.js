@@ -1,4 +1,31 @@
 $(document).ready(function(e){
+      swal({
+    title: 'Consultando datos!',
+    text: 'Este diálogo se cerrará al cargar los datos.',
+    showConfirmButton: false,
+    onOpen: function () {
+    swal.showLoading()
+   }
+  });
+  $.ajax({
+        url:'json_clientes.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto:'',tipo:'0'},
+        success: function(json){
+          console.log(json);
+            var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
+            if(json[2]){
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(json[2]);
+                swal.closeModal();
+            }else{
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(html);
+                swal.closeModal();
+            }
+        }
+      });
 	//habilitar elementos para persona jurídica
 	 $('#tipocliente').change(function() {
         if( $(this).is(':checked') ){
@@ -18,6 +45,51 @@ $(document).ready(function(e){
         $('#nit').removeAttr('required');
         $('#tipocontribuyente').removeAttr('required');
     }
+    });
+
+             //buscar con funcion input
+    $(document).on("input","#busqueda", function(e){
+      var esto=$(this).val();
+      var tipo=$("#tipos").val();
+      $.ajax({
+        url:'json_clientes.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto,tipo},
+        success: function(json){
+          console.log(json);
+          var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
+          if(json[2]){
+            $("#aqui_busqueda").empty();
+          $("#aqui_busqueda").html(json[2]);
+        }else{
+          $("#aqui_busqueda").empty();
+          $("#aqui_busqueda").html(html);
+        }
+        }
+      });
+    });
+
+    // ** evento change para los tipos ** //
+    $(document).on("change","#tipos", function(e){
+        var tipo=$(this).val();
+        $.ajax({
+        url:'json_clientes.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto:'',tipo},
+        success: function(json){
+          console.log(json);
+          var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
+          if(json[2]){
+            $("#aqui_busqueda").empty();
+          $("#aqui_busqueda").html(json[2]);
+        }else{
+          $("#aqui_busqueda").empty();
+          $("#aqui_busqueda").html(html);
+        }
+        }
+      });
     });
 
 	 //dar de baja a un cliente

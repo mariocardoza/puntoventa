@@ -44,6 +44,58 @@ class Servicio
 		}
 	}
 
+    public static function busqueda($dato){
+        $sql="SELECT
+            s.id,
+            s.nombre AS nombre,
+            s.descripcion AS descripcion,
+            s.precio AS precio,
+            s.duracion AS duracion,
+            CASE
+        WHEN s.empleado = 0 THEN
+            'Sin empleado asignado'
+        ELSE
+            p.nombre
+        END AS empleado
+        FROM
+            tb_servicio AS s
+        LEFT JOIN tb_persona AS p ON s.empleado = p.id
+        WHERE
+            s.nombre LIKE '%$dato%'
+            AND s.estado = 1";
+        try{
+            $comando=Conexion::getInstance()->getDb()->prepare($sql);
+            $comando->execute();
+            while ($row=$comando->fetch(PDO::FETCH_ASSOC)) {
+                $html.='<div class="col-sm-6 col-lg-6" style="border:solid 0.50px;">
+                <div class="widget">
+                  <div class="widget-simple">
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\')" data-toggle="tooltip" title="Editar" class="btn btn-mio"><i class="fa fa-pencil"></i></a></td>
+                                <td><b>'.$row[nombre].'</b></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Precio: $'.number_format($row[precio],2).'</td>
+                            </tr>
+                            <tr>
+                                <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_servicio\',\'el servicio\')" data-toggle="tooltip" title="Eliminar" class="btn btn-mio"><i class="fa fa-trash"></i></a></td>
+                                <td>Descripción: '.$row[descripcion].'</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+              </div>
+            </div>';
+            }
+            return array(1,"exito",$html,$sql);
+        }catch(Exception $e){
+            return array(-1,"error",$e->getMessage(),$sql);
+        }
+    }
+
 	public function modal_editar($id)
 	{
 		$empleados=Empleado::obtener_empleados();

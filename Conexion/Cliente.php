@@ -32,6 +32,45 @@ class Cliente
 		}
 	}
 
+	public static function busqueda($dato,$tipo){
+		$el_tipo='';
+		if($tipo!=0){
+			$el_tipo="AND c.tipo=$tipo";
+		}
+		$sql="SELECT * FROM tb_cliente as c WHERE c.estado=1 AND c.nombre LIKE '%$dato%' $el_tipo";
+		try{
+			$comando=Conexion::getInstance()->getDb()->prepare($sql);
+			$comando->execute();
+			while ($row=$comando->fetch(PDO::FETCH_ASSOC)) {
+				$html.='<div class="col-sm-6 col-lg-6" style="border:solid 0.50px;">
+                <div class="widget">
+                  <div class="widget-simple">
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\')" data-toggle="tooltip" title="Editar" class="btn btn-mio"><i class="fa fa-pencil"></i></a></td>
+                                <td><b>'.$row[nombre].'</b></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Teléfono: '.$row[telefono].'</td>
+                            </tr>
+                            <tr>
+                                <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_cliente\',\'el cliente\')" data-toggle="tooltip" title="Eliminar" class="btn btn-mio"><i class="fa fa-trash"></i></a></td>
+                                <td>Dirección: '.$row[direccion].'</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+              </div>
+            </div>';
+			}
+			return array(1,"exito",$html,$sql);
+		}catch(Exception $e){
+			return array(-1,"error",$e->getMessage(),$sql);
+		}
+	}
+
 	public static function obtener_naturales(){
 		$sql="SELECT c.*,CASE WHEN c.tipo=1 THEN 'Persona Natural' else '' end as eltipo FROM tb_cliente as c WHERE c.tipo=1 AND c.estado=1";
 		try{
