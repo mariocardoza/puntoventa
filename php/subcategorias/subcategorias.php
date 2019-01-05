@@ -36,10 +36,22 @@ if($subcategorias[0] == 1)$datos = $subcategorias[2];
 
 <!-- Page content -->
 <div id="page-content">
+  <div class="row">
+          <div class="col-sm-4 col-lg-4">
+              <div class="input-group">
+                  <input type="search" class="form-control" id="busqueda" placeholder="Buscar subcategoría">
+                  <span class="input-group-addon"><i class="fa fa-search"></i></span>
+              </div>
+          </div>
+          <div class="col-sm-4 col-lg-4">
+              <a href="registro_subcategoria.php" class="btn btn-mio btn-block">Nueva subcategoría</a>
+          </div>
+  </div>
     <div class="row">
       <div class="col-xs-12">
         <div class="block full">
-          <div class="block-title">
+          <div class="row" id="aqui_busqueda"></div>
+          <!--div class="block-title">
             <ul class="nav-horizontal">
               <li class="active">
                 <a href="#">SUbcategorías (<?=count($datos)?>)</a>
@@ -79,7 +91,6 @@ if($subcategorias[0] == 1)$datos = $subcategorias[2];
                   <td>
                     <div class="btn-group">
                       <a class="btn btn-warning" onclick="<?php echo "editar(".$subcategoria['id'].")" ?>" href="#"><i class="fa fa-edit"></i></a>
-                      <!--a id="btn_editar" data-id="<?php echo $persona[id] ?>" class="btn btn-warning" href="#"><i class="fa fa-edit"></i></a-->
                       <a onclick="<?php echo "darbaja(".$subcategoria['id'].",'tb_subcategoria','la subcategoria')" ?>"  class="btn btn-danger" href="#"><i class="fa fa-remove"></i></a>
                     </div>
                   </td>
@@ -87,7 +98,7 @@ if($subcategorias[0] == 1)$datos = $subcategorias[2];
                 <?php } ?>
               </tbody>
             </table>
-          </div>
+          </div-->
         </div>
       </div>
     </div>
@@ -103,6 +114,54 @@ if($subcategorias[0] == 1)$datos = $subcategorias[2];
     var table_procesos = cargar_tabla2("exampleTableSearch"); //inicializar tabla
 
     $(document).ready(function(e){
+      swal({
+    title: 'Consultando datos!',
+    text: 'Este diálogo se cerrará al cargar los datos.',
+    showConfirmButton: false,
+    onOpen: function () {
+    swal.showLoading()
+   }
+  });
+  $.ajax({
+        url:'json_subcategorias.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto:''},
+        success: function(json){
+          console.log(json);
+            var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
+            if(json[2]){
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(json[2]);
+                swal.closeModal();
+            }else{
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(html);
+                swal.closeModal();
+            }
+        }
+      });
+      //buscar con funcion input
+    $(document).on("input","#busqueda", function(e){
+      var esto=$(this).val();
+      $.ajax({
+        url:'json_subcategorias.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto},
+        success: function(json){
+          console.log(json);
+          var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
+          if(json[2]){
+            $("#aqui_busqueda").empty();
+          $("#aqui_busqueda").html(json[2]);
+        }else{
+          $("#aqui_busqueda").empty();
+          $("#aqui_busqueda").html(html);
+        }
+        }
+      });
+    });
       $(document).on("click","#btn_guardar", function(e){
             var valid=$("#fm_subcategoria").valid();
             if(valid){

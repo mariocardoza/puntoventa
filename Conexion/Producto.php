@@ -99,24 +99,24 @@ include_once('Subcategoria.php');
                 $productos[]=$row;
             }
          foreach($productos as $producto) { 
-            $modal.='<div class="col-sm-6 col-lg-6" style="border:solid 0.50px;">
+            $modal.='<div class="col-sm-6 col-lg-6" id="listado-card">
                 <div class="widget">
                   <div class="widget-simple">
                     <table width="100%">
                         <tbody>
                             <tr>
-                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$producto[id].'\')" data-toggle="tooltip" title="Editar" class="btn btn-mio"><i class="fa fa-pencil"></i></a></td>
+                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$producto[id].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a></td>
                                 <td width="15%" rowspan="3"><center><img src="../../img/productos/'.$producto[imagen].'" id="cambiar_imagen" data-codigo="'.$producto[codigo_oculto].'" alt="avatar" class="widget-image img-circle"></center></td>
-                                <td>'.$producto[nombre].'</td>
+                                <td style="font-size: 18px;"><b>'.$producto[nombre].'</b></td>
                             </tr>
                             <tr>
-                                <td><a class="btn btn-mio" id="asignar_mas" data-id="'.$producto[id].'" data-nombre="'.$producto[nombre].'" href="javascript:void(0)"><i class="fa fa-plus"></i></a></td>
-                                <td>En inventario: <b>'.$producto[cantidad].'</b></td>
+                                <td><!--<a class="btn btn-mio" id="asignar_mas" data-id="'.$producto[id].'" data-nombre="'.$producto[nombre].'" href="javascript:void(0)"><i class="fa fa-plus"></i></a--></td>
+                                <td style="font-size: 18px;">En inventario: <b>'.$producto[cantidad].'</b></td>
                                 
                             </tr>
                             <tr>
-                                <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$producto[id].'\',\'tb_producto\',\'el producto\')" data-toggle="tooltip" title="Eliminar" class="btn btn-mio"><i class="fa fa-trash"></i></a></td>
-                                <td>Precio $'.number_format($producto[precio_unitario],2).'</td>
+                                <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$producto[id].'\',\'tb_producto\',\'el producto\')" data-toggle="tooltip" title="Eliminar"><img src="../../img/iconos/eliminar.svg" width="35px" height="35px"></a></td>
+                                <td style="font-size: 18px;">Precio $'.number_format($producto[precio_unitario],2).'</td>
                             </tr>
                         </tbody>
                     </table>
@@ -410,24 +410,20 @@ include_once('Subcategoria.php');
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">
-              <span aria-hidden="true">×</span>
+            <h5 class="modal-title">Editar información del producto</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
             </button>
-          </div>
+        </div>
           	<div class="modal-body">
-               <form action="#" method="post" name="form-producto" id="form-producto" class="form-horizontal form-bordered">
+               <form action="#" method="post" name="form-producto" id="form-producto" class="form-horizontal">
             <!-- Product Edit Content -->
         <div class="row">
             <div class="col-lg-6">
                 <!-- General Data Block -->
                 <div class="block">
-                    <!-- General Data Title -->
-                    <div class="block-title">
-                        <h2><i class="fa fa-pencil"></i> <strong>Información</strong> general</h2>
-                    </div>
-                    <!-- END General Data Title -->
-
-                        <div class="form-group">
+                  
+                       <div class="form-group">
                             <label class="col-md-3 control-label" for="nombre">Nombre</label>
                             <div class="col-md-9">
                                 <input type="hidden" name="data_id" value="editar_producto">
@@ -484,11 +480,7 @@ include_once('Subcategoria.php');
             <div class="col-lg-6">
                 <!-- Meta Data Block -->
                 <div class="block">
-                    <!-- Meta Data Title -->
-                    <div class="block-title">
-                        <h2><i class="fa fa-google"></i> <strong>Información</strong> Adicional</h2>
-                    </div>
-
+                    
                     <div class="form-group">
                             <label class="col-md-3 control-label" for="subcategoria">Subcategoría</label>
                             <div class="col-md-9">
@@ -532,12 +524,12 @@ include_once('Subcategoria.php');
                 <!-- END Meta Data Block -->
             </div>
             <div class="col-lg-12">
-                <div class="block">
+                <div class="">
                     <div class="form-group">
                     <div class="col-md-10">
                         <center>
-                            <button type="button" id="btn_guardar" class="btn btn-sm btn-mio"><i class="fa fa-floppy-o"></i> Guardar</button>
-                        <button type="button" data-dismiss="modal" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Cerrar</button>
+                            <button type="button" id="btn_guardar" class="btn btn-mio"> Guardar</button>
+                        <button type="button" data-dismiss="modal" class="btn btn-default">Cerrar</button>
                         </center>
                     </div>
                 </div>

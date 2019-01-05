@@ -99,14 +99,16 @@
             <div id="sidebar-scroll">
                 <!-- Sidebar Content -->
                 <div class="sidebar-content">
-                    <div class="sidebar-section sidebar-user clearfix">
-                        <div class="sidebar-user-avatar">
+                    <div class="sidebar-section ">
+                        <div class="">
                             <a href="../home/perfil.php">
-                                <img src="../../img/usuario/<?= $_SESSION['imagen'] ?>" alt="avatar">
+                                <img style="display:block;margin:auto;border-radius:150px;" src="../../img/usuario/<?= $_SESSION['imagen'] ?>" alt="avatar">
                             </a>
-                        </div>
-                        <div class="sidebar-user-name">nombre del negocio</div>
+                        </div> 
                     </div>
+                    <div class="sidebar-user-name"><center>nombre del negocio</center></div>
+                    <div class="sidebar-sucursal"><center>Sucursal</center></div>
+                    <hr style="color: #989999;margin-right: 19px;margin-left: 19px;">
 
                     <!--div class="sidebar-section sidebar-logo clearfix sidebar-nav-mini-hide">
                         <div class="text-center">
@@ -374,7 +376,7 @@
                 <ul class="nav navbar-nav-custom pull-right">
                     <li class="" id="venti">
                         <a href="javascript:void(0)" id="cobrar">
-                             <img src="../../img/menus/dolar.svg" alt=""></a>
+                             <label for="">Cobrar</label> <img src="../../img/menus/dolar.svg" alt=""></a>
             
                     </li>
                     <!-- END User Dropdown -->
@@ -390,9 +392,12 @@
     </div>
     <div>
         <table width="100%">
-        <td width="40%"><p align="center" style="width: 300px; height: 300px; background-image: url('../../img/menus/fondo.svg');"><img id="cobrar_producto" src="../../img/menus/productos.svg" width="250px" height="250px" alt=""></p></td>
-        <td width="20%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-        <td width="40%"><p align="center" style="width: 300px; height: 300px; background-image: url('../../img/menus/fondo.svg');"><img id="cobrar_servicio" src="../../img/menus/servicios.svg" width="250px" height="250px" alt=""></p></td>
+        <td width="40%"><p class="cobrar_esto"><img id="cobrar_producto" src="../../img/producto.png" width="250px" height="250px" alt="">
+        
+        </p>
+            </td>
+        <td width="20%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td width="40%"><p class="cobrar_esto"><img id="cobrar_servicio" src="../../img/servicio.png" width="250px" height="250px" alt=""></p></td>
     </table>
     </div>
     <div>

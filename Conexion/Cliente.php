@@ -42,22 +42,23 @@ class Cliente
 			$comando=Conexion::getInstance()->getDb()->prepare($sql);
 			$comando->execute();
 			while ($row=$comando->fetch(PDO::FETCH_ASSOC)) {
-				$html.='<div class="col-sm-6 col-lg-6" style="border:solid 0.50px;">
-                <div class="widget">
-                  <div class="widget-simple">
+				$html.='<div class="col-sm-6 col-lg-6" id="listado-card">
+                <div class="">
+                  <div class="">
                     <table width="100%">
                         <tbody>
                             <tr>
-                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\')" data-toggle="tooltip" title="Editar" class="btn btn-mio"><i class="fa fa-pencil"></i></a></td>
-                                <td><b>'.$row[nombre].'</b></td>
+                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a>
+                                </td>
+                                <td style="font-size:18px"><b>'.$row[nombre].'</b></td>
                             </tr>
                             <tr>
                                 <td></td>
-                                <td>Teléfono: '.$row[telefono].'</td>
+                                <td style="font-size:18px">Teléfono: '.$row[telefono].'</td>
                             </tr>
                             <tr>
-                                <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_cliente\',\'el cliente\')" data-toggle="tooltip" title="Eliminar" class="btn btn-mio"><i class="fa fa-trash"></i></a></td>
-                                <td>Dirección: '.$row[direccion].'</td>
+                                <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_cliente\',\'el cliente\')" data-toggle="tooltip" title="Eliminar"><img width="35px" height="35px" src="../../img/iconos/eliminar.svg"></a></td>
+                                <td style="font-size:18px">Dirección: '.$row[direccion].'</td>
                             </tr>
                         </tbody>
                     </table>

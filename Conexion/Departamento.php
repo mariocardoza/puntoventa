@@ -24,6 +24,42 @@ class Departamento
 		}
 	}
 
+    public static function busqueda($dato){
+        $sql="SELECT * FROM tb_departamento WHERE nombre LIKE '%$dato%'";
+        try{
+            $comando=Conexion::getInstance()->getDb()->prepare($sql);
+            $comando->execute();
+            while ($row = $comando->fetch(PDO::FETCH_ASSOC)) {
+                $html.='<div class="col-sm-6 col-lg-6" style="border:solid 0.50px;">
+                <div class="widget">
+                  <div class="widget-simple">
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\')" data-toggle="tooltip" title="Editar" class="btn btn-mio"><i class="fa fa-pencil"></i></a></td>
+                                <td><b>'.$row[nombre].'</b></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_departamento\',\'el departamento\')" data-toggle="tooltip" title="Eliminar" class="btn btn-mio"><i class="fa fa-trash"></i></a></td>
+                                <td>Descripción: '.$row[descripcion].'</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+              </div>
+            </div>';
+            }
+            return array(1,"exito",$html,$sql);
+        }catch(Exception $e){
+            return array(-1,"error",$e->getMessage(),$sql);
+        }
+
+    }
+
 	public static function modal_editar($id){
 		$sql="SELECT * FROM tb_departamento WHERE id='$id'";
 		try{
@@ -78,8 +114,8 @@ class Departamento
                 <div class="form-group">
                 <div class="col-md-10">
                     <center>
-                        <button type="button" id="btn_guardar" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Guardar</button>
-                    <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>  
+                        <button type="button" id="btn_guardar" class="btn btn-sm btn-mio"><i class="fa fa-floppy-o"></i> Guardar</button>
+                    <button type="reset" data-dismiss="modal" class="btn btn-sm btn-warning"><i class="fa fa-times"></i> Cerrar</button>  
                     </center>
                 </div>
             </div>

@@ -27,6 +27,42 @@ class Categoria
 		}
 	}
 
+    public static function busqueda($dato){
+        $sql="SELECT c.id as id,c.nombre as nombre,c.descripcion as descripcion,d.nombre as departamento FROM tb_categoria as c INNER JOIN tb_departamento as d ON d.id=c.departamento WHERE c.nombre LIKE '%$dato%'";
+        try{
+            $comando=Conexion::getInstance()->getDb()->prepare($sql);
+            $comando->execute();
+            while ($row = $comando->fetch(PDO::FETCH_ASSOC)) {
+                $html.='<div class="col-sm-6 col-lg-6" style="border:solid 0.50px;">
+                <div class="widget">
+                  <div class="widget-simple">
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\')" data-toggle="tooltip" title="Editar" class="btn btn-mio"><i class="fa fa-pencil"></i></a></td>
+                                <td><b>'.$row[nombre].'</b></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Descripción: '.$row[descripcion].'</td>
+                            </tr>
+                            <tr>
+                                <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_categoria\',\'la categoría\')" data-toggle="tooltip" title="Eliminar" class="btn btn-mio"><i class="fa fa-trash"></i></a></td>
+                                <td>Departamento: '.$row[departamento].'</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+              </div>
+            </div>';
+            }
+            return array(1,"exito",$html,$sql);
+        }catch(Exception $e){
+            return array(-1,"error",$e->getMessage(),$sql);
+        }
+
+    }
+
 	public static function modal_editar($id){
 		$sql="SELECT * FROM tb_categoria WHERE id='$id'";
 
@@ -45,7 +81,7 @@ class Categoria
             <button type="button" class="close" data-dismiss="modal">
               <span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title">Editar departamento</h4>
+            <h4 class="modal-title">Editar categoría</h4>
           </div-->
           <div class="modal-body">
                     <form action="#" method="post" name="fm_categoria" id="fm_categoria" class="form-horizontal form-bordered">
@@ -53,7 +89,7 @@ class Categoria
         <div class="col-lg-12">
             <div class="block">
                 <div class="block-title">
-                    <h2><i class="fa fa-pencil"></i> <strong>Información</strong> del departamento</h2>
+                    <h2><i class="fa fa-pencil"></i> <strong>Información</strong> de la categorias</h2>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
@@ -99,8 +135,8 @@ class Categoria
                 <div class="form-group">
                 <div class="col-md-10">
                     <center>
-                        <button type="button" id="btn_guardar" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Guardar</button>
-                    <button type="button" data-dismiss="modal" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Cerrar</button>  
+                        <button type="button" id="btn_guardar" class="btn btn-sm btn-mio"><i class="fa fa-floppy-o"></i> Guardar</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-sm btn-warning"><i class="fa fa-times"></i> Cerrar</button>  
                     </center>
                 </div>
             </div>

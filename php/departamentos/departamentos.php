@@ -36,10 +36,22 @@ if($departamentos[0] == 1)$datos = $departamentos[1];
 
 <!-- Page content -->
 <div id="page-content">
+  <div class="row">
+          <div class="col-sm-4 col-lg-4">
+              <div class="input-group">
+                  <input type="search" class="form-control" id="busqueda" placeholder="Buscar departamento">
+                  <span class="input-group-addon"><i class="fa fa-search"></i></span>
+              </div>
+          </div>
+          <div class="col-sm-4 col-lg-4">
+              <a href="registro_departamento.php" class="btn btn-mio btn-block">Nuevo departamento</a>
+          </div>
+  </div>
     <div class="row">
       <div class="col-xs-12">
         <div class="block full">
-          <div class="block-title">
+          <div class="row" id="aqui_busqueda" style="overflow:scroll;overflow-x:hidden;max-height:700px;"></div>
+          <!--div class="block-title">
             <ul class="nav-horizontal">
               <li class="active">
                 <a href="#">Departamentos (<?=count($datos)?>)</a>
@@ -76,7 +88,7 @@ if($departamentos[0] == 1)$datos = $departamentos[1];
                   <td>
                     <div class="btn-group">
                       <a class="btn btn-warning" onclick="<?php echo "editar(".$departamento['id'].")" ?>" href="#"><i class="fa fa-edit"></i></a>
-                      <!--a id="btn_editar" data-id="<?php echo $persona[id] ?>" class="btn btn-warning" href="#"><i class="fa fa-edit"></i></a-->
+                     
                       <a onclick="<?php echo "darbaja(".$departamento['id'].",'tb_departamento','el departamento')" ?>"  class="btn btn-danger" href="#"><i class="fa fa-remove"></i></a>
                     </div>
                   </td>
@@ -84,7 +96,7 @@ if($departamentos[0] == 1)$datos = $departamentos[1];
                 <?php } ?>
               </tbody>
             </table>
-          </div>
+          </div-->
         </div>
       </div>
     </div>
@@ -100,6 +112,56 @@ if($departamentos[0] == 1)$datos = $departamentos[1];
     var table_procesos = cargar_tabla2("exampleTableSearch"); //inicializar tabla
 
     $(document).ready(function(e){
+      swal({
+    title: 'Consultando datos!',
+    text: 'Este diálogo se cerrará al cargar los datos.',
+    showConfirmButton: false,
+    onOpen: function () {
+    swal.showLoading()
+   }
+  });
+  $.ajax({
+        url:'json_departamentos.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto:''},
+        success: function(json){
+          console.log(json);
+            var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
+            if(json[2]){
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(json[2]);
+                swal.closeModal();
+            }else{
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(html);
+                swal.closeModal();
+            }
+        }
+      });
+                   //buscar con funcion input
+    $(document).on("input","#busqueda", function(e){
+      var esto=$(this).val();
+      $.ajax({
+        url:'json_departamentos.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto},
+        success: function(json){
+          console.log(json);
+          var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
+          if(json[2]){
+            $("#aqui_busqueda").empty();
+          $("#aqui_busqueda").html(json[2]);
+        }else{
+          $("#aqui_busqueda").empty();
+          $("#aqui_busqueda").html(html);
+        }
+        }
+      });
+    });
+
+      ///guardar 
       $(document).on("click","#btn_guardar", function(e){
             var valid=$("#fm_departamento").valid();
             if(valid){

@@ -42,41 +42,54 @@ $productos=Producto::obtener_productos();
 
 <div id="page-content">
     <form action="#" method="post" name="fm_orden" id="fm_orden" class="form-horizontal form-bordered">
-        <div class="block">
-            <div class="row">
+        <div class="block" style="background-color: #F2F2F2;">
+            <div class="row" style="background-color: #F2F2F2;">
                 <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-lg-6">
+                    <div class="row" style="background-color: #F2F2F2;">
+                        <div class="col-lg-6" style="background-color: #F2F2F2;">
                             <div class="block">
-                                <div class="block-title"><h4><strong>Productos</strong></h4></div>
                                 <div class="hide">
                                     <div class="form-group">
-                                    <label class="col-md-3 control-label" for="nombre">Tipo de orden</label>
-                                    <div class="col-md-9">
-                                       <select name="tipo_orden" id="tipo_orden" class="select-chosen">
-                                           <option value="">Seleccione</option>
-                                           <option value="1">Mesa</option>
-                                           <option value="2">Llevar</option>
-                                           <option value="1">Domicilio</option>
-                                       </select>
+                                        <label class="col-md-3 control-label" for="nombre">Tipo de orden</label>
+                                        <div class="col-md-9">
+                                           <select name="tipo_orden" id="tipo_orden" class="select-chosen">
+                                               <option value="">Seleccione</option>
+                                               <option value="1">Mesa</option>
+                                               <option value="2">Llevar</option>
+                                               <option value="1">Domicilio</option>
+                                           </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" class="col-lg-3 control-label">Seleccione la mesa</label>
+                                        <div class="col-lg-9">
+                                            <button class="btn btn-primary" type="button" id="selec_mesa">Seleccionar mesa</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" class="col-lg-3 control-label">Mesa seleccionada</label>
+                                        <div class="col-lg-9">
+                                            <label for="" id="nombre_mesa"></label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="" class="col-lg-3 control-label">Seleccione la mesa</label>
-                                    <div class="col-lg-9">
-                                        <button class="btn btn-primary" type="button" id="selec_mesa">Seleccionar mesa</button>
+                                <div class="card-venta">
+                                    <div class="col-sm-6 col-lg-6">
+                                        <div class="input-group">
+                                            <input type="search" class="form-control" id="busqueda" placeholder="Buscar producto" autocomplete="off">
+                                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="" class="col-lg-3 control-label">Mesa seleccionada</label>
-                                    <div class="col-lg-9">
-                                        <label for="" id="nombre_mesa"></label>
+                                    <div class="col-sm-6 col-lg-6">
+                                        <select name="" id="tipos" class="select-chosen">
+                                            <option value="0">Todos</option>
+                                        </select>
                                     </div>
-                                </div>
                                 </div>
                                 <div class="row">
+                                    <div id="aqui_busqueda_venta">
                                     <?php foreach ($productos[1] as $producto): ?>
-                                    <div class="col-xs-12 col-sm-12 col-lg-12">
+                                        <div class="col-xs-12 col-sm-12 col-lg-12" id="listado-card">
                                         <div class="widget">
                                           <div class="widget-simple">
                                             <table width="100%">
@@ -84,16 +97,16 @@ $productos=Producto::obtener_productos();
                                                     <tr>
                                                         <td width="15%"></td>
                                                         <td width="15%" rowspan="3"><center><img src="../../img/productos/<?php echo $producto[imagen] ?>" id="cambiar_imagen" data-codigo="'.$producto[codigo_oculto].'" alt="avatar" class="widget-image img-circle"></center></td>
-                                                        <td><?php echo $producto[nombre] ?></td>
+                                                        <td style="font-size: 18px;"><b><?php echo $producto[nombre] ?></b></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><a class="btn btn-mio" id="asignar_mas" data-id="'.$producto[id].'" data-nombre="'.$producto[nombre].'" href="javascript:void(0)"><i class="fa fa-plus"></i></a></td>
-                                                        <td>En inventario: <b><?php echo $producto[cantidad] ?></b></td>
-                                                        
+                                                        <td><a style="border-radius: 90px" class="btn btn-mio btn-lg" id="agrega_img" data-nombre="<?php echo $producto[nombre] ?>" data-codigo="<?php echo $producto[codigo_oculto] ?>" data-imagen='<?php echo $producto[imagen] ?>' data-precio="<?php echo $producto[precio_unitario] ?>" data-existencia="<?php echo $producto[cantidad] ?>" href="javascript:void(0)"><i class="fa fa-plus"></i></a></td>
+                                                        <td style="font-size: 18px;">En inventario: <b><?php echo $producto[cantidad] ?></b></td> 
                                                     </tr>
                                                     <tr>
                                                         <td width="15%"></td>
-                                                        <td>Precio <?php echo $number_format($producto[precio_unitario],2) ?></td>
+                                                        <td style="font-size: 18px;">Precio <?php echo number_format($producto[precio_unitario],2) ?>
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -110,40 +123,23 @@ $productos=Producto::obtener_productos();
                                           </div>
                                       </div-->
                                     </div>
+                                    
                                     <?php endforeach ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="block">
-                                <div class="block-title"><h4><strong>Detalle de la orden</strong></h4></div>
+                                
                                 <div class="form-group">
-                                    <table class="table" id="orden_tb">
-                                        <thead>
-                                            <tr>
-                                                <th>Producto</th>
-                                                <th>Precio</th>
-                                                <th>Cantidad</th>
-                                                <th>Subtotal</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="cuerpo">
-                                            
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th colspan="4">Total</th>
-                                                <th id="total">$0.00</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default">Cancelar</button>
-                                        <button type="button" class="btn btn-info" id="ordenar">Ordenar</button>
-                                        <button type="button" class="btn btn-success" id="pagar">Pagar</button>
-                                    </div>
+                                    <div id="orden_tb" style="overflow:auto;overflow-x:hidden;max-height:350px; height: 350px;"></div>
                                 </div>
+                            </div>
+                            <div class="block" style="height: 250px;">
+                                <p><center><h1>Total:</h1></center></p>
+                                <p><center><h1 id="total">$0.00</h1></center></p>
+                                <p><center><button type="button" id="btn_cobrar" class="btn btn-lg btn-mio">Cobrar</button></center></p>
                             </div>
                         </div>
                     </div>

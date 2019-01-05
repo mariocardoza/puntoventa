@@ -117,6 +117,9 @@ body {
 #venti{
     background-color: #365D66;
     border-radius: 7px;
+    margin-bottom: 4px;
+    margin-right: 5px;
+    margin-top: 4px;
 }
 
 #sidebar,
@@ -500,12 +503,16 @@ a.sidebar-title:focus {
 }
 
 .sidebar-user-name {
-    font-size: 17px;
-    font-weight: 300;
+    font-size: 13px;
+    font-weight: bold;
     margin-top: 10px;
-    line-height: 26px;
+    line-height: 14px;
     margin-left: -16px;
     overflow: hidden;
+}
+.sidebar-sucursal{
+    font-size: 12px;
+    margin-top: 10px;
 }
 
 .sidebar-user-links a {
@@ -559,6 +566,8 @@ a.sidebar-title:focus {
 .sidebar-themes li a:focus {
     border-color: #ffffff !important;
 }
+
+
 
 .sidebar-themes li.active a {
     border-color: #ffffff !important;
@@ -2565,6 +2574,97 @@ a.list-group-item.active > .badge {
     border-bottom-color: #eaedf1;
 }
 
+/*card estilos */
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+    border-radius: 5px;
+    height: 90px;
+}
+.card-venta {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+    border-radius: 5px;
+    height: 60px;
+}
+.centrado{
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 28px;
+}
+#busqueda{
+    font-size: 15px;
+}
+
+#listado-card{
+    background: #fff; 
+    border-radius: 2px;
+    border-right: 2px solid #F2F2F2;
+    border-bottom: 2px solid #F2F2F2;
+    padding: 25px;
+}
+#aqui_busqueda{
+    margin-top:10px; 
+    background: #Fff; 
+    overflow: auto;
+
+    /* Make sure the inner div is not larger than the container
+     * so that we have room to scroll.
+     */
+    max-height: 100%;
+
+    /* Pick an arbitrary margin/padding that should be bigger
+     * than the max width of all the scroll bars across
+     * the devices you are targeting.
+     * padding = -margin
+     */
+    margin-right: -10px;
+    padding-right: 0px;
+   
+    height: 700px; 
+    max-height:700px;
+}
+
+#aqui_busqueda_venta{
+    margin-top:10px; 
+    background: #Fff; 
+    overflow: auto;
+
+    /* Make sure the inner div is not larger than the container
+     * so that we have room to scroll.
+     */
+    max-height: 100%;
+
+    /* Pick an arbitrary margin/padding that should be bigger
+     * than the max width of all the scroll bars across
+     * the devices you are targeting.
+     * padding = -margin
+     */
+    margin-right: -10px;
+    padding-right: 0px;
+   
+    height: 640px; 
+    max-height:640px;
+}
+
+#sombra{
+    float: top;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.sombra:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.card-venta:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
 .nav-tabs > li {
     margin-bottom: 0;
 }
@@ -3789,6 +3889,8 @@ h1 small, .h1 small, h2 small, .h2 small, h3 small, .h3 small, h1 .small, .h1 .s
     #login-background {
         height: 400px;
     }
+    
+
 
     #login-background > img {
         top: 0;

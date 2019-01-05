@@ -27,6 +27,42 @@ class Subcategoria
 		}
 	}
 
+    public static function busqueda($dato){
+        $sql="SELECT s.id as id,s.nombre as nombre,s.descripcion as descripcion,c.nombre as categoria FROM tb_subcategoria as s LEFT JOIN tb_categoria as c ON c.id=s.categoria WHERE s.nombre LIKE '%$dato%'";
+        try{
+            $comando=Conexion::getInstance()->getDb()->prepare($sql);
+            $comando->execute();
+            while ($row = $comando->fetch(PDO::FETCH_ASSOC)) {
+                $html.='<div class="col-sm-6 col-lg-6" style="border:solid 0.50px;">
+                <div class="widget">
+                  <div class="widget-simple">
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\')" data-toggle="tooltip" title="Editar" class="btn btn-mio"><i class="fa fa-pencil"></i></a></td>
+                                <td><b>'.$row[nombre].'</b></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Descripción: '.$row[descripcion].'</td>
+                            </tr>
+                            <tr>
+                                <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_subcategoria\',\'la subcategoría\')" data-toggle="tooltip" title="Eliminar" class="btn btn-mio"><i class="fa fa-trash"></i></a></td>
+                                <td>Categoría: '.$row[categoria].'</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+              </div>
+            </div>';
+            }
+            return array(1,"exito",$html,$sql);
+        }catch(Exception $e){
+            return array(-1,"error",$e->getMessage(),$sql);
+        }
+
+    }
+
 	public static function modal_editar($id){
 		$sql="SELECT * FROM tb_subcategoria WHERE id='$id'";
 

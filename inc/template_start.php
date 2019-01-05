@@ -58,9 +58,13 @@ date_default_timezone_set('America/El_Salvador');
         <!-- Modernizr (browser feature detection library) -->
         <script src="../../js/vendor/modernizr.min.js"></script>
         <link rel="stylesheet" href="../../css/animate.min.css">
+        <link rel="stylesheet" href="../../css/fonts/fonts/fonts.min.css">
         <!--script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.28.5/dist/sweetalert2.all.min.js"></script-->
      
     <style>
+    body {
+    font-family: 'Proxima Nova', Georgia, sans-serif;
+}
         .notificaciones_dashbord{
             width: 107.203px !important;
         }
@@ -181,6 +185,42 @@ date_default_timezone_set('America/El_Salvador');
         }
         .cls-1 {
             fill: #fff !important;
+        }
+        .block {
+            border-radius: 10px;
+        }
+        @media (max-width: 768px){
+            /*.cobrar_esto {
+                width: 100% !important;
+                height: 128px !important;
+               background-image: none; 
+                background-color: #40BAB3;
+                border-radius: 15px;
+                text-align: center;
+                padding-top: 8px;
+            }*/
+            img#cobrar_producto {
+                width: 68%;
+                height: auto;
+                margin: 0 auto;
+            }
+            img#cobrar_servicio {
+                width: 68%;
+                height: auto;
+                margin: 0 auto;
+            }
+            
+            .card{
+                height: 145px;
+            }
+            .card-venta {
+                height: 77px;
+            }
+            #aqui_busqueda{
+                margin-right: -10px;
+                padding-right: 2px;
+            }
+
         }
    </style>
 

@@ -63,6 +63,8 @@
   var ELIMINAR_MENSAJE="La información han sido borrada de la base de datos";
   var UsuarioCrea = '<?php echo $_SESSION['codigo'];?>';
   $(function(){
+    $("#tipos").chosen({width: "100%"});
+    $("#tipos-chosen").css('font-size','18px');
     $('.telefono').inputmask("9999-9999", { "clearIncomplete": true });
     $(".nacimiento").datepicker({
     isRTL: false,
@@ -151,7 +153,7 @@
 
     //cobrar producto : acciones
     $(document).on("click","#cobrar_producto", function(e){
-      alert("producto");
+      window.location.href="../../php/ordenes/registro_orden.php";
     });
 
     //cobrar servicio : acciones
