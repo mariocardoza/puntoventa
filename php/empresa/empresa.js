@@ -133,7 +133,9 @@ function guardar(){
 		data:datos,
 		success: function(json){
 			if(json[0]==1){
-				guardar_exito("perfil_empresa");
+				guardar_exito();
+                console.log(json);
+                window.location.href="perfil_empresa.php";
 			}else{
 				guardar_error();
 

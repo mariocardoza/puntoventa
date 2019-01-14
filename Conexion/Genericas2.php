@@ -109,6 +109,24 @@
 
 		}
 
+		public static function buscar_por_id($tabla,$campo,$id){
+			$sql="SELECT * FROM $tabla WHERE $campo=$id";
+
+			try {
+				$comando = Conexion::getInstance()->getDb()->prepare($sql);
+	       		$comando->execute();
+	       		while ($row=$comando->fetch(PDO::FETCH_ASSOC)) {
+	       			$resultado[]=$row;
+	       		}
+	       		//$resultado = $comando->fetchAll(PDO::FETCH_ASSOC);
+	       		return array("1",$resultado,$sql);
+				//echo json_encode(array("exito" => $exito));
+			} catch (Exception $e) {
+				return array("0","error",$e->getMessage(),$e->getLine(),$sql);
+	            //echo json_encode(array("error" => $error));
+			}
+		}
+
 		
 		public static function retonrar_id_insertar($tabla){
 			$gsent = Conexion::getInstance()->getDb()->prepare("SELECT COUNT(*) FROM $tabla");
@@ -118,7 +136,7 @@
 		}
 
 		public static function retornar_correlativo($tabla,$codigo){
-			$comando=Conexion::getInstance()->getDb()->prepare("SELECT COUNT(*) as suma FROM $tabla WHERE codigo='$codigo'");
+			$comando=Conexion::getInstance()->getDb()->prepare("SELECT COUNT(*) as suma FROM $tabla WHERE codigo_producto='$codigo'");
 			$comando->execute();
 			while($row=$comando->fetch(PDO::FETCH_ASSOC)){
 				$resultado=$row['suma'];
@@ -265,7 +283,7 @@
 			try {
 				$comando = Conexion::getInstance()->getDb()->prepare($sql);
 	       		$comando->execute();
-	       		return array(1,"Insertado");
+	       		return array(1,"Insertado",$sql);
 				//echo json_encode(array("exito" => $exito));
 			} catch (Exception $e) {
 				return array(-1,"error",$e->getMessage(),$e->getLine(),$sql);

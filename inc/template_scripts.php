@@ -67,12 +67,19 @@
     $("#tipos-chosen").css('font-size','18px');
     $('.telefono').inputmask("9999-9999", { "clearIncomplete": true });
     $(".nacimiento").datepicker({
-    isRTL: false,
-    format: 'dd/mm/yyyy',
-    autoclose:true,
-    language: 'es',
-    endDate: '-18y',
-});
+      isRTL: false,
+      format: 'dd/mm/yyyy',
+      autoclose:true,
+      language: 'es',
+      endDate: '-18y',
+    });
+    $(".vecimi").datepicker({
+      isRTL: false,
+      format: 'dd/mm/yyyy',
+      autoclose:true,
+      language: 'es',
+      startDate: '-0d',
+    });
     $('.dui').inputmask("99999999-9", { "clearIncomplete": true });
     $('.nit').inputmask("9999-999999-999-9", { "clearIncomplete": true });
     $(".select_piker2").selectpicker();
@@ -545,14 +552,14 @@ function validar_dui(dui,tabla,valor){
 });
 }
 
-function guardar_exito(redireccion){
+function guardar_exito(){
   iziToast.success({
     title: EXITO,
     message: EXITO_MENSAJE,
     timeout: 3000,
   });
   var timer=setInterval(function(){
-  location.href = redireccion+".php"
+  //location.href = redireccion+".php"
   clearTimeout(timer);
   },3500);
 }

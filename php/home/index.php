@@ -25,32 +25,63 @@
 <!-- Page content -->
 <div id="page-content">
     <!-- Quick Stats -->
-    <div class="row text-center">
+    <div class="row">
         <div class="col-sm-6 col-lg-4">
-            <a href="javascript:void(0)" class="widget widget-hover-effect2">
-                <div class="widget-extra themed-background">
-                    <h4 class="widget-content-light"><strong>Clientes</strong> registrados</h4>
+            <a href="javascript:void(0)" style="border-radius: 10px; background-color: #fff">
+                <div class="card-index">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="card-index-adentro" style="border-right: 3px solid; color: #F3F3F3F3; ">
+                                <p style="font-size: 48px; color: #40BAB3; text-align: center; position: relative;top: 27%;"><strong>15</strong></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="card-index-adentro">
+                                <p style="font-size: 18px; color: #333333; text-align: center; position: relative;top: 47%;"><strong>Clientes inscritos</strong></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="widget-extra-full"><span class="h2 animation-expandOpen">3</span></div>
             </a>
         </div>
         <div class="col-sm-6 col-lg-4">
-            <a href="javascript:void(0)" class="widget widget-hover-effect2">
-                <div class="widget-extra themed-background">
-                    <h4 class="widget-content-light"><strong>Productos</strong> en el inventario</h4>
+            <a href="javascript:void(0)" style="border-radius: 10px; background-color: #fff">
+                <div class="card-index">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="card-index-adentro" style="border-right: 3px solid; color: #F3F3F3F3; ">
+                                <p style="font-size: 48px; color: #40BAB3; text-align: center; position: relative;top: 27%;"><strong>15</strong></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="card-index-adentro">
+                                <p style="font-size: 18px; color: #333333; text-align: center; position: relative;top: 35%;"><strong>Productos en inventario</strong></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">10</span></div>
             </a>
         </div>
         <div class="col-sm-6 col-lg-4">
-            <a href="javascript:void(0)" class="widget widget-hover-effect2">
-                <div class="widget-extra themed-background">
-                    <h4 class="widget-content-light"><strong>Ventas</strong> este mes</h4>
+            <a href="javascript:void(0)" style="border-radius: 10px; background-color: #fff">
+                <div class="card-index">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="card-index-adentro" style="border-right: 3px solid; color: #F3F3F3F3; ">
+                                <p style="font-size: 29px; color: #40BAB3; text-align: center; position: relative;top: 50%;"><strong>$1246.98</strong></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="card-index-adentro">
+                                <p style="font-size: 18px; color: #333333; text-align: center; position: relative;top: 50%;"><strong>Facturado este mes</strong></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">$ 4.250</span></div>
             </a>
         </div>
     </div>
+    <br><br><br>
     <!-- END Quick Stats -->
 
     <!-- eShop Overview Block -->
@@ -126,5 +157,7 @@
 <?php include '../../inc/page_footer.php'; ?>
 <?php include '../../inc/template_scripts.php'; ?>
 <script src="../../js/pages/ecomDashboard.js"></script>
-<script>$(function(){ EcomDashboard.init(); });</script>
+<script>$(function(){ EcomDashboard.init(); });
+    $("#titulo_nav").text("Inicio");
+</script>
 <?php include '../../inc/template_end.php'; ?>

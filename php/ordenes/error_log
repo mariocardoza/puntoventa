@@ -44,3 +44,16 @@ Stack trace:
 Stack trace:
 #0 {main}
   thrown in /home1/estudjl6/public_html/sys/puntoventa/php/ordenes/registro_orden.php on line 95
+[08-Jan-2019 14:58:39 America/El_Salvador] PHP Parse error:  syntax error, unexpected '$producto' (T_VARIABLE) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 192
+[08-Jan-2019 14:58:45 America/El_Salvador] PHP Parse error:  syntax error, unexpected '$producto' (T_VARIABLE) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 192
+[08-Jan-2019 14:59:46 America/El_Salvador] PHP Parse error:  syntax error, unexpected '$producto' (T_VARIABLE) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 192
+[08-Jan-2019 21:04:08 UTC] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/sys/puntoventa/php/ordenes/json_ventas.php on line 14
+[10-Jan-2019 20:43:43 UTC] PHP Parse error:  syntax error, unexpected '$canti' (T_VARIABLE) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Venta.php on line 61
+[10-Jan-2019 14:47:53 America/El_Salvador] PHP Warning:  Division by zero in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Venta.php on line 60
+[10-Jan-2019 14:47:53 America/El_Salvador] PHP Warning:  Division by zero in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Venta.php on line 60
+[10-Jan-2019 14:48:22 America/El_Salvador] PHP Warning:  Division by zero in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Venta.php on line 60
+[10-Jan-2019 14:48:22 America/El_Salvador] PHP Warning:  Division by zero in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Venta.php on line 60
+[10-Jan-2019 20:57:39 UTC] PHP Fatal error:  Cannot use try without catch or finally in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Venta.php on line 63
+[11-Jan-2019 14:50:12 UTC] PHP Parse error:  syntax error, unexpected '$cuantitos_int' (T_VARIABLE) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Venta.php on line 46
+[11-Jan-2019 17:36:34 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Venta.php on line 86
+[11-Jan-2019 17:36:59 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Venta.php on line 86

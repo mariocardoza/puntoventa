@@ -27,7 +27,9 @@
 <?php include '../../inc/page_head.php'; 
 include_once("../../Conexion/Subcategoria.php");
 $datos = null;
-$subcategorias = Subcategoria::obtener_subcategorias();
+
+include_once("../../Conexion/Categoria.php");
+$categorias=Categoria::obtener_categorias();
 
 //print_r($departamentos);
 if($subcategorias[0] == 1)$datos = $subcategorias[2];
@@ -36,73 +38,29 @@ if($subcategorias[0] == 1)$datos = $subcategorias[2];
 
 <!-- Page content -->
 <div id="page-content">
-  <div class="row">
+  <div class="row" style="background-color: #fff;">
+      <div class="card">
+        <div class="row centrado">
           <div class="col-sm-4 col-lg-4">
-              <div class="input-group">
-                  <input type="search" class="form-control" id="busqueda" placeholder="Buscar subcategoría">
-                  <span class="input-group-addon"><i class="fa fa-search"></i></span>
-              </div>
+            <div class="input-group">
+                <input type="search" class="form-control" id="busqueda" placeholder="Buscar">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            </div>
           </div>
           <div class="col-sm-4 col-lg-4">
-              <a href="registro_subcategoria.php" class="btn btn-mio btn-block">Nueva subcategoría</a>
+            <div class="row">
+              <div class="col-sm-2 col-lg-2"></div>
+              <div class="col-sm-8 col-lg-8"><a href="javascript:void(0)" id="modal_guardar" class="btn btn-mio btn-block">Nueva Subcategoría</a></div>
+              <div class="col-sm-2 col-lg-2"></div>
           </div>
-  </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="block full">
-          <div class="row" id="aqui_busqueda"></div>
-          <!--div class="block-title">
-            <ul class="nav-horizontal">
-              <li class="active">
-                <a href="#">SUbcategorías (<?=count($datos)?>)</a>
-              </li>
-              <li class="pull-right">
-              <a href="registro_subcategoria.php" class="btn btn-lg bg-white"><i class="fa pull-left" style="width: 20px;"><img src="../../img/icon_mas.svg" class="svg" alt=""></i> Agregar subcategoría</a>
-              </li>
-            </ul>
           </div>
-          <div class="">
-            <table id="exampleTableSearch" class="table table-vcenter table-condensed table-bordered" >
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Nombre</th>
-                  <th>Descripción</th>
-                  <th>Categoría</th>
-                  <th class="text-center">Acciones</th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>#</th>
-                  <th>Nombre</th>
-                  <th>Descripción</th>
-                  <th>Categoría</th>
-                  <th class="text-center">Acciones</th>
-                </tr>
-              </tfoot>
-              <tbody>
-                <?php foreach ($datos as $key => $subcategoria) { ?>
-                  <tr>
-                  <td><?php echo $key+1 ?></td>
-                  <td><?php echo $subcategoria[nombre] ?></td>
-                  <td><?php echo $subcategoria[descripcion] ?></td>
-                  <td><?php echo $subcategoria[categoria] ?></td>
-                  <td>
-                    <div class="btn-group">
-                      <a class="btn btn-warning" onclick="<?php echo "editar(".$subcategoria['id'].")" ?>" href="#"><i class="fa fa-edit"></i></a>
-                      <a onclick="<?php echo "darbaja(".$subcategoria['id'].",'tb_subcategoria','la subcategoria')" ?>"  class="btn btn-danger" href="#"><i class="fa fa-remove"></i></a>
-                    </div>
-                  </td>
-                </tr>
-                <?php } ?>
-              </tbody>
-            </table>
-          </div-->
         </div>
+      </div>
+      <div class="" id="aqui_busqueda">
       </div>
     </div>
     <div id="modal_edit"></div>
+    <?php include 'modal.php'; ?>
 </div>
 
 <!-- END Page Content -->
@@ -114,33 +72,12 @@ if($subcategorias[0] == 1)$datos = $subcategorias[2];
     var table_procesos = cargar_tabla2("exampleTableSearch"); //inicializar tabla
 
     $(document).ready(function(e){
-      swal({
-    title: 'Consultando datos!',
-    text: 'Este diálogo se cerrará al cargar los datos.',
-    showConfirmButton: false,
-    onOpen: function () {
-    swal.showLoading()
-   }
+      modal_cargando();
+      cargar();
+  
+  $(document).on("click","#modal_guardar", function(e){
+    $("#md_guardar").modal("show");
   });
-  $.ajax({
-        url:'json_subcategorias.php',
-        type:'POST',
-        dataType:'json',
-        data:{data_id:'busqueda',esto:''},
-        success: function(json){
-          console.log(json);
-            var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
-            if(json[2]){
-                $("#aqui_busqueda").empty();
-                $("#aqui_busqueda").html(json[2]);
-                swal.closeModal();
-            }else{
-                $("#aqui_busqueda").empty();
-                $("#aqui_busqueda").html(html);
-                swal.closeModal();
-            }
-        }
-      });
       //buscar con funcion input
     $(document).on("input","#busqueda", function(e){
       var esto=$(this).val();
@@ -173,7 +110,14 @@ if($subcategorias[0] == 1)$datos = $subcategorias[2];
                     data:datos,
                     success:function(json){
                         if(json[0]==1){
-                            guardar_exito("subcategorias");
+                            modal_cargando();
+                            cargar();
+                            $(".modal").modal("hide");
+                            $("#nombre").val();
+                            $("#id").val();
+                            $("#data_id").val();
+                            $("#descripcion").val();
+                            guardar_exito();
                         }else{
                             guardar_error();
                         }
@@ -193,6 +137,28 @@ if($subcategorias[0] == 1)$datos = $subcategorias[2];
           $("#modal_edit").html(json[3]);
           $('.select-chosen').chosen({width: "100%"});
           $("#md_editar").modal("show");
+        }
+      });
+    }
+
+    function cargar(){
+      $.ajax({
+        url:'json_subcategorias.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto:''},
+        success: function(json){
+          console.log(json);
+            var html='<div class="col-sm-6 col-lg-6">No se encontraron subcategorias</div>';
+            if(json[2]){
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(json[2]);
+                swal.closeModal();
+            }else{
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(html);
+                swal.closeModal();
+            }
         }
       });
     }

@@ -67,13 +67,13 @@ class Servicio
             $comando=Conexion::getInstance()->getDb()->prepare($sql);
             $comando->execute();
             while ($row=$comando->fetch(PDO::FETCH_ASSOC)) {
-                $html.='<div class="col-sm-6 col-lg-6" style="border:solid 0.50px;">
+                $html.='<div class="col-sm-6 col-lg-6" id="listado-card">
                 <div class="widget">
                   <div class="widget-simple">
                     <table width="100%">
                         <tbody>
                             <tr>
-                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\')" data-toggle="tooltip" title="Editar" class="btn btn-mio"><i class="fa fa-pencil"></i></a></td>
+                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a></td>
                                 <td><b>'.$row[nombre].'</b></td>
                             </tr>
                             <tr>
@@ -81,7 +81,7 @@ class Servicio
                                 <td>Precio: $'.number_format($row[precio],2).'</td>
                             </tr>
                             <tr>
-                                <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_servicio\',\'el servicio\')" data-toggle="tooltip" title="Eliminar" class="btn btn-mio"><i class="fa fa-trash"></i></a></td>
+                                <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_servicio\',\'el servicio\')" data-toggle="tooltip" title="Eliminar"><img src="../../img/iconos/eliminar.svg" width="35px" height="35px"></a></td>
                                 <td>Descripción: '.$row[descripcion].'</td>
                             </tr>
                         </tbody>
@@ -112,48 +112,47 @@ class Servicio
             <button type="button" class="close" data-dismiss="modal">
               <span aria-hidden="true">×</span>
             </button>
+            <h4 class="modal-title"><b>Editar servicio</b></h4>
           </div>
           <div class="modal-body">
             <form action="#" method="post" name="fm_servicios" id="fm_servicios" class="form-horizontal form-bordered">
         <div class="row">
             <div class="col-lg-12">
-                <div class="block">
-                    <div class="block-title">
-                        <h2><i class="fa fa-pencil"></i> <strong>Editar información</strong> de los servicios</h2>
-                    </div>
+                <div class="">
+                    
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="nombre">Nombre del servicio</label>
-                                <div class="col-md-9">
-                                    <input type="hidden" name="data_id" value="editar_servicio">
+                                <label class="control-label" for="nombre">Nombre del servicio</label>
+                                
+                                    <input type="hidden" id="data_id" name="data_id" value="editar_servicio">
                                     <input type="hidden" name="id" value="'.$row[id].'">
                                     <input type="text" autocomplete="off" id="nombre" value="'.$row[nombre].'" name="nombre" class="form-control" placeholder="Digite el nombre del servicio">
-                                </div>
+                               
                             </div>
                             <div class="form-group">
-                                <label for="" class="col-md-3 control-label">Descripción</label>
-                                <div class="col-md-9">
+                                <label for="" class="control-label">Descripción</label>
+                                
                                     <textarea name="descripcion" id="descripcion"  rows="2" class="form-control">'.$row[descripcion].'</textarea>
-                                </div>
+                                
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="direccion">Precio</label>
-                                <div class="col-md-9">
+                                <label class="control-label" for="direccion">Precio</label>
+                                
                                     <input type="number" class="form-control" name="precio" value="'.$row[precio].'" id="precio">
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="categoria">Tiempo estimado de duración</label>
-                                <div class="col-md-9">
+                                <label class="control-label" for="categoria">Tiempo estimado de duración</label>
+                                
                                     <input type="text" name="duracion" id="duracion" value="'.$row[duracion].'" class="form-control">
-                                </div>
+                                
                             </div>
                              <div class="form-group">
-                                <label class="col-md-3 control-label" for="email">Empleado</label>
-                                <div class="col-md-9">
+                                <label class="control-label" for="email">Empleado</label>
+                                
                                     <select class="select-chosen" name="empleado" id="empleado">
                                     <option value="0">Ninguno</option>';
                                     foreach($empleados[1] as $empleado){
@@ -164,18 +163,19 @@ class Servicio
                                     	}	
                                     }
                                     $modal.='</select>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
                         <div class="form-group">
-                            <div class="col-md-10">
+                            
                                 <center>
-                                    <button type="button" id="btn_guardar" class="btn btn btn-primary"><i class="fa fa-floppy-o"></i> Guardar</button>
+                                    <button type="button" id="btn_guardar" class="btn btn-mio"> Guardar</button>
+                                    <button type="button" data-dismiss="modal" class="btn btn-default"> Cerrar</button>
                                 </center>
-                            </div>
+                            
                         </div>
                     </div>
                     </div>

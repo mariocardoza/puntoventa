@@ -117,13 +117,33 @@ $primary_nav = array(
         'url'   => '../../php/proveedores/proveedores.php',
         'url_real'=> 'proveedores.php',
     ),
-      array(
+    array(
         'name'  => 'Ventas',
         'icon'  => 'ventas.svg',
-        'url'   => '../../php/ventas/ventas.php',
+        'url'   => '#',
         'url_real'=> 'ventas.php',
     ),
-     
+    array(
+        'name'  => 'Configuración',
+        'icon'  => 'configuracion.svg',
+        'sub' => array(
+            array(
+            'name' => 'Departamentos',
+            'url' => '../../php/departamentos/departamentos.php',
+            'url_real' => 'departamentos.php'
+            ),
+            array(
+            'name' => 'Categorías',
+            'url' => '../../php/categorias/categorias.php',
+            'url_real' => 'categorias.php'
+            ),
+            array(
+            'name' => 'Subcategorías',
+            'url' => '../../php/subcategorias/subcategorias.php',
+            'url_real' => 'subcategorias.php'
+            ),
+        ),
+    ),
    
 
     /*array(

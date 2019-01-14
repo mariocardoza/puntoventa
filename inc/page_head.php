@@ -8,6 +8,10 @@
  * Header and Sidebar of each page
  *
  */
+
+require_once('../../Conexion/Empresa.php');
+$empresa=Empresa::datos_empresa();
+
 ?>
 
 <!-- Page Wrapper -->
@@ -101,12 +105,13 @@
                 <div class="sidebar-content">
                     <div class="sidebar-section ">
                         <div class="">
-                            <a href="../home/perfil.php">
-                                <img style="display:block;margin:auto;border-radius:150px;" src="../../img/usuario/<?= $_SESSION['imagen'] ?>" alt="avatar">
+                            <a href="../empresa/perfil_empresa.php">
+                                <img style="display:block;margin:auto;border-radius:150px; height: 100px; width: 100px;" src="../../img/empresa/<?= $empresa['imagen'] ?>" alt="avatar">
                             </a>
                         </div> 
                     </div>
-                    <div class="sidebar-user-name"><center>nombre del negocio</center></div>
+                    <div class="sidebar-user-name"><center><?php echo $_SESSION['nombre'] ?></center></div>
+                    <div class="sidebar-user-name"><center><?php echo $empresa['nombre'] ?></center></div>
                     <div class="sidebar-sucursal"><center>Sucursal</center></div>
                     <hr style="color: #989999;margin-right: 19px;margin-left: 19px;">
 
@@ -371,6 +376,9 @@
                     <!-- Change Options functionality can be found in js/app.js - templateOptions() -->
                     <!-- END Template Options -->
                 </ul>
+
+                <center id="titulo_nav" class="navbar-brand" style="color: #fff;"></center>
+
                  
                 <!-- Right Header Navigation -->
                 <ul class="nav navbar-nav-custom pull-right">
@@ -390,6 +398,10 @@
     <div>
         <center><h1 style="color:#fff"><b>¿Qué desea cobrar?</b></h1></center>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
     <div>
         <table width="100%">
         <td width="40%"><p class="cobrar_esto"><img id="cobrar_producto" src="../../img/producto.png" width="250px" height="250px" alt="">

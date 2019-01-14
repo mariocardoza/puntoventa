@@ -1,0 +1,226 @@
+[17-Dec-2018 09:00:40 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/registro_producto.php on line 198
+[17-Dec-2018 10:32:09 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/productos.php on line 122
+[18-Dec-2018 10:51:38 America/El_Salvador] PHP Parse error:  syntax error, unexpected 'Y' (T_STRING) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 434
+[18-Dec-2018 10:52:15 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 10:53:37 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 10:56:54 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 10:57:22 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 10:58:46 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 17:03:58 UTC] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 495
+[18-Dec-2018 11:04:01 America/El_Salvador] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 495
+[18-Dec-2018 11:04:54 America/El_Salvador] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 495
+[18-Dec-2018 11:05:10 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:09:33 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:10:59 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:11:07 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:13:54 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:13:54 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 362
+[18-Dec-2018 11:14:09 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:15:30 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:16:37 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:16:43 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 17:18:26 UTC] PHP Parse error:  syntax error, unexpected '<' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 407
+[18-Dec-2018 17:18:29 UTC] PHP Parse error:  syntax error, unexpected '<' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 407
+[18-Dec-2018 11:18:46 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:18:53 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:19:02 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:36:14 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:36:47 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:37:40 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:40:30 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:41:07 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:41:36 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:42:27 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:42:54 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:43:23 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:44:39 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:45:58 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:46:51 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:47:16 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:48:50 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:48:59 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:49:15 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:49:20 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[18-Dec-2018 11:58:05 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 19
+[20-Dec-2018 13:21:14 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[20-Dec-2018 13:21:25 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[20-Dec-2018 15:24:21 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[20-Dec-2018 21:28:46 UTC] PHP Parse error:  syntax error, unexpected '<' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 355
+[20-Dec-2018 21:28:49 UTC] PHP Parse error:  syntax error, unexpected '<' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 355
+[20-Dec-2018 15:29:31 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[20-Dec-2018 15:30:17 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[20-Dec-2018 15:35:44 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[20-Dec-2018 15:37:44 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[21-Dec-2018 15:23:29 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[21-Dec-2018 15:35:33 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[21-Dec-2018 15:36:06 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[22-Dec-2018 09:32:32 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[29-Dec-2018 11:03:28 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[02-Jan-2019 07:34:57 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[02-Jan-2019 09:57:39 America/El_Salvador] PHP Parse error:  syntax error, unexpected 'id' (T_STRING) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 108
+[02-Jan-2019 10:10:58 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 10:29:29 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 10:29:29 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 10:29:30 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 10:29:38 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 10:29:38 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 10:29:38 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 10:29:38 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 10:29:38 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 10:29:38 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 10:29:44 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 10:29:45 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 10:29:45 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 10:29:45 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 10:29:45 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 10:36:56 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/productos.php on line 46
+[02-Jan-2019 10:58:50 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 10:58:56 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 10:58:59 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 10:59:03 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 11:00:18 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 11:00:26 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 11:00:30 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 11:04:42 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 11:06:07 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 11:07:40 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 11:07:43 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 11:07:49 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 11:11:33 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[02-Jan-2019 11:12:34 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 11:15:03 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 11:18:59 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[02-Jan-2019 11:28:36 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 11:28:36 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 11:30:08 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 11:30:08 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 11:30:59 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[02-Jan-2019 11:52:53 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[02-Jan-2019 11:55:52 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[02-Jan-2019 11:56:21 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[02-Jan-2019 13:28:35 America/El_Salvador] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Proveedor.php on line 52
+[02-Jan-2019 15:02:01 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[03-Jan-2019 09:17:03 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[03-Jan-2019 13:25:45 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[04-Jan-2019 14:59:28 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[04-Jan-2019 14:59:30 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[04-Jan-2019 15:23:01 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[04-Jan-2019 15:24:17 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[04-Jan-2019 15:25:09 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[04-Jan-2019 15:26:43 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[04-Jan-2019 15:26:44 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[04-Jan-2019 15:27:09 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[04-Jan-2019 15:28:20 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[04-Jan-2019 15:28:26 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[04-Jan-2019 15:29:05 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[04-Jan-2019 15:29:48 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[04-Jan-2019 16:13:45 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[07-Jan-2019 08:35:25 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[07-Jan-2019 10:45:19 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[07-Jan-2019 15:04:26 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[08-Jan-2019 10:35:22 America/El_Salvador] PHP Warning:  Missing argument 3 for Producto::busqueda(), called in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 30 and defined in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 56
+[08-Jan-2019 10:35:55 America/El_Salvador] PHP Warning:  Missing argument 3 for Producto::busqueda(), called in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 30 and defined in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 56
+[08-Jan-2019 10:35:59 America/El_Salvador] PHP Warning:  Missing argument 3 for Producto::busqueda(), called in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 30 and defined in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 56
+[08-Jan-2019 10:36:01 America/El_Salvador] PHP Warning:  Missing argument 3 for Producto::busqueda(), called in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 30 and defined in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 56
+[08-Jan-2019 10:36:34 America/El_Salvador] PHP Warning:  Missing argument 3 for Producto::busqueda(), called in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 30 and defined in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 56
+[08-Jan-2019 10:37:19 America/El_Salvador] PHP Warning:  Missing argument 3 for Producto::busqueda(), called in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 30 and defined in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 56
+[08-Jan-2019 10:39:00 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[08-Jan-2019 10:39:02 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[08-Jan-2019 10:39:10 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[08-Jan-2019 11:55:38 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[08-Jan-2019 13:33:35 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[08-Jan-2019 13:33:40 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[08-Jan-2019 13:37:07 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/registro_producto.php on line 76
+[08-Jan-2019 13:38:03 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/registro_producto.php on line 88
+[08-Jan-2019 13:38:23 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/registro_producto.php on line 88
+[08-Jan-2019 13:40:09 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/registro_producto.php on line 101
+[08-Jan-2019 13:40:53 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/registro_producto.php on line 100
+[08-Jan-2019 13:44:28 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/registro_producto.php on line 100
+[08-Jan-2019 13:58:07 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[08-Jan-2019 14:00:46 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[08-Jan-2019 14:01:39 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[08-Jan-2019 14:04:28 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[08-Jan-2019 14:05:16 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[08-Jan-2019 14:07:09 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[08-Jan-2019 14:29:17 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[08-Jan-2019 14:29:25 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 101
+[08-Jan-2019 16:32:45 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[08-Jan-2019 16:33:23 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[08-Jan-2019 16:35:22 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[09-Jan-2019 09:20:17 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[09-Jan-2019 09:24:13 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[09-Jan-2019 09:24:48 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[09-Jan-2019 09:25:31 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[09-Jan-2019 17:10:44 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home1/estudjl6/public_html/sys/puntoventa/php/productos/registro_producto.php on line 106
+[09-Jan-2019 17:10:47 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home1/estudjl6/public_html/sys/puntoventa/php/productos/registro_producto.php on line 106
+[09-Jan-2019 11:11:31 America/El_Salvador] PHP Warning:  PDO::prepare() expects at least 1 parameter, 0 given in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 59
+[09-Jan-2019 11:11:31 America/El_Salvador] PHP Fatal error:  Uncaught Error: Call to a member function execute() on boolean in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php:60
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/php/productos/registro_producto.php(45): Producto::obtener_unidades()
+#1 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 60
+[09-Jan-2019 11:33:45 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[09-Jan-2019 19:25:09 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home1/estudjl6/public_html/sys/puntoventa/php/productos/registro_producto.php on line 106
+[09-Jan-2019 19:25:12 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home1/estudjl6/public_html/sys/puntoventa/php/productos/registro_producto.php on line 106
+[09-Jan-2019 15:20:03 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/modales.html on line 130
+[09-Jan-2019 15:20:03 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/modales.html on line 151
+[09-Jan-2019 15:20:03 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/modales.html on line 191
+[09-Jan-2019 15:22:11 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/modales.html on line 130
+[09-Jan-2019 15:22:11 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/modales.html on line 151
+[09-Jan-2019 15:22:11 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/modales.html on line 191
+[09-Jan-2019 15:23:20 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/modales.php on line 130
+[09-Jan-2019 15:23:20 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/modales.php on line 151
+[09-Jan-2019 15:23:20 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/modales.php on line 191
+[09-Jan-2019 15:24:05 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/modales.php on line 130
+[09-Jan-2019 15:24:05 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/modales.php on line 151
+[09-Jan-2019 15:24:05 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/productos/modales.php on line 191
+[10-Jan-2019 07:49:09 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 08:00:40 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 08:25:32 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 08:25:40 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 08:33:58 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 08:35:32 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 08:35:57 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 08:56:30 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 08:56:50 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 08:57:47 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 09:01:43 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 09:02:01 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 09:02:11 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 09:03:56 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 09:04:16 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 09:05:29 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 09:06:28 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 09:07:06 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 09:08:24 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 09:10:19 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 115
+[10-Jan-2019 09:28:12 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 114
+[10-Jan-2019 09:29:47 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 114
+[10-Jan-2019 09:32:55 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 114
+[10-Jan-2019 09:33:25 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 114
+[10-Jan-2019 09:34:09 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 114
+[10-Jan-2019 09:52:19 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 114
+[10-Jan-2019 09:53:08 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 114
+[10-Jan-2019 09:54:54 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 114
+[10-Jan-2019 09:56:07 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 114
+[10-Jan-2019 10:05:47 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 114
+[10-Jan-2019 10:10:28 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 114
+[10-Jan-2019 10:31:37 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[10-Jan-2019 11:16:39 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[10-Jan-2019 11:17:16 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[10-Jan-2019 11:17:30 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[10-Jan-2019 11:23:52 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[10-Jan-2019 11:24:08 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[10-Jan-2019 11:24:23 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[10-Jan-2019 11:24:42 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[10-Jan-2019 11:28:59 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 118
+[10-Jan-2019 11:29:02 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 118
+[10-Jan-2019 11:29:04 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 118
+[10-Jan-2019 11:29:06 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 118
+[10-Jan-2019 13:09:31 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[11-Jan-2019 10:00:02 America/El_Salvador] PHP Fatal error:  Uncaught Error: Class 'Producto' not found in /home1/estudjl6/public_html/sys/puntoventa/php/productos/productos.php:32
+Stack trace:
+#0 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/php/productos/productos.php on line 32
+[11-Jan-2019 10:12:38 America/El_Salvador] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 135
+[11-Jan-2019 10:21:13 America/El_Salvador] PHP Parse error:  syntax error, unexpected '' '' (T_CONSTANT_ENCAPSED_STRING) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 135

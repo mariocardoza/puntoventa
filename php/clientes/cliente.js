@@ -1,31 +1,6 @@
 $(document).ready(function(e){
-      swal({
-    title: 'Consultando datos!',
-    text: 'Este diálogo se cerrará al cargar los datos.',
-    showConfirmButton: false,
-    onOpen: function () {
-    swal.showLoading()
-   }
-  });
-  $.ajax({
-        url:'json_clientes.php',
-        type:'POST',
-        dataType:'json',
-        data:{data_id:'busqueda',esto:'',tipo:'0'},
-        success: function(json){
-          console.log(json);
-            var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
-            if(json[2]){
-                $("#aqui_busqueda").empty();
-                $("#aqui_busqueda").html(json[2]);
-                swal.closeModal();
-            }else{
-                $("#aqui_busqueda").empty();
-                $("#aqui_busqueda").html(html);
-                swal.closeModal();
-            }
-        }
-      });
+      modal_cargando();
+  cargar();
 	//habilitar elementos para persona jurídica
 	 $('#tipocliente').change(function() {
         if( $(this).is(':checked') ){
@@ -46,6 +21,13 @@ $(document).ready(function(e){
         $('#tipocontribuyente').removeAttr('required');
     }
     });
+
+     $(document).on("click","#modal_guardar", function(e){
+        $(".form-control").val("");
+        $("#data_id").val("nuevo_cliente");
+        $("#id").val("");
+        $("#md_guardar").modal("show");
+     });
 
              //buscar con funcion input
     $(document).on("input","#busqueda", function(e){
@@ -307,14 +289,7 @@ $(document).ready(function(e){
 	 	if(valid){
 	 		var datos=$("#fm_cliente").serialize();
 	 		console.log(datos);
-	 		swal({
-                title: '¡Cargando!',
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-                onOpen: function() {
-                    swal.showLoading()
-                }
-            });
+	 		modal_cargando();
 	 		$.ajax({
 	 			url:'json_clientes.php',
 	 			type:'POST',
@@ -323,22 +298,11 @@ $(document).ready(function(e){
 	 			success: function(json){
 	 				console.log(json);
 	 				if(json[0]==1){
-				 		iziToast.success({
-				            title: EXITO,
-				            message: EXITO_MENSAJE,
-				            timeout: 3000,
-			          	});
-			          	var timer=setInterval(function(){
-			            location.reload();
-			            clearTimeout(timer);
-			          	},3500);
+				 		guardar_exito();
+                        cargar();
+                        $(":text").val("");
 	 				}else{
-	 					swal.close();
-				        iziToast.error({
-				          title: ERROR,
-				          message: ERROR_MENSAJE,
-				          timeout: 3000,
-				        });
+	 					guardar_error();
 	 				}
 	 			}
 	 		});
@@ -349,7 +313,6 @@ $(document).ready(function(e){
 	 	var valid=$("#fm_cliente").valid();
 	 	if(valid){
 	 		datos = $("#fm_cliente").serialize();
-	 		modal_cargando();
 	 		$.ajax({
 	 			url:'json_clientes.php',
 	 			type:'POST',
@@ -358,22 +321,12 @@ $(document).ready(function(e){
 	 			success: function(json){
 	 				console.log(json);
 	 				if(json[0]==1){
-				 		iziToast.success({
-				            title: EXITO,
-				            message: EXITO_MENSAJE,
-				            timeout: 3000,
-			          	});
-			          	var timer=setInterval(function(){
-			            location.reload();
-			            clearTimeout(timer);
-			          	},3500);
+				 		guardar_exito();
+                        $(".modal").modal("hide");
+                        cargar();
+                        $(":text").val("");
 	 				}else{
-	 					swal.close();
-				        iziToast.error({
-				          title: ERROR,
-				          message: ERROR_MENSAJE,
-				          timeout: 3000,
-				        });
+	 					guardar_error();
 	 				}
 	 			}
 	 		});
@@ -381,16 +334,23 @@ $(document).ready(function(e){
 	 })
 });
 
-function editar(id){
+function editar(id,tipo){
 	//alert(id);
+    if(tipo=='1'){
+        data_id='modal_natural';
+    }else{
+        data_id='modal_juridico';
+    }
 	$.ajax({
         url: 'json_clientes.php',  
         type: 'POST',
         dataType: 'json',
-        data: {id:id,data_id:'modal_natural'},
+        data: {id:id,data_id:data_id},
         success: function(json){
           console.log(json);
+          $(":text").val("");
           $("#modal_edit").html(json[3]);
+          $(".select-chosen").chosen({"width":"100%"});
           $("#md_editar").modal('show'); // lanza el modal
         }
       });
@@ -407,6 +367,29 @@ function editar(id){
           console.log(json);
           $("#modal_edit").html(json[3]);
           $("#md_editar").modal('show'); // lanza el modal
+        }
+      });
+    }
+
+    //cargar
+    function cargar(){
+        $.ajax({
+        url:'json_clientes.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto:'',tipo:'0'},
+        success: function(json){
+          console.log(json);
+            var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
+            if(json[2]){
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(json[2]);
+                swal.closeModal();
+            }else{
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(html);
+                swal.closeModal();
+            }
         }
       });
     }

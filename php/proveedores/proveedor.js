@@ -1,31 +1,6 @@
 $(document).ready(function(e){
-    swal({
-    title: 'Consultando datos!',
-    text: 'Este diálogo se cerrará al cargar los datos.',
-    showConfirmButton: false,
-    onOpen: function () {
-    swal.showLoading()
-   }
-  });
-  $.ajax({
-        url:'json_proveedores.php',
-        type:'POST',
-        dataType:'json',
-        data:{data_id:'busqueda',esto:''},
-        success: function(json){
-          console.log(json);
-            var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
-            if(json[2]){
-                $("#aqui_busqueda").empty();
-                $("#aqui_busqueda").html(json[2]);
-                swal.closeModal();
-            }else{
-                $("#aqui_busqueda").empty();
-                $("#aqui_busqueda").html(html);
-                swal.closeModal();
-            }
-        }
-      });
+    modal_cargando();
+    cargar();
 
         //buscar con funcion input
     $(document).on("input","#busqueda", function(e){
@@ -58,6 +33,10 @@ $(document).ready(function(e){
                 validar_nit(valor.val(),"tb_proveedor",valor);
             }
         });
+
+   $(document).on("click","#modal_guardar", function(e){
+    $("#md_guardar").modal("show");
+   });
 
       //validar email
      $(document).on('blur', '#email', function(event) {
@@ -99,7 +78,24 @@ $(document).ready(function(e){
                 success: function(json){
                     console.log(json);
                     if(json[0]==1){
-                        guardar_exito("proveedores");
+                        //modal_cargando();
+                        cargar();
+                        $("#data_id").val("");
+                        $("#id").val("");
+                        $("#nombre").val("");
+                        $("#direccion").val("");
+                        $("#telefono").val("");
+                        $("#dui").val("");
+                        $("#nit").val("");
+                        $("#nrc").val("");
+                        $("#giro").val("");
+                        $("#email").val("");
+                        $("#nombre_r").val("");
+                        $("#telefono_r").val("");
+                        $("#dui_r").val("");
+                        $("#direccion_r").val("");
+                        $(".modal").modal("hide");
+                        guardar_exito();
                     }else{
                         guardar_error();
                     }
@@ -120,4 +116,26 @@ function editar(id){
             $("#md_editar").modal('show');
         }
     });
+}
+
+function cargar(){
+  $.ajax({
+        url:'json_proveedores.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto:''},
+        success: function(json){
+          console.log(json);
+            var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
+            if(json[2]){
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(json[2]);
+                swal.closeModal();
+            }else{
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(html);
+                swal.closeModal();
+            }
+        }
+  });
 }

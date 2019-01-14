@@ -48,7 +48,7 @@ class Cliente
                     <table width="100%">
                         <tbody>
                             <tr>
-                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a>
+                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\',\''.$row[tipo].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a>
                                 </td>
                                 <td style="font-size:18px"><b>'.$row[nombre].'</b></td>
                             </tr>
@@ -250,82 +250,80 @@ class Cliente
             <button type="button" class="close" data-dismiss="modal">
               <span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title">Editar cliente</h4>
+            <h4 class="modal-title"><b>Editar cliente</b></h4>
           </div>
           <div class="modal-body">
-            <form action="#" method="post" name="fm_cliente" id="fm_cliente" class="form-horizontal form-bordered">
+            <form action="#" method="post" name="fm_cliente" id="fm_cliente" class="form-horizontal">
             <div class="row">
 		        <div class="col-lg-12">
-		            <div class="block">
-		                <div class="block-title">
-		                    <h2><i class="fa fa-pencil"></i> <strong>Información</strong> general</h2>
-		                </div>
+		            <div class="">
 		                <div class="row">
 			        <div class="col-lg-6">
 			            <div class="form-group">
-			                <label class="col-md-3 control-label" for="nombre">Nombre</label>
-			                <div class="col-md-9">
-			                    <input type="hidden" name="data_id" value="editar_cliente">
+			                <label class="control-label" for="nombre">Nombre</label>
+			                
+			                    <input type="hidden" id="data_id" name="data_id" value="editar_cliente">
 			                    <input type="hidden" name="id" value="'.$cliente[id].'">
 			                    <input type="hidden" name="retiene" value="0">
 			                    <input required value="'.$cliente[nombre].'" type="text" id="nombre" name="nombre" class="form-control" placeholder="Digite el nombre del nombre">
-			                </div>
+			                
 			            </div>
-			            <div class="form-group">
-			                <label class="col-md-3 control-label" for="direccion">Dirección</label>
-			                <div class="col-md-9">
-			                    <textarea required id="direccion" name="direccion" class="form-control" rows="3">'.$cliente[direccion].'</textarea>
-			                </div>
-			            </div>
+			            
 			            <div class="form-group" id="fdui">
-			                <label class="col-md-3 control-label" for="departamento">DUI</label>
-			                <div class="col-md-9">
+			                <label class="control-label" for="departamento">DUI</label>
+			                
 			                    <input type="text" value="'.$cliente[dui].'" name="dui"id="dui" class="form-control dui">
-			                </div>
+			               
 			            </div>
 			            <div class="form-group">
-			                <label class="col-md-3 control-label" for="categoria">NIT</label>
-			                <div class="col-md-9">
+			                <label class="control-label" for="categoria">NIT</label>
+			                
 			                    <input type="text" value="'.$cliente[nit].'" name="nit" id="nit" class="form-control nit">
-			                </div>
+			                
+			            </div>
+			            <div class="form-group">
+			                <label class="control-label" for="direccion">Dirección</label>
+			                
+			                    <textarea required id="direccion" name="direccion" class="form-control" rows="3">'.$cliente[direccion].'</textarea>
+			                
 			            </div>
 			        </div>
 			        <div class="col-lg-6">
 			            <div class="form-group">
-			                <label class="col-md-3 control-label" for="telefono">Número de teléfono</label>
-			                <div class="col-md-9">
+			                <label class="control-label" for="telefono">Número de teléfono</label>
+			                
 			                    <input type="text" name="telefono" id="telefono" value="'.$cliente[telefono].'" class="form-control telefono">
-			                </div>
+			                
 			            </div>
 
 			            <div class="form-group">
-			                <label class="col-md-3 control-label" for="email">Email</label>
-			                <div class="col-md-9">
-			                    <div class="form-group">
+			                <label class="control-label" for="email">Email</label>
+			                
+			                    
 			                        <input type="email" id="email" name="email" value="'.$cliente[email].'"class="form-control" >
-			                    </div>
-			                </div>
+			                    
+			                
 			            </div>
 
 			            <div class="form-group" id="nacimiento">
-			                <label for="" class="col-md-3 control-label">Fecha de nacimiento</label>
-			                <div class="col-md-9">
+			                <label for="" class="control-label">Fecha de nacimiento</label>
+			                
 			                    <input type="text" class="form-control nacimiento" value="'.$cliente[fecha_nacimiento].'" name="fecha_nacimiento" id="fecha_nacimiento">
-			                </div>
+			                
 			            </div>
 			        </div>
 		        </div>
         	</div>
        
         	<div class="col-lg-12">
-            <div class="block">
+            <div class="">
                 <div class="form-group">
-                	<div class="col-md-10">
+                	
                     <center>
-                        <button type="button" id="btn_editar" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Guardar</button>
-                    <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal"><i class="fa fa-repeat"></i> Cerrar</button>  
+                        <button type="button" id="btn_editar" class="btn btn-mio"> Guardar</button>
+                    <button type="button" class="btn btn-defaul" data-dismiss="modal"> Cerrar</button>  
                     </center>
-                	</div>
+                	
             	</div>
             </div>
         	</div>
@@ -360,131 +358,112 @@ class Cliente
             <h4 class="modal-title">Editar cliente</h4>
           </div>
           <div class="modal-body">
-            <form action="#" method="post" name="fm_cliente" id="fm_cliente" class="form-horizontal form-bordered">
+            <form action="#" method="post" name="fm_cliente" id="fm_cliente" class="form-horizontal">
             <div class="row">
 		        <div class="col-lg-12">
-		            <div class="block">
-		                <div class="block-title">
-		                    <h2><i class="fa fa-pencil"></i> <strong>Información</strong> general</h2>
-		                </div>
+		            <div class="">
+		                
 		                <div class="row">
 			        <div class="col-lg-6">
 			            <div class="form-group">
-			                <label class="col-md-3 control-label" for="nombre">Nombre</label>
-			                <div class="col-md-9">
-			                    <input type="hidden" name="data_id" value="editar_cliente">
-			                    <input type="hidden" name="id" value="'.$cliente[id].'">
+			                <label class="control-label" for="nombre">Nombre</label>
+			                
+			                    <input type="hidden" id="data_id" name="data_id" value="editar_cliente">
+			                    <input type="hidden" name="id" id="id" value="'.$cliente[id].'">
 			                    <input required value="'.$cliente[nombre].'" type="text" id="nombre" name="nombre" class="form-control" placeholder="Digite el nombre del nombre">
-			                </div>
+			                
 			            </div>
 			            <div class="form-group">
-			                <label class="col-md-3 control-label" for="direccion">Dirección</label>
-			                <div class="col-md-9">
+			                <label class="control-label" for="direccion">Dirección</label>
+			                
 			                    <textarea required id="direccion" name="direccion" class="form-control" rows="3">'.$cliente[direccion].'</textarea>
-			                </div>
-			            </div>
-			            <div class="form-group" id="fdui">
-			                <label class="col-md-3 control-label" for="departamento">DUI</label>
-			                <div class="col-md-9">
-			                    <input type="text" value="'.$cliente[dui].'" name="dui"id="dui" class="form-control dui">
-			                </div>
+			                
 			            </div>
 			            <div class="form-group">
-			                <label class="col-md-3 control-label" for="categoria">NIT</label>
-			                <div class="col-md-9">
+			                <label class="control-label" for="categoria">NIT</label>
+			                
 			                    <input type="text" value="'.$cliente[nit].'" name="nit" id="nit" class="form-control nit">
-			                </div>
+			                
 			            </div>
 			        </div>
 			        <div class="col-lg-6">
 			            <div class="form-group">
-			                <label class="col-md-3 control-label" for="telefono">Número de teléfono</label>
-			                <div class="col-md-9">
+			                <label class="control-label" for="telefono">Número de teléfono</label>
+			                
 			                    <input type="text" name="telefono" id="telefono" value="'.$cliente[telefono].'" class="form-control telefono">
-			                </div>
+			                
 			            </div>
 
 			            <div class="form-group">
-			                <label class="col-md-3 control-label" for="email">Email</label>
-			                <div class="col-md-9">
-			                    <div class="form-group">
+			                <label class="control-label" for="email">Email</label>
+			                
 			                        <input type="email" id="email" name="email" value="'.$cliente[email].'"class="form-control" >
-			                    </div>
-			                </div>
-			            </div>
-
-			            <div class="form-group" id="nacimiento">
-			                <label for="" class="col-md-3 control-label">Fecha de nacimiento</label>
-			                <div class="col-md-9">
-			                    <input type="text" class="form-control nacimiento" value="'.$cliente[fecha_nacimiento].'" name="fecha_nacimiento" id="fecha_nacimiento">
-			                </div>
+			                  
 			            </div>
 			        </div>
 		        </div>
         	</div>
 
         	 <div class="col-lg-12">
-            <div class="block">
-                <div class="block-title">
-                    <h2><i class="fa fa-pencil"></i> <strong>Datos</strong> del contribuyente</h2>
-                </div>
+            <div class="">
+                
                 <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="" class="col-md-3 control-label">Número de registro</label>
-                        <div class="col-md-9">
+                        <label for="" class="control-label">Número de registro</label>
+                        
                             <input type="text" value="'.$cliente[nrc].'" name="nrc" id="nrc" class="form-control">
-                        </div>
+                        
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-md-3 control-label">Giro</label>
-                        <div class="col-md-9">
+                        <label for="" class="control-label">Giro</label>
+                        
                             <input type="text" name="giro" id="giro" value="'.$cliente[giro].'"class="form-control">
-                        </div>
+                        
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-md-3 control-label">Razón social</label>
-                        <div class="col-md-9">
+                        <label for="" class="control-label">Razón social</label>
+                        
                             <input type="text" value="'.$cliente[razon_social].'"id="razon_social" name="razon_social" class="form-control">
-                        </div>
+                        
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-md-3 control-label">Tipo contribuyente</label>
-                        <div class="col-md-9">
-                            <select name="tipocontribuyente" id="tipocontribuyente" style="width:auto;"data-live-search="true" class="select_piker2">
+                        <label for="" class="control-label">Tipo contribuyente</label>
+                        
+                            <select name="tipocontribuyente" id="tipocontribuyente" style="width:auto;" class="select-chosen">
                                 <option value="">Seleccione...</option>
                                 <option value="1">Pequeño</option>
                                 <option value="2">Mediano</option>
                                 <option value="3">Grande</option>
                             </select>
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="" class="col-md-3 control-label">Nombre del representante legal</label>
-                        <div class="col-md-9">
+                        <label for="" class="control-label">Nombre del representante legal</label>
+                        
                             <input type="text" id="nombre_r" value="'.$cliente[nombre_r].'" name="nombre_r" class="form-control">
-                        </div>
+                        
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-md-3 control-label">Teléfono del representante legal</label>
-                        <div class="col-md-9">
+                        <label for="" class="control-label">Teléfono del representante legal</label>
+                        
                             <input type="text" id="telefono_r" value="'.$cliente[telefono_r].'"name="telefono_r" class="form-control telefono">
-                        </div>
+                        
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-md-3 control-label">Dirección del representante legal</label>
-                        <div class="col-md-9">
+                        <label for="" class="control-label">Dirección del representante legal</label>
+                        
                             <textarea name="direccion_r" id="direccion_r" rows="2" class="form-control">'.$cliente[direccion_r].'</textarea>
-                        </div>
+                        
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-md-3 control-label">Retiene 1%</label>
-                        <div class="col-md-9">
+                        <label for="" class="control-label">Retiene 1%</label>
+                        
                             <input type="radio" checked name="retiene" value="0">No
                             <input type="radio" name="retiene" value="1">Si
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -492,14 +471,14 @@ class Cliente
         </div>
        
         	<div class="col-lg-12">
-            <div class="block">
+            <div class="">
                 <div class="form-group">
-                	<div class="col-md-10">
+                	
                     <center>
-                        <button type="button" id="btn_editar" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Guardar</button>
-                    <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal"><i class="fa fa-repeat"></i> Cerrar</button>  
+                        <button type="button" id="btn_editar" class="btn btn-mio">Guardar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>  
                     </center>
-                	</div>
+                	
             	</div>
             </div>
         	</div>

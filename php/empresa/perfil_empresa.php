@@ -27,7 +27,7 @@
 <?php include '../../inc/page_head.php'; 
 include_once("../../Conexion/administracion/Usuarios.php");
 include_once("../../Conexion/Empresa.php");
-
+$empresa = Empresa::datos_empresa();
 ?>
 
 <!-- Page content -->
@@ -42,10 +42,35 @@ include_once("../../Conexion/Empresa.php");
         </div>
         <div class="col-lg-8">
             <!-- Orders Block -->
+
+            <div class="block">
+                <!-- Products in Cart Title -->
+                <div class="block-title">
+                    <h2><i class="fa fa-home"></i> <strong>Sucursales</strong>  </h2>
+                    <button class="btn btn-mio pull-right" type="button" data-codigo="<?php echo $empresa[codigo_oculto] ?>" id="nueva_sucur">Nueva</button>
+                </div>
+                <!-- END Products in Cart Title -->
+
+                <!-- Products in Cart Content -->
+                <table class="table table-bordered table-striped table-vcenter">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Dirección</th>
+                            <th>Teléfono</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php print_r(Empresa::obtener_sucursales()); ?>
+                    </tbody>
+                </table>
+                <!-- END Products in Cart Content -->
+            </div>
             <div class="block">
                 <!-- Orders Title -->
                 <div class="block-title">
-                    <h2><i class="fa fa-truck"></i> <strong>Empleados</strong> (3)</h2>
+                    <h2><i class="fa fa-user"></i> <strong>Empleados</strong></h2>
                 </div>
                 <!-- END Orders Title -->
 
@@ -69,64 +94,12 @@ include_once("../../Conexion/Empresa.php");
             <!-- END Orders Block -->
 
             <!-- Products in Cart Block -->
-            <div class="block">
-                <!-- Products in Cart Title -->
-                <div class="block-title">
-                    <h2><i class="fa fa-shopping-cart"></i> <strong>Clientes</strong> registrados (0)</h2>
-                </div>
-                <!-- END Products in Cart Title -->
-
-                <!-- Products in Cart Content -->
-                <table class="table table-bordered table-striped table-vcenter">
-                    <tbody>
-                    </tbody>
-                </table>
-                <!-- END Products in Cart Content -->
-            </div>
+            
             <!-- END Products in Cart Block -->
         </div>
     </div>
     <!-- END Customer Content -->
-    <div class="modal" id="md_nuevo_pass" aria-hidden="true"
-      aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">
-              <span aria-hidden="true">×</span>
-            </button>
-            <h4 class="modal-title">Cambiar contraseña a <b><span id="nombre_pass"></span></b></h4>
-          </div>
-          <div class="modal-body">
-          <form method="post" accept-charset="utf-8" id="fm_cambiar_pass">
-            <input type="hidden" name="data_id" value="cambiar_pass">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="pass">Contraseña(*)</label>
-                      <input type="hidden" name="email_pass" id="email_pass">
-                      <input type="password" class="form-control" id="pass" name="pass" placeholder="Ingrese la contraseña">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group"> 
-                        <label class="control-label" for="repass">Repetir contraseña(*):</label>
-                        <input type="password" name="repass" id="repass" placeholder="Repetir contraseña" class="form-control">
-                    </div> 
-                </div>
-            </div>
-            <div class="col-md-12">
-                <center>
-                    <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Cancelar</button>
-                    <button type="sutmit" class="btn btn-primary" id="btn_cambiar_pass">Guardar</button>
-                </center>
-            </div> 
-          </form>
-          </div>
-          <div class="modal-footer"></div>
-        </div>
-      </div>
-</div>
+    
 
 <div class="modal" id="md_editar_perfil" aria-hidden="true"
       aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
@@ -198,6 +171,7 @@ include_once("../../Conexion/Empresa.php");
         </div>
       </div>
 </div>
+<?php include 'modal.php'; ?>
 </div>
 
 
@@ -251,6 +225,33 @@ include_once("../../Conexion/Empresa.php");
 
             });
         });
+
+        $(document).on("click","#nueva_sucur", function(e){
+            var empresa=$(this).attr("data-codigo");
+            $("#empresa").val(empresa);
+            $("#md_nueva_sucur").modal("show");
+        });
+
+        $(document).on("click","#btn_guardar_sucur", function(e){
+            var valid = $("#fm_sucursal").valid();
+            if(valid){
+                var datos=$("#fm_sucursal").serialize();
+                $.ajax({
+                    url:'json_empresa.php',
+                    type:'POST',
+                    dataType:'json',
+                    data:datos,
+                    success: function(json){
+                        if(json[0]==1){
+                            guardar_exito();
+                            window.location.href="perfil_empresa.php";
+                        }else{
+                            guardar_error();
+                        }
+                    }
+                });
+            }
+        });
        
         $(document).on("click", "#img_file", function (e) {
             $("#file_1").click();
@@ -260,6 +261,11 @@ include_once("../../Conexion/Empresa.php");
         });
         $("#file_1").change(function(event) {
             validar_archivo($(this));
+        });
+
+        $(document).on("click","#subir_imagen", function(e){
+            var codigo=$("#codiguito").val();
+            insertar_imagen($("#file_1"),codigo);
         });
 
                 //establecer contraseña manualmente
@@ -317,41 +323,117 @@ include_once("../../Conexion/Empresa.php");
     //
    }
 
-   function cambiar_pass(id){
-        $("#nombre_pass").text('<?php echo $_SESSION[nombre] ?>')
-        $("#email_pass").val('<?php echo $_SESSION[usuario] ?>')
-        $("#md_nuevo_pass").modal("show");
-   }
 
-   function guardar(){
-        var datos=$("#fm_cambiar_pass").serialize();
-        console.log(datos);
-        $.ajax({
-            url:'../json/json_generico.php',
-            type:'POST',
-            dataType:'json',
-            data:datos,
-            success: function(json){
+    function cambiar_foto(){
+        $("#md_cambiar_imagen").modal("show");
+    }
+
+    //funcion que validad que el archivo sea una imagen
+    function validar_archivo(file){
+            $("#img_file").attr("src","../../img/imagenes_subidas/image.svg");//31.gif
+                //var ext = file.value.match(/\.(.+)$/)[1];
+                 //Para navegadores antiguos
+                 if (typeof FileReader !== "function") {
+                    $("#img_file").attr("src",'../../img/imagenes_subidas/image.svg');
+                    return;
+                 }
+                 var Lector;
+                 var Archivos = file[0].files;
+                 var archivo = file;
+                 var archivo2 = file.val();
+                 if (Archivos.length > 0) {
+
+                    Lector = new FileReader();
+
+                    Lector.onloadend = function(e) {
+                        var origen, tipo, tamanio;
+                        //Envia la imagen a la pantalla
+                        origen = e.target; //objeto FileReader
+                        //Prepara la información sobre la imagen
+                        tipo = archivo2.substring(archivo2.lastIndexOf("."));
+                        console.log(tipo);
+                        tamanio = e.total / 1024;
+                        console.log(tamanio);
+
+                        //Si el tipo de archivo es válido lo muestra, 
+
+                        //sino muestra un mensaje 
+
+                        if (tipo !== ".jpeg" && tipo !== ".JPEG" && tipo !== ".jpg" && tipo !== ".JPG" && tipo !== ".png" && tipo !== ".PNG") {
+                            $("#img_file").attr("src",'../../img/imagenes_subidas/photo.svg');
+                            $("#error_formato1").removeClass('hidden');
+                            //$("#error_tamanio"+n).hide();
+                            //$("#error_formato"+n).show();
+                            console.log("error_tipo");
+                        }
+                        else{
+                            $("#img_file").attr("src",origen.result);
+                            $("#error_formato1").addClass('hidden');
+                        }
+
+
+                   };
+                    Lector.onerror = function(e) {
+                    console.log(e)
+                   }
+                   Lector.readAsDataURL(Archivos[0]);
+           }
+           
+        }
+
+    //subir la imagen
+    function insertar_imagen(archivo,id_prod){
+        var file =archivo.files;
+        var formData = new FormData();
+        formData.append('formData', $("#form-producto"));
+        var data = new FormData();
+         //Append files infos
+         jQuery.each(archivo[0].files, function(i, file) {
+            data.append('file-'+i, file);
+         });
+
+         console.log("data",data);
+         $.ajax({  
+            url: "json_imagen.php?id="+id_prod,  
+            type: "POST", 
+            dataType: "json",  
+            data: data,  
+            cache: false,
+            processData: false,  
+            contentType: false, 
+            context: this,
+            success: function (json) {
                 console.log(json);
-                if(json[0]==1){
+                if(json.exito){  
                     iziToast.success({
-                        title: "Excelente",
-                        message: "La contraseña fue actualizada, inicie sesión con la nueva contraseña",
-                        timeout: 6000,
+                        title: 'Excelente',
+                        message: 'Datos almacenados correctamente',
+                        timeout: 3000,
                     });
                     timer=setInterval(function(){
-                        location.href="destruir.php";                        
+                        location.reload();                        
                         clearTimeout(timer);
-                    },6000);
+                    },2000);
                      NProgress.done();
-                }else{
-                    swal.close();
-                    iziToast.error({
-                      title: 'Error',
-                      message: 'Hubo un problema al procesar al cambiar la contraseña, contante al administrador',
-                      timeout: 3000,
-                    });
                 }
+                if(json.error){
+                    swal.close();
+                    swal({
+                      title: '¡Advertencia!',
+                      html: $('<div>')
+                      .addClass('some-class')
+                      .text('No se logro insertar la imagen'),
+                      animation: false,
+                      allowEscapeKey:false,
+                      allowOutsideClick:false,
+                      customClass: 'animated tada',
+                            //timer: 2000
+                          }).then(function (result) {
+                            //$("#md_cantidad").focus();
+                            
+                          });
+                }
+
             }
         });
     }

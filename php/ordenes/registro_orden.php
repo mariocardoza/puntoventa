@@ -41,7 +41,7 @@ $productos=Producto::obtener_productos();
 ?>
 
 <div id="page-content">
-    <form action="#" method="post" name="fm_orden" id="fm_orden" class="form-horizontal form-bordered">
+    <form action="#" method="post" name="fm_orden" id="fm_orden" class="form-horizontal">
         <div class="block" style="background-color: #F2F2F2;">
             <div class="row" style="background-color: #F2F2F2;">
                 <div class="col-lg-12">
@@ -88,43 +88,10 @@ $productos=Producto::obtener_productos();
                                 </div>
                                 <div class="row">
                                     <div id="aqui_busqueda_venta">
-                                    <?php foreach ($productos[1] as $producto): ?>
-                                        <div class="col-xs-12 col-sm-12 col-lg-12" id="listado-card">
-                                        <div class="widget">
-                                          <div class="widget-simple">
-                                            <table width="100%">
-                                                <tbody>
-                                                    <tr>
-                                                        <td width="15%"></td>
-                                                        <td width="15%" rowspan="3"><center><img src="../../img/productos/<?php echo $producto[imagen] ?>" id="cambiar_imagen" data-codigo="'.$producto[codigo_oculto].'" alt="avatar" class="widget-image img-circle"></center></td>
-                                                        <td style="font-size: 18px;"><b><?php echo $producto[nombre] ?></b></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a style="border-radius: 90px" class="btn btn-mio btn-lg" id="agrega_img" data-nombre="<?php echo $producto[nombre] ?>" data-codigo="<?php echo $producto[codigo_oculto] ?>" data-imagen='<?php echo $producto[imagen] ?>' data-precio="<?php echo $producto[precio_unitario] ?>" data-existencia="<?php echo $producto[cantidad] ?>" href="javascript:void(0)"><i class="fa fa-plus"></i></a></td>
-                                                        <td style="font-size: 18px;">En inventario: <b><?php echo $producto[cantidad] ?></b></td> 
-                                                    </tr>
-                                                    <tr>
-                                                        <td width="15%"></td>
-                                                        <td style="font-size: 18px;">Precio <?php echo number_format($producto[precio_unitario],2) ?>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                          </div>
-                                        </div>
-                                      <!--div class="widget hide">
-                                          <div class="widget-simple">
-                                              <a data-nombre="<?php echo $producto[nombre] ?>" data-codigo="<?php echo $producto[codigo_oculto] ?>" data-precio="<?php echo $producto[precio_unitario] ?>" data-existencia="<?php echo $producto[cantidad] ?>" href="#" id="agrega_img">
-                                                  <img src="../../img/productos/<?php echo $producto[imagen] ?>" alt="avatar" class="widget-image img-circle pull-left">
-                                              </a>
-                                              <a data-nombre="<?php echo $producto[nombre] ?>" data-codigo="<?php echo $producto[codigo_oculto] ?>" data-precio="<?php echo $producto[precio_unitario] ?>" data-existencia="<?php echo $producto[cantidad] ?>" href="#" id="agrega_img1">
-                                                    <strong><?php echo $producto[nombre] ?></strong>
-                                                  </a>
-                                          </div>
-                                      </div-->
-                                    </div>
+                                    <?php //foreach ($productos[1] as $producto): ?>
+                                        
                                     
-                                    <?php endforeach ?>
+                                    <?php //endforeach ?>
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +106,7 @@ $productos=Producto::obtener_productos();
                             <div class="block" style="height: 250px;">
                                 <p><center><h1>Total:</h1></center></p>
                                 <p><center><h1 id="total">$0.00</h1></center></p>
-                                <p><center><button type="button" id="btn_cobrar" class="btn btn-lg btn-mio">Cobrar</button></center></p>
+                                <p><center><button type="button" id="btn_tipofactura" class="btn btn-lg btn-mio">Cobrar</button></center></p>
                             </div>
                         </div>
                     </div>

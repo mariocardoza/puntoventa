@@ -32,100 +32,37 @@ if($proveedores[0] == 1)$datos = $proveedores[2];
 
 <!-- Page content -->
 <div id="page-content">
-     <!-- Quick Stats -->
-    <div class="row">
-        <div class="col-sm-4 col-lg-4">
+    <div class="row" style="background-color: #fff;">
+      <div class="card">
+        <div class="row centrado">
+          <div class="col-sm-4 col-lg-4">
             <div class="input-group">
-                <input type="search" class="form-control" id="busqueda" placeholder="Buscar proveedor">
+                <input type="search" class="form-control" id="busqueda" placeholder="Buscar">
                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
             </div>
-        </div>
-        <div class="col-sm-4 col-lg-4">
-            <select name="" id="depart" class="select-chosen">
-                <option value="0">Todos</option>
-            </select>
-        </div>
-        <div class="col-sm-4 col-lg-4">
-            <a href="registro_proveedor.php" class="btn btn-mio btn-block">Nuevo proveedor</a>
-        </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="block full">
-          <div class="row" id="aqui_busqueda" style="overflow:scroll;overflow-x:hidden;max-height:700px;">
-            
           </div>
-          <!--div class="block-title">
-            <ul class="nav-horizontal">
-              <li class="active">
-                <a href="#">Proveedores (<?=count($datos)?>)</a>
-              </li>
-              <li class="pull-right">
-              <a href="registro_proveedor.php" class="btn btn-lg bg-white"><i class="fa pull-left" style="width: 20px;"><img src="../../img/icon_mas.svg" class="svg" alt=""></i> Agregar proveedor</a>
-              </li>
-            </ul>
-          </div-->
-          <!--div class="">
-            <table id="exampleTableSearch" class="table table-vcenter table-condensed table-bordered" >
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Nombre</th>
-                  <th>Teléfono</th>
-                  <th>NRC</th>
-                  <th>NIT</th>
-                  <th>Giro</th>
-                  <th>Dirección</th>
-                  <th>Email</th>
-                  <th class="text-center">Acciones</th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>#</th>
-                  <th>Nombre</th>
-                  <th>Teléfono</th>
-                  <th>NRC</th>
-                  <th>NIT</th>
-                  <th>Giro</th>
-                  <th>Dirección</th>
-                  <th>Email</th>
-                  <th class="text-center">Acciones</th>
-                </tr>
-              </tfoot>
-              <tbody>
-                <?php foreach ($datos as $key => $proveedor) { ?>
-                  <tr>
-                  <td><?php echo $key+1 ?></td>
-                  <td><?php echo $proveedor['nombre'] ?></td>
-                  <td><?php echo $proveedor['telefono'] ?></td>
-                  <td><?php echo $proveedor['nrc'] ?></td>
-                  <td><?php echo $proveedor['nit'] ?></td>
-                  <td><?php echo $proveedor['giro'] ?></td>
-                  <td><?php echo $proveedor['direccion'] ?></td>
-                  <td><?php echo $proveedor['email'] ?></td>
-                  <td>
-                    <div class="btn-group">
-                      <a class="btn btn-warning" onclick="<?php echo "editar(".$proveedor['id'].")" ?>" href="#"><i class="fa fa-edit"></i></a>
-                      <a onclick="<?php echo "darbaja(".$proveedor['id'].",'tb_proveedor','el proveedor')" ?>" class="btn btn-danger" href="#"><i class="fa fa-remove"></i></a>
-                    </div>
-                  </td>
-                </tr>
-                <?php } ?>
-              </tbody>
-            </table>
-          </div-->
+         
+          <div class="col-sm-4 col-lg-4">
+            <div class="row">
+              <div class="col-sm-2 col-lg-2"></div>
+              <div class="col-sm-8 col-lg-8"><a href="javascript:void(0)" id="modal_guardar" class="btn btn-mio btn-block">Nuevo proveedor</a></div>
+              <div class="col-sm-2 col-lg-2"></div>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="" id="aqui_busqueda">
+      </div>  
     </div>
     <div id="modal_edit"></div>
+    <?php include 'modal.php'; ?>
 </div>
 
 <!-- END Page Content -->
 <?php include '../../inc/page_footer.php'; ?>
 <?php include '../../inc/template_scripts.php'; ?>
 <?php include '../../inc/template_end.php'; ?>
-<script src="proveedor.js?cod=<?php echo $cod ?>"></script>
+<script src="proveedor.js?cod=<?php echo date('Yidisus') ?>"></script>
 
 <script type="text/javascript">
   var table_procesos = cargar_tabla2("exampleTableSearch");   </script>

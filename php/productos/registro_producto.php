@@ -24,152 +24,151 @@
 <?php include '../../inc/config.php'; ?>
 <?php include '../../inc/template_start.php'; ?>
 <style type="text/css" media="screen">
-    .block-title h2 {
-        font-size: 23px;
-    }
-    #submit{
-          clear: both;
-      }
-      #barcodeTarget,
-      #canvasTarget{
-        margin-top: 20px;
-      }  
+    
+      
 </style>
 <?php include '../../inc/page_head.php'; 
 include_once("../../Conexion/Proveedor.php");
+include_once("../../Conexion/Departamento.php");
+include_once("../../Conexion/Producto.php");
+include_once("../../Conexion/Subcategoria.php");
 $proveedores=Proveedor::obtener_proveedores();
+$departamentos=Departamento::obtener_departamentos();
+$unidades=Producto::obtener_unidades();
+$subcategorias=Subcategoria::obtener_subcategorias();
 ?>
 
 <div id="page-content">    
-    <div style="background-color: #fff;border-radius:10px">
-        <form action="#" method="post" name="form-producto" id="form-producto" class="form-horizontal">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="block full">
+                <form action="#" method="post" name="form-producto" id="form-producto" class="form-horizontal">
             <!-- Product Edit Content -->
-        <div class="row">
-            <div class="col-lg-6">
-                
-            <div class="block widget widget-hover-effect1">
-                <div class="form-group">
-                    <label class="col-md-3 control-label" for="nombre">Nombre</label>
-                    <div class="col-md-9">
+            <div class="row">
+                <div class="col-sm-6 col-lg-6" style="padding-left: 30px; padding-right: 16px;">
+                    <div class="form-group">
+                        <label class="control-label" for="nombre">Nombre</label>
                         <input type="hidden" name="data_id" value="nuevo_producto">
-                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Digite el nombre del nombre">
+                            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Digite el nombre del nombre">
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label" for="descripcion">Descripción</label>
-                    <div class="col-md-9">
+                    <div class="form-group">
+                        <label class="control-label" for="descripcion">Descripción</label>
                         <textarea  id="descripcion" placeholder="Descripción" name="descripcion" class="form-control" rows="3"></textarea>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label" for="departamento">Departamento</label>
-                    <div class="col-md-9">
-                        <!-- Chosen plugin (class is initialized in js/app.js -> uiInit()), for extra usage examples you can check out http://harvesthq.github.io/chosen/ -->
-                        <select id="departamento" name="departamento" class="select-chosen" data-placeholder="Seleccione un departamento" style="width: 250px;">
-                            <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
-                            <option value="1">Tablets</option>
-                            <option value="2">Laptops</option>
-                            <option value="3">PCs</option>
-                            <option value="4">Consoles</option>
-                            <option value="5">Movies</option>
-                            <option value="6">Books</option>
-                            <option value="7">Cables</option>
-                            <option value="8">Adapters</option>
-                            <option value="9">Office</option>
-                        </select>
+                    <div class="row">
+                      <div class="col-sm-4 col-lg-4">
+                        <div class="form-group">
+                          <label class="control-label" for="departamento">Departamento</label>
+                          <select id="departamento" name="departamento" class="select-chosen" data-placeholder="Seleccione un departamento" style="width: 250px;">
+                              <option></option>
+                              <?php foreach ($departamentos[1] as $departamento): ?>
+                              <option value="<?php echo $departamento[id] ?>"><?php echo $departamento[nombre] ?></option>
+                              <?php endforeach ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-4 col-lg-4">
+                        <div class="form-group">
+                          <label class="control-label" for="categoria">Categoría</label>
+                          <select id="categoria" name="categoria" class="select-chosen" data-placeholder="Seleccione un categoría" style="width: 250px;">
+                              <option></option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-4 col-lg-4">
+                        <div class="form-group">
+                          <label class="control-label" for="subcategoria">Subcategoría</label>
+                          <select name="subcategoria" id="subcategoria" class="select-chosen" data-placeholder="Seleccione un departamento" style="width: 250px;">
+                              <option></option>
+                          </select>
+                        </div> 
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label" for="categoria">Categoría</label>
-                    <div class="col-md-9">
-                        <!-- Chosen plugin (class is initialized in js/app.js -> uiInit()), for extra usage examples you can check out http://harvesthq.github.io/chosen/ -->
-                        <select id="categoria" name="categoria" class="select-chosen" data-placeholder="Seleccione un categoría" style="width: 250px;">
-                            <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
-                            <option value="1">Dama</option>
-                            <option value="2">Caballero</option>
-                            <option value="3">Niños</option>
-                        </select>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label" for="subcategoria">Subcategoría</label>
-                    <div class="col-md-9">
-                        <select name="subcategoria" id="subcategoria" class="select-chosen" data-placeholder="Seleccione un departamento" style="width: 250px;">
-                             <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
-                             <option value="1">Subcategoría</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                        <label class="col-md-3 control-label" for="precio">Precio</label>
-                        <div class="col-md-9">
-                            <div class="input-group">
-                                <input type="number" id="precio" name="precio" class="form-control" placeholder="0.00">
+
+                    <div class="row">
+                        <div class="col-sm-4 col-lg-4">
+                            <div class="form-group">
+                                  <label for="" class="control-label">Unidad de medida</label>
+                                  <select name="medida" id="medida" class="select-chosen" data-placeholder="Seleccione una unidad de medida">
+                                      <option></option>
+                                      <?php foreach ($unidades as $unidad): ?>
+                                          <option value="<?php echo $unidad[id] ?>"><?php echo $unidad[abreviatura]; ?></option>
+                                      <?php endforeach ?>
+                                  </select>
                             </div>
                         </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label" for="cantidad">Cantidad</label>
-                    <div class="col-md-9">
-                        <div class="input-group">
-                            <input type="number" id="cantidad" name="cantidad" class="form-control" placeholder="Cantidad">
+                        <div class="col-sm-4 col-lg-4">
+                            <div class="form-group">
+                                <label for="" class="control-label">Contenido</label>
+                                <input type="text" id="contenido" name="contenido" class="form-control" placeholder="Ej. 600">
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-lg-4">
+                            <div class="form-group">
+                              <label class="control-label" for="cantidad">Cantidad</label>
+                              <input type="number" id="cantidad" name="cantidad" class="form-control" placeholder="Cantidad a adquirir">
+                            </div>
+                        </div>
+                    </div>                  
+                    <div class="row">
+                        <div class="col-sm-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="control-label" for="precio_unitario">Precio unitario</label>
+                                <input type="number" id="precio_unitario" name="precio_unitario" class="form-control" placeholder="Precio unitario de venta">
+                            </div>
+                        </div>
+                        <div class="col-xs-4 col-lg-4">
+                            <div class="form-group">
+                                <label for="" class="control-label">Porcentaje de ganancia</label>
+                                <input type="number" placeholder="Porcentaje de ganancia" id="ganancia" name="ganancia" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-xs-4 col-lg-4">
+                            <div class="form-group">
+                                <label for="" class="control-label">Presentación</label>
+                                <input type="text" name="presentacion" id="presentacion" class="form-control" placeholder="Ej. lata o libra">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-                
-            </div>
-            <div class="col-lg-6">
-                <!-- Meta Data Block -->
-                <div class="block">
-                    
-                    <div class="row">
-
-                        <div class="form-group">
-                            <div class="col-md-3">
-                            <label class="control-label" for="">¿Producto perecedero?</label>
-                        </div>
-                        <div class="col-md-9">
+                <div class="col-lg-6" style="padding-left: 30px; padding-right: 16px;">
+                    <div class="form-group">
+                        <label class="control-label" for="">¿Producto perecedero?</label>
                             No
                         <label class="switch switch-success">
                         <input name="perecedero" id="perecedero" value="si" type="checkbox"><span></span></label>
-                        Si
+                            Si
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-lg-6">
+                            <div class="form-group" style="display: none;" id="venci">
+                                <label for="" class="control-label">Fecha de vencimiento</label>
+                                <input type="text" required disabled name="fecha_vencimiento" id="vencimiento" class="form-control vecimi">
+                            </div>
                         </div>
+                        <div class="col-xs-6 col-lg-6">
+                            <div class="form-group" style="display: none;" id="lotito">
+                                <label for="" class="control-label">Lote N°</label>
+                                <input type="text" id="lote" disabled name="lote" class="form-control">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group" style="display: none;" id="venci">
-                        <label for="" class="col-md-3 control-label">Fecha de vencimiento</label>
-                        <div class="col-md-9">
-                            <input type="date" min="<?php echo date('Y-m-d') ?>" disabled name="fecha_vencimiento" id="vencimiento" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group" style="display: none;" id="lotito">
-                        <label for="" class="col-md-3 control-label">Lote N°</label>
-                        <div class="col-md-9">
-                            <input type="text" id="lote" disabled name="lote" class="form-control">
-                        </div>
-                    </div>
+                    
+                    
                     <div class="form-group">
-                        <label class="col-md-3 control-label" for="product-meta-keywords">Proveedor</label>
-                        <div class="col-md-9">
-                            <select name="proveedor" id="proveedor" class="select-chosen" data-placeholder="Seleccione un proveedor" style="width: 250px;">
-                                <option></option>
-                                <?php foreach ($proveedores[2] as $proveedor): ?>
-                                    <option value="<?php echo $proveedor[id] ?>"><?php echo $proveedor[nombre] ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        </div>
+                        <label class="control-label" for="">Proveedor</label>
+                        <select name="proveedor" id="proveedor" class="select-chosen" data-placeholder="Seleccione un proveedor" style="width: 100%;">
+                            <option></option>
+                            <?php foreach ($proveedores[2] as $proveedor): ?>
+                                <option value="<?php echo $proveedor[id] ?>"><?php echo $proveedor[nombre] ?></option>
+                            <?php endforeach ?>
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label for="" class="col-md-3 control-label">Porcentaje de ganancia</label>
-                        <div class="col-md-9">
-                            <input type="number" placeholder="Porcentaje de ganancia" id="ganancia" name="ganancia" class="form-control">
-                        </div>
-                    </div>
+                    
                     <div class="row">
                         <div class="col-md-6 col-xs-6">
                            <!--label for="firma1">Imagen(*):</label-->
-                           <div class="form-group eleimagen" >
+                           <div class="form-group " >
                               <img src="../../img/imagenes_subidas/image.svg" style="width: 200px;height: 202px;" id="img_file">
                               <input type="file" class="archivos hidden" id="file_1" name="file_1" />
                            </div>
@@ -188,34 +187,31 @@ $proveedores=Proveedor::obtener_proveedores();
                         </div>
                         
                     </div>
-                    
                 </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="">
+                <div class="col-lg-12">
                     <div class="form-group">
-                    <div class="col-md-10">
                         <center>
-                            <button type="submit" class="btn btn-mio">Guardar</button>
+                            <button type="button" class="btn btn-mio" id="btn_guardar">Guardar</button>
                         </center>
                     </div>
                 </div>
-                </div>
+            </div>            
+        </form>
             </div>
         </div>
-    </form>
     </div>
-    
-    <!-- END Product Edit Content -->
 </div>
 
 <!-- END Page Content -->
 <?php include '../../inc/page_footer.php'; ?>
 <?php include '../../inc/template_scripts.php'; ?>
-<script src="producto.js?cod=<?=$cod?>"></script>
-<script type="text/javascript" src="../../js/jquery-barcode.js"></script>
-
 <!-- Load and execute javascript code used only in this page -->
-<script src="../../js/helpers/ckeditor/ckeditor.js"></script>      
+<script src="../../js/helpers/ckeditor/ckeditor.js"></script>   
+<script type="text/javascript" src="../../js/jquery-barcode.js"></script>   
 <?php include '../../inc/template_end.php'; ?>
+
+<script src="producto.js?cod=<?=$cod?>"></script>
+
+
+
 

@@ -9,18 +9,7 @@ $(document).ready(function(e){
     swal.showLoading()
    }
   });
-  $.ajax({
-        url:'json_productos.php',
-        type:'POST',
-        dataType:'json',
-        data:{data_id:'busqueda',esto:'',departamento:'0'},
-        success: function(json){
-          console.log(json);
-          $("#aqui_busqueda").empty();
-          $("#aqui_busqueda").html(json[2]);
-          swal.closeModal();
-        }
-      });
+  cargar();
 
   /// ****** Fin cargar todos los productos **** ///
 
@@ -28,11 +17,12 @@ $(document).ready(function(e){
     $(document).on("change","#depart", function(e){
       var iddepar=$(this).val();
       $("#busqueda").val("");
+      var estado = $("#estados").val();
       $.ajax({
         url:'json_productos.php',
         type:'POST',
         dataType:'json',
-        data:{data_id:'busqueda',esto:'',departamento:iddepar},
+        data:{data_id:'busqueda',esto:'',departamento:iddepar,estado:estado},
         success: function(json){
           console.log(json);
           var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
@@ -46,6 +36,47 @@ $(document).ready(function(e){
         }
         }
       });
+    });
+
+    //cargar modal de registrar nuevo
+    $(document).on("click","#modal_guardar", function(e){
+      $("#md_guardar").modal("show");
+    });
+
+    /// *** buscar segun estado *** ///
+    $(document).on("change","#estados", function(e){
+      var iddepar=$("#depart").val();
+      var estado=$(this).val();
+      $("#busqueda").val("");
+      $.ajax({
+        url:'json_productos.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto:'',departamento:iddepar,estado:estado},
+        success: function(json){
+          console.log(json);
+          var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
+          if(json[2]){
+            $("#aqui_busqueda").empty();
+          $("#aqui_busqueda").html(json[2]);
+        }else{
+          $("#aqui_busqueda").empty();
+          $("#aqui_busqueda").html(html);
+          //swal.closeModal();
+        }
+        }
+      });
+    });
+
+    //funcionar seleccion un departamento y actualizar select categoria
+    $(document).on("change","#departamento", function(e){
+      var id=$(this).val();
+      obtener_categorias(id);
+    });
+    //funcionar seleccion un categoria y actualizar select subcategoria
+    $(document).on("change","#categoria", function(e){
+      var id=$(this).val();
+      obtener_subcategorias(id);
     });
 	//habilitar elemento de fecha de caducidad
 	 $('#perecedero').change(function() {
@@ -76,7 +107,11 @@ $(document).ready(function(e){
           data:datos,
           success: function(json){
             if(json[0]==1){
-              guardar_exito("productos");
+              guardar_exito();
+                  cargar();
+                  //alert("aqui");
+                $(".modal").modal("hide");
+               //$(".form-control").val("");
             }else{
               swal.chose();
               guardar_error();
@@ -130,7 +165,8 @@ $(document).ready(function(e){
                	proveedor: "required",
                	vencimiento: "required",
                 lote: "required",
-                ganancia:"required"
+                ganancia:"required",
+                vencimiento:"required"
             },
             
             messages: {
@@ -146,8 +182,7 @@ $(document).ready(function(e){
                 proveedor: "Seleccione un proveedor",
                vencimiento: "Seleccione la fecha de vencimiento",
                lote:"Digite el n° de lote",
-               ganancia:"Digite el porcentaje de ganacia"
-                      
+               ganancia:"Digite el porcentaje de ganacia",
             },
             submitHandler: function(form) {
               //form.submit();
@@ -156,9 +191,11 @@ $(document).ready(function(e){
         });
 
     $(document).on("click","#btn_editar", function(e){
+      //modal_cargando();
         var valid=$("#form-producto").valid();
         datos=$("#form-producto").serialize();
         if(valid){
+          
           $.ajax({
             url:'json_productos.php',
             type:'POST',
@@ -167,7 +204,11 @@ $(document).ready(function(e){
             success: function(json){
               console.log(json);
               if(json[0]=="1"){
-                guardar_exito('productos');
+                 guardar_exito();
+                  cargar();
+                  //alert("aqui");
+                $(".modal").modal("hide");
+               $(".form-control").val("");
               }else{
                 guardar_error();
               }
@@ -192,11 +233,12 @@ $(document).ready(function(e){
     $(document).on("input","#busqueda", function(e){
       var esto=$(this).val();
       var departamento=$("#depart").val();
+      var estado=$("#estados").val();
       $.ajax({
         url:'json_productos.php',
         type:'POST',
         dataType:'json',
-        data:{data_id:'busqueda',esto,departamento},
+        data:{data_id:'busqueda',esto,departamento,estado:estado},
         success: function(json){
           console.log(json);
           var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
@@ -255,6 +297,7 @@ function verproducto(id){
 ///guardar en la base de datos
 function guardar(){
 	var datos = $("#form-producto").serialize();
+  //var equivalencia = $("#medida").attr("data-equivalencia");
 	console.log(datos);
 	$.ajax({
 		type: 'POST',
@@ -274,7 +317,7 @@ function guardar(){
           });
           var timer=setInterval(function(){
             //$("#md_nuevo").modal('toggle');
-            location.reload();
+            //window.location.href="productos.php";
             clearTimeout(timer);
           },3500);
         }
@@ -411,7 +454,63 @@ function validar_archivo(file){
           $("#aqui_modal").html(json[3]);
           $('.select-chosen').chosen({width: "100%"});
           $("#md_editar").modal("show");
+          /*$("#departamento").trigger('change');
+          $("#departamento").trigger('chosen:updated');
+          $("#categoria").trigger('change');
+          $("#categoria").trigger('chosen:updated');*/
         }
+      });
+    }
+
+    function cargar(){
+      $.ajax({
+        url:'json_productos.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto:'',departamento:'0',estado:'1'},
+        success: function(json){
+          console.log(json);
+          $("#aqui_busqueda").empty();
+          $("#aqui_busqueda").html(json[2]);
+          swal.closeModal();
+        }
+      });
+    }
+
+    function obtener_categorias(id){
+      var html="<option></option>";
+      $.ajax({
+        url:'json_productos.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'categoria',id:id},
+        success:function(json){
+          $.each(json[1],function(index,value){
+            console.log(value);
+            html+="<option value="+value.id+">"+value.nombre+"</option>";
+          });
+          $("#categoria").html(html);
+          $("#categoria").trigger("chosen:updated");
+        }
+
+      });
+    }
+    function obtener_subcategorias(id){
+      var html="<option></option>";
+      $.ajax({
+        url:'json_productos.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'subcategoria',id:id},
+        success:function(json){
+          $.each(json[1],function(index,value){
+            console.log(value);
+            html+="<option value="+value.id+">"+value.nombre+"</option>";
+          });
+          $("#subcategoria").html(html);
+          $("#subcategoria").trigger("chosen:updated");
+        }
+
       });
     }
 

@@ -134,7 +134,7 @@ $departamentos=Departamento::obtener_departamentos();
                     data:datos,
                     success:function(json){
                         if(json[0]==1){
-                            guardar_exito("categorias");
+                            guardar_exito();
                         }else{
                             swal.close();
                             guardar_error();

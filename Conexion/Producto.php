@@ -53,7 +53,21 @@ include_once('Subcategoria.php');
 		}
  	}
 
-    public static function busqueda($dato,$departamento){
+    public static function obtener_unidades(){
+        $sql="SELECT * FROM tb_unidad_medida";
+        try{
+          $comando=Conexion::getInstance()->getDb()->prepare($sql);
+          $comando->execute();
+          while ($row=$comando->fetch(PDO::FETCH_ASSOC)) {
+                $unidades[]=$row;
+            }
+            return $unidades;  
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+    public static function busqueda($dato,$departamento,$estado){
         $segun_depar="";
         if($departamento!=0){
             $segun_depar="AND p.departamento=$departamento";
@@ -63,9 +77,12 @@ include_once('Subcategoria.php');
             p.nombre,
             p.descripcion,
             p.sku,
-            p.codigo_barra,
             p.cantidad,
             p.imagen,
+            um.abreviatura,
+            p.contenido,
+            p.presentacion,
+            SUM(pd.contenido) / p.contenido as disponible,
             CASE
         WHEN p.fecha_vencimiento = '' THEN
             'Producto no perecedero'
@@ -87,11 +104,15 @@ include_once('Subcategoria.php');
         FROM
             tb_producto AS p
         INNER JOIN tb_departamento AS d ON p.departamento = d.id
+        INNER JOIN tb_unidad_medida as um ON p.medida=um.id
+        INNER JOIN tb_producto_detalle AS pd ON p.codigo_oculto = pd.codigo_producto
         WHERE
             p.nombre LIKE '%$dato%'
-        
+        AND pd.estado IN(1,2)
         $segun_depar
-        AND p.estado=1";
+        AND p.estado LIKE '%$estado%' 
+        GROUP BY
+            pd.codigo_producto";
         try{
             $comando=Conexion::getInstance()->getDb()->prepare($sql);
             $comando->execute();
@@ -107,22 +128,104 @@ include_once('Subcategoria.php');
                             <tr>
                                 <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$producto[id].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a></td>
                                 <td width="15%" rowspan="3"><center><img src="../../img/productos/'.$producto[imagen].'" id="cambiar_imagen" data-codigo="'.$producto[codigo_oculto].'" alt="avatar" class="widget-image img-circle"></center></td>
-                                <td style="font-size: 18px;"><b>'.$producto[nombre].'</b></td>
+                                <td style="font-size: 18px;"><b>'.$producto[nombre]. '</b> '.$producto[descripcion].' </td>
                             </tr>
                             <tr>
                                 <td><!--<a class="btn btn-mio" id="asignar_mas" data-id="'.$producto[id].'" data-nombre="'.$producto[nombre].'" href="javascript:void(0)"><i class="fa fa-plus"></i></a--></td>
-                                <td style="font-size: 18px;">En inventario: <b>'.$producto[cantidad].'</b></td>
+                                <td style="font-size: 18px;">En inventario: <b>'.rtrim(rtrim((string)number_format($producto[disponible], 2, ".", ""),"0"),".").' '.$producto[presentacion].' de '.$producto[contenido].''.$producto[abreviatura].'</b></td>
                                 
                             </tr>
                             <tr>
                                 <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$producto[id].'\',\'tb_producto\',\'el producto\')" data-toggle="tooltip" title="Eliminar"><img src="../../img/iconos/eliminar.svg" width="35px" height="35px"></a></td>
-                                <td style="font-size: 18px;">Precio $'.number_format($producto[precio_unitario],2).'</td>
+                                <td style="font-size: 18px;">Precio $'.number_format($producto[precio_venta],2).'</td>
                             </tr>
                         </tbody>
                     </table>
                   </div>
               </div>
             </div>';
+         } 
+            return array(1,"exito",$modal,$productos,$sql);
+        }catch(Exception $e){
+            return array(-1,"error",$e->getMessage(),$sql);
+        }
+
+        
+    }
+
+    public static function busqueda_venta($dato,$departamento){
+        $segun_depar="";
+        if($departamento!=0){
+            $segun_depar="AND p.departamento=$departamento";
+        }
+        $sql="SELECT
+            p.id,
+            p.nombre,
+            p.descripcion,
+            p.sku,
+            p.cantidad,
+            p.imagen,
+            CASE
+        WHEN p.fecha_vencimiento = '' THEN
+            'Producto no perecedero'
+        ELSE
+            DATE_FORMAT(
+                p.fecha_vencimiento,
+                '%d/%m/%Y'
+            )
+        END AS vencimiento,
+         p.precio_unitario,
+         d.nombre AS departamento,
+         p.ganancia,
+         p.codigo_oculto,
+         SUM(pd.contenido) / p.contenido as disponible,
+         (
+            (
+                (p.ganancia / 100) * p.precio_unitario
+            ) + p.precio_unitario
+        ) AS precio_venta
+        FROM
+            tb_producto AS p
+        INNER JOIN tb_departamento AS d ON p.departamento = d.id
+        INNER JOIN tb_producto_detalle AS pd ON p.codigo_oculto = pd.codigo_producto
+        WHERE
+            p.nombre LIKE '%$dato%'
+        AND pd.estado IN(1,2)
+        $segun_depar
+        AND p.estado =1 
+        GROUP BY
+            pd.codigo_producto";
+        try{
+            $comando=Conexion::getInstance()->getDb()->prepare($sql);
+            $comando->execute();
+            while ($row=$comando->fetch(PDO::FETCH_ASSOC)) {
+                $productos[]=$row;
+            }
+         foreach($productos as $producto) { 
+            $modal.='<div class="col-xs-12 col-sm-12 col-lg-12" id="listado-card">
+        <div class="widget">
+          <div class="widget-simple">
+            <table width="100%">
+                <tbody>
+                    <tr>
+                        <td width="15%"></td>
+                        <td width="15%" rowspan="3"><center><img src="../../img/productos/'.$producto[imagen].'" id="cambiar_imagen" data-codigo="'.$producto[codigo_oculto].'" alt="avatar" class="widget-image img-circle"></center></td>
+                        <td style="font-size: 18px;"><b>'.$producto[nombre] .'</b></td>
+                    </tr>
+                    <tr>
+                        <td><a style="border-radius: 90px" class="btn btn-mio btn-lg" id="agrega_img" data-nombre="'.$producto[nombre].'" data-codigo="'. $producto[codigo_oculto].'" data-imagen="'. $producto[imagen].'" data-precio="'. $producto[precio_venta] .'" data-existencia="'.$producto[disponible].'" href="javascript:void(0)"><i class="fa fa-plus"></i></a></td>
+                        <td style="font-size: 18px;">En inventario: <b>'.rtrim(rtrim((string)number_format($producto[disponible], 2, ".", ""),"0"),".") .'</b></td> 
+                    </tr>
+                    <tr>
+                        <td width="15%"></td>
+                        <td style="font-size: 18px;">Precio '. number_format($producto[precio_venta],2).'
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+    </div>';
          } 
             return array(1,"exito",$modal,$productos,$sql);
         }catch(Exception $e){
@@ -164,28 +267,28 @@ include_once('Subcategoria.php');
 
  	public static function guardar($data){
  		$oculto=date("Yidisus");
- 		$codigo_barra = "0 ".date("Yidisus");
- 		$sku = date("Yidisus").rand(1,100);
- 		$last_insert = "";
+ 		$sku = rand(1,100)."-".date("Yidisus");
  		if($data['fecha_vencimiento']==''){
- 			$sql="INSERT INTO `tb_producto`(`nombre`, `departamento`, `categoria`, `subcategoria`, `descripcion`, `precio_unitario`, `cantidad`, `proveedor`, `sku`, `codigo_barra`, `ganancia`, `codigo_oculto`) VALUES ('$data[nombre]','$data[departamento]','$data[categoria]','$data[subcategoria]','$data[descripcion]','$data[precio]','$data[cantidad]','$data[proveedor]','$sku','$codigo_barra',0.4,'$oculto',$data[ganancia])";
- 		}else{
- 			$sql="INSERT INTO `tb_producto`(`nombre`, `departamento`, `categoria`, `subcategoria`, `descripcion`, `precio_unitario`, `cantidad`, `fecha_vencimiento`, `proveedor`, `sku`, `codigo_barra`, `porcentaje_ganancia`, `codigo_oculto`,lote,ganancia) VALUES ('$data[nombre]','$data[departamento]','$data[categoria]','$data[subcategoria]','$data[descripcion]','$data[precio]','$data[cantidad]','$data[fecha_vencimiento]','$data[proveedor]','$sku','$codigo_barra',0.4,'$oculto','$data[lote]',$data[ganancia])";
- 		}
+            $fecha="";
+        }else{
+            $fecha_aux=explode("/",$data[fecha_vencimiento]);
+            $fecha=$fecha_aux[2]."-".$fecha_aux[1]."-".$fecha_aux[0];
+        }
+        $canti=$data[cantidad]*$data[contenido];
+ 		$sql="INSERT INTO `tb_producto`(`nombre`, `departamento`, `categoria`, `subcategoria`, `descripcion`, `precio_unitario`, `cantidad`, `proveedor`, `sku`,`codigo_oculto`,`ganancia`,`medida`,`fecha_vencimiento`,`presentacion`,`contenido`) VALUES ('$data[nombre]','$data[departamento]','$data[categoria]','$data[subcategoria]','$data[descripcion]','$data[precio_unitario]','$canti','$data[proveedor]','$sku','$oculto',$data[ganancia],$data[medida],'$fecha','$data[presentacion]','$data[contenido]')";
+ 		
  		try{
  			$comando=Conexion::getInstance()->getDb()->prepare($sql);
  			$comando->execute();
  			if($comando){
  				for($i=0;$i<$data['cantidad'];$i++){
  					$correlativo=Genericas2::retornar_correlativo("tb_producto_detalle",$oculto);
- 					$sql2="INSERT INTO tb_producto_detalle (codigo,correlativo,lote) VALUES('$oculto','$correlativo',$data[lote])";
+ 					$sql2="INSERT INTO tb_producto_detalle (codigo_producto,correlativo,lote,contenido,fecha_vencimiento) VALUES('$oculto','$correlativo','$data[lote]',$data[contenido],'$fecha')";
 
  					$comando3=Conexion::getInstance()->getDb()->prepare($sql2);
  					$comando3->execute();
 
  				}
-
-
  			}
  			return array("1",$oculto,$sql,$sql2);
  		}catch(Exception $e){
@@ -376,13 +479,11 @@ include_once('Subcategoria.php');
 			p.nombre,
 			p.descripcion,
 			p.sku,
-			p.codigo_barra,
 			p.cantidad,
 			p.imagen,
 			p.precio_unitario,
 			p.ganancia,
 			p.fecha_vencimiento,
-			p.lote,
 			d.id AS departamento,
 			c.id AS categoria,
 			s.id AS subcategoria,

@@ -26,8 +26,10 @@
 </style>
 <?php include '../../inc/page_head.php'; 
 include_once("../../Conexion/Servicio.php");
+include_once("../../Conexion/Empleado.php");
 $datos = null;
 $servicios = Servicio::obtener_servicios();
+$empleados = Empleado::obtener_empleados();
 
 //print_r($departamentos);
 
@@ -36,85 +38,29 @@ $servicios = Servicio::obtener_servicios();
 
 <!-- Page content -->
 <div id="page-content">
-  <div class="row">
-        <div class="col-sm-4 col-lg-4">
+      <div class="row" style="background-color: #fff;">
+      <div class="card">
+        <div class="row centrado">
+          <div class="col-sm-4 col-lg-4">
             <div class="input-group">
-                <input type="search" class="form-control" id="busqueda" placeholder="Buscar servicio">
+                <input type="search" class="form-control" id="busqueda" placeholder="Buscar">
                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
             </div>
+          </div>
+          <div class="col-sm-4 col-lg-4">
+            <div class="row">
+              <div class="col-sm-2 col-lg-2"></div>
+              <div class="col-sm-8 col-lg-8"><a href="javascript:void(0)" id="modal_guardar" class="btn btn-mio btn-block">Nuevo servicio</a></div>
+              <div class="col-sm-2 col-lg-2"></div>
+          </div>
+          </div>
         </div>
-        <div class="col-sm-4 col-lg-4">
-            <select name="" id="depart" class="select-chosen">
-                <option value="0">Todos</option>
-            </select>
-        </div>
-        <div class="col-sm-4 col-lg-4">
-            <a href="registro_servicio.php" class="btn btn-mio btn-block">Nuevo servicio</a>
-        </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="block full">
-          <div class="row" id="aqui_busqueda" style="overflow:scroll;overflow-x:hidden;max-height:700px;"></div>
-          <!--div class="block-title">
-            <ul class="nav-horizontal">
-              <li class="active">
-                <a href="#">Categorias (<?=count($datos)?>)</a>
-              </li>
-              <li class="pull-right">
-              <a href="registro_servicio.php" class="btn btn-primary"><span class="fa fa-plus-circle pull-left"></span> Agregar servicio</a>
-              </li>
-            </ul>
-          </div-->
-          <!--div class="">
-            <table id="exampleTableSearch" class="table table-vcenter table-condensed table-bordered" >
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Nombre</th>
-                  <th>Descripción</th>
-                  <th>Precio</th>
-                  <th>Duración</th>
-                  <th>Empleado</th>
-                  <th class="text-center">Acciones</th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>#</th>
-                  <th>Nombre</th>
-                  <th>Descripción</th>
-                  <th>Precio</th>
-                  <th>Duración</th>
-                  <th>Empleado</th>
-                  <th class="text-center">Acciones</th>
-                </tr>
-              </tfoot>
-              <tbody>
-                <?php foreach ($servicios as $key => $servicio) { ?>
-                  <tr>
-                  <td><?php echo $key+1 ?></td>
-                  <td><?php echo $servicio[nombre] ?></td>
-                  <td><?php echo $servicio[descripcion] ?></td>
-                  <td class="text-right">$<?php echo $servicio[precio] ?></td>
-                  <td><?php echo $servicio[duracion] ?></td>
-                  <td><?php echo $servicio[empleado] ?></td>
-                  <td>
-                    <div class="btn-group">
-                      <a class="btn btn-warning" onclick="<?php echo "editar(".$servicio['id'].")" ?>" href="#"><i class="fa fa-edit"></i></a>
-                      <a id="btn_editar" data-id="<?php echo $persona[id] ?>" class="btn btn-warning" href="#"><i class="fa fa-edit"></i></a>
-                      <a onclick="<?php echo "darbaja(".$servicio['id'].",'tb_servicio','el servicio')" ?>"  class="btn btn-danger" href="#"><i class="fa fa-remove"></i></a>
-                    </div>
-                  </td>
-                </tr>
-                <?php } ?>
-              </tbody>
-            </table>
-          </div-->
-        </div>
+      </div>
+      <div class="" id="aqui_busqueda">
       </div>
     </div>
     <div id="modal_edit"></div>
+    <?php include 'modal.php'; ?>
 </div>
 
 <!-- END Page Content -->
@@ -138,7 +84,35 @@ $servicios = Servicio::obtener_servicios();
                     data:datos,
                     success:function(json){
                         if(json[0]==1){
-                            guardar_exito("servicios");
+                            guardar_exito();
+                            $(".modal").modal("hide");
+                            cargar();
+                        }else{
+                          swal.close();
+                            guardar_error();
+                        }
+                    }
+                });
+            }
+        });
+    });
+
+    $(document).ready(function(e){
+      $(document).on("click","#btn_guardar_n", function(e){
+        modal_cargando();
+            var valid=$("#fm_servicios").valid();
+            if(valid){
+                var datos=$("#fm_servicios").serialize();
+                $.ajax({
+                    url:'json_servicios.php',
+                    type:'POST',
+                    dataType:'json',
+                    data:datos,
+                    success:function(json){
+                        if(json[0]==1){
+                            guardar_exito();
+                            $(".modal").modal("hide");
+                            cargar();
                         }else{
                           swal.close();
                             guardar_error();
@@ -159,6 +133,28 @@ $servicios = Servicio::obtener_servicios();
           $("#modal_edit").html(json[3]);
           $('.select-chosen').chosen({width: "100%"});
           $("#md_editar").modal("show");
+        }
+      });
+    }
+
+    function cargar(){
+      $.ajax({
+        url:'json_servicios.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto:''},
+        success: function(json){
+          console.log(json);
+            var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
+            if(json[2]){
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(json[2]);
+                swal.closeModal();
+            }else{
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(html);
+                swal.closeModal();
+            }
         }
       });
     }

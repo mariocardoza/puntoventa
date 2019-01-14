@@ -39,28 +39,29 @@ include_once("../../Conexion/Cliente.php");
                 <input type="search" class="form-control" id="busqueda" placeholder="Buscar">
                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
             </div>
-        </div>
-        <div class="col-sm-4 col-lg-4">
+          </div>
+          <div class="col-sm-4 col-lg-4">
             <select name="" id="tipos" >
                 <option value="0">Todos</option>
                 <option value="1">Naturales</option>
                 <option value="2">Jurídicos</option>
             </select>
-        </div>
-        <div class="col-sm-4 col-lg-4">
+          </div>
+          <div class="col-sm-4 col-lg-4">
             <div class="row">
               <div class="col-sm-2 col-lg-2"></div>
-              <div class="col-sm-8 col-lg-8"><a href="registro.php" class="btn btn-mio btn-block">Nuevo cliente</a></div>
+              <div class="col-sm-8 col-lg-8"><a href="javascript:void(0)" id="modal_guardar" class="btn btn-mio btn-block">Nuevo cliente</a></div>
               <div class="col-sm-2 col-lg-2"></div>
           </div>
-        </div>
+          </div>
         </div>
       </div>
       <div class="" id="aqui_busqueda">
-        </div>
+      </div>
       
     </div>
     <div id="modal_edit"></div>
+    <?php include 'modal.php'; ?>
 </div>
 
 <!-- END Page Content -->

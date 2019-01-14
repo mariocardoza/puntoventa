@@ -6,6 +6,25 @@ var precio=0.0;
 var cantidad=0;
 var existencias=0;
 $(document).ready(function(e){
+    $.ajax({
+        url:'json_ventas.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto:'',departamento:'0'},
+        success: function(json){
+          console.log(json);
+          var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
+          if(json[2]){
+            $("#aqui_busqueda_venta").empty();
+          $("#aqui_busqueda_venta").html(json[2]);
+        }else{
+          $("#aqui_busqueda_venta").empty();
+          $("#aqui_busqueda_venta").html(html);
+        }
+        }
+      });
+
+
     $(document).on("click","#btn_guardar", function(e){
             var valid=$("#fm_orden").valid();
             if(valid){
@@ -49,31 +68,27 @@ $(document).ready(function(e){
     //evento input
     $(document).on("input","#canti",function(e){
     	//var contador=1;
-        var canti=$(this).val();
-        var precio_aqui=parseFloat($(this).attr('data-precio'));
-        if(canti==1){
-        	alert("es uno");
+        var canti=($(this).val()=='') ? 0.00 : parseFloat($(this).val());
+        var existencias=$(this).attr('data-existencia');
+        var codigo=$(this).attr('data-codigo');
+        if(canti>existencias){
+            alert("sobrepasa el inventario")
+            $("input[name='"+codigo+"']").val("");
         }else{
-        	var canti_aqui=parseInt($(this).attr('data-cantidad'));
-	        
-	        var codigo=$(this).attr('data-codigo');
-	        var sub_anterior=parseFloat($(this).attr('data-sub'));
-	        if(canti>canti_aqui){
-	        	var contador=canti;
-	        	var sub=sub_anterior+precio_aqui;
-	        	total+=precio_aqui;
-	        }else{
-	        	var contador=canti;
-	        	contador--;
-	        	var sub=sub_anterior-precio_aqui;
-	        	total-=precio_aqui;
-	        }
-	        
-	        
-	        $("#total").text("$"+total.toFixed(2));
-	        $( "input[name='"+codigo+"']" ).attr('data-sub', sub);
-	        $( "input[name='"+codigo+"']" ).attr('data-cantidad', contador);
+            //var canti=$(this).val();
+            console.log(canti);
+            var precio_aqui=parseFloat($(this).attr('data-precio'));
+            var sub_aqui=canti*precio_aqui
+            var sub_anterior=parseFloat($(this).attr('data-sub'));
+            total=total-sub_anterior;
+            total=total+sub_aqui;
+                
+                
+            $("#total").text("$"+total.toFixed(2));
+            $( "input[name='"+codigo+"']" ).attr('data-sub', sub_aqui);
+            $( "input[name='"+codigo+"']" ).attr('data-cantidad', canti);
         }
+        
 
         
     });
@@ -81,15 +96,32 @@ $(document).ready(function(e){
     //quitar de la tabla
     $(document).on("click","#btn_quitar", function(e){
         var codigo=$(this).attr('data-codigo');
+        var div=$("."+codigo);
         var input=$(e.target).parents("tbody").find('tr:eq(1)').find('td:eq(2)').find('input');
         var subtotal=parseFloat(input.attr('data-sub'));
-        /*var fila=$(this).parents('tr').find('td:eq(3)').text();
-        var res=fila.split(" ");
-        var totalFila=parseFloat(res[1]);
-        total=total-totalFila;
-        tr.remove();
-        $("#total").text("$"+total);*/
+        total=total-subtotal;
+        div.remove();
+        $("#total").text("$"+total.toFixed(2));
     });
+
+    //tipo de factura
+    $(document).on("click","#btn_tipofactura", function(e){
+        $("#md_tipofactura").modal("show");
+    });
+
+    //click en boton de seleccion de tipo factura
+    $(document).on("click", "#btn_cobrar_antes", function(e){
+        var tipo=$('input[name=tipo_factura]:checked').val();
+        if(tipo==1){
+            $("#md_credito").modal("show");
+        }else{
+            if(tipo==2){
+                $("#md_consumidor").modal("show");
+            }else{
+                $("#btn_cobrar").trigger("click");
+            }
+        }
+    }); 
 
     //cobrar
     $(document).on("click","#btn_cobrar", function(e){
@@ -98,7 +130,8 @@ $(document).ready(function(e){
           if(element){
             venta.push({
                   codigo: $(element).attr("data-codigo"),
-                  cantidad :parseInt($(element).attr("data-cantidad")),
+                  precio: parseFloat($(element).attr("data-precio")),
+                  cantidad :parseFloat($(element).attr("data-cantidad")),
                   subtotal : parseFloat($(element).attr("data-sub"))
               });
           }
@@ -113,20 +146,37 @@ $(document).ready(function(e){
             data:{venta:venta,data_id:'nueva_venta'},
             success: function(json){
                 console.log(json);
+                if(json[0]==1){
+                    guardar_exito();
+                    ticket(JSON.stringify(json[1].venta));
+                }else{
+                    guardar_error();
+                }
             }
-        });
+        });    
     });
 
 
     //agregar imagen a la tabla
     $(document).on("click","#agrega_img",function(e){
-        //$("#md_digitar_cantidad").modal("show");
         codigo=$(this).attr("data-codigo");
-        producto=$(this).attr("data-nombre");
-        precio=$(this).attr("data-precio");
-        existencias =$(this).attr('data-existencia');
-        imagen=$(this).attr('data-imagen');
-        agregar(codigo,producto,precio,imagen);
+        var existe=$(this).attr("data-existencia");
+        var articulos = new Array();
+       
+        if($("#"+codigo).length){
+            var canti=parseInt($("input[name="+codigo+"]").val());
+            if(canti+1 < existe){
+              $("input[name="+codigo+"]").val(canti+1);
+                $("input[name="+codigo+"]").trigger("input");  
+            } 
+        }else{
+            producto=$(this).attr("data-nombre");
+            precio=parseFloat($(this).attr("data-precio"));
+            existencias =parseInt($(this).attr('data-existencia'));
+            imagen=$(this).attr('data-imagen');
+            agregar(codigo,producto,precio,imagen,existencias);
+        }
+        
     });
 
     $(document).on("click","#agregar_a_tabla", function(e){
@@ -144,12 +194,68 @@ $(document).ready(function(e){
         }
     });
 
-    $(document).on("click","#ordenar", function(e){
+    /// *** buscar segun departamento *** ///
+    $(document).on("change","#depart", function(e){
+      var iddepar=$(this).val();
+      $("#busqueda").val("");
+      $.ajax({
+        url:'json_ventas.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto:'',departamento:iddepar},
+        success: function(json){
+          console.log(json);
+          var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
+          if(json[2]){
+            $("#aqui_busqueda_venta").empty();
+          $("#aqui_busqueda").html(json[2]);
+        }else{
+          $("#aqui_busqueda_venta").empty();
+          $("#aqui_busqueda_venta").html(html);
+          //swal.closeModal();
+        }
+        }
+      });
+    });
 
+     //buscar con funcion input
+    $(document).on("input","#busqueda", function(e){
+      var esto=$(this).val();
+      var departamento=$("#depart").val();
+      $.ajax({
+        url:'json_ventas.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto,departamento},
+        success: function(json){
+          console.log(json);
+          var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
+          if(json[2]){
+            $("#aqui_busqueda_venta").empty();
+          $("#aqui_busqueda_venta").html(json[2]);
+        }else{
+          $("#aqui_busqueda_venta").empty();
+          $("#aqui_busqueda_venta").html(html);
+        }
+        }
+      });
     });
 });
 
-function agregar(codigo,producto,precio,imagen){
+function ticket(datos){
+    console.log("esto "+datos);
+    var h = $( window ).height();
+    console.log(h);
+    var iframe = '<div class="iframe-container"><iframe id="PDF_doc" src="../../lib/tcpdf/reportes/ticketp.php?datos='+datos+'" width="100%" height="'+(h-100)+'px"></iframe></div>'+
+      '<div class="iframe-container"><iframe id="PDF_doc2" class="hide" src="../../lib/tcpdf/reportes/ticket.php?datos='+datos+'" width="100%" height="100%"></iframe></div>';
+    console.log(iframe);
+    $("#md_imprimir .modal-body").empty().html(iframe);
+    console.log(iframe);
+    swal.close();
+    $("#md_imprimir").modal({show: 'false'});
+}
+
+function agregar(codigo,producto,precio,imagen,existencias){
     var sub=parseFloat(precio);
         total+=sub;
         $("#orden_tb").append(
@@ -173,7 +279,7 @@ function agregar(codigo,producto,precio,imagen){
                     '<button class="btn btn-danger" id="btn_quitar"><i class="fa fa-remove"></i></button>'+
                 '</td>'+
             '</tr>'*/
-            '<div class="col-xs-12 col-sm-12 col-lg-12 elementos" id="listado-card">'+
+            '<div class="col-xs-12 col-sm-12 col-lg-12 '+codigo+'" id="listado-card">'+
                         '<div class="widget">'+
                           '<div class="widget-simple">'+
                             '<table width="100%">'+
@@ -192,7 +298,7 @@ function agregar(codigo,producto,precio,imagen){
                                         '<td><a style="border-radius: 90px" class="btn btn-mio btn-lg" id="btn_quitar" data-codigo="'+codigo+'" href="javascript:void(0)"><i class="fa fa-times"></i></a></td>'+
                                         '<td style="font-size: 18px;">Precio: $'+precio+'</td>'+
                                         '<td align="center">'+
-                                            '<input type="number" data-cantidad="1" data-sub="'+sub+'" class="form-control" data-codigo="'+codigo+'" data-precio="'+precio+'" name="'+codigo+'" id="canti" value="1" step="1" min="1" max="100" placeholder="" readonly="">'+
+                                            '<input type="number" data-cantidad="1" data-sub="'+sub+'" class="form-control" data-codigo="'+codigo+'" data-precio="'+precio+'" data-existencia="'+existencias+'" name="'+codigo+'" id="canti" value="1" step="0.01" max="'+existencias+'" placeholder="" >'+
                                         '</td>'+
                                     '</tr>'+
                                     '<tr>'+

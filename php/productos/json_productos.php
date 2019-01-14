@@ -27,8 +27,16 @@ if($_POST['data_id']=='editar_producto'){
 	exit();
 }
 if($_POST['data_id']=='busqueda'){
-	$result=Producto::busqueda($_POST['esto'],$_POST['departamento']);
+	$result=Producto::busqueda($_POST['esto'],$_POST['departamento'],$_POST['estado']);
 	echo json_encode($result);
 	exit();
+}
+if($_POST['data_id']=='categoria'){
+	$result=Genericas2::buscar_por_id("tb_categoria","departamento",$_POST['id']);
+	echo json_encode($result);exit();
+}
+if($_POST['data_id']=='subcategoria'){
+	$result=Genericas2::buscar_por_id("tb_subcategoria","categoria",$_POST['id']);
+	echo json_encode($result);exit();
 }
 ?>

@@ -1,0 +1,12 @@
+[12-Dec-2018 15:44:47 America/El_Salvador] PHP Fatal error:  Uncaught Error: Class 'Cliente' not found in /home1/estudjl6/public_html/sys/puntoventa/php/departamentos/departamentos.php:30
+Stack trace:
+#0 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/php/departamentos/departamentos.php on line 30
+[12-Dec-2018 15:45:24 America/El_Salvador] PHP Fatal error:  Uncaught Error: Class 'Cliente' not found in /home1/estudjl6/public_html/sys/puntoventa/php/departamentos/departamentos.php:30
+Stack trace:
+#0 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/php/departamentos/departamentos.php on line 30
+[12-Dec-2018 15:47:03 America/El_Salvador] PHP Fatal error:  Uncaught Error: Class 'Cliente' not found in /home1/estudjl6/public_html/sys/puntoventa/php/departamentos/departamentos.php:30
+Stack trace:
+#0 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/php/departamentos/departamentos.php on line 30

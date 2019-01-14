@@ -58,13 +58,25 @@ date_default_timezone_set('America/El_Salvador');
         <!-- Modernizr (browser feature detection library) -->
         <script src="../../js/vendor/modernizr.min.js"></script>
         <link rel="stylesheet" href="../../css/animate.min.css">
-        <link rel="stylesheet" href="../../css/fonts/fonts/fonts.min.css">
+        
         <!--script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.28.5/dist/sweetalert2.all.min.js"></script-->
      
     <style>
+
+    @font-face {
+           font-family: "Proxima-regular";
+           src: url(../../css/fonts/proximanova/Proxima_Nova_Regular.otf) format("truetype");
+        }
+    body *{
+        font-family: 'Proxima-regular';
+
+    }
+
     body {
-    font-family: 'Proxima Nova', Georgia, sans-serif;
-}
+        padding: 0px !important;
+    }
+
+        
         .notificaciones_dashbord{
             width: 107.203px !important;
         }
@@ -216,10 +228,7 @@ date_default_timezone_set('America/El_Salvador');
             .card-venta {
                 height: 77px;
             }
-            #aqui_busqueda{
-                margin-right: -10px;
-                padding-right: 2px;
-            }
+            
 
         }
    </style>

@@ -691,6 +691,7 @@ a.sidebar-title:focus {
 .chat-form .form-control {
     background: transparent;
     color: #eeeeee;
+    border-radius: 15px;
 }
 
 /* Sidebar Navigation */
@@ -1116,8 +1117,8 @@ a.sidebar-title:focus {
 
 .widget .widget-image,
 .widget .widget-icon {
-    width: 64px;
-    height: 64px;
+    width: 80px;
+    height: 80px;
 }
 
 .widget .widget-icon {
@@ -2154,6 +2155,7 @@ textarea.form-control {
     margin: 1px 0;
     color: #394263;
     border-color: #dbe1e8;
+    border-radius: 15px;
 }
 
 .form-control-borderless .form-control,
@@ -2582,6 +2584,23 @@ a.list-group-item.active > .badge {
     border-radius: 5px;
     height: 90px;
 }
+.card-index {
+    /*box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);*/
+    transition: 0.3s;
+    width: 100%;
+    border-radius: 10px;
+    height: 150px;
+    background-color: #ffffff;
+}
+
+.card-index-adentro {
+    /*box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);*/
+    transition: 0.3s;
+    width: 100%;
+    height: 130px;
+    background-color: #ffffff;
+    margin-top: 8px;
+}
 .card-venta {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
@@ -2604,6 +2623,7 @@ a.list-group-item.active > .badge {
     border-right: 2px solid #F2F2F2;
     border-bottom: 2px solid #F2F2F2;
     padding: 25px;
+    height: 172px;
 }
 #aqui_busqueda{
     margin-top:10px; 
@@ -2620,8 +2640,7 @@ a.list-group-item.active > .badge {
      * the devices you are targeting.
      * padding = -margin
      */
-    margin-right: -10px;
-    padding-right: 0px;
+   
    
     height: 700px; 
     max-height:700px;
@@ -2983,6 +3002,8 @@ li.dropdown-header {
 
 .modal-body {
     padding: 20px 15px;
+    padding-right: 46px;
+    padding-left: 46px;
 }
 
 .modal-body .nav-tabs {
@@ -3925,8 +3946,8 @@ h1 small, .h1 small, h2 small, .h2 small, h3 small, .h3 small, h1 .small, .h1 .s
     .block.full,
     .modal-body,
     #page-content + footer {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 46px;
+        padding-right: 46px;
     }
 
     .block .block-content-full {

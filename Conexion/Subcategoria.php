@@ -33,13 +33,13 @@ class Subcategoria
             $comando=Conexion::getInstance()->getDb()->prepare($sql);
             $comando->execute();
             while ($row = $comando->fetch(PDO::FETCH_ASSOC)) {
-                $html.='<div class="col-sm-6 col-lg-6" style="border:solid 0.50px;">
+                $html.='<div class="col-sm-6 col-lg-6" id="listado-card">
                 <div class="widget">
                   <div class="widget-simple">
                     <table width="100%">
                         <tbody>
                             <tr>
-                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\')" data-toggle="tooltip" title="Editar" class="btn btn-mio"><i class="fa fa-pencil"></i></a></td>
+                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a></a></td>
                                 <td><b>'.$row[nombre].'</b></td>
                             </tr>
                             <tr>
@@ -47,7 +47,7 @@ class Subcategoria
                                 <td>Descripción: '.$row[descripcion].'</td>
                             </tr>
                             <tr>
-                                <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_subcategoria\',\'la subcategoría\')" data-toggle="tooltip" title="Eliminar" class="btn btn-mio"><i class="fa fa-trash"></i></a></td>
+                                <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_subcategoria\',\'la subcategoría\')" data-toggle="tooltip" title="Eliminar"><img src="../../img/iconos/eliminar.svg" width="35px" height="35px"></a></a></td>
                                 <td>Categoría: '.$row[categoria].'</td>
                             </tr>
                         </tbody>
@@ -75,79 +75,57 @@ class Subcategoria
 			}
 			$modal.='<div class="modal fade modal-side-fall" id="md_editar" aria-hidden="true"
       aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog">
         <div class="modal-content">
-          <!--div class="modal-header">
+          <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">
               <span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title">Editar departamento</h4>
-          </div-->
+            <h4 class="modal-title"><b>Editar subcategoría</b></h4>
+          </div>
           <div class="modal-body">
-                    <form action="#" method="post" name="fm_subcategoria" id="fm_subcategoria" class="form-horizontal form-bordered">
-            <div class="row">
-        <div class="col-lg-12">
-            <div class="block">
-                <div class="block-title">
-                    <h2><i class="fa fa-pencil"></i> <strong>Información</strong> de la subcategoría</h2>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="nombre">Nombre</label>
-                            <div class="col-md-9">
+                    <form action="#" method="post" name="fm_subcategoria" id="fm_subcategoria" class="form-horizontal">
+                    <div class="form-group">
+                            <label class="control-label" for="nombre">Nombre</label>
+                            
                                 <input type="hidden" name="data_id" value="editar_subcategoria">
-                                <input type="hidden" name="id" value="'.$subcategoria[id].'">
+                                <input type="hidden" name="id" id="id" value="'.$subcategoria[id].'">
                                 
                                 <input required type="text" id="nombre" value="'.$subcategoria[nombre].'" name="nombre" class="form-control" placeholder="Digite el nombre del departamento">
-                            </div>
+                            
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="nombre">Categoría</label>
-                            <div class="col-md-9">
+                            <label class="control-label" for="nombre">Categoría</label>
+                            
                                 <textarea required name="descripcion" id="descripcion" class="form-control" rows="2">'.$subcategoria[descripcion].'</textarea>
-                            </div>
+                           
                         </div>
-                    </div>
-                    <div class="col-lg-6">
                         <div class="form-group">
-                            <label for="" class="col-md-3 control-label">Departamento</label>
-                            <div class="col-md-9">
+                            <label for="" class="control-label">Categoría</label>
+                            
                                  <select name="categoria" id="categoria" class="select-chosen" data-placeholder="Seleccione un departamento" style="width: 100%;">';
                                     foreach ($categorias[2] as $categoria){
-                                    	if($categoria[id]==$subcategoria[categoria]){
-                                    		$modal.='<option selected value="'.$categoria[id].'">'.$categoria[nombre].'</option>';
-                                    	}else{
-                                    		$modal.='<option value="'.$categoria[id].'">'.$categoria[nombre].'</option>';
-                                    	}
+                                        if($categoria[id]==$subcategoria[categoria]){
+                                            $modal.='<option selected value="'.$categoria[id].'">'.$categoria[nombre].'</option>';
+                                        }else{
+                                            $modal.='<option value="'.$categoria[id].'">'.$categoria[nombre].'</option>';
+                                        }
 
                                         
                                     }
                                 $modal.='</select>
-                            </div>
+                            
                         </div>
-                    </div>
-                </div>
+                        <div class="form-group">
+                            <center>
+                                <button type="button" id="btn_guardar" class="btn btn btn-mio">Guardar</button>
+                            <button type="button" data-dismiss="modal" class="btn btn btn-default">Cerrar</button>  
+                            </center>
+                        </div>
+                    </form>
+		        </div>
             </div>
         </div>
-        
-        <div class="col-lg-12">
-            <div class="block">
-                <div class="form-group">
-                <div class="col-md-10">
-                    <center>
-                        <button type="button" id="btn_guardar" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Guardar</button>
-                    <button type="button" data-dismiss="modal" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Cerrar</button>  
-                    </center>
-                </div>
-            </div>
-            </div>
-        </div>
-        </div>
-    </form>
-		</div>
-        </div>
-      </div>
     </div>';
 
             return array("1",$subcategoria,$sql,$modal);

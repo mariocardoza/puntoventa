@@ -60,7 +60,6 @@ include_once("../../Conexion/Empleado.php");
             <div class="row">
         <div class="col-lg-12">
             <div class="block">
-                <div class="block-title"></div>
                 <div class="form-group">
                 <div class="col-md-3">
                     <label class="control-label" for="">Tipo de cliente</label>
