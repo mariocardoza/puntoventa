@@ -35,32 +35,6 @@
       </div>
 </div>
 
-<div class="modal fade modal-side-fall" id="md_digitar_cantidad" aria-hidden="true"
-      aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">
-              <span aria-hidden="true">×</span>
-            </button>
-            <h4 class="modal-title">Digite la cantidad</h4>
-          </div>
-          <div class="modal-body">
-              <div class="form-group">
-                <label for="" class="col-lg-4 control-label">Digite la cantidad</label>
-                <div class="col-lg-9">
-                  <input type="number" id="cuantos" value="1" class="form-control">
-                </div>
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Cerrar</button>
-            <button id="agregar_a_tabla" class="btn btn-pure btn-primary"><i">agregar</button>
-          </div>
-        </div>
-      </div>
-</div>
-
 <div class="modal fade modal-side-fall" id="md_tipofactura" aria-hidden="true"
       aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog">
@@ -72,20 +46,20 @@
         <div class="form-group">
           <h2>
             <div class="icheck-turquoise ">
-                <input type="radio" value="1" name="tipo_factura" checked id="sala_belleza" />
-                <label for="sala_belleza">Crédito fiscal</label>
+                <input type="radio" value="1" name="tipo_factura" checked id="credito_fiscal" />
+                <label for="credito_fiscal">Crédito fiscal</label>
             </div>
           </h2>
           <h2>
             <div class="icheck-turquoise ">
-                <input type="radio" value="2" name="tipo_factura" id="mini_super" />
-                <label for="mini_super">Consumidor final</label>
+                <input type="radio" value="2" name="tipo_factura" id="consumidor_final" />
+                <label for="consumidor_final">Consumidor final</label>
             </div>
           </h2>
           <h2>
             <div class="icheck-turquoise ">
-                <input type="radio" value="3" name="tipo_factura" id="tienda" />
-                <label for="tienda">Ticket</label>
+                <input type="radio" value="3" name="tipo_factura" id="ticket" />
+                <label for="ticket">Ticket</label>
             </div>
           </h2>         
         </div>
@@ -110,31 +84,37 @@
           <div class="row">
             <div class="col-xs-12">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Nombre" id="nombre_fac">         
+                <input type="text" class="form-control" placeholder="Nombre" list="juridicos" id="nombre_fac">
+                <datalist id="juridicos">
+                  <?php foreach ($juridicos[1] as $juridico): ?>
+                    <option value="<?php echo $juridico[nombre] ?>"></option>
+                  <?php endforeach ?>
+                </datalist>       
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-12">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Dirección" id="direccion_fac">         
+                <input type="text" class="form-control" placeholder="Dirección" id="direccion_fac">
+                <input type="hidden" id="id_juridicos">        
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-6"><input type="text" class="form-control" placeholder="NIT" id="nit_fac"></div>
+            <div class="col-xs-6"><input type="text" class="form-control nit" placeholder="NIT" id="nit_fac"></div>
             <div class="col-xs-6"><input type="text" class="form-control" placeholder="NRC" id="nrc_fac"></div>
           </div>
           <br><br>
           <div class="row">
             <div class="form-group">
               <center>
-                <button id="btn_cobrar" type="button" class="btn btn-mio"><i">Aceptar</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button id="btn_cobrar" style="display: none;" type="button" class="btn btn-mio acepta2">Aceptar</button>
+                <button id="btn_guardar_juridico" type="button" class="btn btn-mio guarda2">Guardar</button>
+                <button type="button" class="btn btn-default" id="btn_cerrar_fiscal">Cerrar</button>
               </center>
             </div>
           </div>
-        </div>
         </form>
       </div>
     </div>
@@ -151,14 +131,20 @@
           <div class="row">
             <div class="col-xs-12">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Nombre" id="nombre_fac">         
+                <input type="hidden" id="id_natural">
+                <input type="text" class="form-control" placeholder="Nombre" list="naturales" id="nombre_fac_final"> 
+                <datalist id="naturales">
+                  <?php foreach ($naturales[1] as $natural): ?>
+                    <option value="<?php echo $natural[nombre] ?>"></option>
+                  <?php endforeach ?>
+                </datalist>        
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-12">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Dirección" id="direccion_fac">         
+                <input type="text" class="form-control" placeholder="Dirección" id="direccion_fac_final">         
               </div>
             </div>
           </div>
@@ -166,12 +152,92 @@
           <div class="row">
             <div class="form-group">
               <center>
-                <button id="btn_cobrar" type="button" class="btn btn-mio"><i">Aceptar</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button id="btn_cobrar" type="button" class="btn btn-mio acepta" style="display: none;">Aceptar</button>
+                <button id="btn_guardar_natural" type="button" class="btn btn-mio guarda">Guardar</button>
+                <button type="button" class="btn btn-default" id="btn_cerrar_consumidor">Cerrar</button>
               </center>
             </div>
           </div>
-        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal antes de imprimir el ticket -->
+<div class="modal fade modal-side-fall" id="md_formapago" aria-hidden="true"
+      aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <center><h1>Forma de pago</h1></center>
+        <form id="pagoo">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <p><h2 id="poner_total"></h2></p>
+                <input type="hidden" readonly class="form-control" placeholder="Nombre" name="total_venta" id="total_venta">
+                <input type="hidden" readonly class="form-control" placeholder="Nombre" id="id_venta">
+                <input type="hidden" name="tipo_fac" id="tipo_fac">         
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <div class="icheck-turquoise icheck-inline">
+                    <input type="radio" value="1" name="tipo_pago" checked id="efectivo" />
+                    <label for="efectivo">Efectivo</label>
+                </div>
+                <div class="icheck-turquoise icheck-inline">
+                    <input type="radio" value="2" name="tipo_pago" id="credito" />
+                    <label for="credito">Crédito</label>
+                </div>
+                <div class="icheck-turquoise icheck-inline">
+                    <input type="radio" value="3" name="tipo_pago" id="tarjeta" />
+                    <label for="tarjeta">Tarjeta</label>
+                </div>
+                <!--div class="icheck-turquoise icheck-inline">
+                    <input type="radio" value="4" name="tipo_pago" id="cupon" />
+                    <label for="cupon">Cupón</label>
+                </div-->        
+              </div>
+            </div>
+            <div class="col-xs-12" id="efec">
+              <div class="form-group">
+                <label for="">Efectivo recibido</label>
+                <input type="text" name="efectivo_recibido" class="form-control" id="efectivo_recibido">
+              </div>
+              <div class="form-group">
+                <label for="">Cambio</label>
+                <input type="text" readonly class="form-control" id="efectivo_vuelto">
+              </div>
+            </div>
+            <div class="col-xs-12" id="credit" style="display: none;">
+              <div class="form-group">
+                <label for="">Cliente</label>
+                <select disabled name="cliente_debe" id="cliente_debe" class="select-chosen">
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="">Fecha de pago</label>
+                <input type="text" disabled name="fecha_pago" id="fecha_pago" class="form-control vecimi">
+              </div>
+              <div class="form-group">
+                <label for="">Descripción</label>
+                <textarea disabled name="descripcion_debe" class="form-control" id="descripcion_debe" cols="3"></textarea>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div class="row">
+            <div class="form-group">
+              <center>
+                <button id="btn_imprimir_ticket" type="button" class="btn btn-mio">Aceptar</button>
+                <button type="button" class="btn btn-default" id="btn_cerrar_formapago">Cerrar</button>
+              </center>
+            </div>
+          </div>
         </form>
       </div>
     </div>
@@ -193,7 +259,7 @@
               
             </div>
             <div class="modal-footer">
-          <a href="javascript:void(0)" class="btn btn-primary" id="btn_imprimir2" onclick="document.getElementById('PDF_doc').focus(); document.getElementById('PDF_doc').contentWindow.print();"> Imprimir</a>
+              <a href="javascript:void(0)" class="btn btn-primary" id="btn_imprimir2" onclick="document.getElementById('PDF_doc').focus(); document.getElementById('PDF_doc').contentWindow.print();"> Imprimir</a>
               <a href="javascript:void(0)" class="btn btn-default btn-pure" id="btn_cancelar_nc" data-dismiss="modal" aria-label="Close">Cancelar</a>
             </div>
           </div>

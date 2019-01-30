@@ -46,6 +46,42 @@ class Empleado
 		}
 	}
 
+	public static function busqueda($dato){
+        $sql="SELECT * FROM tb_persona WHERE nombre LIKE '%$dato%'";
+        try{
+            $comando=Conexion::getInstance()->getDb()->prepare($sql);
+            $comando->execute();
+            while ($row = $comando->fetch(PDO::FETCH_ASSOC)) {
+                $html.='<div class="col-sm-6 col-lg-6" id="listado-card">
+                <div class="widget">
+                  <div class="widget-simple">
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a></td>
+                                <td style="font-size:18px"><b>'.$row[nombre].'</b></td>
+                            </tr>
+                            <tr>
+                                <td height="18px"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_persona\',\'el empleado\')" data-toggle="tooltip" title="Eliminar"><img src="../../img/iconos/eliminar.svg" width="35px" height="35px"></a></td>
+                                <td style="font-size:18px">'.$row[email].'</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+              </div>
+            </div>';
+            }
+            return array(1,"exito",$html,$sql);
+        }catch(Exception $e){
+            return array(-1,"error",$e->getMessage(),$sql);
+        }
+
+    }
+
 	public static function obtener_empleados_guardar(){
 		$sql="SELECT p.id as id, p.nombre as nombre FROM tb_persona as p WHERE p.email NOT IN(SELECT u.email FROM tb_usuario as u)";
 		try {
@@ -69,7 +105,7 @@ class Empleado
 		}else{
 			$sql="INSERT INTO `tb_persona`(`nombre`, `telefono`, `email`, `codigo_oculto`, `dui`, `nit`, `genero`, `direccion`,`fecha_nacimiento`) VALUES ('$data[nombre]','$data[telefono]','$data[email]','$oculto','$data[dui]','$data[nit]','$data[genero]','$data[direccion]','$fechan');
 
-		INSERT INTO `tb_usuario`(`email`, `pass`, `nivel`,`codigo_oculto`, `estado`) VALUES ( '$data[email]', PASSWORD('$pass'), 2,'$oculto', 2)";
+		INSERT INTO `tb_usuario`(`email`, `pass`, `nivel`,`codigo_oculto`, `estado`) VALUES ( '$data[email]', PASSWORD('$pass'), '$data[nivel]','$oculto', 2)";
 		}
 
 		try{
@@ -93,8 +129,14 @@ class Empleado
 
 	//funcion editar empleado
 	public static function editar_empleado($data){
-		$sql="UPDATE `persona` SET `nombre`='$data[nombre]',`telefono`='$data[telefono]',`email`='$data[email]',`dui`='$data[dui]',`nit`='$data[nit]',`genero`='$data[genero]',`direccion`='$data[direccion]' WHERE id= $data[id]";
-		return array("1","exito",$sql);
+		$sql="UPDATE `tb_persona` SET `nombre`='$data[nombre]',`telefono`='$data[telefono]',`email`='$data[email]',`dui`='$data[dui]',`nit`='$data[nit]',`genero`='$data[genero]',`direccion`='$data[direccion]' WHERE id= $data[id]";
+		try{
+			$comando=Conexion::getInstance()->getDb()->prepare($sql);
+			$comando->execute();
+			return array(1,"exito","actualizado");
+		}catch(Exception $e){
+			return array(-1,"error",$e->getMessage(),$sql);
+		}
 	}
 
 	//crear modal para editar
@@ -181,7 +223,7 @@ class Empleado
                                   <h5>La imagen debe de ser formato png o jpg con un peso máximo de 3 MB</h5>
                             </div><br><br>
                             <div class="form-group">
-                              <button type="button" class="btn btn-sm btn-primary" id="btn_subir_img"><i class="icon md-upload" aria-hidden="true"></i> Seleccione Imagen</button>
+                              <button type="button" class="btn btn-sm btn-mio" id="btn_subir_img"><i class="icon md-upload" aria-hidden="true"></i> Seleccione Imagen</button>
                             </div>
                             <div class="form-group">
                               <div id="error_formato1" class="hidden"><span style="color: red;">Formato de archivo invalido. Solo se permiten los formatos JPG y PNG.</span>
@@ -195,7 +237,7 @@ class Empleado
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" id="btn_actualizar">Actualizar</button>
+            <button type="button" class="btn btn-mio" id="btn_actualizar">Actualizar</button>
           </div>
         </div>
       </div>

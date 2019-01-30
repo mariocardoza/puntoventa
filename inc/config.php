@@ -120,7 +120,7 @@ $primary_nav = array(
     array(
         'name'  => 'Ventas',
         'icon'  => 'ventas.svg',
-        'url'   => '#',
+        'url'   => '../../php/ventas/ventas.php',
         'url_real'=> 'ventas.php',
     ),
     array(
@@ -182,7 +182,7 @@ $primary_nav = array(
         'name'  => 'Salir',
         'url'   => '../../php/home/destruir.php',
         'url_real'=> 'destruir.php',
-        'icon'  => 'hi hi-log_out'
+        'icon'  => 'salir.svg'
     )
     // array(
     //     'name'  => 'Widget Kit',

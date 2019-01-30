@@ -69,7 +69,7 @@ if($departamentos[0] == 1)$datos = $departamentos[1];
 <!--script src="cliente.js?cod=<?php echo date("Yidisus") ?>"></script-->
 <script type="text/javascript">
     var table_procesos = cargar_tabla2("exampleTableSearch"); //inicializar tabla
-    $("#titulo_nav").text("Departamentos")
+    $("#titulo_nav").text("Departamentos");
     $(document).ready(function(e){
       cargar_departamentos();
 

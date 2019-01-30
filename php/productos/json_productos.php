@@ -12,7 +12,7 @@ if($_GET['data_id']=='ver_producto'){
 	exit();
 }
 if($_POST['data_id']=='agregar_existencia'){
-	$resultado=Producto::actualizar_inventario($_POST[id],$_POST[cantidad],$_POST[precio]);
+	$resultado=Producto::actualizar_inventario($_POST[id],$_POST[cantidad],$_POST[precio],$_POST[lote],$_POST[vencimiento],$_POST[contenido]);
 	echo json_encode($resultado);
 	exit();
 }

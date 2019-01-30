@@ -1,14 +1,7 @@
 var table_procesos = cargar_tabla2("productos_table"); //inicializar tabla
 $(document).ready(function(e){
   /// *** funcion para cargar todos los productos *** ///
-  swal({
-    title: 'Consultando datos!',
-    text: 'Este diálogo se cerrará al cargar los datos.',
-    showConfirmButton: false,
-    onOpen: function () {
-    swal.showLoading()
-   }
-  });
+  modal_cargando();
   cargar();
 
   /// ****** Fin cargar todos los productos **** ///
@@ -17,6 +10,7 @@ $(document).ready(function(e){
     $(document).on("change","#depart", function(e){
       var iddepar=$(this).val();
       $("#busqueda").val("");
+      modal_cargando();
       var estado = $("#estados").val();
       $.ajax({
         url:'json_productos.php',
@@ -25,15 +19,15 @@ $(document).ready(function(e){
         data:{data_id:'busqueda',esto:'',departamento:iddepar,estado:estado},
         success: function(json){
           console.log(json);
-          var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
           if(json[2]){
             $("#aqui_busqueda").empty();
           $("#aqui_busqueda").html(json[2]);
         }else{
           $("#aqui_busqueda").empty();
-          $("#aqui_busqueda").html(html);
-          //swal.closeModal();
+          $("#aqui_busqueda").html(no_datos);
+          //
         }
+        swal.closeModal();
         }
       });
     });
@@ -48,6 +42,7 @@ $(document).ready(function(e){
       var iddepar=$("#depart").val();
       var estado=$(this).val();
       $("#busqueda").val("");
+       modal_cargando();
       $.ajax({
         url:'json_productos.php',
         type:'POST',
@@ -61,9 +56,10 @@ $(document).ready(function(e){
           $("#aqui_busqueda").html(json[2]);
         }else{
           $("#aqui_busqueda").empty();
-          $("#aqui_busqueda").html(html);
+          $("#aqui_busqueda").html(no_datos);
           //swal.closeModal();
         }
+        swal.closeModal();
         }
       });
     });
@@ -111,7 +107,7 @@ $(document).ready(function(e){
                   cargar();
                   //alert("aqui");
                 $(".modal").modal("hide");
-               //$(".form-control").val("");
+               $(".form-control").val("");
             }else{
               swal.chose();
               guardar_error();
@@ -149,17 +145,22 @@ $(document).ready(function(e){
 
 
 
-    $("form[name='form-producto']").validate({
+    $("form[name='form-productog']").validate({
             ignore: ":hidden:not(select)",
             rules: {
                 nombre: "required",
                	departamento: "required",
                	descripcion: "required",
                	categoria: "required",
-               	subcategoria: "required",
+               	//subcategoria: "required",
                	cantidad: "required",
+                medida:"required",
+                contenido:{
+                  required: true
+                },
+                presentacion:"required",
                	//precio: "required",
-                precio: {
+                precio_unitario: {
                   required: true
                 },
                	proveedor: "required",
@@ -180,6 +181,9 @@ $(document).ready(function(e){
                 cantidad: "Digite la cantidad",
                 subcategoria: "Seleccione una subcategoria",
                 proveedor: "Seleccione un proveedor",
+                medida:{
+                  required: "Seleccione unidad medida"
+                },
                vencimiento: "Seleccione la fecha de vencimiento",
                lote:"Digite el n° de lote",
                ganancia:"Digite el porcentaje de ganacia",
@@ -234,6 +238,7 @@ $(document).ready(function(e){
       var esto=$(this).val();
       var departamento=$("#depart").val();
       var estado=$("#estados").val();
+      modal_cargando();
       $.ajax({
         url:'json_productos.php',
         type:'POST',
@@ -247,8 +252,9 @@ $(document).ready(function(e){
           $("#aqui_busqueda").html(json[2]);
         }else{
           $("#aqui_busqueda").empty();
-          $("#aqui_busqueda").html(html);
+          $("#aqui_busqueda").html(no_datos);
         }
+        swal.closeModal();
         }
       });
     });
@@ -257,25 +263,38 @@ $(document).ready(function(e){
     $(document).on("click","#asignar_mas", function(e){
       var id=$(this).attr("data-id");
       var nombre=$(this).attr("data-nombre");
-      $("#md_titulo").text(nombre);
+      var contenido = $(this).attr("data-contenido");
+      $("#md_titulo").text("Producto: "+nombre);
       $("#id_producto").val(id);
+      $("#contenido_agregar").val(contenido);
       $("#md_agregar_mercaderia").modal('show');
     });
 
     //agregar más mercadería
     $(document).on("click","#agregar_existencia", function(e){
+     var valid = $("#form_mas").valid();
+     if(valid){
       var id=$("#id_producto").val();
       var cantidad=$("#canti").val();
       var precio = $("#precio").val();
+      var lote=$("#lote_mas").val();
+      var contenido=$("#contenido_agregar").val();
+      var vencimiento=$("#vencimiento_mas").val();
       $.ajax({
         url:'json_productos.php',
         type:'POST',
         dataType:'json',
-        data:{id,cantidad,precio,data_id:'agregar_existencia'},
+        data:{id,cantidad,precio,contenido,lote,vencimiento,data_id:'agregar_existencia'},
         success: function(json){
           console.log(json);
+          if(json[0]=="1"){
+            guardar_exito();
+            $(".modal").modal("hide");
+            cargar();
+          }
         }
       });
+     }
     });
 });
 //ver información de un producto
@@ -296,7 +315,7 @@ function verproducto(id){
 }
 ///guardar en la base de datos
 function guardar(){
-	var datos = $("#form-producto").serialize();
+	var datos = $("#form-productog").serialize();
   //var equivalencia = $("#medida").attr("data-equivalencia");
 	console.log(datos);
 	$.ajax({
@@ -470,8 +489,13 @@ function validar_archivo(file){
         data:{data_id:'busqueda',esto:'',departamento:'0',estado:'1'},
         success: function(json){
           console.log(json);
-          $("#aqui_busqueda").empty();
-          $("#aqui_busqueda").html(json[2]);
+          if(json[2]){
+            $("#aqui_busqueda").empty();
+            $("#aqui_busqueda").html(json[2]);
+          }else{
+            $("#aqui_busqueda").empty();
+            $("#aqui_busqueda").html(no_datos);
+          }
           swal.closeModal();
         }
       });

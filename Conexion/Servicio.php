@@ -73,15 +73,15 @@ class Servicio
                     <table width="100%">
                         <tbody>
                             <tr>
-                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a></td>
+                                <td style="padding: 5px 0px;" width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a></td>
                                 <td><b>'.$row[nombre].'</b></td>
                             </tr>
                             <tr>
-                                <td></td>
+                                <td style="padding: 5px 0px;"><a href="javascript:void(0)"><img src="../../img/iconos/ojo.svg" width="35px" height="35px"></a></td>
                                 <td>Precio: $'.number_format($row[precio],2).'</td>
                             </tr>
                             <tr>
-                                <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_servicio\',\'el servicio\')" data-toggle="tooltip" title="Eliminar"><img src="../../img/iconos/eliminar.svg" width="35px" height="35px"></a></td>
+                                <td style="padding: 5px 0px;" width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_servicio\',\'el servicio\')" data-toggle="tooltip" title="Eliminar"><img src="../../img/iconos/eliminar.svg" width="35px" height="35px"></a></td>
                                 <td>Descripción: '.$row[descripcion].'</td>
                             </tr>
                         </tbody>

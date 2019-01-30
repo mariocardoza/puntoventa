@@ -36,13 +36,17 @@
 <?php include '../../inc/page_head.php'; 
 include_once("../../Conexion/Mesa.php");
 include_once("../../Conexion/Producto.php");
+include_once("../../Conexion/Cliente.php");
 $mesas=Mesa::obtener_mesas();
 $productos=Producto::obtener_productos();
+$naturales=Cliente::obtener_naturales();
+$juridicos=Cliente::obtener_juridicos();
+$clientes=Cliente::obtener_todos();
+//print_r($_SESSION);
 ?>
 
-<div id="page-content">
+<div id="page-content" style="background-color: #F2F2F2;">
     <form action="#" method="post" name="fm_orden" id="fm_orden" class="form-horizontal">
-        <div class="block" style="background-color: #F2F2F2;">
             <div class="row" style="background-color: #F2F2F2;">
                 <div class="col-lg-12">
                     <div class="row" style="background-color: #F2F2F2;">
@@ -84,45 +88,35 @@ $productos=Producto::obtener_productos();
                                         <select name="" id="tipos" class="select-chosen">
                                             <option value="0">Todos</option>
                                         </select>
+                                        <!--button type="button" class="btn btn-mio" id="elticket">ticket</button-->
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div id="aqui_busqueda_venta">
-                                    <?php //foreach ($productos[1] as $producto): ?>
-                                        
-                                    
-                                    <?php //endforeach ?>
-                                    </div>
+                                    <div id="aqui_busqueda_venta"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="block">
-                                
                                 <div class="form-group">
-                                    <div id="orden_tb" style="overflow:auto;overflow-x:hidden;max-height:350px; height: 350px;"></div>
+                                    <div id="orden_tb" style="overflow:auto;overflow-x:hidden;max-height:350px; height: 350px;">
+                                        <div id="alert" class="alert alert-warning" role="alert">
+                                          Seleccione un ítem del inventario y aparecerá aquí
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="block" style="height: 250px;">
                                 <p><center><h1>Total:</h1></center></p>
                                 <p><center><h1 id="total">$0.00</h1></center></p>
                                 <p><center><button type="button" id="btn_tipofactura" class="btn btn-lg btn-mio">Cobrar</button></center></p>
+                                <input type="hidden" id="totalp">
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--div class="col-lg-12">
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            <center>
-                                <button type="button" id="btn_guardar" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Guardar</button>
-                                <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>  
-                            </center>
-                        </div>
-                    </div>
-                </div-->
             </div>
-        </div>
+        
     </form>
     <!-- END Product Edit Content -->
 <?php include 'modales.php'; ?>

@@ -384,7 +384,7 @@ $empresa=Empresa::datos_empresa();
                 <ul class="nav navbar-nav-custom pull-right">
                     <li class="" id="venti">
                         <a href="javascript:void(0)" id="cobrar">
-                             <label for="">Cobrar</label> <img src="../../img/menus/dolar.svg" alt=""></a>
+                            <img src="../../img/iconos/cobrar.svg" width="200px" height="200px" alt=""></a>
             
                     </li>
                     <!-- END User Dropdown -->
@@ -395,21 +395,22 @@ $empresa=Empresa::datos_empresa();
             </header>
 <div class="modal fade" id="modal_cobrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
+    <br>
+    <br>
     <div>
         <center><h1 style="color:#fff"><b>¿Qué desea cobrar?</b></h1></center>
     </div>
-    <br>
-    <br>
+    
     <br>
     <br>
     <div>
         <table width="100%">
-        <td width="40%"><p class="cobrar_esto"><img id="cobrar_producto" src="../../img/producto.png" width="250px" height="250px" alt="">
+        <td width="40%"><p class="cobrar_esto"><img style="cursor: pointer;" id="cobrar_producto" src="../../img/producto.png" width="250px" height="250px" alt="">
         
         </p>
             </td>
         <td width="20%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-        <td width="40%"><p class="cobrar_esto"><img id="cobrar_servicio" src="../../img/servicio.png" width="250px" height="250px" alt=""></p></td>
+        <td width="40%"><p class="cobrar_esto"><img style="cursor: pointer;" id="cobrar_servicio" src="../../img/servicio.png" width="250px" height="250px" alt=""></p></td>
     </table>
     </div>
     <div>

@@ -15,27 +15,34 @@
     }else{
         
     }//prueba
+
+
 ?>
 
 <?php include '../../inc/config.php'; ?>
 <?php include '../../inc/template_start.php'; ?>
 <?php include '../../inc/page_head.php'; ?>
+<?php include_once('../../Conexion/Empresa.php'); 
+$datos=Empresa::totales();
+$productos=Empresa::cuantos_productos();
+$clientes=Empresa::cuantos_clientes();
+?>
 
 
 <!-- Page content -->
 <div id="page-content">
     <!-- Quick Stats -->
     <div class="row">
-        <div class="col-sm-6 col-lg-4">
-            <a href="javascript:void(0)" style="border-radius: 10px; background-color: #fff">
+        <div class="col-xs-4 col-lg-4">
+            <a href="../../php/clientes/clientes.php" style="border-radius: 10px; background-color: #fff">
                 <div class="card-index">
                     <div class="row">
-                        <div class="col-lg-6 col-sm-6">
+                        <div class="col-lg-6 col-xs-6">
                             <div class="card-index-adentro" style="border-right: 3px solid; color: #F3F3F3F3; ">
-                                <p style="font-size: 48px; color: #40BAB3; text-align: center; position: relative;top: 27%;"><strong>15</strong></p>
+                                <p style="font-size: 48px; color: #40BAB3; text-align: center; position: relative;top: 27%;"><strong><?php echo $clientes[0][clientes] ?></strong></p>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-6">
+                        <div class="col-lg-6 col-xs-6">
                             <div class="card-index-adentro">
                                 <p style="font-size: 18px; color: #333333; text-align: center; position: relative;top: 47%;"><strong>Clientes inscritos</strong></p>
                             </div>
@@ -44,16 +51,16 @@
                 </div>
             </a>
         </div>
-        <div class="col-sm-6 col-lg-4">
-            <a href="javascript:void(0)" style="border-radius: 10px; background-color: #fff">
+        <div class="col-xs-4 col-lg-4">
+            <a href="../../php/productos/productos.php" style="border-radius: 10px; background-color: #fff">
                 <div class="card-index">
                     <div class="row">
-                        <div class="col-lg-6 col-sm-6">
+                        <div class="col-lg-6 col-xs-6">
                             <div class="card-index-adentro" style="border-right: 3px solid; color: #F3F3F3F3; ">
-                                <p style="font-size: 48px; color: #40BAB3; text-align: center; position: relative;top: 27%;"><strong>15</strong></p>
+                                <p style="font-size: 48px; color: #40BAB3; text-align: center; position: relative;top: 27%;"><strong><?php echo $productos[0][productos] ?></strong></p>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-6">
+                        <div class="col-lg-6 col-xs-6">
                             <div class="card-index-adentro">
                                 <p style="font-size: 18px; color: #333333; text-align: center; position: relative;top: 35%;"><strong>Productos en inventario</strong></p>
                             </div>
@@ -62,18 +69,18 @@
                 </div>
             </a>
         </div>
-        <div class="col-sm-6 col-lg-4">
+        <div class="col-xs-4 col-lg-4">
             <a href="javascript:void(0)" style="border-radius: 10px; background-color: #fff">
                 <div class="card-index">
                     <div class="row">
-                        <div class="col-lg-6 col-sm-6">
+                        <div class="col-lg-6 col-xs-6">
                             <div class="card-index-adentro" style="border-right: 3px solid; color: #F3F3F3F3; ">
-                                <p style="font-size: 29px; color: #40BAB3; text-align: center; position: relative;top: 50%;"><strong>$1246.98</strong></p>
+                                <p style="font-size: 29px; color: #40BAB3; text-align: center; position: relative;top: 37%;"><strong>$<?php echo number_format($datos[3],2); ?></strong></p>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-6">
+                        <div class="col-lg-6 col-xs-6">
                             <div class="card-index-adentro">
-                                <p style="font-size: 18px; color: #333333; text-align: center; position: relative;top: 50%;"><strong>Facturado este mes</strong></p>
+                                <p style="font-size: 18px; color: #333333; text-align: center; position: relative;top: 42%;"><strong>Facturado este mes</strong></p>
                             </div>
                         </div>
                     </div>

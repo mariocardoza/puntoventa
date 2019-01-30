@@ -28,6 +28,7 @@
 include_once("../../Conexion/administracion/Usuarios.php");
 include_once("../../Conexion/Empresa.php");
 $empresa = Empresa::datos_empresa();
+$datos = Empresa::totales();
 ?>
 
 <!-- Page content -->
@@ -41,18 +42,49 @@ $empresa = Empresa::datos_empresa();
             <!-- END Customer Info Block -->
         </div>
         <div class="col-lg-8">
-            <!-- Orders Block -->
-
             <div class="block">
-                <!-- Products in Cart Title -->
+                <div class="block-title">
+                    <h2><i class="fa fa-home"></i> <strong>Efectivo por ventas mensuales</strong></h2>
+                </div>
+                <div class="row">
+                    <table class="table">
+
+                        <tr>
+                           <th><h1>Ventas en efectivo:</h1></th>
+                           <td><h1>$<?php echo number_format($datos[0],2); ?></h1></td>
+                           <td><a href="javascript:void(0)"><img src="../../img/iconos/ojo.svg" width="35px" height="35px"></a></td> 
+                        </tr>
+                        <tr>
+                           <th><h1>Ventas por cobrar:</h1></th>
+                           <td><h1>$<?php echo number_format($datos[1],2); ?></h1></td>
+                           <td><a href="javascript:void(0)"><img src="../../img/iconos/ojo.svg" width="35px" height="35px"></a></td>  
+                        </tr>
+                        <tr>
+                            <th><h1>Venta con tarjeta:</h1></th>
+                            <td><h1>$<?php echo number_format($datos[2],2); ?></h1></td>
+                            <td><a href="javascript:void(0)"><img src="../../img/iconos/ojo.svg" width="35px" height="35px"></a></td> 
+                        </tr>
+                        <tr>
+                           <th><h1>Todas por ventas:</h1></th>
+                           <td><h1><b>$<?php echo number_format($datos[3],2); ?></b></h1></td> 
+                           <td><a href="javascript:void(0)"><img src="../../img/iconos/ojo.svg" width="35px" height="35px"></a></td> 
+                        </tr>
+                    </table>
+                </div>              
+            </div>
+        </div>
+        <div class="col-lg-8">
+           
+
+            <!--div class="block">
+               
                 <div class="block-title">
                     <h2><i class="fa fa-home"></i> <strong>Sucursales</strong>  </h2>
                     <button class="btn btn-mio pull-right" type="button" data-codigo="<?php echo $empresa[codigo_oculto] ?>" id="nueva_sucur">Nueva</button>
                 </div>
-                <!-- END Products in Cart Title -->
-
-                <!-- Products in Cart Content -->
-                <table class="table table-bordered table-striped table-vcenter">
+             
+               
+                <table class="table table-bordered table-striped table-vcenter" id="tb_">
                     <thead>
                         <tr>
                             <th>Nombre</th>
@@ -65,23 +97,24 @@ $empresa = Empresa::datos_empresa();
                         <?php print_r(Empresa::obtener_sucursales()); ?>
                     </tbody>
                 </table>
-                <!-- END Products in Cart Content -->
-            </div>
+               
+            </div-->
             <div class="block">
                 <!-- Orders Title -->
                 <div class="block-title">
-                    <h2><i class="fa fa-user"></i> <strong>Empleados</strong></h2>
+                    <h2><i class="fa fa-user"></i> <strong>Ventas</strong></h2>
                 </div>
                 <!-- END Orders Title -->
 
                 <!-- Orders Content -->
-                <table class="table table-bordered table-striped table-vcenter">
+                <table class="table table-bordered table-striped table-vcenter" id="tabla">
                     <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>DUI</th>
-                            <th>Email</th>
-                            <th>Teléfono</th>
+                            <th>Cliente</th>
+                            <th>Empleado</th>
+                            <th>Monto de la venta</th>
+                            <th>Factura</th>
+                            <th>Tipo de venta</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -181,7 +214,7 @@ $empresa = Empresa::datos_empresa();
 <?php include '../../inc/template_end.php'; ?>
 
 <script type="text/javascript">
-    var table_procesos = cargar_tabla2("exampleTableSearch"); //inicializar tabla
+    var tabla = cargar_tabla2("tabla");//inicializar tabla
     $(function() {
 
         $(document).on("click","#nuevo_pass", function(e){

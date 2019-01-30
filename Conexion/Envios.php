@@ -74,7 +74,7 @@
 				             
 				            <tr>
 				                <td align="center" bgcolor="#ffffff" style="padding: 20px 20px 20px 20px; color: #ffffff; font-family: Arial, sans-serif; font-size: 36px; font-weight: bold;background-color: #575756;  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);">
-				                    <img src="http://contenucompany.com/nutriconsultores/img/imagenes_mias/esta.png" alt="ProUI Logo" width="105" height="83" style="display:block;" />
+				                    <!--img src="http://contenucompany.com/nutriconsultores/img/imagenes_mias/esta.png" alt="ProUI Logo" width="105" height="83" style="display:block;" /-->
 				                </td>
 				            </tr>
 				            <tr>
@@ -165,7 +165,7 @@
 				             
 				            <tr>
 				                <td align="center" bgcolor="#ffffff" style="padding: 20px 20px 20px 20px; color: #ffffff; font-family: Arial, sans-serif; font-size: 36px; font-weight: bold;background-color: #575756;  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);">
-				                    <img src="http://contenucompany.com/nutriconsultores/img/imagenes_mias/esta.png" alt="ProUI Logo" width="105" height="83" style="display:block;" />
+				                    
 				                </td>
 				            </tr>
 				            <tr>
@@ -181,7 +181,7 @@
 				            </tr>
 				            <tr>
 				                <td align="center" bgcolor="#dddddd" style="padding: 15px 10px 15px 10px; color: #555555; font-family: Arial, sans-serif; font-size: 12px; line-height: 18px;box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);">
-				                    <a href="estudioagil.com/sys/puntoventa" target="_blank" style="color: #1ec1b8;">PuntodeVenta</a>
+				                    
 				                </td>
 				            </tr>
 				            <tr>

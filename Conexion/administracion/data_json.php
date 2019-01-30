@@ -27,6 +27,10 @@
 		echo json_encode($result);
 		exit();
 	}
+	if($_POST['data_id']=='busqueda'){
+		$result=Empleado::busqueda($_POST['esto']);
+		echo json_encode($result);exit();
+	}
 	if($_GET['data_id']=='eliminar_empleado'){
 		$result = Empleado::eliminar_empleado($_GET['id']);
 		echo json_encode($result);

@@ -19,6 +19,7 @@
 <script type="text/javascript" src="../../js/izitoast/iziToast.min.js?v=130c"></script>
 <script type="text/javascript" src="../../datepicker/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="../../datepicker/locales/bootstrap-datepicker.es.min.js"></script>
+<script type="text/javascript" src="../../js/fraction.js"></script>
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -53,6 +54,7 @@
 
 <script type="text/javascript">
   var val_tel=false;
+  var no_datos='<div class="col-sm-12 col-lg-12"><div class="alert alert-danger" role="alert">Sin resultados!</div></div>';
   var EXITO="Excelente";
   var EXITO_MENSAJE="Datos almacenados correctamente";
   var EXITO_ACTUALIZAR="Datos Actualizados";
@@ -351,6 +353,44 @@
               iziToast.success({
                   title: ELIMINAR,
                   message: ELIMINAR_MENSAJE,
+                  timeout: 3000,
+              });
+              var timer=setInterval(function(){
+                  location.reload();
+                  clearTimeout(timer);
+              },3500);
+          }else
+            iziToast.error({
+                title: ERROR,
+                message: ERROR_MENSAJE,
+                timeout: 3000,
+            });
+       }
+      });
+   });
+}
+
+function daralta(id,tabla,nombre){
+      swal({
+       title: '¿Desea continuar?',
+       text: "¡Se habilitará "+nombre+"!",
+       type: 'warning',
+       showCancelButton: true,
+       cancelButtonText:"Cancelar",
+       confirmButtonColor: 'red',
+       cancelButtonColor: '#3085d6',
+       confirmButtonText: '¡Si, continuar!'
+   }).then(function () {
+    $.ajax({
+      url:'../json/json_generico.php',
+      type:'POST',
+      dataType:'json',
+      data:{data_id:'dar_alta',id:id,tabla:tabla},
+      success: function(json){
+        if(json[0]==1){
+              iziToast.success({
+                  title: 'Exito',
+                  message: 'Se habilitó '+nombre,
                   timeout: 3000,
               });
               var timer=setInterval(function(){

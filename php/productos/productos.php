@@ -58,7 +58,7 @@ $subcategorias=Subcategoria::obtener_subcategorias();
                 <?php endforeach ?>
             </select>
         </div>
-        <div class="col-sm 3 col-lg-3">
+        <div class="col-sm-3 col-lg-3">
             <select name="" id="estados" class="select-chosen">
                 <option value="1">Activos</option>
                 <option value="2">Inactivos</option>
@@ -67,7 +67,7 @@ $subcategorias=Subcategoria::obtener_subcategorias();
         <div class="col-sm-3 col-lg-3">
             <div class="row">
               <div class="col-sm-2 col-lg-2"></div>
-              <div class="col-sm-8 col-lg-8"><a id="modal_guarda" href="registro_producto.php" class="btn btn-mio btn-block">Nuevo producto</a></div>
+              <div class="col-sm-8 col-lg-8"><a id="modal_guardar" href="javascript:void(0)" class="btn btn-mio btn-block">Nuevo producto</a></div>
               <div class="col-sm-2 col-lg-2"></div>
           </div>
         </div>

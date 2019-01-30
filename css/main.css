@@ -360,8 +360,8 @@ header.navbar-inverse.navbar-fixed-bottom {
 }
 
 .nav.navbar-nav-custom > li > a > img {
-    width: 40px;
-    height: 40px;
+    width: 146px;
+    height: 50px;
     border-radius: 20px;
     vertical-align: top;
 }
@@ -2611,7 +2611,7 @@ a.list-group-item.active > .badge {
 .centrado{
   margin-left: auto;
   margin-right: auto;
-  padding-top: 28px;
+  padding-top: 14px;
 }
 #busqueda{
     font-size: 15px;
@@ -2622,8 +2622,7 @@ a.list-group-item.active > .badge {
     border-radius: 2px;
     border-right: 2px solid #F2F2F2;
     border-bottom: 2px solid #F2F2F2;
-    padding: 25px;
-    height: 172px;
+    height: 225px;
 }
 #aqui_busqueda{
     margin-top:10px; 

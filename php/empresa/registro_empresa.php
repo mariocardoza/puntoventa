@@ -45,20 +45,22 @@ $empresa=Empresa::datos_empresa();
             <div class="col-lg-12">
                 <div class="form-group">
                     <label for="" class="col-lg-3 control-label">Seleccione el tipo de empresa</label>
+                    <input type="hidden" name="data_id" value="editar_empresa">
+                    <input type="hidden" name="id" value="<?php echo $empresa[id] ?>">
                     <div class="icheck-turquoise icheck-inline">
-                        <input type="radio" value="1" name="tipo_empresa" checked id="sala_belleza" />
+                        <input type="radio" value="1" name="tipo_negocio" checked id="sala_belleza" />
                         <label for="sala_belleza">Sala de Belleza</label>
                     </div>
                     <div class="icheck-turquoise icheck-inline">
-                        <input type="radio" value="2" name="tipo_empresa" id="mini_super" />
+                        <input type="radio" value="2" name="tipo_negocio" id="mini_super" />
                         <label for="mini_super">Mini súper</label>
                     </div>
                     <div class="icheck-turquoise icheck-inline">
-                        <input type="radio" value="3" name="tipo_empresa" id="tienda" />
+                        <input type="radio" value="3" name="tipo_negocio" id="tienda" />
                         <label for="tienda">Tienda</label>
                     </div>
                     <div class="icheck-turquoise icheck-inline">
-                        <input type="radio" value="4" name="tipo_empresa" id="restaurante" />
+                        <input type="radio" value="4" name="tipo_negocio" id="restaurante" />
                         <label for="restaurante">Restaurante</label>
                     </div>          
                 </div>
@@ -72,9 +74,7 @@ $empresa=Empresa::datos_empresa();
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="nombre">Nombre del negocio</label>
-                                <div class="col-md-9">
-                                    <input type="hidden" name="id" value="<?php echo $empresa[id] ?>">
-                                    <input type="hidden" name="data_id" value="editar_empresa">
+                                <div class="col-md-9">              
                                     <input type="text" autocomplete="off" id="nombre" name="nombre" class="form-control" value="<?php echo $empresa[nombre] ?>" placeholder="Digite el nombre del proveedor">
                                 </div>
                             </div>
@@ -135,6 +135,7 @@ $empresa=Empresa::datos_empresa();
         <div class="row">
             <div class="col-lg-12">
                 <div class="form-group">
+                    <input type="hidden" name="data_id" value="nueva_empresa">
                     <label for="" class="col-lg-3 control-label">Seleccione el tipo de empresa</label>
                     <div class="icheck-turquoise icheck-inline">
                         <input type="radio" value="1" name="tipo_empresa" checked id="sala_belleza" />
@@ -164,7 +165,6 @@ $empresa=Empresa::datos_empresa();
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="nombre">Nombre del negocio</label>
                                 <div class="col-md-9">
-                                    <input type="hidden" name="data_id" value="nueva_empresa">
                                     <input type="hidden" name="codigo_oculto" value="<?php echo date('Yidisus') ?>">
                                     <input type="text" autocomplete="off" id="nombre" name="nombre" class="form-control" placeholder="Digite el nombre del proveedor">
                                 </div>

@@ -1,5 +1,6 @@
 <?php 
 require_once('../../Conexion/Cliente.php');
+require_once('../../Conexion/Genericas2.php');
 require_once("../../Conexion/Validaciones.php");
 if(isset($_POST) || isset($_GET)){
 	if($_POST['data_id']=='nuevo_cliente'){
@@ -21,6 +22,10 @@ if(isset($_POST) || isset($_GET)){
 		$result = Validaciones::val_nrc($_POST['nrc'],'tb_cliente');
 		echo json_encode($result);
 		exit();
+	}
+	if($_POST['data_id']=='ver_venta'){
+		$result=Genericas2::ver_venta($_POST['id']);
+		echo json_encode($result);exit();
 	}
 
 	if($_POST['data_id']== 'val_nit'){

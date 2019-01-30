@@ -42,22 +42,22 @@ class Cliente
 			$comando=Conexion::getInstance()->getDb()->prepare($sql);
 			$comando->execute();
 			while ($row=$comando->fetch(PDO::FETCH_ASSOC)) {
-				$html.='<div class="col-sm-6 col-lg-6" id="listado-card">
+				$html.='<div class="col-sm-6 col-lg-6" style="height: 175px;" id="listado-card">
                 <div class="">
                   <div class="">
                     <table width="100%">
                         <tbody>
                             <tr>
-                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\',\''.$row[tipo].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a>
+                                <td style="padding: 5px 0px;" width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\',\''.$row[tipo].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a>
                                 </td>
                                 <td style="font-size:18px"><b>'.$row[nombre].'</b></td>
                             </tr>
                             <tr>
-                                <td></td>
+                                <td style="padding: 5px 0px;"><a href="perfil.php?cliente='.$row[codigo_oculto].'" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/ojo.svg" width="35px" height="35px"></a></td>
                                 <td style="font-size:18px">Teléfono: '.$row[telefono].'</td>
                             </tr>
                             <tr>
-                                <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_cliente\',\'el cliente\')" data-toggle="tooltip" title="Eliminar"><img width="35px" height="35px" src="../../img/iconos/eliminar.svg"></a></td>
+                                <td style="padding: 5px 0px;" width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_cliente\',\'el cliente\')" data-toggle="tooltip" title="Eliminar"><img width="35px" height="35px" src="../../img/iconos/eliminar.svg"></a></td>
                                 <td style="font-size:18px">Dirección: '.$row[direccion].'</td>
                             </tr>
                         </tbody>
@@ -71,6 +71,124 @@ class Cliente
 			return array(-1,"error",$e->getMessage(),$sql);
 		}
 	}
+
+	public static function construir_perfil($id){
+          $codigo_oculto="";
+          $html ="";
+          $sql = "SELECT * FROM tb_cliente WHERE codigo_oculto='$id'";
+          try {
+                
+                $elec1 = Conexion::getInstance()->getDb()->prepare($sql);
+                $elec1->execute();
+                while ($row = $elec1->fetch(PDO::FETCH_ASSOC)) {
+
+                  $html.='<div class="block">
+                
+                            <div class="block-title">
+                                <h2><i class="gi gi-user"></i> <strong>Información del</strong> cliente</h2>
+                            </div>
+                            <div class="block-section text-center">
+                                <!--a href="javascript:void(0)" onclick="cambiar_foto()">
+                                    <img src="http://estudioagil.com/sys/puntoventa/img/empresa/'.$row[imagen].'" style="width: 128px;height: 128px;" alt="avatar" class="img-circle">
+                                </a-->
+                                <h3>
+                                    <strong>'.$row[nombre].'</strong><br><small></small>
+                                </h3>
+                                <input type="hidden" id="codiguito" value="'.$row[codigo_oculto].'">
+                            </div>
+                            <table class="table table-borderless table-striped table-vcenter">
+                                <tbody>
+                                    <tr>
+                                        <td class="text-right"><strong>NIT</strong></td>
+                                        <td>'.$row[nit].'</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right"><strong>Correo electrónico</strong></td>
+                                        <td>'.$row[email].'</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right"><strong>Dirección</strong></td>
+                                        <td>'.$row[direccion].'</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right"><strong>DUI</strong></td>
+                                        <td>'.$row[dui].'</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right"><strong>Teléfono</strong></td>
+                                        <td>'.$row[telefono].'</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+               
+                        </div>';
+
+
+                }
+                return $html;
+          } catch (Exception $e) {
+                return array($e->getMessage(),$sql);
+          }
+
+          
+        }
+
+    
+
+    public static function obtener_compras($codigo_oculto){
+        	$sql="SELECT
+                v.tipo AS tipo_factura,
+                v.tipo_venta AS tipo_venta,
+                v.total AS total,
+                c.nombre AS cliente,
+                per.nombre AS empleado,
+                v.codigo_oculto as codigo_venta,
+                CASE
+            WHEN v.tipo = 1 THEN
+                'Crédito fiscal'
+            WHEN v.tipo= 2 THEN
+                'Consumidor final'
+            ELSE
+                'Ticket'
+            END AS lafactura,
+            CASE
+            WHEN v.tipo_venta = 1 THEN
+                'Efectivo'
+            WHEN v.tipo_venta= 2 THEN
+                'Crédito'
+            ELSE
+                'Tarjeta (crédito o débito)'
+            END AS laventa
+            FROM
+                `tb_venta` AS v
+            INNER JOIN tb_persona AS per ON per.email = v.empleado
+            LEFT JOIN tb_cliente AS c ON c.codigo_oculto = v.cliente
+            WHERE v.cliente='$codigo_oculto'";
+        	try{
+        		$comando = Conexion::getInstance()->getDb()->prepare($sql);
+                $comando->execute();
+                while ($row = $comando->fetch(PDO::FETCH_ASSOC)) {
+                		$html.='<tr>
+                        <td>'.$row[empleado].'</td>
+                        <td>$'.$row[total].'</td>
+                        <td>'.$row[lafactura].'</td>
+                        <td>'.$row[laventa].'</td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-xs">
+                                <a href="javascript:void(0)" onclick="ver(\''.$row[codigo_venta].'\')" data-original-title="Ver"><img src="../../img/iconos/ojo.svg" width="35px" height="35px"></a>
+                            </div>
+                        </td>
+                    </tr>';	
+                	}	
+
+                return $html;
+        	}catch(Exception $e){
+        		return array("error",$e->getMessage(),$sql);
+        	}
+
+        	
+            
+        }
 
 	public static function obtener_naturales(){
 		$sql="SELECT c.*,CASE WHEN c.tipo=1 THEN 'Persona Natural' else '' end as eltipo FROM tb_cliente as c WHERE c.tipo=1 AND c.estado=1";
@@ -88,6 +206,21 @@ class Cliente
 
 	public static function obtener_juridicos(){
 		$sql="SELECT c.*,CASE WHEN c.tipo=2 THEN 'Persona Jurídica' else '' end as eltipo,case WHEN c.tipocontribuyente=1 THEN 'Pequeño contribuyente' WHEN c.tipocontribuyente=2 THEN 'Mediano contribuyente' ELSE 'Gran contribuyente' end as contri FROM tb_cliente as c WHERE c.tipo=2 AND c.estado=1";
+		try{
+			$comando=Conexion::getInstance()->getDb()->prepare($sql);
+			$comando->execute();
+			$datos = $comando->fetchAll(PDO::FETCH_ASSOC);
+            return array(1,$datos,$sql);
+            exit();
+		}catch(Exception $e){
+			return array(-1,$e->getMessage(),$e->getLine(),$sql);
+			exit();
+		}
+
+	}
+
+	public static function obtener_todos(){
+		$sql="SELECT * FROM tb_cliente WHERE estado=1";
 		try{
 			$comando=Conexion::getInstance()->getDb()->prepare($sql);
 			$comando->execute();

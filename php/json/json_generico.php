@@ -8,6 +8,11 @@ if(isset($_POST) || isset($_GET)){
 		echo json_encode($result);
 		exit();
 	}
+	if($_POST['data_id']=='dar_alta'){
+		$result=Genericas2::daralta($_POST['tabla'],$_POST['id']);
+		echo json_encode($result);
+		exit();
+	}
 
 	if($_POST['data_id']=='val_nit'){
 		$result = Validaciones::val_nit($_POST['nit'],$_POST['tabla']);

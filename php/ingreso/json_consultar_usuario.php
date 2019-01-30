@@ -63,6 +63,7 @@
                 p.nombre,
                 p.telefono,
                 p.email,
+                u.usuario,
                 u.nivel,
                 u.estado,
                 u.pass,
@@ -71,7 +72,7 @@
             FROM
                 tb_persona AS p
                 INNER JOIN tb_usuario AS u ON p.email = u.email
-            WHERE p.email='".$_POST["usuario"]."' and u.pass = PASSWORD('".$_POST["password"]."')
+            WHERE (p.email='".$_POST["usuario"]."' OR u.usuario ='".$_POST["usuario"]."')  and u.pass = PASSWORD('".$_POST["password"]."')
             AND u.nivel IN(0,1,2) ";
 
             try {

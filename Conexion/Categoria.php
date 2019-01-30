@@ -13,6 +13,20 @@ class Categoria
 		# code...
 	}
 
+    public static function consumibles(){
+        $sql="SELECT c.id as id,c.nombre as nombre FROM tb_categoria as c WHERE c.departamento=2";
+        try{
+            $comando=Conexion::getInstance()->getDb()->prepare($sql);
+            $comando->execute();
+            while ($row=$comando->fetch(PDO::FETCH_ASSOC)) {
+                $categorias[]=$row;
+            }
+            return array(1,"exito",$categorias);
+        }catch(Exception $e){
+            return array(-1,"error",$sql,$e->getMessage());
+        }
+    }
+
 	public static function obtener_categorias(){
 		$sql="SELECT c.id as id,c.nombre as nombre,c.descripcion as descripcion,d.nombre as departamento FROM tb_categoria as c INNER JOIN tb_departamento as d ON d.id=c.departamento";
 		try{

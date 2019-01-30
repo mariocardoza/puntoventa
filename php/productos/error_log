@@ -224,3 +224,12 @@ Stack trace:
   thrown in /home1/estudjl6/public_html/sys/puntoventa/php/productos/productos.php on line 32
 [11-Jan-2019 10:12:38 America/El_Salvador] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 135
 [11-Jan-2019 10:21:13 America/El_Salvador] PHP Parse error:  syntax error, unexpected '' '' (T_CONSTANT_ENCAPSED_STRING) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 135
+[11-Jan-2019 10:25:49 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[11-Jan-2019 14:20:40 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[11-Jan-2019 14:20:55 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[11-Jan-2019 14:20:56 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[11-Jan-2019 15:27:06 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[15-Jan-2019 15:05:31 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[15-Jan-2019 15:05:40 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[15-Jan-2019 15:06:00 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[15-Jan-2019 15:29:17 America/El_Salvador] PHP Parse error:  syntax error, unexpected ';', expecting ',' or ')' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 304

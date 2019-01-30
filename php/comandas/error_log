@@ -1,0 +1,19 @@
+[28-Jan-2019 13:52:16 America/El_Salvador] PHP Fatal error:  Uncaught Error: Call to a member function diff() on string in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Comanda.php:171
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/php/comandas/json_comandas.php(29): Comanda::ver_comanda(Array)
+#1 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Comanda.php on line 171
+[28-Jan-2019 13:55:25 America/El_Salvador] PHP Parse error:  syntax error, unexpected '=' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Comanda.php on line 169
+[28-Jan-2019 13:58:26 America/El_Salvador] PHP Catchable fatal error:  Object of class DateInterval could not be converted to string in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Comanda.php on line 204
+[28-Jan-2019 14:00:28 America/El_Salvador] PHP Catchable fatal error:  Object of class DateInterval could not be converted to string in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Comanda.php on line 205
+[28-Jan-2019 14:01:08 America/El_Salvador] PHP Catchable fatal error:  Object of class DateInterval could not be converted to string in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Comanda.php on line 205
+[28-Jan-2019 14:06:19 America/El_Salvador] PHP Catchable fatal error:  Object of class DateInterval could not be converted to string in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Comanda.php on line 205
+[28-Jan-2019 14:07:53 America/El_Salvador] PHP Fatal error:  Uncaught TypeError: DateTime::__construct() expects parameter 1 to be string, array given in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Comanda.php:171
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/Conexion/Comanda.php(171): DateTime->__construct(Array)
+#1 /home1/estudjl6/public_html/sys/puntoventa/php/comandas/json_comandas.php(29): Comanda::ver_comanda(Array)
+#2 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Comanda.php on line 171
+[28-Jan-2019 14:11:14 America/El_Salvador] PHP Warning:  date() expects at least 1 parameter, 0 given in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Comanda.php on line 169
+[28-Jan-2019 14:11:14 America/El_Salvador] PHP Catchable fatal error:  Object of class DateInterval could not be converted to string in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Comanda.php on line 205
+[28-Jan-2019 14:12:04 America/El_Salvador] PHP Catchable fatal error:  Object of class DateInterval could not be converted to string in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Comanda.php on line 205

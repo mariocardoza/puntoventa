@@ -35,76 +35,25 @@ if($result[0] == 1)$datos = $result[1];
 
 <!-- Page content -->
 <div id="page-content">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="block full">
-          <div class="block-title">
-            <h2> <strong> Empleados (<?=count($datos)?>)</strong></h2>
-            <div class="block-options pull-right">
-              <a href="javascript:void(0)" class="btn btn-lg bg-white" id="btn_nuevo"><i class="fa pull-left" style="width: 20px;"><img src="../../img/icon_mas.svg" class="svg" alt=""></i> Agregar empleado</a>
+    <div class="row" style="background-color: #fff;">
+      <div class="card">
+        <div class="row centrado">
+          <div class="col-sm-4 col-lg-4">
+            <div class="input-group">
+                <input type="search" class="form-control" id="busqueda" placeholder="Buscar">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
             </div>
           </div>
-          <div class="">
-            <table id="exampleTableSearch" class="table table-vcenter table-condensed table-bordered" >
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Imagen</th>
-                  <th>Nombre</th>
-                  <th>Teléfono</th>
-                  <th>DUI</th>
-                  <th>NIT</th>
-                  <th>Dirección</th>
-                  <th>Edad</th>
-                  <th>Email</th>
-                  <th class="text-center">Acciones</th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>#</th>
-                  <th>Imagen</th>
-                  <th>Nombre</th>
-                  <th>Teléfono</th>
-                  <th>DUI</th>
-                  <th>NIT</th>
-                  <th>Dirección</th>
-                  <th>Edad</th>
-                  <th>Email</th>
-                  <th class="text-center">Acciones</th>
-                </tr>
-              </tfoot>
-              <tbody>
-                <?php $n=1; foreach ($datos as $row) {
-                    $imagen = $row['imagen'];
-                    if(!$imagen || $imagen==""){
-                        $imagen= "avatar2.jpg";
-                    }
-                ?>
-                <tr id="tr_<?=$n?>">
-                  <td ><?=$n?></td>
-                  <td><img src="../../img/usuario/<?= $imagen ?>" alt="avatar" class="img-circle img-circle-usuarios"></td>
-                  <td class="nombre"><?=($row['nombre'])?></td>
-                  <td nowrap class="telefono"><?=($row['telefono'])?></td>
-                  <td class="nivel"><?=($row['dui'])?></td>
-                  <td class="nivel"><?=($row['nit'])?></td>
-                  <td class="nivel"><?=($row['direccion'])?></td>
-                  <td class="nivel"><?=($row['edad'])?></td>
-                  <td nowrap class="email"><?=($row['email'])?></td>
-                  <td nowrap class="text-center actions">
-                    <div class="btn-group">
-                      <a onclick="<?php echo "editar(".$row[id].")" ?>" class="btn btn-warning btn-xs" href="#"><span class="fa fa-edit"></span></a>
-                    <a onclick="<?php echo "darbaja(".$row[id].",'tb_persona','la persona')" ?>" class="btn btn-danger btn-xs" href="#"><span class="fa fa-remove"></span></a>
-                    </div>
-                  </td>
-                </tr>
-                <?php 
-                  $n++;}
-                ?>
-              </tbody>
-            </table>
+          <div class="col-sm-4 col-lg-4">
+            <div class="row">
+              <div class="col-sm-2 col-lg-2"></div>
+              <div class="col-sm-8 col-lg-8"><a href="javascript:void(0)" id="btn_nuevo" class="btn btn-mio btn-block">Nuevo empleado</a></div>
+              <div class="col-sm-2 col-lg-2"></div>
+          </div>
           </div>
         </div>
+      </div>
+      <div class="" id="aqui_busqueda">
       </div>
     </div>
 
@@ -152,8 +101,29 @@ if($result[0] == 1)$datos = $result[1];
                 <div class="col-md-6">
                     <div class="form-group">
                       <label for="" class="control-label">¿Usuario del sistema?</label>
-                      <label for="">No</label><input type="radio" name="es_usuario" value="no" checked>
-                      <label for="">Si</label><input type="radio" name="es_usuario" value="si">
+                      <div class="icheck-turquoise icheck-inline">
+                          <input type="radio" value="no" name="es_usuario" checked id="no" />
+                          <label for="no">No</label>
+                      </div>
+                      <div class="icheck-turquoise icheck-inline">
+                          <input type="radio" value="si" name="es_usuario" id="si" />
+                          <label for="si">Si</label>
+                      </div>
+                    </div>
+                    <div class="form-group" id="leveles" style="display: none;">
+                      <label for="" class="control-label">¿Nivel de usuario?</label>
+                      <div class="icheck-turquoise icheck-inline">
+                          <input type="radio" value="0" name="nivel" checked id="admin" />
+                          <label for="admin">Administrador</label>
+                      </div>
+                      <div class="icheck-turquoise icheck-inline">
+                          <input type="radio" value="1" name="nivel" id="mesero" />
+                          <label for="mesero">Cajero</label>
+                      </div>
+                      <div class="icheck-turquoise icheck-inline">
+                          <input type="radio" value="2" name="nivel" id="cajero" />
+                          <label for="cajero">Mesero</label>
+                      </div>
                     </div>
                     <div class="form-group"> 
                         <label class="control-label" for="rol">Fecha de nacimiento(*):</label>
@@ -181,7 +151,7 @@ if($result[0] == 1)$datos = $result[1];
                                   <h5>La imagen debe de ser formato png o jpg con un peso máximo de 3 MB</h5>
                             </div><br><br>
                             <div class="form-group">
-                              <button type="button" class="btn btn-sm btn-primary" id="btn_subir_img"><i class="icon md-upload" aria-hidden="true"></i> Seleccione Imagen</button>
+                              <button type="button" class="btn btn-sm btn-mio" id="btn_subir_img"><i class="icon md-upload" aria-hidden="true"></i> Seleccione Imagen</button>
                             </div>
                             <div class="form-group">
                               <div id="error_formato1" class="hidden"><span style="color: red;">Formato de archivo invalido. Solo se permiten los formatos JPG y PNG.</span>
@@ -195,7 +165,7 @@ if($result[0] == 1)$datos = $result[1];
           </div>
           <div class="modal-footer"><!-- margin-0 -->
             <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" id="btn_guardar">Guardar</button>
+            <button type="button" class="btn btn-mio" id="btn_guardar">Guardar</button>
             <!--button type="button" data-formulario="fm_nuevo" class="btn btn-primary valida1">Validar</button-->
           </div>
         </div>
@@ -238,7 +208,7 @@ if($result[0] == 1)$datos = $result[1];
           </div>
           <div class="modal-footer"><!-- margin-0 -->
             <button type="button" class="btn btn-default btn-pure" id="btn_cancelar_ep">Cancelar</button>
-            <button type="button" class="btn btn-primary hide guarda1" id="btn_editar_proceso">Guardar</button>
+            <button type="button" class="btn btn-mio hide guarda1" id="btn_editar_proceso">Guardar</button>
             <!--button type="button" class="btn btn-primary valida1">Validar</button-->
           </div>
         </div>
@@ -259,7 +229,41 @@ if($result[0] == 1)$datos = $result[1];
     var nom_ed = "";
     var data_n = -1;
     var validar_cambios=val_email=val_tel= false;
+    $("#titulo_nav").text("Empleados");
     $(function() {
+      cargar_empleados();
+        $(document).on("input","#busqueda", function(e){
+          var esto=$(this).val();
+          $.ajax({
+            url:'../../Conexion/administracion/data_json.php',
+            type:'POST',
+            dataType:'json',
+            data:{data_id:'busqueda',esto},
+            success: function(json){
+              console.log(json);
+              var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
+              if(json[2]){
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(json[2]);
+              }else{
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(html);
+              }
+          }
+        });
+      });
+
+        $(document).on("change","input:radio[name=es_usuario]:checked",function(e){
+          var esto = $(this).val();
+          if(esto=='si'){
+            $("#leveles").show();
+          }
+          if(esto=='no'){
+            $("#leveles").hide();
+          }
+        });
+
+
         $(document).on('input', '#n_email', function(event) {
             validar_cambios = false;
             $(".guarda1").addClass("hide");
@@ -389,29 +393,15 @@ if($result[0] == 1)$datos = $result[1];
                 method: "POST",
                 success: function(json) {
                     console.log(json);
-                    /*if(json[0]=='1'){
-                        if ($("#file_1").val()!="") {
-                            insertar_imagen($("#file_1"),json[1][0]);
-                        }else{
-                            iziToast.success({
-                                title: '<?php echo EXITO; ?>',
-                                message: '<?php echo EXITO_MENSAJE;?>',
-                                timeout: 3000,
-                            });
-                            var timer=setInterval(function(){
-                                $("#md_nuevo").modal('toggle');
-                                location.reload();
-                                clearTimeout(timer);
-                            },3500);
-                        }
-                    }if(json[0]=='-1'){
+                    if(json[0]==1){
+                        guardar_exito();
+                        $(".modal").modal("hide");
+                        cargar_empleados();
+                        $(".form-control").val("");
+                    }else{
                         swal.close();
-                        iziToast.error({
-                            title: '<?php echo ERROR; ?>',
-                            message: '<?php echo ERROR_MENSAJE;?>',
-                            timeout: 3000,
-                        });
-                    }*/
+                        guardar_error();
+                    }
                 }
             });
           }
@@ -447,24 +437,17 @@ if($result[0] == 1)$datos = $result[1];
                             if ($("#file_1").val()!="") {
                                 insertar_imagen($("#file_1"),json[1][0]);
                             }else{
-                                iziToast.success({
-                                    title: '<?php echo EXITO; ?>',
-                                    message: '<?php echo EXITO_MENSAJE;?>',
-                                    timeout: 3000,
-                                });
+                                guardar_exito();
                                 var timer=setInterval(function(){
                                     $("#md_nuevo").modal('toggle');
-                                    location.reload();
+                                   cargar_empleados();
+                                   $(".form-control").val("");
                                     clearTimeout(timer);
                                 },3500);
                             }
-                        }if(json[0]==-1){
+                        }else{
                             swal.close();
-                            iziToast.error({
-                                title: '<?php echo ERROR; ?>',
-                                message: '<?php echo ERROR_MENSAJE;?>',
-                                timeout: 3000,
-                            });
+                            guardar_error();
                         }
                     }
                 });
@@ -604,6 +587,36 @@ if($result[0] == 1)$datos = $result[1];
           $("#md_editar").modal('show'); // lanza el modal
         }
       });
+    }
+
+    function cargar_empleados(){
+      swal({
+        title: 'Consultando datos!',
+        text: 'Este diálogo se cerrará al cargar los datos.',
+        showConfirmButton: false,
+        onOpen: function () {
+          swal.showLoading()
+        }
+      });
+      $.ajax({
+            url:'../../Conexion/administracion/data_json.php',
+            type:'POST',
+            dataType:'json',
+            data:{data_id:'busqueda',esto:''},
+            success: function(json){
+              console.log(json);
+                var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
+                if(json[2]){
+                    $("#aqui_busqueda").empty();
+                    $("#aqui_busqueda").html(json[2]);
+                    swal.closeModal();
+                }else{
+                    $("#aqui_busqueda").empty();
+                    $("#aqui_busqueda").html(html);
+                    swal.closeModal();
+                }
+            }
+          });
     }
 
 </script>
