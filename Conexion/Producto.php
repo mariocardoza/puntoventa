@@ -154,7 +154,8 @@ include_once('Subcategoria.php');
         $segun_depar
         AND p.estado = $estado 
         GROUP BY
-            pd.codigo_producto";
+            pd.codigo_producto
+        ORDER BY p.nombre";
         try{
             $comando=Conexion::getInstance()->getDb()->prepare($sql);
             $comando->execute();
@@ -165,32 +166,35 @@ include_once('Subcategoria.php');
             $modal.='<div class="col-sm-6 col-lg-6" id="listado-card">
                 <div class="widget">
                   <div class="widget-simple">
-                    <table width="100%">
-                        <tbody>
-                            <tr>
-                                <td style="padding: 5px 0px;" width="15%"><a href="javascript:void(0)" onclick="editar(\''.$producto[id].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a></td>
-                                <td width="15%" rowspan="4"><center><img src="../../img/productos/'.$producto[imagen].'" id="cambiar_imagen" data-codigo="'.$producto[codigo_oculto].'" alt="avatar" class="widget-image img-circle"></center></td>
-                                <td rowspan="2" style="font-size: 18px;"><b>'.$producto[nombre]. '</b> '.$producto[descripcion].' </td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 5px 0px;"><a onclick="verproducto(\''.$producto[id].'\')" href="javascript:void(0)"><img src="../../img/iconos/ojo.svg" width="35px" height="35px"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 5px 0px;"><a id="asignar_mas" data-id="'.$producto[id].'" data-contenido="'.$producto[contenido].'" data-nombre="'.$producto[nombre].'" href="javascript:void(0)"><img src="../../img/iconos/mas.svg" width="35px" height="35px"></a></td>
-                                <td style="font-size: 18px;">En inventario: <b>'.rtrim(rtrim((string)number_format($producto[disponible], 2, ".", ""),"0"),".").' '.$producto[presentacion].' de '.$producto[contenido].''.$producto[abreviatura].'</b></td>
-                                
-                            </tr>
-                            <tr>';
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <a href="javascript:void(0)" onclick="editar(\''.$producto[id].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a>
+                            <br><br>
+                            <a onclick="verproducto(\''.$producto[id].'\')" href="javascript:void(0)"><img src="../../img/iconos/ojo.svg" width="35px" height="35px"></a>
+                            <br><br>
+                            <a id="asignar_mas" data-id="'.$producto[id].'" data-contenido="'.$producto[contenido].'" data-nombre="'.$producto[nombre].'" href="javascript:void(0)"><img src="../../img/iconos/mas.svg" width="35px" height="35px"></a>
+                            <br><br>';
                             if($producto[estado]==1):
                                 $modal.='<td style="padding: 5px 0px;" width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$producto[id].'\',\'tb_producto\',\'el producto\')" data-toggle="tooltip" title="Eliminar"><img src="../../img/iconos/eliminar.svg" width="35px" height="35px"></a></td>';
                             else:
                                 $modal.='<td style="padding: 5px 0px;" width="15%"><a class="btn btn-mio" href="javascript:void(0)" onclick="daralta(\''.$producto[id].'\',\'tb_producto\',\'el producto\')" data-toggle="tooltip" style="width:35px; height:35px;" title="Habilitar"><i class="fa fa-level-up"></i></a></td>';
                             endif;
-                                $modal.='<td style="font-size: 18px;">Precio $'.number_format($producto[precio_venta],2).'</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        $modal.='</div>
+                        <div class="col-xs-3">
+                            <br><br>
+                            <center><img src="../../img/productos/'.$producto[imagen].'" id="cambiar_imagen" data-codigo="'.$producto[codigo_oculto].'" alt="avatar" class="widget-image img-circle"></center>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="row">
+                                <div style="font-size: 18px;" class="col-xs-12"><b>'.$producto[nombre]. '</b> '.$producto[descripcion].'</div>
+                                <br><br>
+                                <div style="font-size: 18px;" class="col-xs-12">En inventario: <b>'.rtrim(rtrim((string)number_format($producto[disponible], 2, ".", ""),"0"),".").' '.$producto[presentacion].' de '.$producto[contenido].''.$producto[abreviatura].'</b></div>
+                                <br><br>
+                                <div style="font-size: 18px;" class="col-xs-12">Precio $'.number_format($producto[precio_venta],2).'</div>
+                                <div class="col-xs-12"><a href="inventario.php?id='.$producto[codigo_oculto].'" class="pull-right"><img src="../../img/iconos/ojo.svg" width="35px" height="35px"></a></div>
+                            </div>
+                        </div>
+                    </div>
                   </div>
               </div>
             </div>';
@@ -244,7 +248,8 @@ include_once('Subcategoria.php');
         $segun_depar
         AND p.estado =1 
         GROUP BY
-            pd.codigo_producto";
+            pd.codigo_producto
+        ";
         try{
             $comando=Conexion::getInstance()->getDb()->prepare($sql);
             $comando->execute();
@@ -290,20 +295,20 @@ include_once('Subcategoria.php');
  		$sql = "SELECT
 			p.nombre,
 			 p.descripcion,
-			 p.sku,
+             i.detalle,
 			i.tipo,
 			i.cantidad,
-			i.fecha,
-			i.precio_unitario,
-			p.precio_unitario as precio
+			DATE_FORMAT(i.fecha,'%d/%m/%Y') as fecha,
+            round((i.precio_unitario+(i.precio_unitario*(i.ganancia/100))),2) as precio_unitario,
+            i.precio_unitario as precio_salida,
+            ((i.precio_unitario+(i.precio_unitario*(i.ganancia/100)))*i.cantidad) as veamos
 			FROM
 				tb_inventario AS i
-			INNER JOIN tb_producto AS p ON i.producto = p.id
+			INNER JOIN tb_producto AS p ON i.producto = p.codigo_oculto
 			WHERE
 				p.estado = 1
-			AND p.id=$id
-			ORDER BY
-				p.nombre ASC";
+			AND p.codigo_oculto='$id'
+			";
 		try {
 			$comando = Conexion::getInstance()->getDb()->prepare($sql);
             $comando->execute();
@@ -327,10 +332,21 @@ include_once('Subcategoria.php');
         $canti=$data[cantidad]*$data[contenido];
  		$sql="INSERT INTO `tb_producto`(`nombre`, `departamento`, `categoria`, `subcategoria`, `descripcion`, `precio_unitario`, `cantidad`, `proveedor`, `sku`,`codigo_oculto`,`ganancia`,`medida`,`fecha_vencimiento`,`presentacion`,`contenido`,`ingrediente`) VALUES ('$data[nombre]','$data[departamento]','$data[categoria]','$data[subcategoria]','$data[descripcion]','$data[precio_unitario]','$canti','$data[proveedor]','$sku','$oculto',$data[ganancia],$data[medida],'$fecha','$data[presentacion]','$data[contenido]','$data[ingrediente]')";
  		
+        $array_i=array(
+                'data_id'=> 'nuevo',
+                'fecha' => date("Y-m-d"),
+                'producto' => $oculto,
+                'detalle' => 'Inventario inicial',
+                'precio_unitario' => $data[precio_unitario],
+                'ganancia' => $data[ganancia],
+                'cantidad' => $data[cantidad],
+                'tipo' => 1
+            );
  		try{
  			$comando=Conexion::getInstance()->getDb()->prepare($sql);
  			$comando->execute();
  			if($comando){
+                $resulti=Genericas2::insertar_generica("tb_inventario",$array_i);
  				for($i=0;$i<$data['cantidad'];$i++){
  					$correlativo=Genericas2::retornar_correlativo("tb_producto_detalle",$oculto);
  					$sql2="INSERT INTO tb_producto_detalle (codigo_producto,correlativo,lote,contenido,fecha_vencimiento) VALUES('$oculto','$correlativo','$data[lote]',$data[contenido],'$fecha')";
@@ -340,7 +356,7 @@ include_once('Subcategoria.php');
 
  				}
  			}
- 			return array("1",$oculto,$sql,$sql2);
+ 			return array("1",$oculto,$sql,$sql2,$resulti);
  		}catch(Exception $e){
  			return array("-1","error",$e->getMessage(),$sql);
  		}
@@ -354,7 +370,7 @@ include_once('Subcategoria.php');
             $fecha_aux=explode("/",$venci);
             $fecha=$fecha_aux[2]."-".$fecha_aux[1]."-".$fecha_aux[0];
         }
- 		$sql_producto="SELECT p.cantidad,p.precio_unitario,p.codigo_oculto FROM tb_producto as p WHERE p.id=$producto";
+ 		$sql_producto="SELECT p.cantidad,p.precio_unitario,p.codigo_oculto,p.ganancia FROM tb_producto as p WHERE p.id=$producto";
  		try{
  			$comando=Conexion::getInstance()->getDb()->prepare($sql_producto);
  			$comando->execute();
@@ -362,10 +378,25 @@ include_once('Subcategoria.php');
  				$cantidad_base=$row['cantidad'];
  				$precio_base=$row['precio_unitario'];
  				$oculto=$row['codigo_oculto'];
+                $ganancia=$row['ganancia'];
  				//$lote=$row['lote'];
  			}
- 			$canti_aux=$cantidad_base+$cantidad;
- 			$precio_aux=($precio_base+$precio)/2;
+            //calculo para nuevos precios y cantidades
+            $canti_aux=$cantidad_base+$cantidad;
+            $precio_aux=($precio_base+$precio)/2;
+            //actualizar el kardex
+            $array_i=array(
+                'data_id'=> 'nuevo',
+                'fecha' => date("Y-m-d"),
+                'producto' => $oculto,
+                'detalle' => 'Compra al '.date("d/m/Y"),
+                'precio_unitario' => $precio,
+                'ganancia' => $ganancia,
+                'cantidad' => $cantidad,
+                'tipo' => 1
+            );
+            $resulti=Genericas2::insertar_generica("tb_inventario",$array_i);
+ 			
  			$sql_update="UPDATE tb_producto SET cantidad=$canti_aux, precio_unitario=$precio_aux WHERE id=$producto";
  			$comando_update=Conexion::getInstance()->getDb()->prepare($sql_update);
  			if($comando_update->execute()){
@@ -380,7 +411,7 @@ include_once('Subcategoria.php');
  			}
 
  	
- 			return array("1",$sql_producto,$sql_update);
+ 			return array("1",$sql_producto,$sql_update,$resulti);
  		}catch(Exception $e){
  			return array("-1","error",$e->getMessage(),$sql_producto,$e->getLine());
  		}
@@ -458,7 +489,7 @@ include_once('Subcategoria.php');
 			tb_producto AS p
 		INNER JOIN tb_departamento AS d ON d.id = p.departamento
 		INNER JOIN tb_categoria AS c ON c.id = p.categoria
-		INNER JOIN tb_subcategoria AS s ON s.id = p.subcategoria
+		LEFT JOIN tb_subcategoria AS s ON s.id = p.subcategoria
         INNER JOIN tb_unidad_medida as um ON p.medida=um.id
         INNER JOIN tb_producto_detalle AS pd ON p.codigo_oculto = pd.codigo_producto
 
@@ -517,6 +548,10 @@ include_once('Subcategoria.php');
                         <td>'.rtrim(rtrim((string)number_format($producto[disponible], 2, ".", ""),"0"),".").' '.$producto[presentacion].'</td>
                     </tr>
                     <tr>
+                        <th>Fecha de caducidad</th>
+                        <td>'.$producto[vencimiento].'</td>
+                    </tr>
+                    <tr>
                         <th>Departamento</th>
                         <td>'.$producto[departamento].'</td>
                     </tr>
@@ -565,6 +600,7 @@ include_once('Subcategoria.php');
 			p.precio_unitario,
 			p.ganancia,
 			p.fecha_vencimiento,
+            p.codigo_oculto,
 			d.id AS departamento,
 			c.id AS categoria,
 			s.id AS subcategoria,
@@ -574,7 +610,7 @@ include_once('Subcategoria.php');
 		INNER JOIN tb_departamento AS d ON d.id = p.departamento
 		INNER JOIN tb_proveedor as prov ON prov.id=p.proveedor
 		INNER JOIN tb_categoria AS c ON c.id = p.categoria
-		INNER JOIN tb_subcategoria AS s ON s.id = p.subcategoria
+		LEFT JOIN tb_subcategoria AS s ON s.id = p.subcategoria
 		WHERE
 			p.estado = 1
 		AND p.id=$id
@@ -608,6 +644,7 @@ include_once('Subcategoria.php');
                             <label class="control-label" for="nombre">Nombre</label>
                                 <input type="hidden" name="data_id" value="editar_producto">
                                 <input type="hidden" name="id" value="'.$producto[id].'" >
+                                <input type="hidden" name="codigo_oculto" value="'.$producto[codigo_oculto].'" >
                                 <input type="text" id="nombre" name="nombre" value="'.$producto[nombre].'" class="form-control" placeholder="Digite el nombre del nombre">
                         </div>
                         <div class="form-group">
@@ -686,6 +723,33 @@ include_once('Subcategoria.php');
                             <label for="" class="control-label">Porcentaje de ganancia</label>
                                 <input type="number" value="'.$producto[ganancia].'" id="ganancia" name="ganancia" class="form-control">
                         </div>
+                        <div class="row">
+                        <div class="col-xs-6 col-lg-6">
+                           <!--label for="firma1">Imagen(*):</label-->
+                           <div class="form-group " >';
+                           if($producto[imagen]!=''):
+                            $modal.='<img src="../../img/productos/'.$producto[imagen].'" style="width: 100px;height: 102px;" id="img_file">
+                              <input type="file" class="archivos hidden" id="file_1" name="file_1" />';
+                           else: 
+                            $modal.='<img src="../../img/imagenes_subidas/image.svg" style="width: 100px;height: 102px;" id="img_file">
+                              <input type="file" class="archivos hidden" id="file_1" name="file_1" />';
+                          endif;
+                          $modal.='</div>
+                        </div>
+                        <div class="col-xs-6 col-lg-6 ele_div_imagen">
+                            <div class="form-group">
+                                  <h5>La imagen debe de ser formato png o jpg con un peso máximo de 3 MB</h5>
+                            </div><br><br>
+                            <div class="form-group">
+                              <button type="button" class="btn btn-sm btn-mio" id="btn_subir_img"><i class="icon md-upload" aria-hidden="true"></i> Seleccione Imagen</button>
+                            </div>
+                            <div class="form-group">
+                              <div id="error_formato1" class="hidden"><span style="color: red;">Formato de archivo invalido. Solo se permiten los formatos JPG y PNG.</span>
+                              </div>
+                            </div>
+                        </div>
+                        
+                    </div>
                     <!-- END Meta Data Content -->
                 </div>
                 <!-- END Meta Data Block -->
@@ -694,7 +758,7 @@ include_once('Subcategoria.php');
                     <div class="form-group">
                         <center>
                             <button type="button" id="btn_guardar" class="btn btn-mio"> Guardar</button>
-                        <button type="button" data-dismiss="modal" class="btn btn-default">Cerrar</button>
+                        <button type="button" id="btn_cerrar_modal" class="btn btn-default">Cerrar</button>
                         </center>
                 </div>
             </div>

@@ -62,13 +62,12 @@ $(document).ready(function(e){
         data:{data_id:'busqueda',esto:'',tipo},
         success: function(json){
           console.log(json);
-          var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
           if(json[2]){
             $("#aqui_busqueda").empty();
           $("#aqui_busqueda").html(json[2]);
         }else{
           $("#aqui_busqueda").empty();
-          $("#aqui_busqueda").html(html);
+          $("#aqui_busqueda").html(no_datos);
         }
         }
       });
@@ -347,11 +346,15 @@ function editar(id,tipo){
         dataType: 'json',
         data: {id:id,data_id:data_id},
         success: function(json){
-          console.log(json);
-          $(":text").val("");
-          $("#modal_edit").html(json[3]);
-          $(".select-chosen").chosen({"width":"100%"});
-          $("#md_editar").modal('show'); // lanza el modal
+            console.log(json);
+            $(":text").val("");
+            $("#modal_edit").html(json[3]);
+            $(".select-chosen").chosen({"width":"100%"});
+            $('.dui').inputmask("99999999-9", { "clearIncomplete": true });
+            $('.nit').inputmask("9999-999999-999-9", { "clearIncomplete": true });
+            $('.telefono').inputmask("9999-9999", { "clearIncomplete": true });
+
+            $("#md_editar").modal('show'); // lanza el modal
         }
       });
     }

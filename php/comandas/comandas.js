@@ -11,6 +11,9 @@ var nota_guarda="";
 var cobrar_propina="";
 var obj_comanda = new Object();
 $(document).ready(function(e){
+  total=total+total_php;
+  $("#totalpone").text("Total: $"+total.toFixed(2));
+  $("#total_comanda").val(total.toFixed(2));
   cargar_todos();
   //traer_clientes();
   $("#titulo_nav").text("Comandas");
@@ -81,6 +84,48 @@ $(document).ready(function(e){
     //ejecutar comanda
     $(document).on("click","#comandar", function(e){
         guardar_comanda();
+    });
+
+    //editar la comanda
+    $(document).on("click","#btn_editar_comanda", function(e){
+      var id_mesa = $("#id_mesa").val() || 0;
+        var numero_clientes = $("#numero_clientes").val() || 0;
+        var tipo_pedido = $("#tipo_pedido").val() || 0;
+        var cliente = $("#nom_cliente").val();
+        var comanda=new Array();
+        var total=$("#total_comanda").val() || 0;
+        var nombre_cliente=$("#nom_cliente").val();
+        var direccion = $("#direccion").val();
+        
+          $("#comandi").find('input').each(function (index, element) {
+            if(element){
+              comanda.push({
+                    codigo: $(element).attr("data-codigo"),
+                    nota: $(element).attr("data-nota"),
+             });
+            }
+          });
+
+        if(total && tipo_pedido ){
+          $.ajax({
+            url:'json_comandas.php?cod='+yidisus,
+            type:'POST',
+            dataType: 'json',
+            data:{data_id:'actualizar_comanda',codigo_oculto:lacomanda,id_mesa,numero_clientes,tipo_pedido,comanda,total,nombre_cliente,direccion},
+            success: function(json){
+              console.log(json);
+              if(comanda.length > 0){
+                ticket(lacomanda);
+              }
+              guardar_exito();
+            }
+          });
+        }else{
+          swal('aviso',
+            'No ha seleccionado nada',
+            'warning');
+        }
+        
     });
 
     $(document).on("click","#add_nota", function(e){
@@ -517,12 +562,57 @@ $(document).ready(function(e){
       var nombre=$("#elnombre").val() || 0;
       var direccion=$("#direcc").val();
       if(nombre != 0){
+        $("#tipo_ordenes").text("Llevar");
         $("#nom_cliente").val(nombre);
         $("#nome_cliente").text("Cliente: "+nombre);
         $("#direccion").val(direccion);
         $("#md_nombre_cliente").modal("hide");
+        $("#img_tipo").attr("src","../../img/placeholders/llevar.png");
+        $("#num_mesa").text("");
+        $("#para_cuantos").text("");
+        
+        $("#numero_clientes").val("");
+        $("#nom_cliente").val(nombre);
+        $("#direccion").val(direccion);
+        $("#direc_cliente").text("Direccion de entrega: "+direccion);
       }else{
         swal('Aviso','Debe digitar el nombre del cliente','warning');
+      }
+    });
+
+    $(document).on("click","#editar_datos_comanda", function(e){
+      $("#md_cambiar_comanda").modal("show");
+    });
+
+    $(document).on("change","input[type=radio][name=quecambiar]", function(e){
+      var esto=$(this).val();
+      if(esto==1){
+        $("#diveltipo").show();
+        $("#lapregunta").hide();
+      }
+      if(esto==2){
+
+      }
+    });
+
+    $(document).on("change","input[type=radio][name=eltipodeorden]", function(e){
+      var esto=$(this).val();
+      if(esto==1){
+        alert("mesa");
+      }else{
+        if(esto==2){
+          $("#md_cambiar_comanda").modal("hide");
+          $("#md_nombre_cliente").modal("show");
+          $("#direccion").val("");
+          $("#tipo_pedido").val(2);
+        }else{
+          if(esto==3){
+            $("#md_cambiar_comanda").modal("hide");
+            $("#md_nombre_cliente").modal("show");
+            $("#domicilios").show();
+            $("#tipo_pedido").val(3);
+          }
+        }
       }
     });
     
@@ -600,24 +690,23 @@ function traer_clientes(cliente){
 //cargar
     function cargar_todos(){
         $.ajax({
-        url:'json_comandas.php',
-        type:'POST',
-        dataType:'json',
-        data:{data_id:'busqueda',esto:'',tipo:'0'},
-        success: function(json){
-          console.log(json);
-            var html='<div class="col-sm-6 col-lg-6">No se encontraron productos</div>';
-            if(json[2]){
-                $("#aqui_busqueda").empty();
-                $("#aqui_busqueda").html(json[2]);
-                swal.closeModal();
-            }else{
-                $("#aqui_busqueda").empty();
-                $("#aqui_busqueda").html(html);
-                swal.closeModal();
+          url:'json_comandas.php',
+          type:'POST',
+          dataType:'json',
+          data:{data_id:'busqueda',esto:'',tipo:'0'},
+          success: function(json){
+            console.log(json);
+              if(json[2]){
+                  $("#aqui_busqueda").empty();
+                  $("#aqui_busqueda").html(json[2]);
+                  swal.closeModal();
+              }else{
+                  $("#aqui_busqueda").empty();
+                  $("#aqui_busqueda").html(no_datos);
+                  swal.closeModal();
+              }
             }
-        }
-      });
+        });
     }
 
     function agregar_a_comanda(x,nombre,codigo,cantidad,precio){
@@ -673,6 +762,11 @@ function traer_clientes(cliente){
         
     }
 
+    function actualizar_comanda(){
+        
+        
+    }
+
   function ticket(comanda){
     console.log("esto "+comanda);
     var h = $( window ).height();
@@ -692,6 +786,33 @@ function ticket2(comanda){
     console.log(h);
     var iframe = '<div class="iframe-container"><iframe id="PDF_doc" src="../../lib/tcpdf/reportes/ticketc.php?datos='+comanda+'" width="100%" height="'+(h-100)+'px"></iframe></div>'+
       '<div class="iframe-container"><iframe id="PDF_doc2" class="hide" src="../../lib/tcpdf/reportes/ticketc.php?datos='+comanda+'" width="100%" height="100%"></iframe></div>';
+    console.log(iframe);
+    $("#md_imprimir .modal-body").empty().html(iframe);
+    console.log(iframe);
+    swal.close();
+    $("#md_imprimir").modal({show: 'false'});
+}
+
+//funcion que imprmer factura consumidor final
+function consumidor(comanda){
+    console.log("esto "+comanda);
+    var h = $( window ).height();
+    console.log(h);
+    var iframe = '<div class="iframe-container"><iframe id="PDF_doc" src="../../lib/tcpdf/reportes/finalc.php?datos='+comanda+'" width="100%" height="'+(h-100)+'px"></iframe></div>'+
+      '<div class="iframe-container"><iframe id="PDF_doc2" class="hide" src="../../lib/tcpdf/reportes/finalc.php?datos='+comanda+'" width="100%" height="100%"></iframe></div>';
+    console.log(iframe);
+    $("#md_imprimir .modal-body").empty().html(iframe);
+    console.log(iframe);
+    swal.close();
+    $("#md_imprimir").modal({show: 'false'});
+}
+
+function credito(comanda){
+    console.log("esto "+comanda);
+    var h = $( window ).height();
+    console.log(h);
+    var iframe = '<div class="iframe-container"><iframe id="PDF_doc" src="../../lib/tcpdf/reportes/fiscalc.php?datos='+comanda+'" width="100%" height="'+(h-100)+'px"></iframe></div>'+
+      '<div class="iframe-container"><iframe id="PDF_doc2" class="hide" src="../../lib/tcpdf/reportes/fiscalc.php?datos='+comanda+'" width="100%" height="100%"></iframe></div>';
     console.log(iframe);
     $("#md_imprimir .modal-body").empty().html(iframe);
     console.log(iframe);
@@ -731,16 +852,66 @@ function cobrar(id,total_a,mesa){
 }
 
 function ver(id){
-      $.ajax({
-        url:'json_comandas.php',
-        type:'POST',
-        dataType:'json',
-        data:{data_id:'ver_comanda',id:id},
-        success: function(json){
-          $("#aqui_modal").html(json[3]);
-          $("#md_ver_comanda").modal("show");
-        }
-      });
+  $.ajax({
+    url:'json_comandas.php',
+    type:'POST',
+    dataType:'json',
+    data:{data_id:'ver_comanda',id:id},
+    success: function(json){
+      $("#aqui_modal").html(json[3]);
+      $("#md_ver_comanda").modal("show");
     }
+  });
+}
+
+function anular(codigo){
+  swal({
+       title: '¿Desea continuar?',
+       text: "¡Se anulará la comanda!",
+       type: 'warning',
+       showCancelButton: true,
+       cancelButtonText:"Cancelar",
+       confirmButtonColor: 'red',
+       cancelButtonColor: '#3085d6',
+       confirmButtonText: '¡Si, continuar!'
+   }).then(function () {
+      swal({
+         title: '¿Está realmente seguro?',
+         text: "¡Se acción eliminará permanentemente la comanda y no podrá acceder a ella nuevamente!",
+         type: 'warning',
+         showCancelButton: true,
+         cancelButtonText:"Cancelar",
+         confirmButtonColor: 'red',
+         cancelButtonColor: '#3085d6',
+         confirmButtonText: '¡Si, continuar!'
+      }).then(function () {
+        $.ajax({
+          url:'json_comandas.php',
+          type:'POST',
+          dataType:'json',
+          data:{codigo,data_id:'anular'},
+          success: function(json){
+            if(json[0]==1){
+              iziToast.success({
+                  title: ELIMINAR,
+                  message: ELIMINAR_MENSAJE,
+                  timeout: 3000,
+              });
+              var timer=setInterval(function(){
+                  cargar_todos();
+                  clearTimeout(timer);
+              },3500);
+            }else{
+              iziToast.error({
+                title: ERROR,
+                message: ERROR_MENSAJE,
+                timeout: 3000,
+            });
+            }
+          }
+        });
+      });
+   });
+}
 
 

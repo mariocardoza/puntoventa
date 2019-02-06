@@ -46,8 +46,12 @@ class Empleado
 		}
 	}
 
-	public static function busqueda($dato){
-        $sql="SELECT * FROM tb_persona WHERE nombre LIKE '%$dato%'";
+	public static function busqueda($dato,$estado){
+		$elestado="";
+		if($estado!=""){
+			$elestado="AND p.estado=$estado";
+		}
+        $sql="SELECT * FROM tb_persona as p WHERE p.nombre LIKE '%$dato%' $elestado";
         try{
             $comando=Conexion::getInstance()->getDb()->prepare($sql);
             $comando->execute();
@@ -58,17 +62,25 @@ class Empleado
                     <table width="100%">
                         <tbody>
                             <tr>
-                                <td width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a></td>
-                                <td style="font-size:18px"><b>'.$row[nombre].'</b></td>
+                                <td style="padding: 5px 0px;" width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[id].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a></td>
+                                <td rowspan="2" style="font-size:18px"><b>'.$row[nombre].'</b></td>
                             </tr>
                             <tr>
-                                <td height="18px"></td>
-                                <td></td>
+                            <td><a style="width:35px; height:35px;" href="javascript:void(0)" id="cambiar_pass" data-nombre="'.$row[nombre].'" data-email="'.$row[email].'" class="btn btn-mio"><i class="fa fa-key"></i></a></td>
                             </tr>
                             <tr>
-                                <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_persona\',\'el empleado\')" data-toggle="tooltip" title="Eliminar"><img src="../../img/iconos/eliminar.svg" width="35px" height="35px"></a></td>
-                                <td style="font-size:18px">'.$row[email].'</td>
-                            </tr>
+                                <td style="padding: 5px 0px;" height="18px"><a href="javascript:void(0)" onclick="ver(\''.$row[id].'\')"><img src="../../img/iconos/ojo.svg" width="35px" height="35px"></a></td>
+                                <td style="font-size:18px">DUI: '.$row[dui].'</td>
+                            </tr>';
+                            if($row[estado]==1):
+                                $html.='<tr><td style="padding: 5px 0px;" width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_persona\',\'el empleado\')" data-toggle="tooltip" title="Eliminar"><img src="../../img/iconos/eliminar.svg" width="35px" height="35px"></a></td>
+                                <td style="font-size:18px">Email: '.$row[email].'</td>';
+                            else:
+                            	$html.='<tr><td style="padding: 5px 0px;" width="15%"><a href="javascript:void(0)" onclick="daralta(\''.$row[id].'\',\'tb_persona\',\'el empleado\')" data-toggle="tooltip" class="btn btn-mio" title="Alta"><i class="fa fa-level-up"></i></a></td>
+                                <td style="font-size:18px"> Email: '.$row[email].'</td>';
+                            	
+                        	endif;
+                        $html.='</tr>
                         </tbody>
                     </table>
                   </div>
@@ -129,11 +141,12 @@ class Empleado
 
 	//funcion editar empleado
 	public static function editar_empleado($data){
-		$sql="UPDATE `tb_persona` SET `nombre`='$data[nombre]',`telefono`='$data[telefono]',`email`='$data[email]',`dui`='$data[dui]',`nit`='$data[nit]',`genero`='$data[genero]',`direccion`='$data[direccion]' WHERE id= $data[id]";
+		$sql="UPDATE `tb_persona` SET `nombre`='$data[nombre]',`telefono`='$data[telefono]',`email`='$data[email]',`dui`='$data[dui]',`nit`='$data[nit]',`genero`='$data[genero]',`direccion`='$data[direccion]' WHERE id= $data[id];
+		UPDATE tb_usuario SET email='$data[email]', usuario='$data[username]' WHERE codigo_oculto='$data[codigo_oculto]'";
 		try{
 			$comando=Conexion::getInstance()->getDb()->prepare($sql);
 			$comando->execute();
-			return array(1,"exito","actualizado");
+			return array(1,"exito","actualizado",$data[codigo_oculto]);
 		}catch(Exception $e){
 			return array(-1,"error",$e->getMessage(),$sql);
 		}
@@ -141,7 +154,7 @@ class Empleado
 
 	//crear modal para editar
 	public static function modal_editar($id){
-		$sql="SELECT * FROM tb_persona WHERE id=$id";
+		$sql="SELECT p.*,u.usuario as usuario FROM tb_persona as p LEFT JOIN tb_usuario as u ON p.email=u.email WHERE p.id=$id";
 		$empleado="";
 		try{
 		$comando=Conexion::getInstance()->getDb()->prepare($sql);
@@ -158,7 +171,7 @@ class Empleado
             <button type="button" class="close" data-dismiss="modal">
               <span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title">Editar empleado '.$empleado[nombre].'</h4>
+            <h4 class="modal-title"><b>Editar empleado</b> '.$empleado[nombre].'</h4>
           </div>
           <div class="modal-body">
           <form method="post" accept-charset="utf-8" name="fm_editar_empleado" id="fm_editar_empleado">
@@ -168,6 +181,7 @@ class Empleado
                     <div class="form-group">
                       <label for="">Nombre(*)</label>
                       <input type="hidden" name="id" value="'.$empleado[id].'">
+                      <input type="hidden" name="codigo_oculto" value="'.$empleado[codigo_oculto].'">
                       <input type="text" class="form-control" id="n_nombre" name="nombre" required placeholder="Ingrese el nombre" value="'.$empleado[nombre].'" >
                     </div>
                     <div class="form-group">
@@ -182,8 +196,6 @@ class Empleado
                         <label class="control-label" for="rol">Dirección(*):</label>
                         <textarea name="direccion" required class="form-control" id="n_direccion" cols="30" rows="4">'.$empleado[direccion].'</textarea>
                     </div>
-                </div>
-                <div class="col-md-6">
                     <div class="form-group"> 
                         <label class="control-label" for="rol">DUI(*):</label>
                         <input type="text" required name="dui" id="n_dui" value="'.$empleado[dui].'" class="form-control dui">
@@ -192,9 +204,15 @@ class Empleado
                         <label class="control-label" for="rol">NIT(*):</label>
                         <input type="text" value="'.$empleado[nit].'" required name="nit" id="n_nit" class="form-control nit">
                     </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                    	<label for="" class="control-label">Nombre de usuario</label>
+                    	<input type="text" name="username" id="username" value="'.$empleado[usuario].'" class="form-control">
+                    </div>
                     <div class="form-group"> 
                         <label class="control-label" for="rol">Género(*):</label>
-                        <select id="genero" required name="genero" class="form-control select_piker2" data-plugin="selectpicker" data-live-search="true" data-placeholder="Seleccione el Municipio" readonly="" style="width: 250px;">
+                        <select id="genero" required name="genero" class="form-control select_piker2" data-plugin="selectpicker" data-live-search="true" data-placeholder="Seleccione el Municipio" readonly="" style="width: 100%;">
                             <option value="" disabled="" selected="">seleccione..</option>';
                             if($empleado[genero]=='Femenino'){
                             	$html.='<option selected value="Femenino">Femenino</option>
@@ -253,6 +271,80 @@ class Empleado
 
 	}
 
+	public static function modal_ver($id){
+		$sql="SELECT p.*,u.usuario as usuario FROM tb_persona as p LEFT JOIN tb_usuario as u ON u.email=p.email WHERE p.id='$id'";
+		try{
+			$comando=Conexion::getInstance()->getDb()->prepare($sql);
+			$comando->execute();
+			while ($row=$comando->fetch(PDO::FETCH_ASSOC)) {
+				$modal.='<div class="modal fade modal-side-fall" id="md_ver_empleado" aria-hidden="true"
+      aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title"></h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+            	<div class="col-md-6">';
+            	if($row[imagen]==""):
+            		$modal.='<img src="../../img/usuario/avatar2.jpg" width="400" height="400">';
+            	else:
+            		$modal.='<img src="../../img/usuario/'.$row[imagen].'" width="400" height="400">';
+            	endif;
+            	$modal.='</div>
+            	<div class="col-md-6">
+            		<table class="table">
+                <tbody>
+                    <tr>
+                        <th>Nombre</th>
+                        <td>'.$row[nombre].'</td>
+                    </tr>
+                    <tr>
+                        <th>Dirección</th>
+                        <td>'.$row[direccion].'</td>
+                    </tr>
+                    <tr>
+                        <th>Teléfono</th>
+                        <td>'.$row[telefono].'</td>
+                    </tr>
+                    <tr>
+                        <th>DUI</th>
+                        <td>$'.$row[dui].'</td>
+                    </tr>
+                    <tr>
+                        <th>NIT</th>
+                        <td>'.$row[nit].'</td>
+                    </tr>
+                    <tr>
+                        <th>Nombre de usuario</th>
+                        <td>'.$row[usuario].'</td>
+                    </tr>
+                    <tr>
+                        <th>Correo electrónico</th>
+                        <td>'.$row[email].'</td>
+                    </tr>
+                </tbody>
+            </table>
+            	</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>';
+			}
+			return array(1,"exito",$modal);
+		}catch(Exception $e){
+			return array(-1,"error",$e->getMessage,$sql);
+		}
+	}
+
 	public static function eliminar_empleado($id){
 		$sql="UPDATE tb_persona SET estado=2 WHERE id=$id";
 		try{
@@ -267,7 +359,7 @@ class Empleado
 	}
 
 	public static function get_img_anterior($id){
-		$sql="SELECT imagen FROM persona WHERE codigo_oculto = '$id';";
+		$sql="SELECT imagen FROM tb_persona WHERE codigo_oculto = '$id';";
 		$html="";
     	$datos=null;
 	 	$datos_modelo=array();
@@ -285,7 +377,7 @@ class Empleado
 	}
 
 	public static function set_img($id,$imagen){
-		$sql="UPDATE `persona` SET `imagen` = '$imagen' WHERE `codigo_oculto` = '$id';";
+		$sql="UPDATE `tb_persona` SET `imagen` = '$imagen' WHERE `codigo_oculto` = '$id';";
 		$html="";
     	$datos=null;
 	 	$datos_modelo=array();

@@ -12,7 +12,10 @@ if(isset($_POST) || isset($_GET)){
 		$result = Comanda::nueva_comanda($_POST);
 		echo json_encode($result);exit();
 	}
-
+	if($_POST['data_id']=='actualizar_comanda'){
+		$result=Comanda::actualizar_comanda($_POST);
+		echo json_encode($result);exit();
+	}
 	if($_POST['data_id']=='busqueda'){
 		$result=Comanda::busqueda($_POST['esto'],$_POST['tipo']);
 		echo json_encode($result);exit();
@@ -29,10 +32,13 @@ if(isset($_POST) || isset($_GET)){
 		$result = Comanda::ver_comanda($_POST[id]);
 		echo json_encode($result);exit();
 	}
-	if($_POST['data_id']='cobrar'){
+	if($_POST['data_id']=='cobrar'){
 		$result=Comanda::cobrar($_POST);
 		echo json_encode($result);exit();
 	}
-
+	if($_POST['data_id']=='anular'){
+		$result=Comanda::eliminar($_POST);
+		echo json_encode($result);exit();
+	}
 }
 ?>

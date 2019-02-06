@@ -51,6 +51,7 @@ $tipos=Comanda::tipos();
 
 <div id="page-content" style="background-color: #F2F2F2;">
     <form action="#" method="post" name="fm_orden" id="fm_orden" class="form-horizontal">
+      <div class="row">
         <div class="col-lg-12">
             <div class="row" style="background-color: #F2F2F2;">
                 <div class="col-lg-12" style="background-color: #F2F2F2;">
@@ -81,7 +82,7 @@ $tipos=Comanda::tipos();
                                 <div class="widget">
                                     <div class="widget-simple <?php echo ($mesa[ocupado] == 0) ? 'themed-background-dark' : 'themed-background-dark-fire' ?>">
                                         <a data-codigo="<?php echo $mesa[codigo_oculto] ?>" data-nombre="<?php echo $mesa[nombre] ?>" href="#" id="<?php echo ($mesa[ocupado]==0)? 'libre' : 'ocupado' ?>" >
-                                            <img src="../../img/placeholders/mesa.png" alt="avatar" class="widget-image img-circle pull-left">
+                                            <img src="../../img/placeholders/MESAS.svg" alt="avatar" class="widget-image img-circle pull-left">
                                         </a>
                                         <h4 class="widget-content">
                                             <a data-nombre="<?php echo $mesa[nombre] ?>" data-codigo="<?php echo $mesa[codigo_oculto] ?>" href="#" id="<?php echo ($mesa[ocupado]==0)? 'libre1' : 'ocupado1' ?>">
@@ -97,23 +98,24 @@ $tipos=Comanda::tipos();
                     <div class="block" id="orden" style="display: none;">
                       <div class="row">
                         <div class="widget">
-                                    <div class="widget-simple themed-background-dark-fire">
-                                        <img id="img_tipo" src="../../img/placeholders/mesa.png" alt="avatar" class="widget-image img-circle pull-left">
-                                        <h4 class="widget-content">                         <a href="javascript:void(0)" >
-                                            <p id="tipo_ordenes"></p>
-                                            <strong id="num_mesa"></strong>
-                                            <p id="para_cuantos"></p>
-                                            <p id="nome_cliente"></p>
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <input type="hidden" id="id_mesa">
-                                <input type="hidden" id="numero_clientes">
-                                <input type="hidden" id="tipo_pedido">
-                                <input type="hidden" id="total_comanda"> 
-                                <input type="hidden" id="nom_cliente">
-                                <input type="hidden" id="direccion">
+                          <div class="widget-simple themed-background-dark-fire">
+                              <img id="img_tipo" src="../../img/placeholders/mesa.png" alt="avatar" class="widget-image img-circle pull-left">
+                              <h4 class="widget-content">       
+                                  <a href="javascript:void(0)">
+                                    <p id="tipo_ordenes"></p>
+                                    <p id="num_mesa"></p>
+                                    <p id="para_cuantos"></p>
+                                    <p id="nome_cliente"></p>
+                                  </a>
+                              </h4>
+                          </div>
+                        </div>
+                        <input type="hidden" id="id_mesa">
+                        <input type="hidden" id="numero_clientes">
+                        <input type="hidden" id="tipo_pedido">
+                        <input type="hidden" id="total_comanda"> 
+                        <input type="hidden" id="nom_cliente">
+                        <input type="hidden" id="direccion">
                         <div class="col-xs-3 col-lg-3" style="height: 840px;overflow-y: auto;">
                           <h2>Categorías</h2>
                           <div class="row" style="height: 700px;">
@@ -129,7 +131,7 @@ $tipos=Comanda::tipos();
                                   </div>
                                 </div>
                               </div>
-                          <?php endforeach ?>
+                            <?php endforeach ?>
                           </div>
                         </div>
                         <div class="col-xs-3 col-lg-3" style="height: 840px;overflow-y: auto;">
@@ -154,10 +156,11 @@ $tipos=Comanda::tipos();
           <div class="form-group">
             <center>
               <button class="btn btn-mio" type="button" id="comandar">Aceptar</button>
-              <button class="btn btn-default" id="btn_cancelar_comanda">Cancelar</button>
+              <a href="comandas.php" class="btn btn-default" >Cancelar</a>
             </center>
           </div>
-        </div>  
+        </div> 
+      </div> 
     </form>
     <!-- END Product Edit Content -->
 <?php include 'modales.php'; ?>
@@ -167,7 +170,9 @@ $tipos=Comanda::tipos();
 <?php include '../../inc/page_footer.php'; ?>
 <?php include '../../inc/template_scripts.php'; ?>
 
-
+<script>
+var total_php=parseFloat(0.00);
+</script>
 <!-- Load and execute javascript code used only in this page -->
 <script src="comandas.js?cod=<?php echo date("Yidisus") ?>"></script>    
 <?php include '../../inc/template_end.php'; ?>

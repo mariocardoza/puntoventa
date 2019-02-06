@@ -175,86 +175,6 @@
 			}
 			
 		}
-		public static function retornar_contactos2($id_ingenio,$pertenece_a){
-			$html='';
-			$html.='<table id="tabla_telefonos" class="table table-bordered table-striped table-vcenter">
-			            <thead>
-			                <tr>
-			                    
-			                    <th class="text-left">Nombre</th>
-			                    <th class="text-left">Tipo</th>
-			                    <th class="text-left">Número de Teléfono</th>
-			                    <th class="text-left">Email</th>
-			                    <th class="text-left">Acciones</th>
-			                </tr>
-			            </thead>
-			            <tbody>';
-			$labels['0']['class']   = "label-success";
-            $labels['0']['text']    = "Available";
-            $labels['1']['class']   = "label-danger";
-            $labels['1']['text']    = "Out of Stock";
-
-			try {
-				$sql = "SELECT 
-							i.id as elid,
-							i.id_ingenio,
-							i.contacto as nombre,
-							i.telefono,
-							i.email,
-							i.descripcion,
-							i.id_tipo_contactos,
-							tc.contacto as elcontacto,i.pertenece_a
-						FROM
-							ingenio_contactos as i
-						JOIN tipo_contactos as tc
-						ON tc.id = i.id_tipo_contactos
-						WHERE
-							i.id_ingenio = '$id_ingenio' and i.pertenece_a='$pertenece_a'";
-
-                $comando = Conexion::getInstance()->getDb()->prepare($sql);
-                $comando->execute();
-                while ($row = $comando->fetch(PDO::FETCH_ASSOC)) {
-                	$html.="<tr>";
-                    $html.="<td>$row[nombre]</td>";
-                    $html.="<td>$row[elcontacto]</td>";
-                    $html.="<td>$row[telefono]</td>";
-                     $html.="<td>$row[email]</td>";
-					$html.="<td class='text-center nowrap'> 
-                            
-                                <a id='a1' class='btn btn-sm btn-primary' data-pertenece_a ='$row[pertenece_a]' data-tipocontactos ='$row[id_tipo_contactos]' data-iid ='$row[elid]' data-contacto ='$row[nombre]' data-telefono ='$row[telefono]' data-email ='$row[email]' data-descripcion ='$row[descripcion]' data-nombre ='$row[nombre]' data-toggle='tooltip' title='Editar' href='javascript:void(0)' data-toggle='modal' ><i class='fa fa-pencil pull-center'></i></a>
-
-                                
-                                <a data-iid ='$row[elid]'  class='btn btn-sm btn-danger' id='btneliminar' data-toggle='tooltip' href='javascript:void(0)' title='Eliminar' ><i class='fa fa-trash pull-center'></i></a>
-                                
-
-                             
-                        </td>
-                    </tr>";
-
-
-
-                }
-
-                $html.='</tbody>
-        		</table>';
-
-        		$script="App.datatables();
-        		$('#tabla_telefonos').dataTable({
-	                columnDefs: [
-	                    { type: 'date-custom', targets: [1] },
-	                    { orderable: false, targets: [2] }
-	                ],
-	                order: [[ 0, 'desc' ]],
-	                pageLength: 5,
-	                lengthMenu: [[5, 20, 30, -1], [5, 20, 30, 'Todo']]
-	            });";
-
-
-               	return array('1',$sql,$html,$script);
-			} catch (Exception $e) {
-				return array('-1',$e->getMessage(),$e->getLine());
-			}
-		}
 
 		public static function encriptar_datos($datos, $key){
 
@@ -338,7 +258,8 @@
 	 			$as++;
 	 			if ($key === 'table') {//obtengo tabla
 	 				$tabla = $array_values[$key];
-	 			}else if ($as===2) {//obtengo id para update
+	 			}
+	 			else if ($as===2) {//obtengo id para update
 	 				$valor_whereid = $array_values[$key];
 	 				$wherid= $key;
 	 			} 
@@ -353,6 +274,9 @@
 					}
 					$agregando_as.=$as;
 				}
+				if($key==='codigo_oculto'){
+					$elid=$array_values[$key];
+				}
 	 		}
 
 	 		$sql ="UPDATE $tablita SET $sentencia_update WHERE $wherid = '$valor_whereid'";//String de update creada
@@ -362,7 +286,7 @@
 			try {
 				$comando = Conexion::getInstance()->getDb()->prepare($sql);//ejecutro la actualización
 	       		$comando->execute();
-	       		return array("1",array("Actualizado",$sql));//retorno en caso de exito 
+	       		return array("1",array("Actualizado",$sql),$elid);//retorno en caso de exito 
 				//echo json_encode(array("exito" => $exito));
 			} catch (Exception $e) {
 				return array("0","Error al actualizar",$e->getMessage(),$e->getLine(),$sql);//retorno mensajes en caso de error
@@ -387,6 +311,7 @@
 			}
 
 			$sql = "DELETE FROM $tabla WHERE $campo = '$valor_campo'";
+			
 			try {
 				$comando = Conexion::getInstance()->getDb()->prepare($sql);
 	            $comando->execute();

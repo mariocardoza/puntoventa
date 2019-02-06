@@ -1,0 +1,5 @@
+[02-Feb-2019 15:14:28 America/El_Salvador] PHP Warning:  include(modales.php): failed to open stream: No such file or directory in /home1/estudjl6/public_html/sys/puntoventa/php/reservas/reservas.php on line 61
+[02-Feb-2019 15:14:28 America/El_Salvador] PHP Warning:  include(modales.php): failed to open stream: No such file or directory in /home1/estudjl6/public_html/sys/puntoventa/php/reservas/reservas.php on line 61
+[02-Feb-2019 15:14:28 America/El_Salvador] PHP Warning:  include(): Failed opening 'modales.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home1/estudjl6/public_html/sys/puntoventa/php/reservas/reservas.php on line 61
+[02-Feb-2019 22:50:08 UTC] PHP Fatal error:  Class 'Conexion' not found in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Reserva.php on line 25
+[02-Feb-2019 22:50:23 UTC] PHP Fatal error:  Class 'Conexion' not found in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Reserva.php on line 25

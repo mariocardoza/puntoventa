@@ -58,6 +58,7 @@ date_default_timezone_set('America/El_Salvador');
         <!-- Modernizr (browser feature detection library) -->
         <script src="../../js/vendor/modernizr.min.js"></script>
         <link rel="stylesheet" href="../../css/animate.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
         
         <!--script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.28.5/dist/sweetalert2.all.min.js"></script-->
      

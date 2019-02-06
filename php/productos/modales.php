@@ -29,17 +29,17 @@
                     </div>
                     <div class="form-group">
                         <label for="" class="control-label">Lote</label>
-                        <input type="number" id="lote_mas" name="lote_mas" class="form-control">
+                        <input type="text" id="lote_mas" name="lote_mas" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="" class="control-label">Fecha de vencimiento</label>
                         <input type="text" id="vencimiento_mas" name="vencimiento_mas" class="form-control vecimi">
                     </div>
                     <div class="form-group">
-                        <div class="col-md-offset-3">
+                        <center>
                             <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Cerrar</button>
                             <button type="button" id="agregar_existencia" class="btn btn-mio btn-pure">Guardar</button>
-                        </div>
+                        </center>
                     </div>
                 </div>
             </div>
@@ -142,7 +142,7 @@
                         <div class="form-group">
                           <label class="control-label" for="categoria">Categoría</label>
                           <select id="categoria" name="categoria" class="select-chosen" data-placeholder="Seleccione un categoría" style="width: 250px;">
-                              <option></option>
+                            <option></option>
                           </select>
                         </div>
                       </div>
@@ -153,19 +153,19 @@
                               <option></option>
                           </select>
                         </div> 
-                    </div>
+                      </div>
                     </div>
 
                     <div class="row">
                         <div class="col-xs-4 col-lg-4">
                             <div class="form-group">
-                                  <label for="" class="control-label">Unidad de medida</label>
-                                  <select name="medida" id="medida" class="select-chosen" data-placeholder="Seleccione una unidad de medida">
-                                      <option></option>
-                                      <?php foreach ($unidades as $unidad): ?>
-                                          <option value="<?php echo $unidad[id] ?>"><?php echo $unidad[abreviatura]; ?></option>
-                                      <?php endforeach ?>
-                                  </select>
+                              <label for="" class="control-label">Unidad de medida</label>
+                              <select name="medida" id="medida" class="select-chosen" data-placeholder="Seleccione una unidad de medida">
+                                  <option></option>
+                                  <?php foreach ($unidades as $unidad): ?>
+                                      <option value="<?php echo $unidad[id] ?>"><?php echo $unidad[abreviatura]; ?></option>
+                                  <?php endforeach ?>
+                              </select>
                             </div>
                         </div>
                         <div class="col-xs-4 col-lg-4">
@@ -183,32 +183,32 @@
                     </div>                  
                     <div class="row">
                         <div class="col-xs-4 col-lg-4">
+                          <div class="form-group">
+                            <label class="control-label" for="precio_unitario">Precio unitario</label>
+                            <input type="number" id="precio_unitario" name="precio_unitario" class="form-control" placeholder="Precio unitario de venta">
+                          </div>
+                        </div>
+                        <div class="col-xs-4 col-lg-4">
                             <div class="form-group">
-                                <label class="control-label" for="precio_unitario">Precio unitario</label>
-                                <input type="number" id="precio_unitario" name="precio_unitario" class="form-control" placeholder="Precio unitario de venta">
+                              <label for="" class="control-label">Porcentaje de ganancia</label>
+                              <input type="number" placeholder="Porcentaje de ganancia" id="ganancia" name="ganancia" class="form-control">
                             </div>
                         </div>
                         <div class="col-xs-4 col-lg-4">
                             <div class="form-group">
-                                <label for="" class="control-label">Porcentaje de ganancia</label>
-                                <input type="number" placeholder="Porcentaje de ganancia" id="ganancia" name="ganancia" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-xs-4 col-lg-4">
-                            <div class="form-group">
-                                <label for="" class="control-label">Presentación</label>
-                                <input type="text" name="presentacion" id="presentacion" class="form-control" placeholder="Ej. lata o libra">
+                              <label for="" class="control-label">Presentación</label>
+                              <input type="text" name="presentacion" id="presentacion" class="form-control" placeholder="Ej. lata o libra">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-4 col-lg-4" style="padding-left: 30px; padding-right: 16px;">
                     <div class="form-group">
-                        <label class="control-label" for="">¿Producto perecedero?</label>
-                            No
-                        <label class="switch switch-success">
-                        <input name="perecedero" id="perecedero" value="si" type="checkbox"><span></span></label>
-                            Si
+                      <label class="control-label" for="">¿Producto perecedero?</label>
+                          No
+                      <label class="switch switch-success">
+                      <input name="perecedero" id="perecedero" value="si" type="checkbox"><span></span></label>
+                          Si
                     </div>
                     <div class="form-group" style="display: none;" id="venci">
                         <label for="" class="control-label">Fecha de vencimiento</label>
@@ -228,44 +228,43 @@
                         </select>
                     </div>
                     <div class="form-group">
-                    <label for="" class="control-label">Seleccione si el producto será un ingrediente</label>
-                    <div class="icheck-turquoise icheck-inline">
-                        <input type="radio" value="0" name="ingrediente" checked id="no" />
-                        <label for="no">No</label>
+                      <label for="" class="control-label">Seleccione si el producto será un ingrediente</label>
+                      <div class="icheck-turquoise icheck-inline">
+                          <input type="radio" value="0" name="ingrediente" checked id="no" />
+                          <label for="no">No</label>
+                      </div>
+                      <div class="icheck-turquoise icheck-inline">
+                          <input type="radio" value="1" name="ingrediente" id="si" />
+                          <label for="si">Si</label>
+                      </div>          
                     </div>
-                    <div class="icheck-turquoise icheck-inline">
-                        <input type="radio" value="1" name="ingrediente" id="si" />
-                        <label for="si">Si</label>
-                    </div>          
-                </div>
                     <div class="row">
-                        <div class="col-xs-6 col-lg-6">
-                           <!--label for="firma1">Imagen(*):</label-->
-                           <div class="form-group " >
-                              <img src="../../img/imagenes_subidas/image.svg" style="width: 100px;height: 102px;" id="img_file">
-                              <input type="file" class="archivos hidden" id="file_1" name="file_1" />
-                           </div>
+                      <div class="col-xs-6 col-lg-6">
+                        <div class="form-group " >
+                          <img src="../../img/imagenes_subidas/image.svg" style="width: 100px;height: 102px;" id="img_file">
+                          <input type="file" class="archivos hidden" id="file_1" name="file_1" />
                         </div>
-                        <div class="col-xs-6 col-lg-6 ele_div_imagen">
-                            <div class="form-group">
-                                  <h5>La imagen debe de ser formato png o jpg con un peso máximo de 3 MB</h5>
-                            </div><br><br>
-                            <div class="form-group">
-                              <button type="button" class="btn btn-sm btn-mio" id="btn_subir_img"><i class="icon md-upload" aria-hidden="true"></i> Seleccione Imagen</button>
-                            </div>
-                            <div class="form-group">
-                              <div id="error_formato1" class="hidden"><span style="color: red;">Formato de archivo invalido. Solo se permiten los formatos JPG y PNG.</span>
-                              </div>
-                            </div>
+                      </div>
+                      <div class="col-xs-6 col-lg-6 ele_div_imagen">
+                        <div class="form-group">
+                              <h5>La imagen debe de ser formato png o jpg con un peso máximo de 3 MB</h5>
+                        </div><br><br>
+                        <div class="form-group">
+                          <button type="button" class="btn btn-sm btn-mio" id="btn_subir_img"><i class="icon md-upload" aria-hidden="true"></i> Seleccione Imagen</button>
                         </div>
-                        
+                        <div class="form-group">
+                          <div id="error_formato1" class="hidden"><span style="color: red;">Formato de archivo invalido. Solo se permiten los formatos JPG y PNG.</span>
+                          </div>
+                        </div>
+                      </div>    
                     </div>
                 </div>
-                <div class="col-lg-12">
+                <div class="col-xs-12 col-lg-12">
                     <div class="form-group">
-                        <center>
-                            <button type="submit" class="btn btn-mio" id="">Guardar</button>
-                        </center>
+                      <center>
+                        <button type="submit" class="btn btn-mio" id="">Guardar</button>
+                        <button class="btn btn-default" type="button" id="btn_cerrar_modal">Cerrar</button>
+                      </center>
                     </div>
                 </div>
             </div>            

@@ -22,13 +22,18 @@
 		echo json_encode($result);
 		exit();
 	}
+	if($_GET['data_id']=='modal_ver'){
+		$result = Empleado::modal_ver($_GET['id']);
+		echo json_encode($result);
+		exit();
+	}
 	if($_POST['data_id']=='editar_empleado'){
 		$result=Empleado::editar_empleado($_POST);
 		echo json_encode($result);
 		exit();
 	}
 	if($_POST['data_id']=='busqueda'){
-		$result=Empleado::busqueda($_POST['esto']);
+		$result=Empleado::busqueda($_POST['esto'],$_POST['estado']);
 		echo json_encode($result);exit();
 	}
 	if($_GET['data_id']=='eliminar_empleado'){

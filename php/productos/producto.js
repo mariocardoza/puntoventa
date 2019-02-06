@@ -34,7 +34,14 @@ $(document).ready(function(e){
 
     //cargar modal de registrar nuevo
     $(document).on("click","#modal_guardar", function(e){
+      //$("#img_file").attr("src","../../img/imagenes_subidas/image.svg");
       $("#md_guardar").modal("show");
+    });
+
+    $(document).on("click","#btn_cerrar_modal", function(e){
+        $(".form-control").val("");
+        $("#img_file").attr("src","../../img/imagenes_subidas/image.svg");
+        $(".modal").modal("hide");
     });
 
     /// *** buscar segun estado *** ///
@@ -103,11 +110,16 @@ $(document).ready(function(e){
           data:datos,
           success: function(json){
             if(json[0]==1){
-              guardar_exito();
-                  cargar();
-                  //alert("aqui");
+              if ($("#file_1").val()!="") {
+                insertar_imagen($("#file_1"),json[2]);
+              }else{
+                guardar_exito();
                 $(".modal").modal("hide");
-               $(".form-control").val("");
+            $(".form-control").val("");  
+            cargar();
+            //$("#md_nuevo").modal('toggle');
+            //window.location.href="productos.php";
+              }
             }else{
               swal.chose();
               guardar_error();
@@ -124,27 +136,12 @@ $(document).ready(function(e){
     $(document).on("click", "#btn_subir_img", function (e) {
         $("#file_1").click();
     });
-    $("#file_1").change(function(event) {
+    $(document).on("change", "#file_1", function(event) {
+      console.log("llego");
         validar_archivo($(this));
     });
 
-    //codigo para generar el sku
-    $(document).on("click","#generar_sku", function(e){
-    	$.ajax({
-    		type: 'GET',
-    		url:'generar_bc.php',
-    		dataType: 'json',
-    		data:{},
-    		success: function(json){
-    			console.log(json)
-    		}
-    	});
-    });
-
-    ///abrir modal de ver producto
-
-
-
+   
     $("form[name='form-productog']").validate({
             ignore: ":hidden:not(select)",
             rules: {
@@ -299,8 +296,6 @@ $(document).ready(function(e){
 });
 //ver información de un producto
 function verproducto(id){
-  //$("#md_ver_producto").modal('show');
-  //alert(id);
   $.ajax({
     url:'json_productos.php',
     type:'GET',
@@ -316,7 +311,6 @@ function verproducto(id){
 ///guardar en la base de datos
 function guardar(){
 	var datos = $("#form-productog").serialize();
-  //var equivalencia = $("#medida").attr("data-equivalencia");
 	console.log(datos);
 	$.ajax({
 		type: 'POST',
@@ -334,11 +328,11 @@ function guardar(){
             message: 'Datos almacenados correctamente',
             timeout: 3000,
           });
-          var timer=setInterval(function(){
             //$("#md_nuevo").modal('toggle');
             //window.location.href="productos.php";
-            clearTimeout(timer);
-          },3500);
+            $(".modal").modal("hide");
+            $(".form-control").val("");  
+            cargar();
         }
       }if(json[0]==-1){
         swal.close();
@@ -354,188 +348,186 @@ function guardar(){
 
 //funcion que validad que el archivo sea una imagen
 function validar_archivo(file){
-        $("#img_file").attr("src","../../img/imagenes_subidas/image.svg");//31.gif
-            //var ext = file.value.match(/\.(.+)$/)[1];
-             //Para navegadores antiguos
-             if (typeof FileReader !== "function") {
-                $("#img_file").attr("src",'../../img/imagenes_subidas/image.svg');
-                return;
-             }
-             var Lector;
-             var Archivos = file[0].files;
-             var archivo = file;
-             var archivo2 = file.val();
-             if (Archivos.length > 0) {
-
-                Lector = new FileReader();
-
-                Lector.onloadend = function(e) {
-                    var origen, tipo, tamanio;
-                    //Envia la imagen a la pantalla
-                    origen = e.target; //objeto FileReader
-                    //Prepara la información sobre la imagen
-                    tipo = archivo2.substring(archivo2.lastIndexOf("."));
-                    console.log(tipo);
-                    tamanio = e.total / 1024;
-                    console.log(tamanio);
-
-                    //Si el tipo de archivo es válido lo muestra, 
-
-                    //sino muestra un mensaje 
-
-                    if (tipo !== ".jpeg" && tipo !== ".JPEG" && tipo !== ".jpg" && tipo !== ".JPG" && tipo !== ".png" && tipo !== ".PNG") {
-                        $("#img_file").attr("src",'../../img/imagenes_subidas/photo.svg');
-                        $("#error_formato1").removeClass('hidden');
-                        //$("#error_tamanio"+n).hide();
-                        //$("#error_formato"+n).show();
-                        console.log("error_tipo");
-                    }
-                    else{
-                        $("#img_file").attr("src",origen.result);
-                        $("#error_formato1").addClass('hidden');
-                    }
-
-
-               };
-                Lector.onerror = function(e) {
-                console.log(e)
-               }
-               Lector.readAsDataURL(Archivos[0]);
+  $("#img_file").attr("src","../../img/imagenes_subidas/image.svg");//31.gif
+      //var ext = file.value.match(/\.(.+)$/)[1];
+       //Para navegadores antiguos
+       if (typeof FileReader !== "function") {
+          $("#img_file").attr("src",'../../img/imagenes_subidas/image.svg');
+          return;
        }
-       
-    }
+       var Lector;
+       var Archivos = file[0].files;
+       var archivo = file;
+       var archivo2 = file.val();
+       if (Archivos.length > 0) {
+
+          Lector = new FileReader();
+
+          Lector.onloadend = function(e) {
+              var origen, tipo, tamanio;
+              //Envia la imagen a la pantalla
+              origen = e.target; //objeto FileReader
+              //Prepara la información sobre la imagen
+              tipo = archivo2.substring(archivo2.lastIndexOf("."));
+              console.log(tipo);
+              tamanio = e.total / 1024;
+              console.log(tamanio);
+
+              //Si el tipo de archivo es válido lo muestra, 
+
+              //sino muestra un mensaje 
+
+              if (tipo !== ".jpeg" && tipo !== ".JPEG" && tipo !== ".jpg" && tipo !== ".JPG" && tipo !== ".png" && tipo !== ".PNG") {
+                  $("#img_file").attr("src",'../../img/imagenes_subidas/photo.svg');
+                  $("#error_formato1").removeClass('hidden');
+                  //$("#error_tamanio"+n).hide();
+                  //$("#error_formato"+n).show();
+                  console.log("error_tipo");
+              }
+              else{
+                  $("#img_file").attr("src",origen.result);
+                  $("#error_formato1").addClass('hidden');
+              }
+
+
+         };
+          Lector.onerror = function(e) {
+          console.log(e)
+         }
+         Lector.readAsDataURL(Archivos[0]);
+  }
+}
 
     //subir la imagen
-    function insertar_imagen(archivo,id_prod){
-        var file =archivo.files;
-        var formData = new FormData();
-        formData.append('formData', $("#form-producto"));
-        var data = new FormData();
-         //Append files infos
-         jQuery.each(archivo[0].files, function(i, file) {
-            data.append('file-'+i, file);
-         });
+function insertar_imagen(archivo,id_prod){
+    var file =archivo.files;
+    var formData = new FormData();
+    formData.append('formData', $("#form-producto"));
+    var data = new FormData();
+     //Append files infos
+     jQuery.each(archivo[0].files, function(i, file) {
+        data.append('file-'+i, file);
+     });
 
-         console.log("data",data);
-         $.ajax({  
-            url: "json_imagen.php?id="+id_prod,  
-            type: "POST", 
-            dataType: "json",  
-            data: data,  
-            cache: false,
-            processData: false,  
-            contentType: false, 
-            context: this,
-            success: function (json) {
-                console.log(json);
-                if(json.exito){  
-                    iziToast.success({
-                        title: 'Excelente',
-                        message: 'Datos almacenados correctamente',
-                        timeout: 3000,
-                    });
-                    timer=setInterval(function(){
-                        location.reload();                        
-                        clearTimeout(timer);
-                    },2000);
-                     NProgress.done();
-                }
-                if(json.error){
-                    swal.close();
-                    swal({
-                      title: '¡Advertencia!',
-                      html: $('<div>')
-                      .addClass('some-class')
-                      .text('No se logro insertar la imagen'),
-                      animation: false,
-                      allowEscapeKey:false,
-                      allowOutsideClick:false,
-                      customClass: 'animated tada',
-                            //timer: 2000
-                          }).then(function (result) {
-                            //$("#md_cantidad").focus();
-                            
-                          });
-                }
-
+     console.log("data",data);
+     $.ajax({  
+        url: "json_imagen.php?id="+id_prod,  
+        type: "POST", 
+        dataType: "json",  
+        data: data,  
+        cache: false,
+        processData: false,  
+        contentType: false, 
+        context: this,
+        success: function (json) {
+            console.log(json);
+            if(json.exito){  
+                iziToast.success({
+                    title: 'Excelente',
+                    message: 'Datos almacenados correctamente',
+                    timeout: 3000,
+                });
+                $(".modal").modal("hide");
+                $(".form-control").val(""); 
+                cargar();
+                 NProgress.done();
             }
-        });
-    }
+            if(json.error){
+                swal.close();
+                swal({
+                  title: '¡Advertencia!',
+                  html: $('<div>')
+                  .addClass('some-class')
+                  .text('No se logro insertar la imagen'),
+                  animation: false,
+                  allowEscapeKey:false,
+                  allowOutsideClick:false,
+                  customClass: 'animated tada',
+                        //timer: 2000
+                      }).then(function (result) {
+                        //$("#md_cantidad").focus();
+                        
+                      });
+            }
 
-    function editar(id){
-      $.ajax({
-        url:'json_productos.php',
-        type:'POST',
-        dataType:'json',
-        data:{data_id:'modal_editar',id:id},
-        success:function(json){
-          console.log(json);
-          $("#aqui_modal").html(json[3]);
-          $('.select-chosen').chosen({width: "100%"});
-          $("#md_editar").modal("show");
-          /*$("#departamento").trigger('change');
-          $("#departamento").trigger('chosen:updated');
-          $("#categoria").trigger('change');
-          $("#categoria").trigger('chosen:updated');*/
         }
+    });
+}
+
+function editar(id){
+  $.ajax({
+    url:'json_productos.php',
+    type:'POST',
+    dataType:'json',
+    data:{data_id:'modal_editar',id:id},
+    success:function(json){
+      console.log(json);
+      $("#aqui_modal").html(json[3]);
+      $('.select-chosen').chosen({width: "100%"});
+      $("#md_editar").modal("show");
+      /*$("#departamento").trigger('change');
+      $("#departamento").trigger('chosen:updated');
+      $("#categoria").trigger('change');
+      $("#categoria").trigger('chosen:updated');*/
+    }
+  });
+}
+
+function cargar(){
+  $.ajax({
+    url:'json_productos.php',
+    type:'POST',
+    dataType:'json',
+    data:{data_id:'busqueda',esto:'',departamento:'0',estado:'1'},
+    success: function(json){
+      console.log(json);
+      if(json[2]){
+        $("#aqui_busqueda").empty();
+        $("#aqui_busqueda").html(json[2]);
+      }else{
+        $("#aqui_busqueda").empty();
+        $("#aqui_busqueda").html(no_datos);
+      }
+      swal.closeModal();
+    }
+  });
+}
+
+function obtener_categorias(id){
+  var html="<option></option>";
+  $.ajax({
+    url:'json_productos.php',
+    type:'POST',
+    dataType:'json',
+    data:{data_id:'categoria',id:id},
+    success:function(json){
+      $.each(json[1],function(index,value){
+        console.log(value);
+        html+="<option value="+value.id+">"+value.nombre+"</option>";
       });
+      $("#categoria").html(html);
+      $("#categoria").trigger("chosen:updated");
     }
 
-    function cargar(){
-      $.ajax({
-        url:'json_productos.php',
-        type:'POST',
-        dataType:'json',
-        data:{data_id:'busqueda',esto:'',departamento:'0',estado:'1'},
-        success: function(json){
-          console.log(json);
-          if(json[2]){
-            $("#aqui_busqueda").empty();
-            $("#aqui_busqueda").html(json[2]);
-          }else{
-            $("#aqui_busqueda").empty();
-            $("#aqui_busqueda").html(no_datos);
-          }
-          swal.closeModal();
-        }
-      });
-    }
+  });
+}
 
-    function obtener_categorias(id){
-      var html="<option></option>";
-      $.ajax({
-        url:'json_productos.php',
-        type:'POST',
-        dataType:'json',
-        data:{data_id:'categoria',id:id},
-        success:function(json){
-          $.each(json[1],function(index,value){
-            console.log(value);
-            html+="<option value="+value.id+">"+value.nombre+"</option>";
-          });
-          $("#categoria").html(html);
-          $("#categoria").trigger("chosen:updated");
-        }
-
+function obtener_subcategorias(id){
+  var html="<option></option>";
+  $.ajax({
+    url:'json_productos.php',
+    type:'POST',
+    dataType:'json',
+    data:{data_id:'subcategoria',id:id},
+    success:function(json){
+      $.each(json[1],function(index,value){
+        console.log(value);
+        html+="<option value="+value.id+">"+value.nombre+"</option>";
       });
+      $("#subcategoria").html(html);
+      $("#subcategoria").trigger("chosen:updated");
     }
-    function obtener_subcategorias(id){
-      var html="<option></option>";
-      $.ajax({
-        url:'json_productos.php',
-        type:'POST',
-        dataType:'json',
-        data:{data_id:'subcategoria',id:id},
-        success:function(json){
-          $.each(json[1],function(index,value){
-            console.log(value);
-            html+="<option value="+value.id+">"+value.nombre+"</option>";
-          });
-          $("#subcategoria").html(html);
-          $("#subcategoria").trigger("chosen:updated");
-        }
-
-      });
-    }
+  });
+}
 
     

@@ -18,18 +18,18 @@
                               <img src="../../img/placeholders/mesa.png" alt="avatar" class="widget-image img-circle pull-left">
                           </a>
                           <h4 class="widget-content">
-                              <a data-nombre="<?php echo $mesa[nombre] ?>" data-codigo="<?php echo $mesa[codigo_oculto] ?>" href="#" id="<?php echo ($mesa[ocupado]==0)? 'libre1' : 'ocupado1' ?>">
-                                  <strong><?php echo $mesa[nombre] ?></strong>
-                              </a>
+                            <a data-nombre="<?php echo $mesa[nombre] ?>" data-codigo="<?php echo $mesa[codigo_oculto] ?>" href="#" id="<?php echo ($mesa[ocupado]==0)? 'libre1' : 'ocupado1' ?>">
+                              <strong><?php echo $mesa[nombre] ?></strong>
+                            </a>
                           </h4>
                       </div>
                   </div>
-              </div> 
+                </div> 
               <?php endforeach ?>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" data-dismiss="modal" class="btn btn-default btn-pure" data-dismiss="modal">Cerrar</button>
+            <button type="button" data-dismiss="modal" class="btn btn-default btn-pure">Cerrar</button>
           </div>
         </div>
       </div>
@@ -83,7 +83,7 @@
                 </div>
                 <div class="form-group" id="domicilios" style="display: none;">
                   <label for="">Dirección de envío</label>
-                  <textarea class="form-control" id="direcc"rows="2"></textarea>
+                  <textarea class="form-control" id="direcc" rows="2"></textarea>
                 </div>
               </form>
             </div>
@@ -98,7 +98,7 @@
 
 <div class="modal fade modal-side-fall" id="md_add_nota" aria-hidden="true"
       aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog modal-sm">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">
@@ -179,7 +179,7 @@
         </div>
         <div class="form-group">
           <center>
-            <button id="btn_cobrar_antes" class="btn btn-mio"><i">Aceptar</button>
+            <button id="btn_cobrar_antes" class="btn btn-mio">Aceptar</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
           </center>
         </div>
@@ -289,9 +289,9 @@
           <div class="row">
             <div class="col-xs-12">
               <div class="form-group">
-                <p><h2 id="poner_totala"></h2></p>
-                <p><h2 id="poner_propina"></h2></p>
-                <p><h2 id="poner_total"></h2></p>
+                <h2 id="poner_totala"></h2>
+                <h2 id="poner_propina"></h2>
+                <h2 id="poner_total"></h2>
                 <input type="hidden" readonly class="form-control" placeholder="Nombre" name="total_venta" id="total_venta">
                 <input type="hidden" id="total_real">
                 <input type="hidden" readonly class="form-control" placeholder="Nombre" id="id_venta">
@@ -387,7 +387,62 @@
         </div>
         <div class="form-group">
           <center>
-            <button id="btn_cobrar_antes_p" class="btn btn-mio"><i">Aceptar</button>
+            <button id="btn_cobrar_antes_p" class="btn btn-mio">Aceptar</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          </center>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade modal-side-fall" id="md_cambiar_comanda" aria-hidden="true"
+      aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal">
+          <span style="margin-right: -61px;" aria-hidden="true">×</span>
+        </button>
+        <div class="form-group" id="lapregunta">
+          <h2>¿Desea cambiar el tipo de la orden?</h2>
+            <h3>
+              <div class="icheck-turquoise icheck-inline">
+                  <input type="radio" value="2" name="quecambiar" checked id="cno" />
+                  <label for="cno">No</label>
+              </div>
+            </h3>
+            <h3>
+              <div class="icheck-turquoise icheck-inline">
+                <input type="radio" value="1" name="quecambiar" id="csi" />
+                <label for="csi">Si</label>
+            </div>
+          </h3>
+        </div>
+        <div class="form-group" id="diveltipo" style="display: none;">
+          <h2>Seleccione una opción</h2>
+            <h3>
+              <div class="icheck-turquoise icheck-inline">
+                  <input type="radio" value="1" name="eltipodeorden" <?php echo ($comanda_a[tipo]==1) ? 'checked':'' ?> id="mesaa" />
+                  <label for="mesaa">Mesas</label>
+              </div>
+            </h3>
+            <h3>
+              <div class="icheck-turquoise icheck-inline">
+                <input type="radio" value="2" name="eltipodeorden" <?php echo ($comanda_a[tipo]==2) ? 'checked':'' ?> id="lleva" />
+                <label for="lleva">Llevar</label>
+              </div>
+            </h3>
+            <h3>
+              <div class="icheck-turquoise icheck-inline">
+                <input type="radio" value="3" name="eltipodeorden" <?php echo ($comanda_a[tipo]==3) ? 'checked':'' ?> id="domi" />
+                <label for="domi">Domicilio</label>
+              </div>
+            </h3>
+        </div>
+        <div class="form-group">
+          <center>
+            <button id="btn_cobrar_antes_p" class="btn btn-mio">Aceptar</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
           </center>
         </div>

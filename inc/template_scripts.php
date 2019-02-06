@@ -45,6 +45,7 @@
   <script src="../../js/mask/jquery.inputmask.bundle.js" type="text/javascript"></script>
   <script src="../../js/moment.min.js" type="text/javascript"></script>
   <script src="../../js/plus-minus-input.js" type="text/javascript"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
 <style type="text/css" media="screen">
   header .dropdown-menu.dropdown-custom > li {
@@ -82,6 +83,7 @@
       language: 'es',
       startDate: '-0d',
     });
+    $('.lahora').timepicker({template: 'modal'});
     $('.dui').inputmask("99999999-9", { "clearIncomplete": true });
     $('.nit').inputmask("9999-999999-999-9", { "clearIncomplete": true });
     $(".select_piker2").selectpicker();

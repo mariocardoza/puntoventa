@@ -71,6 +71,12 @@ $primary_nav = array(
         'url_real'=> 'index.php',
         'icon'  => 'inicio.svg'
     ),
+    array(
+        'name'  => 'Empleados',
+        'url'   => '../../php/administrar/empleados.php',
+        'url_real'=> 'empleados.php',
+        'icon'  => 'agregar.svg'
+    ),
     /*array(
         'name'  => 'Administración',
         'icon'  => 'gi gi-table',
@@ -100,10 +106,16 @@ $primary_nav = array(
         'url_real' => 'productos.php'
     ),
          array(
-        'name'  => 'Servicios',
+        'name'  => 'Comandas',
         'icon'  => 'servicios.svg',
-        'url'   => '../../php/servicios/servicios.php',
+        'url'   => '../../php/comandas/comandas.php',
         'url_real'=> 'servicios.php',
+    ),
+    array(
+        'name'  => 'Recetas',
+        'icon'  => 'recetas.svg',
+        'url'   => '../../php/recetas/recetas.php',
+        'url_real'=> 'recetas.php',
     ),
        array(
         'name'  => 'Clientes',

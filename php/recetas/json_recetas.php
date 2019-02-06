@@ -15,6 +15,18 @@ if($_POST['data_id']=='buscar_productos'){
 	$result=Receta::productos($_POST['id']);
 	echo json_encode($result);exit();
 }
+if($_POST['data_id']=='modal_editar'){
+	$result=Receta::modal_editar($_POST['id']);
+	echo json_encode($result);exit();
+}
+if($_POST['data_id']=='modal_ver'){
+	$result=Receta::modal_ver($_POST['id']);
+	echo json_encode($result);exit();
+}
+if($_POST['data_id']=='editar_receta'){
+	$result=Receta::editar($_POST);
+	echo json_encode($result);exit();
+}
 if($_POST['data_id']=='categoria'){
 	$result=Genericas2::buscar_por_id("tb_categoria","departamento",$_POST['id']);
 	echo json_encode($result);exit();

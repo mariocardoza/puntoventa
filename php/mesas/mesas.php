@@ -36,59 +36,54 @@ $mesas = Mesa::obtener_mesas();
 
 <!-- Page content -->
 <div id="page-content">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="block full">
-          <div class="block-title">
-            <ul class="nav-horizontal">
-              <li class="active">
-                <a href="#">Mesas (<?=count($mesas)?>)</a>
-              </li>
-              <li class="pull-right">
-              <a href="registro_mesa.php" class="btn btn-lg bg-white"><i class="fa pull-left" style="width: 20px;"><img src="../../img/icon_mas.svg" class="svg" alt=""></i> Agregar mesa</a>
-              </li>
-            </ul>
-          </div>
-          <div class="">
-            <table id="exampleTableSearch" class="table table-vcenter table-condensed table-bordered" >
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Nombre</th>
-                  <th>Estado</th>
-                  <th class="text-center">Acciones</th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>#</th>
-                  <th>Nombre</th>
-                  <th>Estado</th>
-                  <th class="text-center">Acciones</th>
-                </tr>
-              </tfoot>
-              <tbody>
-                <?php foreach ($mesas as $key => $mesa) { ?>
-                  <tr>
-                  <td><?php echo $key+1 ?></td>
-                  <td><?php echo $mesa[nombre] ?></td>
-                  <td><?php echo $mesa[disponibilidad] ?></td>
-                  <td>
-                    <div class="btn-group">
-                      <a class="btn btn-warning" onclick="<?php echo "editar(".$mesa['id'].")" ?>" href="#"><i class="fa fa-edit"></i></a>
-                      <!--a id="btn_editar" data-id="<?php echo $persona[id] ?>" class="btn btn-warning" href="#"><i class="fa fa-edit"></i></a-->
-                      <a onclick="<?php echo "darbaja(".$mesa['id'].",'tb_mesa','la mesa')" ?>"  class="btn btn-danger" href="#"><i class="fa fa-remove"></i></a>
-                    </div>
-                  </td>
-                </tr>
-                <?php } ?>
-              </tbody>
-            </table>
+  <div class="row" style="background-color: #fff;">
+      <div class="card">
+        <div class="row centrado">
+          <div class="col-sm-3 col-lg-3">
+              <div class="row">
+                <div class="col-sm-2 col-lg-2"></div>
+                <div class="col-sm-8 col-lg-8"><a id="modal_guardar" href="javascript:void(0)" class="btn btn-mio btn-block">Nueva mesa</a></div>
+                <div class="col-sm-2 col-lg-2"></div>
+            </div>
           </div>
         </div>
       </div>
+      <div class="" id="aqui_busqueda">
+       
+      </div>
+      
     </div>
     <div id="modal_edit"></div>
+    <div class="modal fade depa" id="md_guardar" aria-hidden="true"
+      aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Registrar mesa</h4>
+            </div>
+            <div class="modal-body">
+                    <form action="#" method="post" name="fm_mesas" id="fm_mesas" class="form-horizontal">
+            
+                        <div class="form-group">
+                            <label class="control-label" for="nombre">Nombre</label>
+                                <input type="hidden" name="data_id" value="nueva_mesa">  
+                                <input type="hidden" name="codigo_oculto" value="<?php echo date("Yidisus") ?>">
+                                <input required type="text" id="nombre" name="nombre" class="form-control" placeholder="Digite el nombre del departamento">
+                        </div>
+                        <div class="form-group">
+                            <center>
+                                <button type="button" id="btn_guardar" class="btn btn-sm btn-mio">Guardar</button>
+                                <button type="button" data-dismiss="modal" class="btn btn-sm btn-defaul"> Cerrar</button>
+                            </center>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
 <!-- END Page Content -->
@@ -100,10 +95,12 @@ $mesas = Mesa::obtener_mesas();
     var table_procesos = cargar_tabla2("exampleTableSearch"); //inicializar tabla
 
     $(document).ready(function(e){
+      cargar_mesas();
+      $("#titulo_nav").text("Mesas");
       $(document).on("click","#btn_guardar", function(e){
-        modal_cargando();
             var valid=$("#fm_mesas").valid();
             if(valid){
+              modal_cargando();
                 var datos=$("#fm_mesas").serialize();
                 $.ajax({
                     url:'json_mesas.php',
@@ -112,7 +109,13 @@ $mesas = Mesa::obtener_mesas();
                     data:datos,
                     success:function(json){
                         if(json[0]==1){
-                            guardar_exito("mesas");
+                            guardar_exito();
+                            cargar_mesas();
+                            $(".modal").modal("hide");
+                            $("#data_id").val("");
+                            $("#id").val("");
+                            $("#codigo_oculto").val("");
+                            $("#nombre").val("");
                         }else{
                           swal.close();
                             guardar_error();
@@ -121,6 +124,10 @@ $mesas = Mesa::obtener_mesas();
                 });
             }
         });
+
+      $(document).on("click","#modal_guardar", function(e){
+        $("#md_guardar").modal("show");
+      });
     });
 
     function editar(id){
@@ -132,6 +139,28 @@ $mesas = Mesa::obtener_mesas();
         success: function(json){
           $("#modal_edit").html(json[2]);
           $("#md_editar").modal("show");
+        }
+      });
+    }
+
+    function cargar_mesas(){
+      modal_cargando();
+      $.ajax({
+        url:'json_mesas.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda'},
+        success: function(json){
+          console.log(json);
+            if(json[2]){
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(json[2]);
+                swal.closeModal();
+            }else{
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(no_datos);
+                swal.closeModal();
+            }
         }
       });
     }

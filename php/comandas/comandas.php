@@ -45,16 +45,14 @@ $juridicos=Cliente::obtener_juridicos();
         </div>
         <div class="col-sm-3 col-lg-3">
             <select name="" id="estados" class="select-chosen">
-                <option value="">Todas</option>
                 <option value="1">En espera</option>
-                <option value="2">Comiendo</option>
-                <option value="3">Finalizadas</option>
+                <option value="2">Finalizadas</option>
             </select>
         </div>
         <div class="col-sm-3 col-lg-3">
             <div class="row">
               <div class="col-sm-2 col-lg-2"></div>
-              <div class="col-sm-8 col-lg-8"><a id="modal_guardar" href="javascript:void(0)" class="btn btn-mio btn-block">Nueva orden</a></div>
+              <div class="col-sm-8 col-lg-8"><a id="modal_guardar" href="registro_comanda.php" class="btn btn-mio btn-block">Nueva orden</a></div>
               <div class="col-sm-2 col-lg-2"></div>
           </div>
         </div>
@@ -80,8 +78,8 @@ $juridicos=Cliente::obtener_juridicos();
 <?php include '../../inc/template_scripts.php'; ?>
 
 <!-- Load and execute javascript code used only in this page -->
-<script src="../../js/pages/ecomProducts.js"></script>
+<script>var total_php=0.00;</script>
 <script src="comandas.js?cod=<?php echo $cod ?>"></script>
-<script>$(function(){ EcomProducts.init(); });$("#titulo_nav").text("Comandas");</script>
+<script>$("#titulo_nav").text("Comandas");</script>
 <?php include '../../inc/template_end.php'; ?>
 

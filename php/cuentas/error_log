@@ -1,0 +1,4 @@
+[30-Jan-2019 16:47:41 America/El_Salvador] PHP Fatal error:  Uncaught Error: Class 'Comanda' not found in /home1/estudjl6/public_html/sys/puntoventa/php/cuentas/json_cuentas.php:7
+Stack trace:
+#0 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/php/cuentas/json_cuentas.php on line 7

@@ -233,3 +233,159 @@ Stack trace:
 [15-Jan-2019 15:05:40 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
 [15-Jan-2019 15:06:00 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
 [15-Jan-2019 15:29:17 America/El_Salvador] PHP Parse error:  syntax error, unexpected ';', expecting ',' or ')' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 304
+[15-Jan-2019 15:56:26 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[15-Jan-2019 15:56:47 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[15-Jan-2019 15:57:16 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[15-Jan-2019 15:57:31 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[15-Jan-2019 15:57:36 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[15-Jan-2019 15:58:23 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[15-Jan-2019 15:58:28 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[15-Jan-2019 15:58:29 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[15-Jan-2019 15:58:29 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[15-Jan-2019 15:58:30 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[15-Jan-2019 15:58:30 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[15-Jan-2019 16:00:00 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[15-Jan-2019 16:00:13 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[15-Jan-2019 16:00:33 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[15-Jan-2019 16:01:04 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[15-Jan-2019 16:01:16 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[15-Jan-2019 16:01:33 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[16-Jan-2019 08:42:27 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[16-Jan-2019 14:15:14 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[16-Jan-2019 14:17:08 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[16-Jan-2019 14:22:58 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[16-Jan-2019 14:23:38 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[16-Jan-2019 14:23:43 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[16-Jan-2019 14:23:47 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[16-Jan-2019 14:24:41 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[16-Jan-2019 14:24:51 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[16-Jan-2019 14:30:32 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[16-Jan-2019 14:30:39 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[16-Jan-2019 14:30:44 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[16-Jan-2019 14:30:48 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[16-Jan-2019 14:31:33 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[16-Jan-2019 14:40:01 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[16-Jan-2019 14:40:15 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[16-Jan-2019 14:42:45 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[16-Jan-2019 14:44:06 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[16-Jan-2019 14:45:53 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[16-Jan-2019 16:13:33 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[16-Jan-2019 16:13:41 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[16-Jan-2019 16:13:58 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 122
+[16-Jan-2019 16:32:09 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[17-Jan-2019 07:54:54 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:54:54 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:54:54 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:54:55 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:54:55 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:54:58 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:07 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:08 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:08 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:10 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:10 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:11 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:11 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:12 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:12 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:13 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:16 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:18 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:19 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:20 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:22 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:22 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:27 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:45 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:45 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:46 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:55:56 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 07:56:10 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[17-Jan-2019 08:33:45 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 123
+[17-Jan-2019 08:54:06 America/El_Salvador] PHP Fatal error:  Cannot redeclare Genericas2::darbaja() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Genericas2.php on line 312
+[17-Jan-2019 08:54:54 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 124
+[17-Jan-2019 09:05:46 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 124
+[17-Jan-2019 14:13:49 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[17-Jan-2019 14:14:25 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[17-Jan-2019 14:14:30 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[17-Jan-2019 14:17:55 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[17-Jan-2019 14:23:03 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 124
+[17-Jan-2019 14:25:27 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[22-Jan-2019 16:16:32 America/El_Salvador] PHP Deprecated:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[01-Feb-2019 08:59:54 America/El_Salvador] PHP Warning:  Illegal string offset 'imagen' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 494
+[01-Feb-2019 08:59:54 America/El_Salvador] PHP Warning:  Illegal string offset 'sku' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 501
+[01-Feb-2019 08:59:54 America/El_Salvador] PHP Warning:  Illegal string offset 'nombre' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 505
+[01-Feb-2019 08:59:54 America/El_Salvador] PHP Warning:  Illegal string offset 'descripcion' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 509
+[01-Feb-2019 08:59:54 America/El_Salvador] PHP Warning:  Illegal string offset 'precio_venta' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 513
+[01-Feb-2019 08:59:54 America/El_Salvador] PHP Warning:  number_format() expects parameter 1 to be double, string given in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 513
+[01-Feb-2019 08:59:54 America/El_Salvador] PHP Warning:  Illegal string offset 'disponible' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 517
+[01-Feb-2019 08:59:54 America/El_Salvador] PHP Warning:  number_format() expects parameter 1 to be double, string given in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 517
+[01-Feb-2019 08:59:54 America/El_Salvador] PHP Warning:  Illegal string offset 'presentacion' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 517
+[01-Feb-2019 08:59:54 America/El_Salvador] PHP Warning:  Illegal string offset 'departamento' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 521
+[01-Feb-2019 08:59:54 America/El_Salvador] PHP Warning:  Illegal string offset 'categoria' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 525
+[01-Feb-2019 08:59:54 America/El_Salvador] PHP Warning:  Illegal string offset 'sub' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 529
+[01-Feb-2019 08:59:54 America/El_Salvador] PHP Warning:  Illegal string offset 'sku' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 532
+[01-Feb-2019 09:00:07 America/El_Salvador] PHP Warning:  Illegal string offset 'imagen' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 494
+[01-Feb-2019 09:00:07 America/El_Salvador] PHP Warning:  Illegal string offset 'sku' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 501
+[01-Feb-2019 09:00:07 America/El_Salvador] PHP Warning:  Illegal string offset 'nombre' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 505
+[01-Feb-2019 09:00:07 America/El_Salvador] PHP Warning:  Illegal string offset 'descripcion' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 509
+[01-Feb-2019 09:00:07 America/El_Salvador] PHP Warning:  Illegal string offset 'precio_venta' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 513
+[01-Feb-2019 09:00:07 America/El_Salvador] PHP Warning:  number_format() expects parameter 1 to be double, string given in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 513
+[01-Feb-2019 09:00:07 America/El_Salvador] PHP Warning:  Illegal string offset 'disponible' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 517
+[01-Feb-2019 09:00:07 America/El_Salvador] PHP Warning:  number_format() expects parameter 1 to be double, string given in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 517
+[01-Feb-2019 09:00:07 America/El_Salvador] PHP Warning:  Illegal string offset 'presentacion' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 517
+[01-Feb-2019 09:00:07 America/El_Salvador] PHP Warning:  Illegal string offset 'departamento' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 521
+[01-Feb-2019 09:00:07 America/El_Salvador] PHP Warning:  Illegal string offset 'categoria' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 525
+[01-Feb-2019 09:00:07 America/El_Salvador] PHP Warning:  Illegal string offset 'sub' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 529
+[01-Feb-2019 09:00:07 America/El_Salvador] PHP Warning:  Illegal string offset 'sku' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 532
+[01-Feb-2019 09:00:18 America/El_Salvador] PHP Warning:  Illegal string offset 'imagen' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 494
+[01-Feb-2019 09:00:18 America/El_Salvador] PHP Warning:  Illegal string offset 'sku' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 501
+[01-Feb-2019 09:00:18 America/El_Salvador] PHP Warning:  Illegal string offset 'nombre' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 505
+[01-Feb-2019 09:00:18 America/El_Salvador] PHP Warning:  Illegal string offset 'descripcion' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 509
+[01-Feb-2019 09:00:18 America/El_Salvador] PHP Warning:  Illegal string offset 'precio_venta' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 513
+[01-Feb-2019 09:00:18 America/El_Salvador] PHP Warning:  number_format() expects parameter 1 to be double, string given in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 513
+[01-Feb-2019 09:00:18 America/El_Salvador] PHP Warning:  Illegal string offset 'disponible' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 517
+[01-Feb-2019 09:00:18 America/El_Salvador] PHP Warning:  number_format() expects parameter 1 to be double, string given in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 517
+[01-Feb-2019 09:00:18 America/El_Salvador] PHP Warning:  Illegal string offset 'presentacion' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 517
+[01-Feb-2019 09:00:18 America/El_Salvador] PHP Warning:  Illegal string offset 'departamento' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 521
+[01-Feb-2019 09:00:18 America/El_Salvador] PHP Warning:  Illegal string offset 'categoria' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 525
+[01-Feb-2019 09:00:18 America/El_Salvador] PHP Warning:  Illegal string offset 'sub' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 529
+[01-Feb-2019 09:00:18 America/El_Salvador] PHP Warning:  Illegal string offset 'sku' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 532
+[01-Feb-2019 09:00:24 America/El_Salvador] PHP Warning:  Illegal string offset 'imagen' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 494
+[01-Feb-2019 09:00:24 America/El_Salvador] PHP Warning:  Illegal string offset 'sku' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 501
+[01-Feb-2019 09:00:24 America/El_Salvador] PHP Warning:  Illegal string offset 'nombre' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 505
+[01-Feb-2019 09:00:24 America/El_Salvador] PHP Warning:  Illegal string offset 'descripcion' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 509
+[01-Feb-2019 09:00:24 America/El_Salvador] PHP Warning:  Illegal string offset 'precio_venta' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 513
+[01-Feb-2019 09:00:24 America/El_Salvador] PHP Warning:  number_format() expects parameter 1 to be double, string given in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 513
+[01-Feb-2019 09:00:24 America/El_Salvador] PHP Warning:  Illegal string offset 'disponible' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 517
+[01-Feb-2019 09:00:24 America/El_Salvador] PHP Warning:  number_format() expects parameter 1 to be double, string given in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 517
+[01-Feb-2019 09:00:24 America/El_Salvador] PHP Warning:  Illegal string offset 'presentacion' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 517
+[01-Feb-2019 09:00:24 America/El_Salvador] PHP Warning:  Illegal string offset 'departamento' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 521
+[01-Feb-2019 09:00:24 America/El_Salvador] PHP Warning:  Illegal string offset 'categoria' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 525
+[01-Feb-2019 09:00:24 America/El_Salvador] PHP Warning:  Illegal string offset 'sub' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 529
+[01-Feb-2019 09:00:24 America/El_Salvador] PHP Warning:  Illegal string offset 'sku' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 532
+[01-Feb-2019 09:00:33 America/El_Salvador] PHP Warning:  Illegal string offset 'imagen' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 494
+[01-Feb-2019 09:00:33 America/El_Salvador] PHP Warning:  Illegal string offset 'sku' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 501
+[01-Feb-2019 09:00:33 America/El_Salvador] PHP Warning:  Illegal string offset 'nombre' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 505
+[01-Feb-2019 09:00:33 America/El_Salvador] PHP Warning:  Illegal string offset 'descripcion' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 509
+[01-Feb-2019 09:00:33 America/El_Salvador] PHP Warning:  Illegal string offset 'precio_venta' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 513
+[01-Feb-2019 09:00:33 America/El_Salvador] PHP Warning:  number_format() expects parameter 1 to be double, string given in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 513
+[01-Feb-2019 09:00:33 America/El_Salvador] PHP Warning:  Illegal string offset 'disponible' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 517
+[01-Feb-2019 09:00:33 America/El_Salvador] PHP Warning:  number_format() expects parameter 1 to be double, string given in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 517
+[01-Feb-2019 09:00:33 America/El_Salvador] PHP Warning:  Illegal string offset 'presentacion' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 517
+[01-Feb-2019 09:00:33 America/El_Salvador] PHP Warning:  Illegal string offset 'departamento' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 521
+[01-Feb-2019 09:00:33 America/El_Salvador] PHP Warning:  Illegal string offset 'categoria' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 525
+[01-Feb-2019 09:00:33 America/El_Salvador] PHP Warning:  Illegal string offset 'sub' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 529
+[01-Feb-2019 09:00:33 America/El_Salvador] PHP Warning:  Illegal string offset 'sku' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 532
+[01-Feb-2019 09:02:29 America/El_Salvador] PHP Strict Standards:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[01-Feb-2019 09:24:32 America/El_Salvador] PHP Strict Standards:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[01-Feb-2019 09:25:17 America/El_Salvador] PHP Strict Standards:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[01-Feb-2019 09:25:31 America/El_Salvador] PHP Strict Standards:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[01-Feb-2019 09:28:04 America/El_Salvador] PHP Strict Standards:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[01-Feb-2019 09:31:59 America/El_Salvador] PHP Strict Standards:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[01-Feb-2019 09:32:25 America/El_Salvador] PHP Strict Standards:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[01-Feb-2019 09:48:06 America/El_Salvador] PHP Strict Standards:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[01-Feb-2019 09:49:56 America/El_Salvador] PHP Strict Standards:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[01-Feb-2019 09:51:28 America/El_Salvador] PHP Strict Standards:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[01-Feb-2019 10:09:32 America/El_Salvador] PHP Strict Standards:  Non-static method Producto::modal_editar() should not be called statically in /home1/estudjl6/public_html/sys/puntoventa/php/productos/json_productos.php on line 20
+[01-Feb-2019 16:12:56 UTC] PHP Parse error:  syntax error, unexpected '" style="' (T_CONSTANT_ENCAPSED_STRING) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Producto.php on line 694

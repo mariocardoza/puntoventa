@@ -1,5 +1,10 @@
 $(document).ready(function(e){
-	//habilitar elemento de fecha de caducidad
+    cargar_todas();
+
+    $(document).on("click","#modal_guardar", function(e){
+      $("#md_guardar").modal("show");
+    });
+	//habilitar elemento de minimo de stock
 	 $('input[name="tipo"]').change(function(e) {
         var tipo = $(this).val();
         if(tipo=="stock"){
@@ -31,3 +36,25 @@ $(document).ready(function(e){
             }
         });
 });
+
+function cargar_todas(){
+    modal_cargando();
+      $.ajax({
+        url:'json_politicas.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda'},
+        success: function(json){
+          console.log(json);
+            if(json[2]){
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(json[2]);
+                swal.closeModal();
+            }else{
+                $("#aqui_busqueda").empty();
+                $("#aqui_busqueda").html(no_datos);
+                swal.closeModal();
+            }
+        }
+      });
+  }

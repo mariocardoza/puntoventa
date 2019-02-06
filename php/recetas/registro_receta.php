@@ -48,7 +48,7 @@ $categorias=Categoria::consumibles();
                 <div class="col-xs-6 col-lg-6">
                   <div class="form-group">
                     <label class="control-label" for="">Descripción</label>
-                    <textarea name="descripcion" required id="descripcion" rows="2" class="form-control"></textarea>
+                    <textarea name="descripcion"  id="descripcion" rows="2" class="form-control"></textarea>
                   </div>
                 </div>
               </div>

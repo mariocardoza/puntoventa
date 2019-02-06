@@ -40,26 +40,21 @@ include_once("../../Conexion/Empleado.php");
 <div id="page-content">
     <form action="#" method="post" name="fm_mesa" id="fm_mesa" class="form-horizontal form-bordered">
         <div class="block">
-            <div class="block-title">
-                <h2><i class="fa fa-pencil"></i> <strong>Información</strong> de la mesa</h2>
-            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="form-group">
-                        <label class="col-md-3 control-label" for="nombre">Nombre</label>
-                        <div class="col-md-9">
+                        <label class="control-label" for="nombre">Nombre</label>
                             <input type="hidden" name="data_id" value="nueva_mesa">
                             <input type="hidden" name="codigo_oculto" value="<?php echo date('Yidisus') ?>">
                             <input required type="text" id="nombre" name="nombre" class="form-control" placeholder="Digite el nombre del mesa">
-                        </div>
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <div class="form-group">
-                        <div class="col-md-10">
+                        <div class="form-group">
                             <center>
-                                <button type="button" id="btn_guardar" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Guardar</button>
-                                <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>  
+                                <button type="button" id="btn_guardar" class="btn btn-mio">Guardar</button>
+                                <a href="mesas.php" class="btn btn-warning">Cancelar</a>  
                             </center>
                         </div>
                     </div>

@@ -25,11 +25,21 @@
 </style>
 <?php include '../../inc/page_head.php'; 
 include_once("../../Conexion/Departamento.php");
+include_once("../../Conexion/Conexion.php");
 include_once("../../Conexion/Producto.php");
 include_once("../../Conexion/Categoria.php");
+include_once("../../Conexion/Receta.php");
 $departamentos=Departamento::obtener_departamentos();
 $productos=Producto::obtener_ingredientes();
 $categorias=Categoria::consumibles();
+$receta=$_GET['receta'];
+$ingredientes="";
+$sql="SELECT rd.cantidad,p.nombre as n_producto, me.nombre as n_medida FROM tb_receta_detalle as rd INNER JOIN tb_producto as p ON p.codigo_oculto=rd.codigo_producto INNER JOIN tb_unidad_medida as me ON me.id=p.medida WHERE rd.codigo_receta='$receta'";
+  $comando=Conexion::getInstance()->getDb()->prepare($sql);
+  $comando->execute();
+  while ($row=$comando->fetch(PDO::FETCH_ASSOC)) {
+    $ingredientes.='<tr><td>'.$row[n_producto].'</td><td>'.Receta::convertir_decimal_a_fraccion($row[cantidad]).' '.$row[n_medida].'</td><td><button class="btn btn-mio btn-xs" type="button" id="quitabase"><i class="fa fa-remove"></i></button></td></tr>';
+  }
 ?>
 <div id="page-content">    
   <div class="row">
@@ -69,7 +79,9 @@ $categorias=Categoria::consumibles();
                     <th>Cantidad</th>
                     <th>Acciones</th>
                   </thead>
-                  <tbody id="cuerpo"></tbody>
+                  <tbody id="cuerpo">
+                    <?php echo $ingredientes; ?>
+                  </tbody>
                 </table>
               </div>
               <div class="col-xs-12 col-lg-12">
@@ -93,6 +105,9 @@ $categorias=Categoria::consumibles();
 <!-- Load and execute javascript code used only in this page -->
 <script src="../../js/helpers/ckeditor/ckeditor.js"></script>   
 <script type="text/javascript" src="../../js/jquery-barcode.js"></script>  
-<script src="recetas.js?cod=<?=$cod?>"></script> 
+<script src="recetas.js?cod=<?=$cod?>"></script>
+<script>
+  $("#titulo_nav").text("Ingredientes");
+</script> 
 <?php include '../../inc/template_end.php'; ?>
 

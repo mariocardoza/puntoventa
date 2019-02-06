@@ -38,24 +38,6 @@ include_once("../../Conexion/Empleado.php");
 ?>
 
 <div id="page-content">
-    <!-- eCommerce Product Edit Header -->
-    <div class="content-header">
-        <ul class="nav-horizontal text-center">
-            <li>
-                <a href="../../php/home.index.php"><i class="fa fa-bar-chart"></i> Dashboard</a>
-            </li>
-            <li class="active">
-                <a href="#"><i class="gi gi-pencil"></i> Registro de proveedor</a>
-            </li>
-            <li >
-                <a href="proveedores.php"><i class="gi gi-user"></i> Proveedores</a>
-            </li>
-        </ul>
-    </div>
-    <!-- END eCommerce Product Edit Header -->
-
-    <!-- Product Edit Content -->
-        <!-- General Data Content -->
         <form action="#" method="post" name="fm_politicas" id="fm_politicas" class="form-horizontal form-bordered">
             <div class="row">
         <div class="col-lg-12">

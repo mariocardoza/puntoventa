@@ -46,6 +46,33 @@ class Comanda
 		
 	}
 
+	public static function actualizar_comanda($data){
+		$update=Array(
+				'data_id' => 'editar_comanda',
+				'codigo_oculto' => $data[codigo_oculto],
+				'mesa' => $data[id_mesa],
+				'numero_clientes' => $data[numero_clientes],
+				'tipo' => $data[tipo_pedido],
+				'mesero' => $_SESSION['usuario'],
+				'total' => $data[total],
+				'nombre_cliente' => $data[nombre_cliente],
+				'direccion' => $data[direccion]
+			);
+		$result=Genericas2::actualizar_generica("tb_comanda",$update);
+		if(Count($data[comanda]) > 0){
+			foreach ($data[comanda] as $comandad) {
+				$detalle=Array(
+					'data_id' => 'nueva',
+					'codigo_comanda' => $data[codigo_oculto],
+					'codigo_producto' => $comandad[codigo],
+					'notas' => $comandad[nota]
+				);
+				$result2=Genericas2::insertar_generica("tb_comanda_detalle",$detalle);
+			}
+		}
+		return array(1,"exito",$result,$result2);
+	}
+
 	public static function cobrar($data){
 		$array_update=array(
 			'data_id' => 'update',
@@ -57,6 +84,7 @@ class Comanda
 			'cambio' => $data[cambio],
 			'tipo_factura' => $data[tipo_factura],
 			'forma_pago' => $data[forma_pago],
+			'cliente' => $data[cliente_aqui],
 			'estado' => 2
 		);
 		$result=Genericas2::actualizar_generica("tb_comanda",$array_update);
@@ -100,26 +128,29 @@ class Comanda
 					$tipo_orden="Domicilio";
 				}
 
-				$html.='<div class="col-sm-6 col-lg-6" style="height: 175px;" id="listado-card">
-			                <div class="">
-			                  <div class="">
-			                    <table width="100%">
-			                        <tbody>
-			                            <tr>
-			                                <td style="padding: 5px 0px;" width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[codigo_oculto].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a>
-			                                </td>
-			                                <td style="font-size:18px"><b>Orden: </b>'.$tipo_orden.'</td>
-			                            </tr>
-			                            <tr>
-			                                <td style="padding: 5px 0px;"><a href="javascript:void(0)" onclick="ver(\''.$row[codigo_oculto].'\')" data-toggle="tooltip" title="Ver"><img src="../../img/iconos/ojo.svg" width="35px" height="35px"></a></td>
-			                                <td style="font-size:18px">'.$row[n_mesa].'</td>
-			                            </tr>
-			                            <tr>
-			                                <td style="padding: 5px 0px;" width="15%"><a data-total="'.$row[total].'" class="btn btn-mio" href="javascript:void(0)" onclick="cobrar(\''.$row[codigo_oculto].'\',\''.$row[total].'\',\''.$row[mesa].'\')" data-toggle="tooltip" title="Eliminar"><i class="fa fa-usd"></i></a></td>
-			                                <td style="font-size:18px">Clientes: '.$row[numero_clientes].'</td>
-			                            </tr>
-			                        </tbody>
-			                    </table>
+				$html.='<div class="col-sm-6 col-lg-6" style="height: 227px;"  id="listado-card">
+			                <div class="widget">
+			                  <div class="widget-simple">
+			                  	<div class="row">
+			                  		<div class="col-xs-2">
+			                  			<a href="editar_comanda.php?comanda='.$row[codigo_oculto].'" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a>
+			                  			<br><br>
+			                  			<a href="javascript:void(0)" onclick="ver(\''.$row[codigo_oculto].'\')" data-toggle="tooltip" title="Ver"><img src="../../img/iconos/ojo.svg" width="35px" height="35px"></a>
+			                  			<br><br>
+			                  			<a data-total="'.$row[total].'" class="btn btn-mio" href="javascript:void(0)" onclick="cobrar(\''.$row[codigo_oculto].'\',\''.$row[total].'\',\''.$row[mesa].'\')" data-toggle="tooltip" title="Eliminar"><i class="fa fa-usd"></i></a>
+			                  			<br><br>
+			                  			<a href="javascript:void(0)" onclick="anular(\''.$row[codigo_oculto].'\')" data-toggle="tooltip" title="Eliminar"><img src="../../img/iconos/eliminar.svg" width="35px" height="35px"></a>
+			                  		</div>
+			                  		<div class="col-xs-10">
+			                  			<p style="font-size: 18px;"><b>Orden: </b>'.$tipo_orden.'</p>
+			                  		</div>
+			                  		<div class="col-xs-10">
+			                  			<p style="font-size: 18px;">'.$row[n_mesa].'</p>
+			                  		</div>
+			                  		<div class="col-xs-10">
+			                  			<p style="font-size: 18px;">Clientes: '.$row[numero_clientes].'</p>
+			                  		</div>
+			                  	</div>
 			                  </div>
 			              	</div>
 	            		</div>
@@ -347,6 +378,25 @@ FROM
 				return array("-1",$e->getMessage(),$e->getLine(),$sql);
 				exit();
 			}
+	}
+
+	public static function eliminar($data){
+		$array=array(
+			'table' => 'tb_comanda',
+			'codigo_oculto' => $data[codigo]
+		);
+		$array2=array(
+			'table' => 'tb_comanda_detalle',
+			'codigo_comanda' => $data[codigo]
+		);
+		$result=Genericas2::eliminar_generica($array);
+		$result2=Genericas2::eliminar_generica($array2);
+		if($result[0]=="1" && $result2[0]=="1"){
+			return array(1,"exito",$result,$result2);
+		}else{
+			return array(-1,"error",$result,$result2);
+		}
+		
 	}
 }
  ?>

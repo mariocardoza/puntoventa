@@ -136,6 +136,16 @@ class Venta
 			$generic1=Genericas2::insertar_generica("tb_venta",$array);
 			$generic2=Genericas2::insertar_generica("tb_cuenta",$cuenta);
 			foreach ($data[venta] as $venta) {
+				$array_i=array(
+                'data_id'=> 'nuevo',
+                'fecha' => date("Y-m-d"),
+                'producto' => $venta[codigo],
+                'detalle' => 'Venta N° '.$correlativo_venta.' al '.date("d/m/Y"),
+                'precio_unitario' => $venta[precio],
+                'cantidad' => $venta[cantidad],
+                'tipo' => 2
+            );
+				Genericas2::insertar_generica("tb_inventario",$array_i);
 				Genericas2::insertar_generica("tb_venta_detalle",array('data_id'=>'nueva','codigo_venta'=>$codigo,'codigo_producto'=>$venta[codigo],'cantidad'=>$venta[cantidad]));
 			}
 			$retorno_descuento=Venta::descontar_producto($data);
