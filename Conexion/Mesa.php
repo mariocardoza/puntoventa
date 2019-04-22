@@ -33,7 +33,7 @@ class Mesa
             $comando->execute();
             while($row=$comando->fetch(PDO::FETCH_ASSOC)){
                 $html.='<div class="col-xs-6 col-lg-4">
-                  <div class="widget">
+                  <div class="draggable widget">
                       <div class="widget-simple '.(($row[ocupado] == 0) ? 'themed-background-dark' : 'themed-background-dark-fire').'">
                         <div class="row">
                             <div class="col-xs-8">

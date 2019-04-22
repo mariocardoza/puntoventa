@@ -1,4 +1,5 @@
 <?php
+@session_start();
 /**
  * config.php
  *
@@ -64,6 +65,7 @@ $template = array(
 );
 
 /* Primary navigation array (the primary navigation will be created automatically based on this array, up to 3 levels deep) */
+if($_SESSION[level]==0):
 $primary_nav = array(
     array(
         'name'  => 'Home',
@@ -72,44 +74,28 @@ $primary_nav = array(
         'icon'  => 'inicio.svg'
     ),
     array(
+        'name'  => 'cajas',
+        'url'   => '../../php/cajas/cajas.php',
+        'url_real'=> 'cajas.php',
+        'icon'  => 'inicio.svg'
+    ),
+    array(
         'name'  => 'Empleados',
         'url'   => '../../php/administrar/empleados.php',
         'url_real'=> 'empleados.php',
         'icon'  => 'agregar.svg'
     ),
-    /*array(
-        'name'  => 'Administración',
-        'icon'  => 'gi gi-table',
-        'sub'   => array(
-            array(
-                'name'  => 'Empleados',
-                'url'   => '../../php/administrar/empleados.php',
-                'url_real'=> 'empleados.php'
-            ),
-            array(
-                'name'  => 'Usuarios',
-                'url'   => '../../php/administrar/usuarios.php',
-                'url_real'=> 'usuarios.php'
-            ),
-            array(
-                'name'  => 'Cargos de empleados',
-                'url'   => '../../php/administrar/cargos.php',
-                'url_real'=> 'cargos.php'
-            )
-
-        )
-    ),*/
      array(
         'name'  => 'Inventario',
         'icon'  => 'inventario.svg',
         'url'   => '../../php/productos/productos.php',
         'url_real' => 'productos.php'
     ),
-         array(
+    array(
         'name'  => 'Comandas',
         'icon'  => 'servicios.svg',
         'url'   => '../../php/comandas/comandas.php',
-        'url_real'=> 'servicios.php',
+        'url_real'=> 'comandas.php',
     ),
     array(
         'name'  => 'Recetas',
@@ -117,7 +103,7 @@ $primary_nav = array(
         'url'   => '../../php/recetas/recetas.php',
         'url_real'=> 'recetas.php',
     ),
-       array(
+    array(
         'name'  => 'Clientes',
         'icon'  => 'clientes.svg',
         'url'   => '../../php/clientes/clientes.php',
@@ -132,32 +118,42 @@ $primary_nav = array(
     array(
         'name'  => 'Ventas',
         'icon'  => 'ventas.svg',
-        'url'   => '../../php/ventas/ventas.php',
-        'url_real'=> 'ventas.php',
+        'url'   => '../../php/cuentas/cuentas.php',
+        'url_real'=> 'cuentas.php',
+    ),
+    array(
+        'name'  => 'Turno',
+        'icon'  => 'ventas.svg',
+        'url'   => '../../php/turnos/turnos.php',
+        'url_real'=> 'turnos.php',
     ),
     array(
         'name'  => 'Configuración',
         'icon'  => 'configuracion.svg',
         'sub' => array(
             array(
-            'name' => 'Departamentos',
-            'url' => '../../php/departamentos/departamentos.php',
-            'url_real' => 'departamentos.php'
+                'name' => 'Mesas',
+                'url' => '../../php/mesas/mesas.php',
+                'url_real' => 'mesas.php'
             ),
             array(
-            'name' => 'Categorías',
-            'url' => '../../php/categorias/categorias.php',
-            'url_real' => 'categorias.php'
+                'name' => 'Departamentos',
+                'url' => '../../php/departamentos/departamentos.php',
+                'url_real' => 'departamentos.php'
             ),
             array(
-            'name' => 'Subcategorías',
-            'url' => '../../php/subcategorias/subcategorias.php',
-            'url_real' => 'subcategorias.php'
+                'name' => 'Categorías',
+                'url' => '../../php/categorias/categorias.php',
+                'url_real' => 'categorias.php'
+            ),
+            array(
+                'name' => 'Subcategorías',
+                'url' => '../../php/subcategorias/subcategorias.php',
+                'url_real' => 'subcategorias.php'
             ),
         ),
     ),
    
-
     /*array(
         'name'  => 'mesas',
         'icon'  => 'gi gi-user',
@@ -204,3 +200,110 @@ $primary_nav = array(
     // ),
     
 );
+elseif($_SESSION[level]==1):
+    if($_SESSION[turno]):
+        $primary_nav = array(
+            array(
+                'name'  => 'Home',
+                'url'   => '../../php/home/index.php',
+                'url_real'=> 'index.php',
+                'icon'  => 'inicio.svg'
+            ),
+            array(
+                'name'  => 'Comandas',
+                'icon'  => 'servicios.svg',
+                'url'   => '../../php/comandas/comandas.php',
+                'url_real'=> 'servicios.php',
+            ),
+            array(
+                'name'  => 'Salir',
+                'url'   => '../../php/home/destruir.php',
+                'url_real'=> 'destruir.php',
+                'icon'  => 'salir.svg'
+            ),
+
+        );  
+else:
+    $primary_nav = array(
+            array(
+                'name'  => 'Home',
+                'url'   => '../../php/home/index.php',
+                'url_real'=> 'index.php',
+                'icon'  => 'inicio.svg'
+            ),
+            array(
+                'name'  => 'Salir',
+                'url'   => '../../php/home/destruir.php',
+                'url_real'=> 'destruir.php',
+                'icon'  => 'salir.svg'
+            ),
+
+        ); 
+    endif;
+elseif($_SESSION[level]==2):
+$primary_nav = array(
+    array(
+        'name'  => 'Comandas',
+        'icon'  => 'servicios.svg',
+        'url'   => '../../php/comandas/comandas.php',
+        'url_real'=> 'servicios.php',
+    ),
+    array(
+        'name'  => 'Configuración',
+        'icon'  => 'configuracion.svg',
+        'sub' => array(
+            array(
+            'name' => 'Mesas',
+            'url' => '../../php/mesas/mesas.php',
+            'url_real' => 'mesas.php'
+            ),
+        ),
+    ),
+   
+    /*array(
+        'name'  => 'mesas',
+        'icon'  => 'gi gi-user',
+        'sub'   => array(
+            array(
+                'name'  => 'Administración de mesas',
+                'url'   => '../../php/mesas/mesas.php',
+                'url_real'=> 'mesas.php',
+            ),
+            array(
+                'name'  => 'Registro de mesas',
+                'url'   => '../../php/mesas/registro_mesa.php',
+                'url_real'=> 'registro_mesa.php'
+            )
+        )
+    ),
+    array(
+        'name'  => 'ordenes',
+        'icon'  => 'gi gi-user',
+        'sub'   => array(
+            array(
+                'name'  => 'Administración de ordenes',
+                'url'   => '../../php/ordenes/ordenes.php',
+                'url_real'=> 'ordenes.php',
+            ),
+            array(
+                'name'  => 'Registro de ordenes',
+                'url'   => '../../php/ordenes/registro_orden.php',
+                'url_real'=> 'registro_orden.php'
+            )
+        )
+    ),*/
+    array(
+        'name'  => 'Salir',
+        'url'   => '../../php/home/destruir.php',
+        'url_real'=> 'destruir.php',
+        'icon'  => 'salir.svg'
+    )
+    // array(
+    //     'name'  => 'Widget Kit',
+    //     'opt'   => '<a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a>' .
+    //                '<a href="javascript:void(0)" data-toggle="tooltip" title="Create the most amazing pages with the widget kit!"><i class="gi gi-lightbulb"></i></a>',
+    //     'url'   => 'header',
+    // ),
+    
+);
+endif;

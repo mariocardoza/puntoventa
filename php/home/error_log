@@ -1,10 +1,8 @@
-[19-Nov-2018 21:32:14 UTC] PHP Warning:  require_once(../../Conexion/Reportes.php): failed to open stream: No such file or directory in /home1/estudjl6/public_html/gentedecaa19a/sys/php/home/index.php on line 24
-[19-Nov-2018 21:32:14 UTC] PHP Fatal error:  require_once(): Failed opening required '../../Conexion/Reportes.php' (include_path='.:/opt/cpanel/ea-php70/root/usr/share/pear') in /home1/estudjl6/public_html/gentedecaa19a/sys/php/home/index.php on line 24
-[19-Nov-2018 15:55:04 America/El_Salvador] PHP Fatal error:  Uncaught Error: Call to undefined method Reportes::obteneruempleados() in /home1/estudjl6/public_html/gentedecaa19a/sys/php/home/index.php:46
-Stack trace:
-#0 {main}
-  thrown in /home1/estudjl6/public_html/gentedecaa19a/sys/php/home/index.php on line 46
-[19-Nov-2018 15:56:00 America/El_Salvador] PHP Fatal error:  Uncaught Error: Call to undefined method Reportes::obteneruempleados() in /home1/estudjl6/public_html/gentedecaa19a/sys/php/home/index.php:46
-Stack trace:
-#0 {main}
-  thrown in /home1/estudjl6/public_html/gentedecaa19a/sys/php/home/index.php on line 46
+[07-Feb-2019 16:06:41 America/El_Salvador] PHP Parse error:  syntax error, unexpected 'if' (T_IF), expecting ')' in /home1/estudjl6/public_html/sys/puntoventa/inc/config.php on line 69
+[07-Feb-2019 16:08:05 America/El_Salvador] PHP Parse error:  syntax error, unexpected 'if' (T_IF), expecting ')' in /home1/estudjl6/public_html/sys/puntoventa/inc/config.php on line 69
+[07-Feb-2019 16:09:54 America/El_Salvador] PHP Parse error:  syntax error, unexpected 'if' (T_IF), expecting ')' in /home1/estudjl6/public_html/sys/puntoventa/inc/config.php on line 69
+[07-Feb-2019 22:17:18 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/estudjl6/public_html/sys/puntoventa/php/home/index.php on line 30
+[07-Feb-2019 22:17:47 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/estudjl6/public_html/sys/puntoventa/php/home/index.php on line 30
+[08-Feb-2019 16:02:00 America/El_Salvador] PHP Warning:  Illegal string offset 'cuantos' in /home1/estudjl6/public_html/sys/puntoventa/inc/page_head2.php on line 380
+[11-Feb-2019 13:54:09 UTC] PHP Parse error:  syntax error, unexpected ']' in /home1/estudjl6/public_html/sys/puntoventa/php/home/index.php on line 32
+[11-Feb-2019 13:54:12 UTC] PHP Parse error:  syntax error, unexpected ']' in /home1/estudjl6/public_html/sys/puntoventa/php/home/index.php on line 32

@@ -25,7 +25,8 @@ class Servicio
 			'Sin empleado asignado'
 		ELSE
 			p.nombre
-		END AS empleado
+		END AS empleado,
+        s.codigo_oculto
 		FROM
 			tb_servicio AS s
 		LEFT JOIN tb_persona AS p ON s.empleado = p.id

@@ -104,11 +104,9 @@ $(document).ready(function(e){
                       });
                   }
                 guardar_exito();
-                //alert("aqui");
-                //$(".modal").modal("hide");
                 
               }else{
-                swal.chose();
+                swal.close();
                 guardar_error();
               }
             }

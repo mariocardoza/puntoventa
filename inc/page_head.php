@@ -8,7 +8,7 @@
  * Header and Sidebar of each page
  *
  */
-
+echo $_SESSION['turno'];
 require_once('../../Conexion/Empresa.php');
 $empresa=Empresa::datos_empresa();
 
@@ -365,7 +365,7 @@ $empresa=Empresa::datos_empresa();
 
                 <ul class="nav navbar-nav-custom">
                     <!-- Main Sidebar Toggle Button -->
-                    <li class="hidden-lg">
+                    <li>
                         <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">
                             <i class="fa fa-bars fa-fw"></i>
                         </a>
@@ -405,13 +405,14 @@ $empresa=Empresa::datos_empresa();
     <br>
     <div>
         <table width="100%">
-        <td width="40%"><p class="cobrar_esto"><img style="cursor: pointer;" id="cobrar_producto" src="../../img/producto.png" width="250px" height="250px" alt="">
-        
-        </p>
-            </td>
-        <td width="20%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-        <td width="40%"><p class="cobrar_esto"><img style="cursor: pointer;" id="cobrar_servicio" src="../../img/servicio.png" width="250px" height="250px" alt=""></p></td>
-    </table>
+            <tr>
+                <td width="40%"><p class="cobrar_esto"><img style="cursor: pointer;" id="cobrar_producto" src="../../img/producto.png" width="250px" height="250px" alt="">
+                </p>
+                </td>
+                <td width="20%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td width="40%"><p class="cobrar_esto"><img style="cursor: pointer;" id="cobrar_servicio" src="../../img/servicio.png" width="250px" height="250px" alt=""></p></td>
+            </tr>
+        </table>
     </div>
     <div>
         <center>

@@ -27,9 +27,8 @@
     }
 </style>
 <?php include '../../inc/page_head.php'; 
-include_once("../../Conexion/Cliente.php");
-$naturales=Cliente::obtener_naturales();
-$juridicos=Cliente::obtener_juridicos();
+include_once("../../Conexion/Cuenta.php");
+$turnos=Cuenta::obtener_turnos();
 ?>
 
 <!-- Page content -->
@@ -38,29 +37,32 @@ $juridicos=Cliente::obtener_juridicos();
       <div class="card">
         <div class="row centrado">
           <div class="col-sm-3 col-lg-3">
+            <label for="" class="control-label">Busqueda</label>
             <div class="input-group">
                 <input type="search" class="form-control" id="busqueda" placeholder="Buscar">
                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
             </div>
-        </div>
-        <div class="col-sm-3 col-lg-3">
+          </div>
+          <div class="col-sm-3 col-lg-3">
+            <label for="" class="control-label">Cajeros</label>
             <select name="" id="turnos" class="select-chosen">
-                <option value="20195729570500000006">Mañana</option>
-                <option value="20195729570500000005">Tarde</option>
+                <option value="">Todos</option>
+                <?php foreach ($turnos as $turno): ?>
+                  <option value="<?php echo $turno[email] ?>"><?php echo $turno[nombre] ?></option>
+                <?php endforeach ?>
             </select>
-        </div>
-        <div class="col-sm-3 col-lg-3">
+          </div>
+          <div class="col-sm-3 col-lg-3">
             <div class="row">
               <div class="col-sm-2 col-lg-2"></div>
               <div class="col-sm-8 col-lg-8"><a id="modal_guardar" href="javascript:void(0)" class="btn btn-mio btn-block">Nueva orden</a></div>
               <div class="col-sm-2 col-lg-2"></div>
+            </div>
           </div>
-        </div>
         </div>
       </div>
       <div class="" id="aqui_busqueda">
-        </div>
-      
+      </div>  
     </div>
     <!-- END Quick Stats -->
 

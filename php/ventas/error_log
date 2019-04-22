@@ -1,3 +1,16 @@
-[18-Jan-2019 14:08:28 America/El_Salvador] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Genericas2.php on line 549
-[18-Jan-2019 14:08:29 America/El_Salvador] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Genericas2.php on line 549
-[18-Jan-2019 14:09:09 America/El_Salvador] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Genericas2.php on line 549
+[07-Feb-2019 10:33:32 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/ventas/ticket.php on line 92
+[07-Feb-2019 10:33:32 America/El_Salvador] PHP Fatal error:  Uncaught exception 'Exception' with message 'Failed to print. Command "smbclient '//box5267.bluehost.com/POS' -c 'print -' -N -m SMB2" failed with exit code 127: sh: smbclient: command not found' in /home1/estudjl6/public_html/sys/puntoventa/lib/ticket/src/Mike42/Escpos/PrintConnectors/WindowsPrintConnector.php:230
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/lib/ticket/src/Mike42/Escpos/PrintConnectors/WindowsPrintConnector.php(175): Mike42\Escpos\PrintConnectors\WindowsPrintConnector->finalizeLinux('\e@\ea\x01\nComedor d...')
+#1 /home1/estudjl6/public_html/sys/puntoventa/lib/ticket/src/Mike42/Escpos/Printer.php(503): Mike42\Escpos\PrintConnectors\WindowsPrintConnector->finalize()
+#2 /home1/estudjl6/public_html/sys/puntoventa/php/ventas/ticket.php(143): Mike42\Escpos\Printer->close()
+#3 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/lib/ticket/src/Mike42/Escpos/PrintConnectors/WindowsPrintConnector.php on line 230
+[07-Feb-2019 10:33:59 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/php/ventas/ticket.php on line 92
+[07-Feb-2019 10:33:59 America/El_Salvador] PHP Fatal error:  Uncaught exception 'Exception' with message 'Failed to print. Command "smbclient '//box5267.bluehost.com/POS' -c 'print -' -N -m SMB2" failed with exit code 127: sh: smbclient: command not found' in /home1/estudjl6/public_html/sys/puntoventa/lib/ticket/src/Mike42/Escpos/PrintConnectors/WindowsPrintConnector.php:230
+Stack trace:
+#0 /home1/estudjl6/public_html/sys/puntoventa/lib/ticket/src/Mike42/Escpos/PrintConnectors/WindowsPrintConnector.php(175): Mike42\Escpos\PrintConnectors\WindowsPrintConnector->finalizeLinux('\e@\ea\x01\nComedor d...')
+#1 /home1/estudjl6/public_html/sys/puntoventa/lib/ticket/src/Mike42/Escpos/Printer.php(503): Mike42\Escpos\PrintConnectors\WindowsPrintConnector->finalize()
+#2 /home1/estudjl6/public_html/sys/puntoventa/php/ventas/ticket.php(143): Mike42\Escpos\Printer->close()
+#3 {main}
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/lib/ticket/src/Mike42/Escpos/PrintConnectors/WindowsPrintConnector.php on line 230

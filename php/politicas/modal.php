@@ -14,6 +14,7 @@
                             <label class="control-label" for="nombre">Tipo: stock de inventario</label>
                                 <input type="hidden" name="data_id" value="nueva_politica">  
                                 <input id="tipo2" type="hidden" name="tipo" checked value="stock">
+                                <input type="hidden" name="codigo_oculto" value="<?php echo date("Yidisus") ?>">
                         </div>
                         <div class="form-group">
                             <label for="" class="control-label">Descripción</label>

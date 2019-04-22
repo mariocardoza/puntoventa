@@ -22,6 +22,17 @@ require_once("Genericas2.php");
  		}
  	}
 
+ 	public static function obtener_politicas(){
+ 		$sql="SELECT * FROM tb_politicas WHERE estado=1";
+ 		try{
+ 			$comando=Conexion::getInstance()->getDb()->prepare($sql);
+ 			$comando->execute();
+ 			return $politicas=$comando->fetchAll(PDO::FETCH_ASSOC);
+ 		}catch(Exception $e){
+ 			return $e->getMessage();
+ 		}
+ 	}
+
  	public static function busqueda(){
  		$sql="SELECT * FROM tb_politicas";
  		try{

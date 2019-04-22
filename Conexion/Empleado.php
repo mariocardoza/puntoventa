@@ -313,7 +313,7 @@ class Empleado
                     </tr>
                     <tr>
                         <th>DUI</th>
-                        <td>$'.$row[dui].'</td>
+                        <td>'.$row[dui].'</td>
                     </tr>
                     <tr>
                         <th>NIT</th>

@@ -45,7 +45,7 @@ $sql="SELECT rd.cantidad,p.nombre as n_producto, me.nombre as n_medida FROM tb_r
   <div class="row">
     <div class="col-xs-12">
       <div class="block full">
-        <form action="#" method="post" name="form_receta" id="form_receta" class="form-horizontal">
+        <form action="#" method="post" name="form_receta" id="form_receta" class="form-vertical">
           
           <div class="row" style="display: block;" id="ingredientes">
               <div class="col-xs-3 col-lg-3">
@@ -98,12 +98,10 @@ $sql="SELECT rd.cantidad,p.nombre as n_producto, me.nombre as n_medida FROM tb_r
   </div>
   <?php include 'modal.php'; ?>
 </div>
-
 <!-- END Page Content -->
 <?php include '../../inc/page_footer.php'; ?>
 <?php include '../../inc/template_scripts.php'; ?>
 <!-- Load and execute javascript code used only in this page -->
-<script src="../../js/helpers/ckeditor/ckeditor.js"></script>   
 <script type="text/javascript" src="../../js/jquery-barcode.js"></script>  
 <script src="recetas.js?cod=<?=$cod?>"></script>
 <script>

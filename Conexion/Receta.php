@@ -2,7 +2,7 @@
 @session_start();
 include_once("Conexion.php");
 include_once("Genericas2.php");
-include_once("Categoria.php");
+include_once("Opcion.php");
 /**
  * 
  */
@@ -12,6 +12,18 @@ class Receta
 	function __construct($arg)
 	{
 		
+	}
+
+	public static function traer_compuestos(){
+		$sql="SELECT * FROM tb_receta WHERE estado=1 and tipo_producto=2";
+		try{
+			$comando=Conexion::getInstance()->getDb()->prepare($sql);
+			$comando->execute();
+			$recetas=$comando->fetchAll(PDO::FETCH_ASSOC);
+			return $recetas;
+		}catch(Exception $e){
+			return $e->getMessage();
+		}
 	}
 
 	public static function productos($id)
@@ -64,30 +76,17 @@ class Receta
 		$receta=Array(
 			'data_id' => 'nueva',
 			'codigo_oculto' => $codigo,
-			'categoria' => $data[tipo],
+			'opcion' => $data[tipo],
 			'nombre' => $data[nombre],
 			'descripcion' => $data[descripcion],
 			'precio' => $data[precio]
 		);
-		try{
-			$receta_new=Genericas2::insertar_generica("tb_receta",$receta);
-			/*if($receta_new[0]==1){
-				foreach ($data[productos] as $producto) {
-					$detalle=Array(
-						'data' => 'nueva',
-						'codigo_receta' => $codigo,
-						'codigo_producto' => $producto[codigo],
-						'cantidad' => $producto[cantidad]
-					);
-
-					$detalle_new=Genericas2::insertar_generica("tb_receta_detalle",$detalle);
-				}
-			}*/
+		$receta_new=Genericas2::insertar_generica("tb_receta",$receta);
+		if($receta_new[0]=="1"){
 			return array(1,"exito",$receta_new);
-		}catch(Exception $e){
-			return array(-1,"error",$e->getMessage());
+		}else{
+			return array(-1,"error",$receta_new);
 		}
-		
 	}
 
 	public static function busqueda($dato,$estado){
@@ -121,7 +120,7 @@ class Receta
                   		<div class="row">
                   			<div class="col-xs-12">';
                   			if($row[imagen]!=''):
-                            $html.='<img class="widget-image img-circle" src="../../img/recetas/'.$row[imagen].'" style="width: 100px;height: 102px;" >';
+                            $html.='<img class="widget-image img-circle" src="../../img/productos/'.$row[imagen].'" style="width: 100px;height: 102px;" >';
                            else: 
                             $html.='<img class="widget-image img-circle" src="../../img/imagenes_subidas/image.svg" style="width: 100px;height: 102px;" >';
                           endif;
@@ -148,7 +147,7 @@ class Receta
     }
 
     public static function modal_editar($codigo){
-    	$categorias=Categoria::obtener_categorias();
+    	$categorias=Opcion::obtener_opciones();
     	$sql="SELECT * FROM tb_receta WHERE codigo_oculto='$codigo'";
     	try{
     		$comando=Conexion::getInstance()->getDb()->prepare($sql);
@@ -188,12 +187,12 @@ class Receta
 					                <div class="col-xs-6 col-lg-6">
 					                  <div class="form-group">
 					                    <label class="control-label" for="">Categoría</label>
-					                    <select name="categoria" required id="categoria" class="select-chosen">';
-					                      	foreach ($categorias[2] as $categoria){
-		                                    	if($categoria[id]==$row[categoria]){
-		                                    		 $html.='<option selected value="'.$categoria[id].'">'.$categoria[nombre].'</option>';
+					                    <select name="opcion" required id="opcion" class="select-chosen">';
+					                      	foreach ($categorias as $categoria){
+		                                    	if($categoria[codigo_oculto]==$row[opcion]){
+		                                    		 $html.='<option selected value="'.$categoria[codigo_oculto].'">'.$categoria[nombre].'</option>';
 		                                    	}else{
-		                                    		 $html.='<option value="'.$categoria[id].'">'.$categoria[nombre].'</option>';
+		                                    		 $html.='<option value="'.$categoria[codigo_oculto].'">'.$categoria[nombre].'</option>';
 		                                    	}
 	                                    	} 
 					                    $html.='</select>
@@ -249,14 +248,14 @@ class Receta
 				      </div>
 				</div>';
     		}
-    		return array(1,"exito",$html);
+    		return array(1,"exito",$html,$categorias);
     	}catch(Exception $e){
     		return array(-1,"error",$e->getMessage(),$sql);
     	}
     }
 
     public static function modal_ver($codigo){
-    	$sql="SELECT r.*,c.nombre as n_categoria FROM tb_receta as r INNER JOIN tb_categoria as c ON c.id=r.categoria WHERE r.codigo_oculto='$codigo'";
+    	$sql="SELECT r.*,o.nombre as n_categoria FROM tb_receta as r INNER JOIN tb_opcion as o ON o.codigo_oculto=r.opcion WHERE r.codigo_oculto='$codigo'";
     	$sql2="SELECT rd.cantidad,p.nombre as n_producto, me.nombre as n_medida FROM tb_receta_detalle as rd INNER JOIN tb_producto as p ON p.codigo_oculto=rd.codigo_producto INNER JOIN tb_unidad_medida as me ON me.id=p.medida WHERE rd.codigo_receta='$codigo'";
     	try{
     		$comando=Conexion::getInstance()->getDb()->prepare($sql);
@@ -303,20 +302,21 @@ class Receta
 				                </tbody>
 				            </table>';
 				            if(Count($ingredientes)>0):
-				            $modal.='<label class="control-label"><b>Ingredientes</b></label>
-				            <table class="table">
+				            $modal.='<table class="table">
 				            	<thead>
-				            		<th>Ingrediente</th>
-				            		<th>Cantidad</th>
-				            	</thead>';
+				            		<tr>
+				            			<th>Ingrediente</th>
+				            			<th>Cantidad</th>
+				            		</tr>
+				            	</thead>
+				            	<tbody>';
 				            	foreach ($ingredientes as $ingrediente):
 				            		$modal.='<tr>
 												<td>'.$ingrediente[n_producto].'</td>
 												<td>'.Receta::convertir_decimal_a_fraccion($ingrediente[cantidad]).' '.$ingrediente[n_medida].'</td>
 				            		</tr>';
 				            	endforeach;
-				            	$modal.='<tbody>
-				            	</tbody>
+				            	$modal.='</tbody>
 				            </table>';
 				        endif;
 				            	$modal.='</div>

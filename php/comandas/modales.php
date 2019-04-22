@@ -160,7 +160,7 @@
         <div class="form-group">
           <h2>
             <div class="icheck-turquoise ">
-                <input type="radio" value="1" name="tipo_factura" checked id="credito_fiscal" />
+                <input type="radio" value="1" name="tipo_factura" id="credito_fiscal" />
                 <label for="credito_fiscal">Crédito fiscal</label>
             </div>
           </h2>
@@ -172,7 +172,7 @@
           </h2>
           <h2>
             <div class="icheck-turquoise ">
-                <input type="radio" value="3" name="tipo_factura" id="ticket" />
+                <input type="radio" value="3" checked name="tipo_factura" id="ticket" />
                 <label for="ticket">Ticket</label>
             </div>
           </h2>         
@@ -315,10 +315,10 @@
                     <input type="radio" value="3" name="tipo_pago" id="tarjeta" />
                     <label for="tarjeta">Tarjeta</label>
                 </div>
-                <!--div class="icheck-turquoise icheck-inline">
+                <div class="icheck-turquoise icheck-inline">
                     <input type="radio" value="4" name="tipo_pago" id="cupon" />
-                    <label for="cupon">Cupón</label>
-                </div-->        
+                    <label for="cupon">Canje de cupón</label>
+                </div>        
               </div>
             </div>
             <div class="col-xs-12" id="efec">
@@ -346,6 +346,12 @@
                 <textarea disabled name="descripcion_debe" class="form-control" id="descripcion_debe" cols="3"></textarea>
               </div>
             </div>
+            <div class="col-xs-12" id="cuponsito" style="display: none;">
+              <div class="form-group">
+                <label for="" class="control-label">N° de cupón</label>
+                <input required type="text" class="form-control" id="n_cupon">
+              </div>
+            </div>
           </div>
           <br><br>
           <div class="row">
@@ -357,6 +363,28 @@
             </div>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade modal-side-fall" id="md_receta_aqui" aria-hidden="true"
+      aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title">Quitar ingrediente</h4>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="aqui_la_fila">
+        <div>
+          <ul id="cuerpo_ver_receta" class="list-group"></ul>
+        </div>
+        <div class="form-group">
+          <center>
+            <button type="button" class="btn btn-default" id="btn_cerrar_receta">Cerrar</button>
+          </center>
+        </div>
       </div>
     </div>
   </div>

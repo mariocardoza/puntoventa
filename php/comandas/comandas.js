@@ -9,8 +9,10 @@ var cliente="";
 var tipo_factura=0;
 var nota_guarda="";
 var cobrar_propina="";
+var comanda_previa="";
 var obj_comanda = new Object();
 $(document).ready(function(e){
+ 
   total=total+total_php;
   $("#totalpone").text("Total: $"+total.toFixed(2));
   $("#total_comanda").val(total.toFixed(2));
@@ -70,15 +72,20 @@ $(document).ready(function(e){
     $(document).on("click","#btn_clientes", function(e){
       var cuantos=$("#cuantos").val();
       var codigo_mesa=$("#cod_mesa").val();
-      $("#id_mesa").val(codigo_mesa);
-      $("#numero_clientes").val(cuantos);
-      $("#para_cuantos").text("Clientes: "+cuantos);
-      $("#num_mesa").text($("#nume_mesa").text());
-      $("#tipo_ordenes").text("Tipo orden: Mesas");
-      $("#mesas").hide();
-      $("#selmesa").hide();
-      $("#orden").show();
-      $("#md_cuantos_mesa").modal("hide");
+      if(cuantos > 0){
+        $("#id_mesa").val(codigo_mesa);
+        $("#numero_clientes").val(cuantos);
+        $("#para_cuantos").text("Clientes: "+cuantos);
+        $("#num_mesa").text($("#nume_mesa").text());
+        $("#tipo_ordenes").text("Tipo orden: Mesas");
+        $("#mesas").hide();
+        $("#selmesa").hide();
+        $("#orden").show();
+        $("#md_cuantos_mesa").modal("hide");
+      }else{
+        swal('aviso','Debe digitar cuantos clientes son','warning');
+      }
+      //guardar_vacia();
     });
 
     //ejecutar comanda
@@ -88,33 +95,50 @@ $(document).ready(function(e){
 
     //editar la comanda
     $(document).on("click","#btn_editar_comanda", function(e){
-      var id_mesa = $("#id_mesa").val() || 0;
+        var id_mesa = $("#id_mesa").val() || 0;
         var numero_clientes = $("#numero_clientes").val() || 0;
         var tipo_pedido = $("#tipo_pedido").val() || 0;
         var cliente = $("#nom_cliente").val();
-        var comanda=new Array();
+        var comanda_new=new Array();
+        var detalle_new=new Array();
         var total=$("#total_comanda").val() || 0;
         var nombre_cliente=$("#nom_cliente").val();
         var direccion = $("#direccion").val();
         
-          $("#comandi").find('input').each(function (index, element) {
-            if(element){
-              comanda.push({
-                    codigo: $(element).attr("data-codigo"),
-                    nota: $(element).attr("data-nota"),
-             });
+        $("#comandi").children("div").each(function(index,element){
+          var nota="";
+          var codigo=$(element).children("li").attr("data-codigo");
+          var padre=$(element).children("li").attr("data-padre");
+          nota=$(element).children("li:eq(1)").attr("data-nota");
+          if(element){
+            comanda_new.push({
+              codigo:codigo,
+              nota:nota,
+              familia:padre
+            });
+          }
+
+          $(element).find("div").children("li").each(function(index,element2){
+            if(element2){
+              detalle_new.push({
+                codigo_producto: $(element2).attr("data-elproducto"),
+                cantidad: $(element2).attr("data-cantireceta"),
+                pertenece: padre
+              });
             }
           });
+        });
+        console.log(comanda_new,detalle_new);
 
         if(total && tipo_pedido ){
           $.ajax({
             url:'json_comandas.php?cod='+yidisus,
             type:'POST',
             dataType: 'json',
-            data:{data_id:'actualizar_comanda',codigo_oculto:lacomanda,id_mesa,numero_clientes,tipo_pedido,comanda,total,nombre_cliente,direccion},
+            data:{data_id:'actualizar_comanda',codigo_oculto:lacomanda,id_mesa,numero_clientes,tipo_pedido,comanda_new,detalle_new,total,nombre_cliente,direccion},
             success: function(json){
               console.log(json);
-              if(comanda.length > 0){
+              if(comanda_new.length > 0){
                 ticket(lacomanda);
               }
               guardar_exito();
@@ -134,14 +158,24 @@ $(document).ready(function(e){
       nota_guarda=nota_guarda+","+" "+nota;
       $( "input[name='"+lafila+"']" ).attr('data-nota',nota_guarda);
       $("#"+lafila).append(
-        '<div>'+nota+'</div>'
+        '<li class="list-group-item" data-nota="'+nota+'">'+nota+' <i id="quita_nota" data-fila="'+lafila+'" class="fa fa-remove"></i></li>'
         );
       $("#notita").val("");
       $("#md_add_nota").modal("hide");
+      $("."+lafila+"nota").hide();
+    });
+
+    $(document).on("click","#quita_nota", function(e){
+      var fila=$(this).attr("data-fila");
+      var li=$(this).parent("li");
+      li.remove();
+      $("."+fila+"nota").show();
     });
 
     $(document).on("click","#producto_add", function(e){
       var codigo = $(this).attr("data-id");
+      //guardar_previa(codigo);
+      //llenar_previa();
       //contar();
       //console.log(conta);
       var x = Math.floor((Math.random() * 10000000000) + 1);
@@ -159,15 +193,18 @@ $(document).ready(function(e){
       var nombre = $(this).attr("data-nombre");
       var precio = parseFloat($(this).attr("data-precio"));
       total=total+precio;
+      var div=$("."+codigo).clone();
+      div.removeClass(codigo);
+      //console.log(div);
       $("#totalpone").text("Total: $"+total.toFixed(2));
       $("#total_comanda").val(total.toFixed(2));
-      agregar_a_comanda(x,nombre,codigo,cantidad,precio);
+      agregar_a_comanda(x,nombre,codigo,cantidad,precio,div);
     });
     //click en las mesas ocupadas
     $(document).on("click","#ocupado,#ocupado1",function(e){
         swal(
           'Aviso!',
-          'La mesa no esta disponible',
+          'La mesa está ocupada',
           'warning'
         );
     });
@@ -214,6 +251,82 @@ $(document).ready(function(e){
         $("#total_comanda").val(total.toFixed(2));
     });
 
+    $(document).on("click","#btn_editar", function(e){
+      var fila =$(this).attr('data-fila');
+      var div=$("."+fila);
+      $("#aqui_la_fila").val(fila);
+      console.log(div);
+      $("#cuerpo_ver_receta").html(div.show());
+      $("#md_receta_aqui").modal("show");
+      //console.log(div);
+    });
+
+    $(document).on("click","#anular_elemento",function(e){
+        var familia=$(this).attr("data-familia");
+        swal({
+         title: '¿Desea continuar?',
+         text: "¡Se anulará el elemento!",
+         type: 'warning',
+         showCancelButton: true,
+         cancelButtonText:"Cancelar",
+         confirmButtonColor: 'red',
+         cancelButtonColor: '#3085d6',
+         confirmButtonText: '¡Si, continuar!'
+       }).then(function () {
+          swal({
+             title: '¿Está realmente seguro?',
+             text: "¡Se acción eliminará permanentemente el ítem y no ya no estará disponible!",
+             type: 'warning',
+             showCancelButton: true,
+             cancelButtonText:"Cancelar",
+             confirmButtonColor: 'red',
+             cancelButtonColor: '#3085d6',
+             confirmButtonText: '¡Si, continuar!'
+          }).then(function () {
+            $.ajax({
+              url:'json_comandas.php',
+              type:'POST',
+              dataType:'json',
+              data:{familia,data_id:'anular_item'},
+              success: function(json){
+                if(json[0]==1){
+                  iziToast.success({
+                      title: ELIMINAR,
+                      message: ELIMINAR_MENSAJE,
+                      timeout: 3000,
+                  });
+                  var timer=setInterval(function(){
+                      location.reload();
+                      clearTimeout(timer);
+                  },3500);
+                }else{
+                  iziToast.error({
+                    title: ERROR,
+                    message: ERROR_MENSAJE,
+                    timeout: 3000,
+                });
+                }
+              }
+            });
+          });
+       });
+    });
+
+    $(document).on("click","#btn_cerrar_receta",function(e){
+      var fila=$("#aqui_la_fila").val();
+      var div=$("#cuerpo_ver_receta").children("div");
+      $("#"+fila).append(div);
+      $("."+fila).hide();
+      $("#md_receta_aqui").modal("hide");
+      $("#cuerpo_ver_receta").empty();
+    });
+
+    $(document).on("click","#quitar_ingrediente",function(e){
+      var div = $(this);
+      var esto = $(this).parent("li");
+      esto.remove();
+    });
+
     //click en boton de seleccion de tipo factura
     $(document).on("click", "#btn_cobrar_antes", function(e){
         var tipo=$('input[name=tipo_factura]:checked').val();
@@ -232,8 +345,9 @@ $(document).ready(function(e){
               //cliente="";
               //traer_clientes(cliente);
               tipo_factura=3;
-              $("#md_tipofactura").modal("hide");
               $("#md_propina").modal("show");
+              $("#md_tipofactura").modal("hide");
+              
               //$("#btn_cobrar").trigger("click");
             }
         }
@@ -440,6 +554,8 @@ $(document).ready(function(e){
         $("#cliente_debe").attr("disabled",true);
         $("#fecha_pago").attr("disabled",true);
         $("#descripcion_debe").attr("disabled",true);
+        $("#cuponsito").css("display","none");
+        $("#n_cupon").val("");
       }if(esto==2){
         $("#efec").css("display","none");
         $("#credit").css("display","block"); 
@@ -447,6 +563,8 @@ $(document).ready(function(e){
         $("#cliente_debe").removeAttr("disabled","disabled");
         $("#fecha_pago").removeAttr("disabled","disabled");
         $("#descripcion_debe").removeAttr("disabled","disabled");
+        $("#cuponsito").css("display","none");
+        $("#n_cupon").val("");
         traer_clientes(cliente);
         //console.log(cliente);
       }if(esto==3){
@@ -456,6 +574,17 @@ $(document).ready(function(e){
         $("#cliente_debe").attr("disabled",true);
         $("#fecha_pago").attr("disabled",true);
         $("#descripcion_debe").attr("disabled",true);
+        $("#cuponsito").css("display","none");
+        $("#n_cupon").val("");
+      }if(esto==4){
+        $("#efec").css("display","none");
+        $("#credit").css("display","none");
+        $("#efectivo_recibido").attr("disabled",true);
+        $("#cliente_debe").attr("disabled",true);
+        $("#fecha_pago").attr("disabled",true);
+        $("#descripcion_debe").attr("disabled",true);
+        $("#cuponsito").css("display","block");
+        $("#n_cupon").val("");
       }
     });
 
@@ -480,7 +609,8 @@ $(document).ready(function(e){
 
     $(document).on("click", "#btn_imprimir2", function(e) {//EVENTO SE ACTIVA AL DAR CLICK EN IMPRIMIR DE LA MODAL
           $("#md_imprimir").modal('toggle');
-          
+          var lacomanda=$(this).attr("data-elqueimprime");
+          var tipo = $(this).attr("data-tipo");
           swal({
                   title: '¿Se imprimió correctamente?',
                   //text: "Si",
@@ -509,7 +639,13 @@ $(document).ready(function(e){
       $("#md_tipofactura").modal("show");
     });
 
+    $(document).on("click","#btn_precuenta",function(e){
+      var codigo=$(this).attr("data-codigo");
+      precuenta(codigo);
+    });
+
     $(document).on("click","#btn_imprimir_ticket", function(e){
+      var valid=$("#pagoo").valid();
         var factura=$("#tipo_fac").val();
         var efectivo=$("#efectivo_recibido").val();
         var cambio=$("#efectivo_vuelto").val();
@@ -521,11 +657,13 @@ $(document).ready(function(e){
         var comanda=$("#id_venta").val();
         var propina = $("#propi").val();
         var mesa=$("#mesita").val();
-        $.ajax({
+        var n_cupon = $("#n_cupon").val();
+        if(valid){
+          $.ajax({
             url:'json_comandas.php',
             type:'POST',
             dataType:'json',
-            data:{propina,comanda,total,tipo_factura,cliente_aqui,cliente_debe,descripcion_debe,efectivo,cambio,forma_pago,mesa,data_id:'cobrar'},
+            data:{propina,comanda,total,tipo_factura,cliente_aqui,cliente_debe,descripcion_debe,efectivo,cambio,forma_pago,mesa,n_cupon,data_id:'cobrar'},
             success: function(json){
                 console.log(json);
                 if(json[0]==1){
@@ -546,11 +684,17 @@ $(document).ready(function(e){
                 }
             }
         });
+        }
+        
         //console.log(datos);
         //facturar(tipo_pago,factura,efectivo,cambio,total,cliente_aqui,cliente_debe,descripcion_debe,comanda,propina);
         /*if(factura==1) {}
         if(factura==2) {consumidor(venta,efectivo,cambio,total);}
         else {ticket(venta,efectivo,cambio,total);}*/
+    });
+
+    $(document).on("click","#btn_cancelar_nc", function(e){
+
     });
 
     //cerrar modal de pregunta
@@ -575,6 +719,7 @@ $(document).ready(function(e){
         $("#nom_cliente").val(nombre);
         $("#direccion").val(direccion);
         $("#direc_cliente").text("Direccion de entrega: "+direccion);
+        //guardar_vacia();
       }else{
         swal('Aviso','Debe digitar el nombre del cliente','warning');
       }
@@ -617,6 +762,56 @@ $(document).ready(function(e){
     });
     
   });
+
+function guardar_vacia(){
+  $.ajax({
+    url:'json_comandas.php',
+    type:'POST',
+    dataType:'json',
+    data:{data_id:'guardar_vacia'},
+    success: function(json){
+      console.log(json);
+      comanda_previa=json[2][3];
+    }
+  });
+}
+
+///funcion para llenar las comandas previas
+function llenar_previa(){
+  $.ajax({
+    url:'json_comandas.php',
+    type:'POST',
+    dataType:'json',
+    data:{data_id:'llenar_previa',comanda:comanda_previa},
+    success:function(json){
+      console.log(json);
+    }
+  });
+}
+
+function guardar_previa(codigo){
+  $.ajax({
+    url:'json_comandas.php',
+    type:'POST',
+    dataType:'json',
+    data:{data_id:'guardar_previa',codigo_producto:codigo,comanda:comanda_previa},
+    success:function(json){
+      console.log(json);
+    }
+  });
+}
+
+function eliminar_previa(){
+  $.ajax({
+    url:'json_comandas.php',
+    type:'POST',
+    dataType:'json',
+    data:{data_id:'eliminar_previa',comanda:comanda_previa},
+    success:function(json){
+
+    }
+  });
+}
 
 //facturar
 function facturar(tipo_pago,factura,efectivo,cambio,total,cliente_aqui,cliente_debe,descripcion_debe,comanda,propina){
@@ -709,19 +904,16 @@ function traer_clientes(cliente){
         });
     }
 
-    function agregar_a_comanda(x,nombre,codigo,cantidad,precio){
+    function agregar_a_comanda(x,nombre,codigo,cantidad,precio,div){
       $("#comandi").append(
         '<input type="hidden" name="'+x+'" data-precio="'+precio+'" data-nota="" data-nombre="'+nombre+'" data-codigo="'+codigo+'">'+
-        /*'<thead data-codigo="'+codigo+'" data-precio="'+precio+'" data-cantidad="'+cantidad+'" id="'+x+'">'+
-          '<th rowspan="2">'+cantidad+'</th>'+
-          '<th>'+nombre+'</th>'+
-          '<th>$'+precio+'</th>'+
-          '<th><button type="button" class="btn btn-success btn-xs" id="nota" data-fila="'+x+'">nota</button></th>'+
-        '</thead>'*/
+        
         '<div class="col-xs-12 col-lg-12" id="'+x+'">'+
-          '<div><h3>'+cantidad+'    '+nombre+'    $'+precio+'  <button type="button" class="btn btn-success" id="nota" data-fila="'+x+'">nota</button><button type="button" class="btn btn-danger" id="btn_quitar" data-fila="'+x+'">Quitar</button></h3></div>'+
+          '<li style="font-size: 18px;" class="list-group-item row" data-codigo="'+codigo+'" data-padre="'+x+'">'+cantidad+'    '+nombre+'    $'+precio+'  <div class="btn-group pull-right"><button type="button" class="btn btn-success '+x+'nota" id="nota" data-fila="'+x+'">Nota</button><button type="button" class="btn btn-info" id="btn_editar" data-fila="'+x+'">Editar</button><button type="button" class="btn btn-danger" id="btn_quitar" data-fila="'+x+'">Quitar</button></div></li>'+
         '</div>'
         );
+      div.addClass(x.toString());
+      $("#"+x).append(div);
     }
 
     function guardar_comanda(){
@@ -730,23 +922,41 @@ function traer_clientes(cliente){
         var tipo_pedido = $("#tipo_pedido").val() || 0;
         var cliente = $("#nom_cliente").val();
         var comanda=new Array();
+        var comanda_new=new Array();
+        var detalle_new=new Array();
         var total=$("#total_comanda").val() || 0;
         
-            $("#comandi").find('input').each(function (index, element) {
-            if(element){
-              comanda.push({
-                    codigo: $(element).attr("data-codigo"),
-                    nota: $(element).attr("data-nota"),
-             });
+        $("#comandi").children("div").each(function(index,element){
+          var nota="";
+          var codigo=$(element).children("li").attr("data-codigo");
+          var padre=$(element).children("li").attr("data-padre");
+          nota=$(element).children("li:eq(1)").attr("data-nota");
+          if(element){
+            comanda_new.push({
+              codigo:codigo,
+              familia:padre,
+              nota:nota
+            });
+          }
+
+          $(element).find("div").children("li").each(function(index,element2){
+            if(element2){
+              detalle_new.push({
+                codigo_producto: $(element2).attr("data-elproducto"),
+                cantidad: $(element2).attr("data-cantireceta"),
+                pertenece: padre
+              });
             }
           });
-          console.log(comanda.length);
-        if(total && tipo_pedido && (comanda.length > 0)){
+        });
+        //console.log(comanda_new,detalle_new);
+        
+        if(total && tipo_pedido && (comanda_new.length > 0)){
           $.ajax({
             url:'json_comandas.php',
             type:'POST',
             dataType: 'json',
-            data:{data_id:'nueva_comanda',id_mesa,numero_clientes,tipo_pedido,comanda,total},
+            data:{data_id:'nueva_comanda',id_mesa,numero_clientes,tipo_pedido,comanda_new,detalle_new,total},
             success: function(json){
               console.log(json);
               ticket(json[2][3]);
@@ -757,14 +967,7 @@ function traer_clientes(cliente){
           swal('aviso',
             'No ha seleccionado nada',
             'warning');
-        }
-        
-        
-    }
-
-    function actualizar_comanda(){
-        
-        
+        }  
     }
 
   function ticket(comanda){
@@ -777,6 +980,23 @@ function traer_clientes(cliente){
     $("#md_imprimir .modal-body").empty().html(iframe);
     console.log(iframe);
     swal.close();
+    $("#btn_imprimir2").attr('data-elqueimprime',comanda);
+    $("#btn_imprimir2").attr('data-tipo',1);
+    $("#md_imprimir").modal({show: 'false'});
+}
+
+function precuenta(comanda){
+    console.log("esto "+comanda);
+    var h = $( window ).height();
+    console.log(h);
+    var iframe = '<div class="iframe-container"><iframe id="PDF_doc" src="../../lib/tcpdf/reportes/precuenta.php?datos='+comanda+'" width="100%" height="'+(h-100)+'px"></iframe></div>'+
+      '<div class="iframe-container"><iframe id="PDF_doc2" class="hide" src="../../lib/tcpdf/reportes/precuenta.php?datos='+comanda+'" width="100%" height="100%"></iframe></div>';
+    console.log(iframe);
+    $("#md_imprimir .modal-body").empty().html(iframe);
+    console.log(iframe);
+    swal.close();
+    $("#btn_imprimir2").attr('data-elqueimprime',comanda);
+    $("#btn_imprimir2").attr('data-tipo',1);
     $("#md_imprimir").modal({show: 'false'});
 }
 
@@ -790,6 +1010,8 @@ function ticket2(comanda){
     $("#md_imprimir .modal-body").empty().html(iframe);
     console.log(iframe);
     swal.close();
+    $("#btn_imprimir2").attr('data-elqueimprime',comanda);
+    $("#btn_imprimir2").attr('data-tipo',2);
     $("#md_imprimir").modal({show: 'false'});
 }
 
@@ -804,6 +1026,8 @@ function consumidor(comanda){
     $("#md_imprimir .modal-body").empty().html(iframe);
     console.log(iframe);
     swal.close();
+    $("#btn_imprimir2").attr('data-elqueimprime',comanda);
+    $("#btn_imprimir2").attr('data-tipo',3);
     $("#md_imprimir").modal({show: 'false'});
 }
 
@@ -817,6 +1041,8 @@ function credito(comanda){
     $("#md_imprimir .modal-body").empty().html(iframe);
     console.log(iframe);
     swal.close();
+    $("#btn_imprimir2").attr('data-elqueimprime',comanda);
+    $("#btn_imprimir2").attr('data-tipo',4);
     $("#md_imprimir").modal({show: 'false'});
 }
 
@@ -826,7 +1052,7 @@ function ver(id){
 
 function cobrar(id,total_a,mesa){
   var html='<button id="cancelar_cobrar" class="btn btn-default">Cerrar</button>'+
-           '<button data-codigo="'+id+'" class="btn btn-info">Imprimir precuenta</button>'+
+           '<button data-codigo="'+id+'" id="btn_precuenta" class="btn btn-info">Imprimir precuenta</button>'+
            '<button id="ir_a_cobrar" data-mesa="'+mesa+'" data-codigo="'+id+'" data-total="'+total_a+'" class="btn btn-mio">Cobrar</button>';
   swal({
       title: '¿Qué desea hacer',

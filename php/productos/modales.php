@@ -113,7 +113,7 @@
         <h4 class="modal-title">Registrar producto</h4>
       </div>
       <div class="modal-body">
-        <form action="#" method="post" name="form-productog" id="form-productog" class="form-horizontal">
+        <form action="#" method="post" name="form-productog" id="form-productog" class="">
             <!-- Product Edit Content -->
             <div class="row">
                 <div class="col-xs-8 col-lg-8" style="padding-left: 30px; padding-right: 16px;">

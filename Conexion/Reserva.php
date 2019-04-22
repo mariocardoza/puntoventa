@@ -1,6 +1,9 @@
 <?php 
 @session_start();
 require_once("Conexion.php");
+require_once("Genericas2.php");
+require_once("Servicio.php");
+require_once("Cliente.php");
 /**
  * 
  */
@@ -13,11 +16,46 @@ class Reserva
 	}
 
 	public static function guardar($data){
+		$codigo=date("Yidisus");
+		$fecha_a=explode("/",$data[fecha]);
+		$fecha=$fecha_a[2]."-".$fecha_a[1]."-".$fecha_a[0];
+		$array_guardar=array(
+			'data_id'=>'mueva',
+			'servicio' => $data[servicio],
+			'cliente' => $data[cliente],
+			'empleado' => $data[empleado],
+			'fecha' => $fecha,
+			'hora' => $data[hora],
+			'telefono' => $data[telefono],
+			'codigo_oculto' => $codigo
+		);
 
+		$result=Genericas2::insertar_generica("tb_reserva",$array_guardar);
+		if($result[0]=="1"){
+			return array(1,"exito",$result);
+		}else{
+			return array(-1,"error",$result);
+		}
 	}
 
 	public static function editar($data){
-
+		$array_editar=array(
+			'data_id'=>'mueva',
+			'codigo_oculto' => $data[codigo_oculto],
+			'servicio' => $data[servicio],
+			'cliente' => $data[cliente],
+			'empleado' => $data[empleado],
+			'fecha' => $data[fecha],
+			'hora' => $data[hora],
+			'telefono' => $data[telefono]
+		);
+		$result=Genericas2::actualizar_generica("tb_reserva",$array_editar);
+		if($result[0]=="1"){
+			return array(1,"exito",$result);
+		}else{
+			return array(-1,"error",$result);
+		}
+		
 	}
 
 	public static function busqueda($dato){
@@ -41,7 +79,7 @@ class Reserva
                             </tr>
                             <tr>
                                 <td width="15%"><a href="javascript:void(0)" onclick="darbaja(\''.$row[id].'\',\'tb_departamento\',\'el departamento\')" data-toggle="tooltip" title="Eliminar"><img src="../../img/iconos/eliminar.svg" width="35px" height="35px"></a></td>
-                                <td style="font-size:18px">Día: '.$row[lafecha].' hora: 08:30 am</td>
+                                <td style="font-size:18px">Día: '.$row[lafecha].' hora: '.$row[hora].'</td>
                             </tr>
                         </tbody>
                     </table>
@@ -57,6 +95,8 @@ class Reserva
     }
 
     public static function modal_editar($codigo){
+    	$servicios=Servicio::obtener_servicios();
+    	$clientes=Cliente::obtener_todos();
     	$sql="SELECT * FROM tb_reserva WHERE codigo_oculto='$codigo'";
     	try{
     		$comando=Conexion::getInstance()->getdb()->prepare($sql);
@@ -73,27 +113,35 @@ class Reserva
 				                <h4 class="modal-title">Registrar reserva</h4>
 				            </div>
 				            <div class="modal-body">
-				                    <form action="#" method="post" name="fm_turno" id="fm_turno" class="form-horizontal">
+				                    <form action="#" method="post" name="fm_reserva" id="fm_reserva" class="form-horizontal">
 				            
 				                        <div class="form-group">
 				                            <label class="control-label" for="nombre">Servicio</label>
 				                                <input type="hidden" name="data_id" value="editar_reserva">
 				                                <input type="hidden" name="codigo_oculto" value="'.$row[codigo_oculto].'">   
 				                                <select name="servicio" id="servicio" class="select-chosen">
-				                                    <option value="">Seleccione..</option>
-				                                    <?php foreach ($servicios as $servicio): ?>
-				                                        <option value="<?php echo $servicio[codigo_oculto] ?>"><?php echo $servicio[nombre] ?></option>
-				                                    <?php endforeach ?>
-				                                </select>
+				                                    <option value="">Seleccione..</option>';
+				                                    foreach ($servicios as $servicio): 
+				                                    	if($servicio[codigo_oculto]==$row[servicio]):
+				                                        	$modal.='<option selected value="'.$servicio[codigo_oculto].'">'.$servicio[nombre].'</option>';
+					                                    else:
+					                                    	$modal.='<option value="'.$servicio[codigo_oculto].'">'.$servicio[nombre].'</option>';
+					                                    endif;
+				                                    endforeach; 
+				                                $modal.='</select>
 				                        </div>
 				                        <div class="form-group">
 				                            <label for="" class="control-label">Cliente</label>
 				                            <select name="cliente" id="cliente" class="select-chosen">
-				                                <option value="">Seleccione..</option>
-				                                <?php foreach ($clientes[1] as $cliente): ?>
-				                                    <option value="<?php echo $cliente[codigo_oculto] ?>"><?php echo $cliente[nombre] ?></option>
-				                                <?php endforeach ?>
-				                            </select>
+				                                <option value="">Seleccione..</option>';
+				                                foreach ($clientes[1] as $cliente):
+				                                	if($cliente[codigo_oculto]==$row[cliente]): 
+				                                    $modal.='<option selected value="'.$cliente[codigo_oculto].'">'.$cliente[nombre].'</option>';
+				                                else:
+				                                	$modal.='<option value="'.$cliente[codigo_oculto].'">'.$cliente[nombre].'</option>';
+				                                endif;
+				                                endforeach; 
+				                            $modal.='</select>
 				                        </div>
 				                        <div class="form-group">
 				                            <label for="" class="control-label">Empleado</label>
@@ -105,11 +153,11 @@ class Reserva
 				                    
 				                        <div class="form-group">
 				                            <label class="control-label" for="nombre">Día</label>
-				                                <input type="text" name="dia" required class="form-control vecimi" id="dia">
+				                                <input type="text" value="'.$row[fecha].'" name="dia" required class="form-control vecimi" id="dia">
 				                        </div>
 				                        <div class="form-group">
 				                            <label class="control-label" for="nombre">Hora</label>
-				                                <input type="time" name="hora" required class="form-control " id="hora">
+				                                <input type="time" value="'.$row[hora].'" name="hora" required class="form-control " id="hora">
 				                        </div>
 				                        <div class="form-group">
 				                            <label class="control-label" for="nombre">Teléfono</label>
@@ -117,8 +165,8 @@ class Reserva
 				                        </div>
 				                        <div class="form-group">
 				                            <center>
-				                                <button type="button" id="btn_guardar" class="btn btn-mio">Guardar</button>
-				                                <button type="reset" data-dismiss="modal" class="btn btn-defaul"> Cerrar</button>
+				                                <button type="button" id="btn_editar" class="btn btn-mio">Guardar</button>
+				                                <button type="button" data-dismiss="modal" class="btn btn-defaul"> Cerrar</button>
 				                            </center>
 				                        </div>
 				                    </form>

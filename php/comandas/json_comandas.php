@@ -8,6 +8,22 @@ if(isset($_POST) || isset($_GET)){
 		echo json_encode($result);
 		exit();
 	}
+	if($_POST['data_id']=='guardar_vacia'){
+		$result=Comanda::guardar_vacia();
+		echo json_encode($result);exit();
+	}
+	if($_POST['data_id']=='llenar_previa'){
+		$result=Comanda::llenar_previa($_POST);
+		echo json_encode($result);exit();
+	}
+	if($_POST['data_id']=='eliminar_previa'){
+		$result=Comanda::eliminar_previa($_POST);
+		echo json_encode($result);exit();
+	}
+	if($_POST['data_id']=='guardar_previa'){
+		$result=Comanda::guardar_previa($_POST);
+		echo json_encode($result);exit();
+	}
 	if($_POST['data_id']=='nueva_comanda'){
 		$result = Comanda::nueva_comanda($_POST);
 		echo json_encode($result);exit();
@@ -38,6 +54,10 @@ if(isset($_POST) || isset($_GET)){
 	}
 	if($_POST['data_id']=='anular'){
 		$result=Comanda::eliminar($_POST);
+		echo json_encode($result);exit();
+	}
+	if($_POST['data_id']=='anular_item'){
+		$result=Comanda::eliminar_item($_POST['familia']);
 		echo json_encode($result);exit();
 	}
 }

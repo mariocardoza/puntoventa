@@ -9,7 +9,7 @@
                 <h4 class="modal-title">Registrar reserva</h4>
             </div>
             <div class="modal-body">
-                    <form action="#" method="post" name="fm_turno" id="fm_turno" class="form-horizontal">
+                    <form action="#" method="post" name="fm_reserva" id="fm_reserva" class="form-horizontal">
             
                         <div class="form-group">
                             <label class="control-label" for="nombre">Servicio</label>
@@ -35,26 +35,26 @@
                             <label for="" class="control-label">Empleado</label>
                             <select name="empleado" id="empleado" class="select-chosen">
                                 <option value="">Seleccione...</option>
-                                <option value="">Cualquier empleado</option>
+                                <option value="0">Cualquier empleado</option>
                             </select>
                         </div>
                     
                         <div class="form-group">
                             <label class="control-label" for="nombre">Día</label>
-                                <input type="text" name="dia" required class="form-control vecimi" id="dia">
+                                <input type="text" name="dia" class="form-control vecimi" id="dia">
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="nombre">Hora</label>
-                                <input type="time" name="hora" required class="form-control " id="hora">
+                                <input type="time" name="hora" class="form-control " id="hora">
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="nombre">Teléfono</label>
-                                <input type="text" name="fin" required class="telefono form-control" id="fin">
+                                <input type="text" name="telefono" class="telefono form-control" id="telefono">
                         </div>
                         <div class="form-group">
                             <center>
-                                <button type="button" id="btn_guardar" class="btn btn-mio">Guardar</button>
-                                <button type="reset" data-dismiss="modal" class="btn btn-defaul"> Cerrar</button>
+                                <button type="submit" class="btn btn-mio">Guardar</button>
+                                <button type="button" data-dismiss="modal" class="btn btn-defaul"> Cerrar</button>
                             </center>
                         </div>
                     </form>

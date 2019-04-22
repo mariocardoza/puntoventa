@@ -298,7 +298,7 @@
 		}
 
 		public static function eliminar_generica($array_values){
-			$tabla = $valor_campo=$campo="";
+			$tabla = $valor_campo=$campo=$otrowhere="";
 			$as=0;
 			foreach(array_keys($array_values) as $key ) {
 				$as++;
@@ -307,10 +307,12 @@
 	 			}else if ($as === 2) {//obtengo id para update
 	 				$valor_campo = $array_values[$key];
 	 				$campo= $key;
+	 			}else if($as === 3){//otra condicion del where
+	 				$otrowhere = "AND ".$key." = "." '".$array_values[$key]."'";
 	 			} 
 			}
 
-			$sql = "DELETE FROM $tabla WHERE $campo = '$valor_campo'";
+			$sql = "DELETE FROM $tabla WHERE $campo = '$valor_campo' $otrowhere";
 			
 			try {
 				$comando = Conexion::getInstance()->getDb()->prepare($sql);

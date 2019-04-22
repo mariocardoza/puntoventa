@@ -24,7 +24,7 @@
         font-size: 23px;
     }
 </style>
-<?php include '../../inc/page_head.php'; 
+<?php include '../../inc/page_head2.php'; 
 include_once("../../Conexion/administracion/Usuarios.php");
 include_once("../../Conexion/Empresa.php");
 $empresa = Empresa::datos_empresa();

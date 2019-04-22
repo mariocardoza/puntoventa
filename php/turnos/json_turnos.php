@@ -11,5 +11,9 @@ if(isset($_POST)){
 		$result=Turno::busqueda();
 		echo json_encode($result);exit();
 	}
+	if($_POST['data_id']=='ver_resumen'){
+		$result=Turno::ver_resumen($_POST[turno]);
+		echo json_encode($result);exit();
+	}
 }
 ?>

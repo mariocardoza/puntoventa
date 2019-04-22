@@ -5,6 +5,8 @@ include_once('Proveedor.php');
 include_once('Departamento.php');
 include_once('Categoria.php');
 include_once('Subcategoria.php');
+include_once('Politica.php');
+include_once('Opcion.php');
  class Producto
  {
  	
@@ -589,7 +591,9 @@ include_once('Subcategoria.php');
 		$proveedores=Proveedor::obtener_proveedores();
 		$categorias=Categoria::obtener_categorias();
 		$departamentos=Departamento::obtener_departamentos();
-		$subcategorias=Subcategoria::obtener_subcategorias();
+        $subcategorias=Subcategoria::obtener_subcategorias();
+        $politicas=Politica::obtener_politicas();
+		$opciones=Opcion::obtener_opciones();
 		$sql="SELECT
  			p.id,
 			p.nombre,
@@ -601,16 +605,19 @@ include_once('Subcategoria.php');
 			p.ganancia,
 			p.fecha_vencimiento,
             p.codigo_oculto,
+            p.opcion,
 			d.id AS departamento,
 			c.id AS categoria,
 			s.id AS subcategoria,
-			prov.id as proveedor
+			prov.id as proveedor,
+            po.codigo_oculto as politica
 		FROM
 			tb_producto AS p
 		INNER JOIN tb_departamento AS d ON d.id = p.departamento
 		INNER JOIN tb_proveedor as prov ON prov.id=p.proveedor
 		INNER JOIN tb_categoria AS c ON c.id = p.categoria
 		LEFT JOIN tb_subcategoria AS s ON s.id = p.subcategoria
+        LEFT JOIN tb_politicas as po ON po.codigo_oculto=p.politica
 		WHERE
 			p.estado = 1
 		AND p.id=$id
@@ -634,7 +641,7 @@ include_once('Subcategoria.php');
             </button>
         </div>
           	<div class="modal-body">
-               <form action="#" method="post" name="form-producto" id="form-producto" class="form-horizontal">
+               <form action="#" method="post" name="form-productog" id="form-producto" class="form-horizontal">
             <!-- Product Edit Content -->
         <div class="row">
             <div class="col-lg-6">
@@ -668,8 +675,7 @@ include_once('Subcategoria.php');
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="categoria">Categoría</label>
-                                <!-- Chosen plugin (class is initialized in js/app.js -> uiInit()), for extra usage examples you can check out http://harvesthq.github.io/chosen/ -->
-                                <select id="categoria" name="categoria" class="select-chosen" data-placeholder="Seleccione un categoría" style="width: 250px;">
+                                <select id="categoria" name="categoria" class="select-chosen" data-placeholder="Seleccione un categoría" style="width: 100%;">
                                     <option></option>';
                                     foreach ($categorias[2] as $categoria){
                                     	if($categoria[id]==$producto[categoria]){
@@ -693,7 +699,7 @@ include_once('Subcategoria.php');
                     
                     <div class="form-group">
                             <label class="control-label" for="subcategoria">Subcategoría</label>
-                                <select name="subcategoria" id="subcategoria" class="select-chosen" data-placeholder="Seleccione un departamento" style="width: 250px;">
+                                <select name="subcategoria" id="subcategoria" class="select-chosen" data-placeholder="Seleccione un departamento" style="width: 100%;">
                                      <option></option>';
                                        foreach ($subcategorias[2] as $subcategoria){
                                     	if($subcategoria[id]==$producto[subcategoria]){
@@ -707,7 +713,7 @@ include_once('Subcategoria.php');
                         </div>';     
                         $modal.='<div class="form-group">
                             <label class="control-label" for="product-meta-keywords">Proveedor</label>
-                                <select name="proveedor" id="proveedor" class="select-chosen" data-placeholder="Seleccione un proveedor" style="width: 250px;">
+                                <select name="proveedor" id="proveedor" class="select-chosen" data-placeholder="Seleccione un proveedor" style="width:100%">
                                     <option></option>';
                                     foreach ($proveedores[2] as $proveedor){
                                     	if($proveedor[id]==$producto[proveedor]){
@@ -718,6 +724,36 @@ include_once('Subcategoria.php');
                                        
                                     } 
                                 $modal.='</select>
+                        </div>';
+                        $modal.='<div class="form-group">
+                            <label class="control-label" for="product-meta-keywords">Opción del menú</label>
+                                <select name="opcion" id="opcion" class="select-chosen" data-placeholder="Seleccione un opcion" style="width:100%">
+                                    <option value="">Ninguna</option>';
+                                    foreach ($opciones as $opcion){
+                                        if($opcion[codigo_oculto]==$producto[opcion]){
+                                             $modal.='<option selected value="'.$opcion[codigo_oculto].'">'.$opcion[nombre].'</option>';
+                                        }else{
+                                             $modal.='<option value="'.$opcion[codigo_oculto].'">'.$opcion[nombre].'</option>';
+                                        }
+                                    
+                                       
+                                    } 
+                                $modal.='</select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="control-label">Política</label>
+                            <select name="politica" id="politica" class="select-chosen" data-placeholder="Seleccione una politica" style="width: 100%;">
+                                <option selected value="">Seleccione ...</option>';
+                                    foreach ($politicas as $politica){
+                                        if($politica[codigo_oculto]==$producto[politica]){
+                                             $modal.='<option selected value="'.$politica[codigo_oculto].'">Stock mínimo '.$politica[minimo].'</option>';
+                                        }else{
+                                             $modal.='<option value="'.$politica[codigo_oculto].'">Stock mínimo '.$politica[minimo].'</option>';
+                                        }
+                                       
+                                    } 
+                            $modal.='</select>
                         </div>
                         <div class="form-group">
                             <label for="" class="control-label">Porcentaje de ganancia</label>

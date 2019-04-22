@@ -25,6 +25,7 @@
     .block-title h2 {
         font-size: 23px;
     }
+    .modal { overflow-y: auto !important; }
 </style>
 <?php include '../../inc/page_head.php'; 
 include_once("../../Conexion/Cliente.php");

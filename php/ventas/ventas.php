@@ -118,6 +118,23 @@ if($categorias[0] == 1)$datos = $categorias[2];
         });
       });
 
+      // prueba para imprimir ticket
+    $(document).on("click","#elticket", function(e){
+      var venta=$(this).attr("data-venta");
+           $.ajax({
+               url: 'ticket.php',
+               type: 'POST',
+               data: {datos:venta},
+               success: function(response){
+                   if(response==1){
+                       alert('Imprimiendo....');
+                   }else{
+                       alert('Error');
+                   }
+               }
+           }); 
+    });
+
         $(document).on("change","#tipos", function(e){
           $("#busqueda").val("");
           var tipo=$(this).val();

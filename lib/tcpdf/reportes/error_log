@@ -1,28 +1,5 @@
-[25-Jan-2019 09:51:58 America/El_Salvador] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dc.nota' in 'field list' in /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/comanda.php:214
+[20-Feb-2019 13:30:27 America/El_Salvador] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.empleado' in 'on clause'' in /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/precuenta.php:203
 Stack trace:
-#0 /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/comanda.php(214): PDOStatement->execute()
+#0 /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/precuenta.php(203): PDOStatement->execute()
 #1 {main}
-  thrown in /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/comanda.php on line 214
-[25-Jan-2019 17:04:08 UTC] PHP Parse error:  syntax error, unexpected ')' in /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/comanda.php on line 249
-[28-Jan-2019 16:30:07 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/ticketc.php on line 297
-[28-Jan-2019 16:31:56 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/ticketc.php on line 297
-[31-Jan-2019 10:42:29 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/comanda.php on line 312
-[31-Jan-2019 13:29:57 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/comanda.php on line 312
-[31-Jan-2019 13:29:58 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/comanda.php on line 312
-[31-Jan-2019 13:30:15 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/comanda.php on line 312
-[31-Jan-2019 13:30:16 America/El_Salvador] PHP Warning:  Invalid argument supplied for foreach() in /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/comanda.php on line 312
-[01-Feb-2019 08:48:57 America/El_Salvador] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1267 Illegal mix of collations (utf8_general_ci,IMPLICIT) and (utf8_unicode_ci,IMPLICIT) for operation '='' in /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/fiscalc.php:222
-Stack trace:
-#0 /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/fiscalc.php(222): PDOStatement->execute()
-#1 {main}
-  thrown in /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/fiscalc.php on line 222
-[01-Feb-2019 08:49:01 America/El_Salvador] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1267 Illegal mix of collations (utf8_general_ci,IMPLICIT) and (utf8_unicode_ci,IMPLICIT) for operation '='' in /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/fiscalc.php:222
-Stack trace:
-#0 /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/fiscalc.php(222): PDOStatement->execute()
-#1 {main}
-  thrown in /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/fiscalc.php on line 222
-[01-Feb-2019 08:49:31 America/El_Salvador] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1267 Illegal mix of collations (utf8_general_ci,IMPLICIT) and (utf8_unicode_ci,IMPLICIT) for operation '='' in /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/fiscalc.php:222
-Stack trace:
-#0 /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/fiscalc.php(222): PDOStatement->execute()
-#1 {main}
-  thrown in /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/fiscalc.php on line 222
+  thrown in /home1/estudjl6/public_html/sys/puntoventa/lib/tcpdf/reportes/precuenta.php on line 203

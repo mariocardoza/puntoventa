@@ -64,6 +64,8 @@ class Venta
                         <tbody>
                             <tr>
                                 <td rowspan="4" style="padding: 5px 0px;" width="15%"><a href="javascript:void(0)" onclick="ver(\''.$venta[codigo_venta].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/ojo.svg" width="35px" height="35px"></a>
+                                	<br><br>
+                                	<a href="javascript:void(0)" id="elticket" data-venta="'.$venta[codigo_venta].'" data-toggle="tooltip" title="imprimir"><img src="../../img/iconos/imprimir.svg" width="35px" height="35px"></a>
                                 </td>
                                 <td style="font-size: 18px;"><b> '.$eltipo.' N° '.$venta[correlativo]. '</b>
                                 </td>

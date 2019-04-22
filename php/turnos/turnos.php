@@ -25,14 +25,11 @@
     }
 </style>
 <?php include '../../inc/page_head.php'; 
-include_once("../../Conexion/Departamento.php");
+include_once("../../Conexion/Caja.php");
 $datos = null;
-$departamentos = Departamento::obtener_departamentos();
-
-//print_r($departamentos);
-if($departamentos[0] == 1)$datos = $departamentos[1];
-// else print_r($result);
+$cajas = Caja::cajas_libres();
 ?>
+
 
 <!-- Page content -->
 <div id="page-content">
@@ -48,7 +45,7 @@ if($departamentos[0] == 1)$datos = $departamentos[1];
           <div class="col-sm-4 col-lg-4">
             <div class="row">
               <div class="col-sm-2 col-lg-2"></div>
-              <div class="col-sm-8 col-lg-8"><a href="javascript:void(0)" id="modal_guardar" class="btn btn-mio btn-block">Nuevo Turno</a></div>
+              <div class="col-sm-8 col-lg-8"></div>
               <div class="col-sm-2 col-lg-2"></div>
           </div>
           </div>
@@ -167,5 +164,17 @@ if($departamentos[0] == 1)$datos = $departamentos[1];
                 }
             }
           });
+    }
+    function ver_resumen(turno){
+        $.ajax({
+            url:'json_turnos.php',
+            type:'POST',
+            dataType:'json',
+            data:{data_id:'ver_resumen',turno},
+            success: function(json){
+                $("#modal_edit").html(json[2]);
+                $("#md_ver_resumen").modal("show");
+            }
+        });
     }
 </script>

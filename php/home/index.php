@@ -1,5 +1,9 @@
 <?php 
     @session_start();
+    include_once('../../Conexion/Empresa.php');
+    include_once('../../Conexion/Caja.php');
+    include_once('../../Conexion/Turno.php');
+    $empresa=Empresa::datos_empresa();
     //echo $_SESSION['autentica']."STO TRAE"; exit();
     if(!isset($_SESSION['loggedin']) && $_SESSION['autentica'] != "simon"){
         if($_SESSION['autentica'] != "simon" )
@@ -13,158 +17,361 @@
 
         }
     }else{
-        
+        if(!$empresa){
+            header("Location: ../empresa/registro_empresa.php");  
+        }else{
+            if($_SESSION[level]==2){
+                header("Location: ../comandas/comandas.php");  
+            }
+        }
     }//prueba
 
 
 ?>
 
-<?php include '../../inc/config.php'; ?>
+<?php 
+    if($empresa[tipo_negocio]==1) {
+        include '../../inc/config2.php';
+    }else{
+        if($empresa[tipo_negocio]==2 || $empresa[tipo_negocio]==3){
+            include '../../inc/config2.php';
+        }else{
+            if($empresa[tipo_negocio]==4){
+                include '../../inc/config.php';
+            }else{
+                header("Location: ../empresa/registro_empresa.php"); 
+            }
+        }
+    }
+?>
 <?php include '../../inc/template_start.php'; ?>
-<?php include '../../inc/page_head.php'; ?>
-<?php include_once('../../Conexion/Empresa.php'); 
+<?php ($_SESSION['level']==2) ? include '../../inc/page_head.php' : include '../../inc/page_head2.php' ?> 
+<?php
 $datos=Empresa::totales();
 $productos=Empresa::cuantos_productos();
 $clientes=Empresa::cuantos_clientes();
+$cajas = Caja::cajas_libres();
+$miturno=Turno::obtener_mi_turno();
+$_SESSION['turno'] = $miturno[0][codigo_oculto];
 ?>
 
 
 <!-- Page content -->
 <div id="page-content">
     <!-- Quick Stats -->
-    <div class="row">
-        <div class="col-xs-4 col-lg-4">
-            <a href="../../php/clientes/clientes.php" style="border-radius: 10px; background-color: #fff">
-                <div class="card-index">
+    <?php if($_SESSION[level]==0): 
+        if($empresa[tipo_negocio]==4):
+            include 'admin/index.php';
+        else:
+
+        endif;
+     elseif ($_SESSION[level]==1): 
+        require_once("turnos/modal.php");
+        ?>
+        <div class="row" style="background-color: #fff;">
+            <?php if(!$miturno): ?>
+              <div class="card">
+                <div class="row centrado">
+                  <div class="col-sm-4 col-lg-4">
                     <div class="row">
-                        <div class="col-lg-6 col-xs-6">
-                            <div class="card-index-adentro" style="border-right: 3px solid; color: #F3F3F3F3; ">
-                                <p style="font-size: 48px; color: #40BAB3; text-align: center; position: relative;top: 27%;"><strong><?php echo $clientes[0][clientes] ?></strong></p>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-xs-6">
-                            <div class="card-index-adentro">
-                                <p style="font-size: 18px; color: #333333; text-align: center; position: relative;top: 47%;"><strong>Clientes inscritos</strong></p>
-                            </div>
-                        </div>
-                    </div>
+                      <div class="col-sm-2 col-lg-2"></div>
+                      <div class="col-sm-8 col-lg-8"><a href="javascript:void(0)" id="modal_guardar" class="btn btn-mio btn-block">Iniciar Turno</a></div>
+                      <div class="col-sm-2 col-lg-2"></div>
+                  </div>
+                  </div>
                 </div>
-            </a>
-        </div>
-        <div class="col-xs-4 col-lg-4">
-            <a href="../../php/productos/productos.php" style="border-radius: 10px; background-color: #fff">
-                <div class="card-index">
+              </div>
+            <?php else: ?>
+                <div class="card">
+                <div class="row centrado">
+                  <div class="col-sm-4 col-lg-4">
                     <div class="row">
-                        <div class="col-lg-6 col-xs-6">
-                            <div class="card-index-adentro" style="border-right: 3px solid; color: #F3F3F3F3; ">
-                                <p style="font-size: 48px; color: #40BAB3; text-align: center; position: relative;top: 27%;"><strong><?php echo $productos[0][productos] ?></strong></p>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-xs-6">
-                            <div class="card-index-adentro">
-                                <p style="font-size: 18px; color: #333333; text-align: center; position: relative;top: 35%;"><strong>Productos en inventario</strong></p>
-                            </div>
-                        </div>
-                    </div>
+                      <div class="col-sm-2 col-lg-2"></div>
+                      <div class="col-sm-8 col-lg-8"><a href="javascript:void(0)" id="modal_cerrar_turno" class="btn btn-mio btn-block">Terminar Turno</a></div>
+                      <div class="col-sm-2 col-lg-2"></div>
+                  </div>
+                  </div>
                 </div>
-            </a>
+              </div>
+            <?php endif; ?>
+          <div class="" id="aqui_busqueda">
+            <table class="table" id="tablita">
+                <thead>
+                    <th>N°</th>
+                    <th>Caja</th>
+                    <th>Tipo de transacción</th>
+                    <th>Monto</th>
+                    <th>Fecha y hora</th>
+                </thead>
+            </table>
+          </div>
         </div>
-        <div class="col-xs-4 col-lg-4">
-            <a href="javascript:void(0)" style="border-radius: 10px; background-color: #fff">
-                <div class="card-index">
-                    <div class="row">
-                        <div class="col-lg-6 col-xs-6">
-                            <div class="card-index-adentro" style="border-right: 3px solid; color: #F3F3F3F3; ">
-                                <p style="font-size: 29px; color: #40BAB3; text-align: center; position: relative;top: 37%;"><strong>$<?php echo number_format($datos[3],2); ?></strong></p>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-xs-6">
-                            <div class="card-index-adentro">
-                                <p style="font-size: 18px; color: #333333; text-align: center; position: relative;top: 42%;"><strong>Facturado este mes</strong></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
+    <?php endif; ?>
     <br><br><br>
     <!-- END Quick Stats -->
 
     <!-- eShop Overview Block -->
-    <div class="block full">
-        <!-- eShop Overview Title -->
-        <div class="block-title">
-            <div class="block-options pull-right">
-                <div class="btn-group btn-group-sm">
-                    <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default dropdown-toggle" data-toggle="dropdown">El último año <span class="caret"></span></a>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                        <li class="active">
-                            <a href="javascript:void(0)">El último año</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)">El último mes</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)">Este mes</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)">Hoy</a>
-                        </li>
-                    </ul>
-                </div>
-                <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
-            </div>
-            <h2><strong>Ventas</strong></h2>
-        </div>
-        <!-- END eShop Overview Title -->
-
-        <!-- eShop Overview Content -->
-        <div class="row">
-                <div class="col-md-6 col-lg-4">
-                    <div class="row push">
-                        <div class="col-xs-6">
-                            <h3><strong class="animation-fadeInQuick">45.000</strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Total Orders</a></small></h3>
-                        </div>
-                        <div class="col-xs-6">
-                            <h3><strong class="animation-fadeInQuick">$ 1.200,00</strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Cart Value</a></small></h3>
-                        </div>
-                        <div class="col-xs-6">
-                            <h3><strong class="animation-fadeInQuick">1.520.000</strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Visits</a></small></h3>
-                        </div>
-                        <div class="col-xs-6">
-                            <h3><strong class="animation-fadeInQuick">28.000</strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Customers</a></small></h3>
-                        </div>
-                        <div class="col-xs-6">
-                            <h3><strong class="animation-fadeInQuick">3.5%</strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Conv. Rate</a></small></h3>
-                        </div>
-                        <div class="col-xs-6">
-                            <h3><strong class="animation-fadeInQuick">4.250</strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Products</a></small></h3>
-                        </div>
-                        <div class="col-xs-6">
-                            <h3><strong class="animation-fadeInQuick">$ 260.000,00</strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Net Profit</a></small></h3>
-                        </div>
-                        <div class="col-xs-6">
-                            <h3><strong class="animation-fadeInQuick">$ 16.850,00</strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Payment Fees</a></small></h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-8">
-                    <!-- Flot Charts (initialized in js/pages/ecomDashboard.js), for more examples you can check out http://www.flotcharts.org/ -->
-                    <div id="chart-overview" style="height: 350px;"></div>
-                </div>
-            </div>
-        <!-- END eShop Overview Content -->
-    </div>
+    
     <!-- END eShop Overview Block -->
+    <div id="modal_aqui"></div>
 </div>
 
 
 <!-- END Page Content -->
 <?php include '../../inc/page_footer.php'; ?>
 <?php include '../../inc/template_scripts.php'; ?>
-<script src="../../js/pages/ecomDashboard.js"></script>
-<script>$(function(){ EcomDashboard.init(); });
+<script>
+    $(function(){ 
+
+    });
     $("#titulo_nav").text("Inicio");
+    mis_movimientos();
+    movimientos_dia();
+    graficas();
+    //grafica_mas_vendidos();
+    //grafica_menos_vendidos();
+    $(document).on("click","#modal_guardar", function(e){
+      $("#md_guardar_turno").modal("show");
+    });
+
+    $(document).on("click","#modal_cerrar_turno", function(e){
+      var html='<button id="cerrar_swal" class="btn btn-default">Cancelar</button>'+
+            '<button id="ver_turno" data-turno="<?php echo $_SESSION['turno']; ?>" class="btn btn-default">Ver resumen</button>'+
+            '<button id="btn_terminar" class="btn btn-mio">Terminar turno</button>';
+      swal({
+          title: '¿Qué desea hacer',
+          text: "",
+          html: html,
+          type: 'info',
+          showCancelButton: false,
+          showConfirmButton: false,
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+      });
+    });
+
+    $(document).on("click","#ver_turno",function(e){
+        var turno=$(this).attr('data-turno');
+        swal.closeModal();
+        ver_resumen(turno);
+    })
+
+    $(document).on("click","#btn_marcar", function(e){
+        e.preventDefault();
+        var datos=$("#fm_turno").serialize();
+        $.ajax({
+            url:'json_home.php',
+            type:'post',
+            dataType:'json',
+            data:datos,
+            success: function(json){
+                console.log(json);
+                if(json[0]==1){
+                    guardar_exito();
+                    window.location.href="index.php";
+                }
+            }
+        });
+    });
+
+    $(document).on("click","#cerrar_swal", function(e){
+        swal.closeModal();
+    });
+
+    $(document).on("click","#btn_terminar", function(e){
+        e.preventDefault();
+        $.ajax({
+            url:'json_home.php',
+            type:'POST',
+            dataType:'json',
+            data:{data_id:'terminar_turno'},
+            success: function(json){
+                console.log(json);
+                if(json[0]==1){
+                    guardar_exito();
+                    window.location.href="index.php";
+                }
+            }
+        });
+    });
+
+    function mis_movimientos(){
+        $.ajax({
+            url:'json_home.php',
+            type:'POST',
+            dataType:'json',
+            data:{data_id:'mis_movimientos'},
+            success: function(json){
+                console.log(json);
+                if(json[2]){
+                    $("#tablita").append(json[2]);
+                }
+                cargar_tabla2("tablita");
+            }
+        });
+    }
+
+    function movimientos_dia(){
+        $.ajax({
+            url:'json_home.php',
+            type:'POST',
+            dataType:'json',
+            data:{data_id:'movimientos_dia'},
+            success: function(json){
+                console.log(json);
+                if(json[2]){
+                    $("#lasdeldia").append(json[2]);
+                }
+                cargar_tabla2("lasdeldia");
+            }
+        });
+    }
+
+    function grafica_mas_vendidos(datos_grafica){
+       if(datos_grafica.length > 0){
+        Highcharts.chart('grafica1', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Productos más vendidos en el mes actual'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f} %</b><br>Cantidad:<b>{point.y}</b> Veces'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.y} Veces',
+                    style: {
+        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+    }
+                }
+                //showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Porcentaje',
+            colorByPoint: true,
+            data: datos_grafica
+            }]
+        });
+    }
+                    
+        
+    }
+
+    function graficas(){
+        $.ajax({
+            url:'json_home.php',
+            type:'POST',
+            dataType:'json',
+            data:{data_id:'ver_graficas'},
+            success: function(json){
+                console.log(json);
+                datos_grafica_mas= [];
+                var html_mas=''; 
+                var html_menos=''; 
+                datos_grafica_menos= []; 
+                if(json[2].length > 0){
+                    for(var i = 0, length1 = json[2].length; i < length1; i++){
+                    datos_grafica_mas.push({name: json[2][i].n_producto, y: parseInt(json[2][i].cuantas)});
+                        html_mas+='<tr>'+
+                        '<td>'+(i+1)+'</td>'+
+                        '<td>'+json[2][i].n_producto+'</td>'+
+                        '<td>'+json[2][i].cuantas+'</td>'+
+                        '</tr>';
+                    }
+                    $("#tabla_mas").append(html_mas);
+                    //cargar_tabla2("tabla_mas");
+                    grafica_mas_vendidos(datos_grafica_mas);
+                }else{
+                    //console.log("aqui");
+                    datos_grafica_mas.push({name:'sin información',y:0});
+                    grafica_mas_vendidos(datos_grafica_mas);
+                    }
+    
+                if(json[3].length > 0){
+                    for(var i = 0, length1 = json[3].length; i < length1; i++){
+                    datos_grafica_menos.push({name: json[3][i].n_producto, y: parseInt(json[3][i].cuantas)});
+                        html_menos+='<tr>'+
+                            '<td>'+(i+1)+'</td>'+
+                            '<td>'+json[3][i].n_producto+'</td>'+
+                            '<td>'+json[3][i].cuantas+'</td>'+
+                            '</tr>';
+                    }
+                    $("#tabla_menos").append(html_menos);
+                    grafica_menos_vendidos(datos_grafica_menos);
+                }else{
+                    //console.log("aqui");
+                    datos_grafica_menos.push({name:'sin información',y:0});
+                    grafica_menos_vendidos(datos_grafica_menos);
+                    }
+                }
+            });
+    }
+
+    function grafica_menos_vendidos(datos_grafica){
+        if(datos_grafica.length > 0){
+            Highcharts.chart('grafica2', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Productos menos vendidos en el mes actual'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f} %</b><br>Cantidad:<b>{point.y}</b> Veces'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.y} Veces',
+                        style: {
+            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+        }
+                    }
+                    //showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Porcentaje',
+                colorByPoint: true,
+                data: datos_grafica
+                }]
+            });
+        }
+    }
+        
+    
+
+
+    function ver_resumen(turno){
+        $.ajax({
+            url:'json_home.php',
+            type:'POST',
+            dataType:'json',
+            data:{data_id:'ver_resumen',turno},
+            success: function(json){
+                if(json[2]){
+                    $("#modal_aqui").html(json[2]);
+                    $("#md_ver_resumen").modal("show");
+                }
+                cargar_tabla3("tabla_resumen");
+            }
+        });
+    }
 </script>
 <?php include '../../inc/template_end.php'; ?>

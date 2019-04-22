@@ -1,6 +1,7 @@
 <?php 
 	@session_start();
-	include_once("../../Conexion/Conexion.php");
+    include_once("../../Conexion/Conexion.php");
+	include_once("../../Conexion/Turno.php");
     if(isset($_POST["data_id"]) && $_POST['data_id'] == 'cambiar_contra'){
         $sql="UPDATE `tb_usuario` SET `estado` = 1, `pass` = password('$_POST[contra]') WHERE `id` = '$_POST[codigo]'";
         $contando=$codigo=$email=$level=$nombre=$telefono="";
@@ -98,6 +99,8 @@
                 }
                 else if($n!=0 and $estado == 1 ){ 
                     if(!$imagen || $imagen == "") $imagen = 'avatar2.jpg';
+                    $turno=Turno::tiene_turno($email);
+                    ($turno != 2 ) ? $_SESSION['turno']=$turno: '';
                     $_SESSION['loggedin'] = true;
                     $_SESSION['usuario'] =$email; 
                     $_SESSION['codigo'] =$codigo; 
@@ -109,7 +112,7 @@
                     //$_SESSION["autentica"] = "simon";
                     $_SESSION['autentica']  = 'simon'; 
 
-                    $exito = array("1",$nombre);
+                    $exito = array("1",$nombre,$turno);
                     echo json_encode(array("exito" => $exito));
                 }
                 else if($n!=0 and $estado == 2){ 

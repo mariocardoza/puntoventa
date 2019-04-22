@@ -138,10 +138,10 @@ $producto=$comando->fetchAll(PDO::FETCH_ASSOC);
             </tbody>
         </table>
     </div>
-</div>
+
 <div id="aqui_modal"></div>
 <!-- modales -->
-
+</div>
 
 <!-- END Page Content -->
 <?php include '../../inc/page_footer.php'; ?>

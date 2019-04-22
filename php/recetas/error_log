@@ -1,0 +1,7 @@
+[25-Feb-2019 20:38:32 UTC] PHP Parse error:  syntax error, unexpected '$row' (T_VARIABLE) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Compuesto.php on line 41
+[25-Feb-2019 20:39:32 UTC] PHP Parse error:  syntax error, unexpected '$row' (T_VARIABLE) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Compuesto.php on line 40
+[25-Feb-2019 20:39:34 UTC] PHP Parse error:  syntax error, unexpected '$row' (T_VARIABLE) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Compuesto.php on line 40
+[25-Feb-2019 20:40:00 UTC] PHP Parse error:  syntax error, unexpected 'array' (T_ARRAY) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Compuesto.php on line 47
+[25-Feb-2019 20:40:02 UTC] PHP Parse error:  syntax error, unexpected 'array' (T_ARRAY) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Compuesto.php on line 47
+[25-Feb-2019 20:53:02 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ']' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Compuesto.php on line 66
+[25-Feb-2019 20:53:05 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ']' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Compuesto.php on line 66

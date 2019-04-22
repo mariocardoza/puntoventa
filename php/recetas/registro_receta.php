@@ -26,18 +26,30 @@
 <?php include '../../inc/page_head.php'; 
 include_once("../../Conexion/Departamento.php");
 include_once("../../Conexion/Producto.php");
-include_once("../../Conexion/Categoria.php");
+include_once("../../Conexion/Opcion.php");
 $departamentos=Departamento::obtener_departamentos();
 $productos=Producto::obtener_ingredientes();
-$categorias=Categoria::consumibles();
+$categorias=Opcion::obtener_opciones();
 ?>
 <div id="page-content">    
   <div class="row">
     <div class="col-xs-12">
       <div class="block full">
-        <form action="#" method="post" name="form_receta" id="form_receta" class="form-horizontal">
+        <form action="#" method="post" name="form_receta" id="form_receta" class="">
           <div class="row" id="receta" style="display: block">
             <div class="col-xs-8 col-lg-8" style="padding-left: 30px; padding-right: 16px;">
+              <div class="col-xs-12 col-lg-12">
+                <div class="form-group">
+                  <div class="icheck-turquoise icheck-inline">
+                      <input type="radio" value="1" name="tipo_producto"  id="sala_belleza" />
+                      <label for="sala_belleza">Producto predefinido</label>
+                  </div>
+                  <div class="icheck-turquoise icheck-inline">
+                      <input type="radio" value="2" name="tipo_producto" id="mini_super" />
+                      <label for="mini_super">Producto variable</label>
+                  </div>
+              </div>
+              </div>
               <div class="row">
                 <div class="col-xs-6 col-lg-6">
                   <div class="form-group">
@@ -57,8 +69,8 @@ $categorias=Categoria::consumibles();
                   <div class="form-group">
                     <label class="control-label" for="">Categoría</label>
                     <select name="tipo" required id="tipo" class="select-chosen">
-                      <?php foreach ($categorias[2] as $categoria): ?>
-                        <option value="<?php echo $categoria[id] ?>"><?php echo $categoria[nombre] ?></option>
+                      <?php foreach ($categorias as $categoria): ?>
+                        <option value="<?php echo $categoria[codigo_oculto] ?>"><?php echo $categoria[nombre] ?></option>
                       <?php endforeach ?>
                     </select>
                   </div>
@@ -154,8 +166,6 @@ $categorias=Categoria::consumibles();
 <?php include '../../inc/page_footer.php'; ?>
 <?php include '../../inc/template_scripts.php'; ?>
 <!-- Load and execute javascript code used only in this page -->
-<script src="../../js/helpers/ckeditor/ckeditor.js"></script>   
-<script type="text/javascript" src="../../js/jquery-barcode.js"></script>  
 <script src="recetas.js?cod=<?=$cod?>"></script> 
 <?php include '../../inc/template_end.php'; ?>
 

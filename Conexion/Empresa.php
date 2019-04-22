@@ -70,7 +70,7 @@ class Empresa
     }
 
     public static function datos_empresa(){
-        $sql="SELECT * FROM tb_negocio";
+        $sql="SELECT * FROM tb_negocio FIRST";
         try{
             $comando=Conexion::getInstance()->getDb()->prepare($sql);
             $comando->execute();

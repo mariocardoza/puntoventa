@@ -81,7 +81,7 @@ $clientes = Cliente::obtener_todos();
     $(document).on("input","#busqueda", function(e){
       var esto=$(this).val();
       $.ajax({
-        url:'json_departamentos.php',
+        url:'json_reservas.php',
         type:'POST',
         dataType:'json',
         data:{data_id:'busqueda',esto},
@@ -93,40 +93,76 @@ $clientes = Cliente::obtener_todos();
           $("#aqui_busqueda").html(json[2]);
         }else{
           $("#aqui_busqueda").empty();
-          $("#aqui_busqueda").html(html);
+          $("#aqui_busqueda").html(no_datos);
         }
         }
       });
     });
 
-      ///guardar 
-      $(document).on("click","#btn_guardar", function(e){
-            var valid=$("#fm_departamento").valid();
-            if(valid){
-                var datos=$("#fm_departamento").serialize();
-                $.ajax({
-                    url:'json_departamentos.php',
-                    type:'POST',
-                    dataType:'json',
-                    data:datos,
-                    success:function(json){
-                        if(json[0]==1){
-                            guardar_exito();
-                            $(".depa").modal("hide");
-                            $("#nombre").val();
-                            $("#descripcion").val();
-                            $("#id").val();
-                            $("#data_id").val();
-                            cargar_departamentos();
-                            console.log(json);
-                        }else{
-                            guardar_error();
-                        }
-                    }
-                });
+    $(document).on("click","#btn_editar",function(json){
+      var valid=$("#fm_reserva").valid();
+      if(valid){
+        var datos=$("#fm_reserva").serialize();
+        console.log(datos);
+        modal_cargando();
+        $.ajax({
+          url:'json_reservas.php',
+          type:'POST',
+          dataType:'json',
+          data:datos,
+          success:function(json){
+            if(json[0]==1){
+              guardar_exito();
+              $("#fm_reserva").trigger("reset");
+              cargar_reservas();
+              $(".modal").modal("hide");
+            }else{
+              swal.closeModal();
+              guardar_error();
             }
+          }
         });
+      }
     });
+    
+
+    $("#fm_reserva").validate({
+      ignore: ":hidden:not(select)",
+      rules:{
+        nombre:"required",
+        precio:{
+          required:true,
+          number:true
+        }
+      },
+        submitHandler: function(form) {
+              //form.submit();
+          guardar();
+        }
+      });      
+    });
+
+    function guardar(){
+      modal_cargando();
+      var datos=$("#fm_reserva").serialize();
+      $.ajax({
+        url:'json_reservas.php',
+        type:'POST',
+        dataType:'json',
+        data:datos,
+        success:function(json){
+          if(json[0]==1){
+              guardar_exito();
+              $("#fm_reserva").trigger("reset");
+              $("#md_guardar").modal("hide");
+              console.log(json);
+          }else{
+              guardar_error();
+              swal.closeModal();
+          }
+        }
+      });
+    }
 
     function editar(codigo){
       $.ajax({
@@ -135,30 +171,33 @@ $clientes = Cliente::obtener_todos();
         dataType:'json',
         data:{data_id:'modal_editar',codigo:codigo},
         success: function(json){
-          $("#modal_edit").html(json[2]);
-          $("#md_editar").modal("show");
+          if(json[0]==1){
+            $("#modal_edit").html(json[2]);
+            $("#md_editar").modal("show");
+            $(".select-chosen").chosen({'width':'100%'});
+          }
         }
       });
     }
     function cargar_reservas(){
       modal_cargando();
       $.ajax({
-            url:'json_reservas.php',
-            type:'POST',
-            dataType:'json',
-            data:{data_id:'busqueda',esto:''},
-            success: function(json){
-              console.log(json);
-                if(json[2]){
-                    $("#aqui_busqueda").empty();
-                    $("#aqui_busqueda").html(json[2]);
-                    swal.closeModal();
-                }else{
-                    $("#aqui_busqueda").empty();
-                    $("#aqui_busqueda").html(no_datos);
-                    swal.closeModal();
-                }
-            }
-          });
+        url:'json_reservas.php',
+        type:'POST',
+        dataType:'json',
+        data:{data_id:'busqueda',esto:''},
+        success: function(json){
+          console.log(json);
+          if(json[2]){
+            $("#aqui_busqueda").empty();
+            $("#aqui_busqueda").html(json[2]);
+            swal.closeModal();
+          }else{
+            $("#aqui_busqueda").empty();
+            $("#aqui_busqueda").html(no_datos);
+            swal.closeModal();
+          }
+        }
+      });
     }
 </script>

@@ -1,0 +1,22 @@
+[21-Feb-2019 09:48:00 America/El_Salvador] PHP Warning:  include(modal.php): failed to open stream: No such file or directory in /home1/estudjl6/public_html/sys/puntoventa/php/paquetes/paquetes.php on line 55
+[21-Feb-2019 09:48:00 America/El_Salvador] PHP Warning:  include(modal.php): failed to open stream: No such file or directory in /home1/estudjl6/public_html/sys/puntoventa/php/paquetes/paquetes.php on line 55
+[21-Feb-2019 09:48:00 America/El_Salvador] PHP Warning:  include(): Failed opening 'modal.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home1/estudjl6/public_html/sys/puntoventa/php/paquetes/paquetes.php on line 55
+[21-Feb-2019 09:54:37 America/El_Salvador] PHP Warning:  include(modal.php): failed to open stream: No such file or directory in /home1/estudjl6/public_html/sys/puntoventa/php/paquetes/paquetes.php on line 55
+[21-Feb-2019 09:54:37 America/El_Salvador] PHP Warning:  include(modal.php): failed to open stream: No such file or directory in /home1/estudjl6/public_html/sys/puntoventa/php/paquetes/paquetes.php on line 55
+[21-Feb-2019 09:54:37 America/El_Salvador] PHP Warning:  include(): Failed opening 'modal.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home1/estudjl6/public_html/sys/puntoventa/php/paquetes/paquetes.php on line 55
+[21-Feb-2019 10:21:03 America/El_Salvador] PHP Warning:  include(modal.php): failed to open stream: No such file or directory in /home1/estudjl6/public_html/sys/puntoventa/php/paquetes/paquetes.php on line 55
+[21-Feb-2019 10:21:03 America/El_Salvador] PHP Warning:  include(modal.php): failed to open stream: No such file or directory in /home1/estudjl6/public_html/sys/puntoventa/php/paquetes/paquetes.php on line 55
+[21-Feb-2019 10:21:03 America/El_Salvador] PHP Warning:  include(): Failed opening 'modal.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home1/estudjl6/public_html/sys/puntoventa/php/paquetes/paquetes.php on line 55
+[21-Feb-2019 16:21:06 UTC] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/sys/puntoventa/php/paquetes/json_paquetes.php on line 6
+[21-Feb-2019 10:22:35 America/El_Salvador] PHP Warning:  include(modal.php): failed to open stream: No such file or directory in /home1/estudjl6/public_html/sys/puntoventa/php/paquetes/paquetes.php on line 55
+[21-Feb-2019 10:22:35 America/El_Salvador] PHP Warning:  include(modal.php): failed to open stream: No such file or directory in /home1/estudjl6/public_html/sys/puntoventa/php/paquetes/paquetes.php on line 55
+[21-Feb-2019 10:22:35 America/El_Salvador] PHP Warning:  include(): Failed opening 'modal.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home1/estudjl6/public_html/sys/puntoventa/php/paquetes/paquetes.php on line 55
+[22-Feb-2019 14:09:18 UTC] PHP Fatal error:  Cannot use try without catch or finally in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Paquete.php on line 84
+[22-Feb-2019 08:30:12 America/El_Salvador] PHP Fatal error:  Call to undefined function arrar() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Paquete.php on line 135
+[22-Feb-2019 08:30:36 America/El_Salvador] PHP Fatal error:  Call to undefined function arrar() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Paquete.php on line 135
+[22-Feb-2019 15:30:41 UTC] PHP Parse error:  syntax error, unexpected 'try' (T_TRY) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Paquete.php on line 80
+[22-Feb-2019 10:18:33 America/El_Salvador] PHP Fatal error:  Call to undefined function fetch() in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Paquete.php on line 89
+[22-Feb-2019 17:41:34 UTC] PHP Parse error:  syntax error, unexpected '=', expecting ')' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Paquete.php on line 121
+[22-Feb-2019 17:42:47 UTC] PHP Parse error:  syntax error, unexpected '=', expecting ')' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Paquete.php on line 121
+[22-Feb-2019 11:50:21 America/El_Salvador] PHP Parse error:  syntax error, unexpected '""' (T_CONSTANT_ENCAPSED_STRING) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Genericas2.php on line 301
+[22-Feb-2019 11:50:26 America/El_Salvador] PHP Parse error:  syntax error, unexpected '""' (T_CONSTANT_ENCAPSED_STRING) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Genericas2.php on line 301

@@ -32,7 +32,7 @@
         margin-top: 20px;
       }  
 </style>
-<?php include '../../inc/page_head.php'; 
+<?php //include '../../inc/page_head.php'; 
 include_once("../../Conexion/Empleado.php");
 include_once("../../Conexion/Empresa.php");
 $empresa=Empresa::datos_empresa();
@@ -43,74 +43,55 @@ $empresa=Empresa::datos_empresa();
         <form action="#" method="post" name="fm_negocio" id="fm_negocio" class="form-horizontal form-bordered">
         <div class="row">
             <div class="col-lg-12">
-                <div class="form-group">
-                    <label for="" class="col-lg-3 control-label">Seleccione el tipo de empresa</label>
-                    <input type="hidden" name="data_id" value="editar_empresa">
-                    <input type="hidden" name="id" value="<?php echo $empresa[id] ?>">
-                    <div class="icheck-turquoise icheck-inline">
-                        <input type="radio" value="1" name="tipo_negocio" checked id="sala_belleza" />
-                        <label for="sala_belleza">Sala de Belleza</label>
-                    </div>
-                    <div class="icheck-turquoise icheck-inline">
-                        <input type="radio" value="2" name="tipo_negocio" id="mini_super" />
-                        <label for="mini_super">Mini súper</label>
-                    </div>
-                    <div class="icheck-turquoise icheck-inline">
-                        <input type="radio" value="3" name="tipo_negocio" id="tienda" />
-                        <label for="tienda">Tienda</label>
-                    </div>
-                    <div class="icheck-turquoise icheck-inline">
-                        <input type="radio" value="4" name="tipo_negocio" id="restaurante" />
-                        <label for="restaurante">Restaurante</label>
-                    </div>          
-                </div>
-            </div>
-            <div class="col-lg-12">
                 <div class="block">
-                    <div class="block-title">
-                        <h2><i class="fa fa-pencil"></i> <strong>Información</strong> general</h2>
-                    </div>
                     <div class="row">
+                        <div class="form-group">
+                            <label for="" class="col-lg-3 control-label">Seleccione el tipo de empresa</label>
+                            <input type="hidden" name="data_id" value="editar_empresa">
+                            <input type="hidden" name="id" value="<?php echo $empresa[id] ?>">
+                            <div class="icheck-turquoise icheck-inline">
+                                <input type="radio" value="1" name="tipo_negocio" checked id="sala_belleza" />
+                                <label for="sala_belleza">Sala de Belleza</label>
+                            </div>
+                            <div class="icheck-turquoise icheck-inline">
+                                <input type="radio" value="2" name="tipo_negocio" id="mini_super" />
+                                <label for="mini_super">Mini súper</label>
+                            </div>
+                            <div class="icheck-turquoise icheck-inline">
+                                <input type="radio" value="3" name="tipo_negocio" id="tienda" />
+                                <label for="tienda">Tienda</label>
+                            </div>
+                            <div class="icheck-turquoise icheck-inline">
+                                <input type="radio" value="4" name="tipo_negocio" id="restaurante" />
+                                <label for="restaurante">Restaurante</label>
+                            </div>          
+                        </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="nombre">Nombre del negocio</label>
-                                <div class="col-md-9">              
+                                <label class="control-label" for="nombre">Nombre del negocio</label>    
                                     <input type="text" autocomplete="off" id="nombre" name="nombre" class="form-control" value="<?php echo $empresa[nombre] ?>" placeholder="Digite el nombre del proveedor">
-                                </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="direccion">Dirección</label>
-                                <div class="col-md-9">
-                                    <textarea id="direccion" name="direccion" class="form-control" rows="3"><?php echo $empresa[direccion] ?></textarea>
-                                </div>
+                                <label class="control-label" for="direccion">Dirección</label>
+                                <textarea id="direccion" name="direccion" class="form-control" rows="3"><?php echo $empresa[direccion] ?></textarea>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="categoria">NIT</label>
-                                <div class="col-md-9">
-                                    <input type="text" value="<?php echo $empresa[nit] ?>" name="nit" id="nit" class="form-control nit">
-                                </div>
+                                <label class="control-label" for="categoria">NIT</label>
+                                <input type="text" value="<?php echo $empresa[nit] ?>" name="nit" id="nit" class="form-control nit">
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="email">Email</label>
-                                <div class="col-md-9">
-                                    <div class="form-group">
-                                        <input type="email" value="<?php echo $empresa[email] ?>" autocomplete="off" id="email" name="email" class="form-control" >
-                                    </div>
-                                </div>
+                                <label class="control-label" for="email">Email</label>
+                                <input type="email" value="<?php echo $empresa[email] ?>" autocomplete="off" id="email" name="email" class="form-control" >
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="" class="col-md-3 control-label">Número de registro</label>
-                                <div class="col-md-9">
-                                    <input type="text" value="<?php echo $empresa[nrc] ?>" name="nrc" id="nrc" class="form-control">
-                                </div>
+                                <label for="" class="control-label">Número de registro</label>
+                                <input type="text" value="<?php echo $empresa[nrc] ?>" name="nrc" id="nrc" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="" class="col-md-3 control-label">Giro</label>
-                                <div class="col-md-9">
-                                    <input type="text" name="giro" value="<?php echo $empresa[giro] ?>" id="giro" class="form-control">
-                                </div>
+                                <label for="" class="control-label">Giro</label>
+                                <input type="text" name="giro" value="<?php echo $empresa[giro] ?>" id="giro" class="form-control">
                             </div>
                             
                         </div>
@@ -118,11 +99,9 @@ $empresa=Empresa::datos_empresa();
                     <div class="row">
                         <div class="col-lg-12">
                         <div class="form-group">
-                            <div class="col-md-10">
-                                <center>
-                                    <button type="submit" id="btn_guardar" class="btn btn btn-primary"><i class="fa fa-floppy-o"></i> Guardar</button>
-                                </center>
-                            </div>
+                            <center>
+                                <button type="submit" id="btn_guardar" class="btn btn-mio"><i class="fa fa-floppy-o"></i> Guardar</button>
+                            </center>
                         </div>
                     </div>
                     </div>
@@ -134,33 +113,31 @@ $empresa=Empresa::datos_empresa();
         <form action="#" method="post" name="fm_negocio" id="fm_negocio" class="form-horizontal form-bordered">
         <div class="row">
             <div class="col-lg-12">
-                <div class="form-group">
-                    <input type="hidden" name="data_id" value="nueva_empresa">
-                    <label for="" class="col-lg-3 control-label">Seleccione el tipo de empresa</label>
-                    <div class="icheck-turquoise icheck-inline">
-                        <input type="radio" value="1" name="tipo_empresa" checked id="sala_belleza" />
-                        <label for="sala_belleza">Sala de Belleza</label>
-                    </div>
-                    <div class="icheck-turquoise icheck-inline">
-                        <input type="radio" value="2" name="tipo_empresa" id="mini_super" />
-                        <label for="mini_super">Mini súper</label>
-                    </div>
-                    <div class="icheck-turquoise icheck-inline">
-                        <input type="radio" value="3" name="tipo_empresa" id="tienda" />
-                        <label for="tienda">Tienda</label>
-                    </div>
-                    <div class="icheck-turquoise icheck-inline">
-                        <input type="radio" value="4" name="tipo_empresa" id="restaurante" />
-                        <label for="restaurante">Restaurante</label>
-                    </div>          
-                </div>
-            </div>
-            <div class="col-lg-12">
                 <div class="block">
                     <div class="block-title">
-                        <h2><i class="fa fa-pencil"></i> <strong>Información</strong> general</h2>
+                        <h2><i class="fa fa-pencil"></i> <strong>Información</strong> general del negocio</h2>
                     </div>
                     <div class="row">
+                        <div class="form-group">
+                            <input type="hidden" name="data_id" value="nueva_empresa">
+                            <label for="" class="col-lg-3 control-label">Seleccione el tipo de empresa</label>
+                            <div class="icheck-turquoise icheck-inline">
+                                <input type="radio" value="1" name="tipo_empresa" checked id="sala_belleza" />
+                                <label for="sala_belleza">Sala de Belleza</label>
+                            </div>
+                            <div class="icheck-turquoise icheck-inline">
+                                <input type="radio" value="2" name="tipo_empresa" id="mini_super" />
+                                <label for="mini_super">Mini súper</label>
+                            </div>
+                            <div class="icheck-turquoise icheck-inline">
+                                <input type="radio" value="3" name="tipo_empresa" id="tienda" />
+                                <label for="tienda">Tienda</label>
+                            </div>
+                            <div class="icheck-turquoise icheck-inline">
+                                <input type="radio" value="4" name="tipo_empresa" id="restaurante" />
+                                <label for="restaurante">Restaurante</label>
+                            </div>          
+                        </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="nombre">Nombre del negocio</label>
@@ -206,7 +183,7 @@ $empresa=Empresa::datos_empresa();
                             <div class="form-group">
                                 <label for="" class="col-md-3 control-label">Agregar número de teléfono</label>
                                 <div class="col-md-9">
-                                    <button type="button" class="btn btn-primary" id="btn_agregar_telefono">Agregar</button>
+                                    <button type="button" class="btn btn-mio" id="btn_agregar_telefono">Agregar</button>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -219,7 +196,7 @@ $empresa=Empresa::datos_empresa();
                         <div class="form-group">
                             <div class="col-md-10">
                                 <center>
-                                    <button type="submit" id="btn_guardar" class="btn btn btn-primary"><i class="fa fa-floppy-o"></i> Guardar</button>
+                                    <button type="submit" id="btn_guardar" class="btn btn-mio"><i class="fa fa-floppy-o"></i> Guardar</button>
                                 </center>
                             </div>
                         </div>

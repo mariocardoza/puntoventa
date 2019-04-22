@@ -35,6 +35,24 @@ $(document).ready(function(e){
         $("#md_seleccionar_mesa").modal("show");
     });
 
+    // prueba para imprimir ticket
+    $(document).on("click","#elticket", function(e){
+      alert("aqui");
+      var venta=$(this).attr("data-venta");
+           $.ajax({
+               url: 'ticket.php',
+               type: 'POST',
+               data: {datos:'20191716172600000026'},
+               success: function(response){
+                   if(response==1){
+                       alert('Imprimiendo....');
+                   }else{
+                       alert('Error');
+                   }
+               }
+           }); 
+    });
+
     //click en las mesas libres
     $(document).on("click","#libre,#libre1",function(e){
         var codigo=$(this).attr("data-codigo");
@@ -175,21 +193,7 @@ $(document).ready(function(e){
         else {ticket(venta,efectivo,cambio,total);}*/
     });
 
-// prueba para imprimir ticket
-    $(document).on("click","#elticket", function(e){
-           $.ajax({
-               url: 'ticket.php',
-               type: 'POST',
-               data: {datos:'20191716172600000026'},
-               success: function(response){
-                   if(response==1){
-                       alert('Imprimiendo....');
-                   }else{
-                       alert('Error');
-                   }
-               }
-           }); 
-    });
+
 
     //reimprimir
     $(document).on("click", "#btn_imprimir2", function(e) {//EVENTO SE ACTIVA AL DAR CLICK EN IMPRIMIR DE LA MODAL

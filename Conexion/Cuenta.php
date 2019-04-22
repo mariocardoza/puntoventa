@@ -12,12 +12,24 @@ class Cuenta
 		# code...
 	}
 
+	public static function obtener_turnos(){
+		$sql="SELECT p.nombre,p.email FROM tb_turno as t INNER JOIN tb_persona as p ON p.email=t.empleado GROUP BY p.email";
+		try{
+			$comando=Conexion::getInstance()->getDb()->prepare($sql);
+			$comando->execute();
+			$turnos=$comando->fetchAll(PDO::FETCH_ASSOC);
+			return $turnos;
+		}catch(Exception $e){
+			return $e->getMessage();
+		}
+	}
+
 	public static function busqueda($dato,$turno){
 		$elturno="";
 		if($turno!=""){
-			$elturno="AND c.turno='$turno'";
+			$elturno="AND p.email='$turno'";
 		}
-		$sql="SELECT c.*,m.nombre as n_mesa FROM tb_comanda as c LEFT JOIN tb_mesa as m ON m.codigo_oculto=c.mesa  WHERE c.estado=2 $elturno ORDER BY id DESC";
+		$sql="SELECT c.*,m.nombre as n_mesa FROM tb_comanda as c LEFT JOIN tb_mesa as m ON m.codigo_oculto=c.mesa INNER JOIN tb_turno as t ON t.codigo_oculto=c.turno INNER JOIN tb_persona as p ON p.email=t.empleado WHERE c.estado=2 $elturno ORDER BY id DESC";
 
 		try{
 			$comando=Conexion::getInstance()->getDb()->prepare($sql);
@@ -37,25 +49,21 @@ class Cuenta
 				}
 				
 				$html.='<div class="col-sm-6 col-lg-6" style="height: 175px;" id="listado-card">
-			                <div class="">
-			                  <div class="">
-			                    <table width="100%">
-			                        <tbody>
-			                            <tr>
-			                                <td style="padding: 5px 0px;" width="15%"><a href="javascript:void(0)" onclick="editar(\''.$row[codigo_oculto].'\')" data-toggle="tooltip" title="Editar"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a>
-			                                </td>
-			                                <td style="font-size:18px"><b>Orden: </b>'.$tipo_orden.'</td>
-			                            </tr>
-			                            <tr>
-			                                <td style="padding: 5px 0px;"><a href="javascript:void(0)" onclick="ver(\''.$row[codigo_oculto].'\')" data-toggle="tooltip" title="Ver"><img src="../../img/iconos/ojo.svg" width="35px" height="35px"></a></td>
-			                                <td style="font-size:18px">'.$row[n_mesa].'</td>
-			                            </tr>
-			                            <tr>
-			                                <td style="padding: 5px 0px;" width="15%"><a data-total="'.$row[total].'" href="javascript:void(0)" onclick="cobrar(\''.$row[codigo_oculto].'\',\''.$row[total].'\',\''.$row[mesa].'\')" data-toggle="tooltip" title="Eliminar"><img src="../../img/iconos/ojo.svg" width="35px" height="35px"></a></td>
-			                                <td style="font-size:18px">Total: $'.$row[total].'</td>
-			                            </tr>
-			                        </tbody>
-			                    </table>
+			                <div class="widget">
+			                  <div class="widget-simple">
+			                  	<div class="row">
+			                  		<div class="col-xs-2">
+			                  			<br><br>
+			                  			<a href="javascript:void(0)" onclick="ver(\''.$row[codigo_oculto].'\')" data-toggle="tooltip" title="Ver"><img src="../../img/iconos/ojo.svg" width="35px" height="35px"></a>
+			                  		</div>
+			                  		<div class="col-xs-10">
+			                  			<div class="row">
+			                  				<div style="font-size:18px" class="col-xs-12"><b>Orden: </b>'.$tipo_orden.'</div><br><br>
+			                  				<div style="font-size:18px" class="col-xs-12">'.$row[n_mesa].'</div><br><br>
+			                  				<div style="font-size:18px" class="col-xs-12">Total: $'.$row[total].'</div>
+			                  			</div>
+			                  		</div>
+			                  	</div>
 			                  </div>
 			              	</div>
 	            		</div>

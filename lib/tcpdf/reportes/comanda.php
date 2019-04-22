@@ -1,4 +1,5 @@
 <?php
+require_once("../../../Conexion/Receta.php");
 @session_start();
 //============================================================+
 
@@ -198,7 +199,7 @@ require_once ("../../../Conexion/Conexion.php");
 
 $comanda=$_GET['datos'];
 
-$sql_comanda="SELECT c.*,m.nombre as n_mesa, DATE_FORMAT(c.fecha,'%d/%m/%Y') as dia_comanda,DATE_FORMAT(fecha,'%H:%m:%s') as hora_comanda FROM tb_comanda as c LEFT JOIN tb_mesa as m ON m.codigo_oculto=c.mesa WHERE c.codigo_oculto='$comanda'";
+$sql_comanda="SELECT c.*,m.nombre as n_mesa, DATE_FORMAT(c.fecha,'%d/%m/%Y') as dia_comanda,DATE_FORMAT(fecha,'%H:%i:%s') as hora_comanda FROM tb_comanda as c LEFT JOIN tb_mesa as m ON m.codigo_oculto=c.mesa WHERE c.codigo_oculto='$comanda'";
 $comandov=Conexion::getInstance()->getDb()->prepare($sql_comanda);
 $comandov->execute();
 while ($row=$comandov->fetch(PDO::FETCH_ASSOC)) {
@@ -212,7 +213,8 @@ $sql="SELECT
 	n_producto,
 	precio_p,
 	codigo_producto,
-	descripcion
+	descripcion,
+	familia
 FROM
 	(
 		SELECT
@@ -227,7 +229,8 @@ FROM
 				2
 			) AS precio_p,
 			p.codigo_oculto as codigo_producto,
-			p.descripcion as descripcion
+			p.descripcion as descripcion,
+			dc.familia
 		FROM
 			tb_producto AS p
 		INNER JOIN tb_comanda_detalle AS dc ON dc.codigo_producto = p.codigo_oculto
@@ -239,7 +242,8 @@ FROM
 				r.nombre AS n_producto,
 				r.precio AS precio_p,
 				r.codigo_oculto as codigo_producto,
-				r.descripcion as descripcion
+				r.descripcion as descripcion,
+				dc.familia as familia
 			FROM
 				tb_receta AS r
 			INNER JOIN tb_comanda_detalle AS dc ON dc.codigo_producto = r.codigo_oculto
@@ -310,26 +314,34 @@ $i=60;
 $contador=0;
 $total=0.0;
 foreach ($comandas as $comanda) {
-	$sql_pro="SELECT p.nombre as n_producto FROM `tb_receta_detalle` as rc INNER JOIN tb_producto as p ON p.codigo_oculto=rc.codigo_producto WHERE rc.codigo_receta='$comanda[codigo_producto]'";
+	$sql_pro="SELECT p.nombre as n_producto,rc.cantidad,me.abreviatura FROM `tb_ingrediente_comanda` as rc INNER JOIN tb_producto as p ON p.codigo_oculto=rc.codigo_producto INNER JOIN tb_unidad_medida as me ON me.id=p.medida WHERE rc.pertenece_a='$comanda[familia]'";
 	$comando2=Conexion::getInstance()->getDb()->prepare($sql_pro);
 	$comando2->execute();
 	$txt=$comanda[n_producto]." ".$comanda[descripcion];
 	$pdf->SetXY(6,$i);
 	//$pdf->Write(0,$txt);
 	$pdf->MultiCell(30,0, $txt,0,'L',false);
-	/*while ($row=$comando2->fetch(PDO::FETCH_ASSOC)) {
+	while ($row=$comando2->fetch(PDO::FETCH_ASSOC)) {
 		$txt="- ".$row[n_producto];
 		$pdf->SetXY(10,$i+10);
 		$pdf->Write(0,$txt);
-		$i=$i+3;
-	}*/
 
-	$txt="- ".substr($comanda[notas],2);;
+		$txt=Receta::convertir_decimal_a_fraccion($row[cantidad]);
+		$pdf->SetXY(40,$i+10);
+		$pdf->Write(0,$txt);
+
+		$txt=$row[abreviatura];
+		$pdf->SetXY(47,$i+10);
+		$pdf->Write(0,$txt);
+		$i=$i+3;
+	}
+
+	$txt="- ".$comanda[notas];
 	$pdf->SetXY(10,$i+10);
 	$pdf->Write(0,$txt);
 
 	$txt="$".number_format($comanda[precio_p],2);
-	$pdf->SetXY(59,$i);
+	$pdf->SetXY(63,$i);
 	$pdf->Write(0,$txt);
 	$contador=$contador+1;
 
@@ -342,9 +354,6 @@ $pdf->Write(0,$txt);
 $txt="Cant. Artículos: ".$contador;
 $pdf->SetXY(6,$i+3);
 $pdf->Write(0,$txt);
-
-
-
 
 $txt="Mesero (a):";
 $pdf->SetXY(6,$i+8);

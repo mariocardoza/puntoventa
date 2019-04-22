@@ -3,3 +3,6 @@
 [02-Feb-2019 15:14:28 America/El_Salvador] PHP Warning:  include(): Failed opening 'modales.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home1/estudjl6/public_html/sys/puntoventa/php/reservas/reservas.php on line 61
 [02-Feb-2019 22:50:08 UTC] PHP Fatal error:  Class 'Conexion' not found in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Reserva.php on line 25
 [02-Feb-2019 22:50:23 UTC] PHP Fatal error:  Class 'Conexion' not found in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Reserva.php on line 25
+[20-Feb-2019 22:51:07 UTC] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Reserva.php on line 35
+[20-Feb-2019 22:51:16 UTC] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Reserva.php on line 35
+[20-Feb-2019 16:52:37 America/El_Salvador] PHP Fatal error:  Class 'Genericas2' not found in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Reserva.php on line 30

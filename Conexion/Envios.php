@@ -112,7 +112,7 @@
             $cabeceras .= 'From: info@grupolah.com' . "\r\n" . //La direccion de correo desde donde supuestamente se envió
                         'X-Mailer: PHP/' . phpversion();  //información sobre el sistema de envio de correos, en este caso la version de PHP
             // Cabeceras adicionales
-            $cabeceras .= 'To: Empresa Registro <mcardoza@estudioagil.com>' . "\r\n";
+            $cabeceras .= 'Cc: Empresa Registro <mcardoza@contenucompany.com>' . "\r\n";
             // Enviarlo
             try {
                  if(mail($para, $asunto, $mensaje, $cabeceras)){
@@ -203,7 +203,7 @@
             $cabeceras .= 'From: info@grupolah.com' . "\r\n" . //La direccion de correo desde donde supuestamente se envió
                         'X-Mailer: PHP/' . phpversion();  //información sobre el sistema de envio de correos, en este caso la version de PHP
             // Cabeceras adicionales
-            $cabeceras .= 'To: Empresa Registro <mcardoza@estudioagil.com>' . "\r\n";
+            $cabeceras .= 'Cc: Empresa Registro <mcardoza@contenucompany.com>' . "\r\n";
             // Enviarlo
             try {
                  if(mail($para, $asunto, $mensaje, $cabeceras)){

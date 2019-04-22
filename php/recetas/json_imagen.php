@@ -1,8 +1,8 @@
 <?php 
     include_once("../../Conexion/Receta.php");
-    $file_path = "../../img/recetas/";
+    $file_path = "../../img/productos/";
     $file_path = $file_path . basename($_FILES['file-0']['name']);
-    $file_path2 = "../../img/recetas/";
+    $file_path2 = "../../img/productos/";
 
     $trozos = explode(".", $file_path); 
     $extension = end($trozos);

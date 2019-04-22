@@ -39,7 +39,8 @@ $(document).ready(function(e){
     });
 
     $(document).on("click","#btn_cerrar_modal", function(e){
-        $(".form-control").val("");
+        $("#form-productog").trigger("reset");
+        $("#form-producto").trigger("reset");
         $("#img_file").attr("src","../../img/imagenes_subidas/image.svg");
         $(".modal").modal("hide");
     });
@@ -193,8 +194,8 @@ $(document).ready(function(e){
 
     $(document).on("click","#btn_editar", function(e){
       //modal_cargando();
-        var valid=$("#form-producto").valid();
-        datos=$("#form-producto").serialize();
+        var valid=$("#form-productog").valid();
+        datos=$("#form-productog").serialize();
         if(valid){
           
           $.ajax({
@@ -205,11 +206,11 @@ $(document).ready(function(e){
             success: function(json){
               console.log(json);
               if(json[0]=="1"){
-                 guardar_exito();
-                  cargar();
+                guardar_exito();
+                cargar();
                   //alert("aqui");
                 $(".modal").modal("hide");
-               $(".form-control").val("");
+                $("#form-productog").trigger("reset");
               }else{
                 guardar_error();
               }
@@ -312,6 +313,7 @@ function verproducto(id){
 function guardar(){
 	var datos = $("#form-productog").serialize();
 	console.log(datos);
+  modal_cargando();
 	$.ajax({
 		type: 'POST',
 		dataType: 'json',
@@ -323,24 +325,14 @@ function guardar(){
         if ($("#file_1").val()!="") {
           insertar_imagen($("#file_1"),json[1]);
         }else{
-          iziToast.success({
-            title: 'Excelente',
-            message: 'Datos almacenados correctamente',
-            timeout: 3000,
-          });
-            //$("#md_nuevo").modal('toggle');
-            //window.location.href="productos.php";
+          guardar_exito()
             $(".modal").modal("hide");
-            $(".form-control").val("");  
+            $("#form-productog").trigger("reset");  
             cargar();
         }
       }if(json[0]==-1){
         swal.close();
-        iziToast.error({
-          title: 'Error',
-          message: 'Hubo un problema al procesar la solicitud, intentelo nuevamente',
-          timeout: 3000,
-        });
+        guardar_error();
       }
 		}
 	});
@@ -402,7 +394,7 @@ function validar_archivo(file){
 function insertar_imagen(archivo,id_prod){
     var file =archivo.files;
     var formData = new FormData();
-    formData.append('formData', $("#form-producto"));
+    formData.append('formData', $("#form-productog"));
     var data = new FormData();
      //Append files infos
      jQuery.each(archivo[0].files, function(i, file) {
@@ -428,7 +420,8 @@ function insertar_imagen(archivo,id_prod){
                     timeout: 3000,
                 });
                 $(".modal").modal("hide");
-                $(".form-control").val(""); 
+                $("#form-productog").trigger("reset");  
+            cargar();
                 cargar();
                  NProgress.done();
             }

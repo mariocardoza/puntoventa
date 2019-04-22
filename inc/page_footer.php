@@ -13,7 +13,7 @@
             <footer class="clearfix">
                  
                 <div class="pull-left">
-                    <?php echo date(Y); ?> &copy; <a href="#" target="_blank"><?php echo $template['name']; ?></a>
+                    <?php echo date(Y); ?> &copy; <a href="http://estudioagil.com" target="_blank">Estudio Ágil</a>
                 </div>
             </footer>
             <!-- END Footer -->

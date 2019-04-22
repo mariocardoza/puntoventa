@@ -22,6 +22,7 @@
 <script type="text/javascript" src="../../js/fraction.js"></script>
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
@@ -44,7 +45,7 @@
 
   <script src="../../js/mask/jquery.inputmask.bundle.js" type="text/javascript"></script>
   <script src="../../js/moment.min.js" type="text/javascript"></script>
-  <script src="../../js/plus-minus-input.js" type="text/javascript"></script>
+  <!--script src="../../js/plus-minus-input.js" type="text/javascript"></script-->
   <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
 <style type="text/css" media="screen">

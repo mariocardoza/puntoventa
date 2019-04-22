@@ -37,36 +37,35 @@
 include_once("../../Conexion/Mesa.php");
 include_once("../../Conexion/Producto.php");
 include_once("../../Conexion/Cliente.php");
-include_once("../../Conexion/Categoria.php");
+include_once("../../Conexion/Opcion.php");
 include_once("../../Conexion/Comanda.php");
 $mesas=Mesa::obtener_mesas();
 $productos=Producto::obtener_productos();
 $naturales=Cliente::obtener_naturales();
 $juridicos=Cliente::obtener_juridicos();
 $clientes=Cliente::obtener_todos();
-$categorias=Categoria::consumibles();
+$categorias=Opcion::obtener_opciones();
 $tipos=Comanda::tipos();
 $comanda=$_GET['comanda'];
 
-$sql_comanda="SELECT c.*,m.nombre as n_mesa, DATE_FORMAT(c.fecha,'%d/%m/%Y') as dia_comanda,DATE_FORMAT(fecha,'%H:%m:%s') as hora_comanda FROM tb_comanda as c INNER JOIN tb_mesa as m ON m.codigo_oculto=c.mesa  WHERE c.codigo_oculto='$comanda'";
+$sql_comanda="SELECT c.*,m.nombre as n_mesa, DATE_FORMAT(c.fecha,'%d/%m/%Y') as dia_comanda,DATE_FORMAT(fecha,'%H:%i:%s') as hora_comanda FROM tb_comanda as c LEFT JOIN tb_mesa as m ON m.codigo_oculto=c.mesa  WHERE c.codigo_oculto='$comanda'";
 $comandoc=Conexion::getInstance()->getDb()->prepare($sql_comanda);
 $comandoc->execute();
 while ($row=$comandoc->fetch(PDO::FETCH_ASSOC)) {
   $comanda_a=$row;
 }
 $tipo="";
-if($comanda_a[tipo]==1) $tipo="Orden: Mesa";
-if($comanda_a[tipo]==2) $tipo="Orden: Llevar";
-if($comanda_a[tipo]==3) $tipo="Orden: Domicilio";
-
-//print_r($comanda);
+if($comanda_a[tipo]==1) { $tipo="Orden: Mesa"; }
+if($comanda_a[tipo]==2) { $tipo="Orden: Llevar"; }
+if($comanda_a[tipo]==3) { $tipo="Orden: Domicilio";}
 
 $sql_dcomanda="SELECT
               notas,
               n_producto,
               precio_p,
               codigo_producto,
-              descripcion
+              descripcion,
+              familia
             FROM
               (
                 SELECT
@@ -81,7 +80,8 @@ $sql_dcomanda="SELECT
                     2
                   ) AS precio_p,
                   p.codigo_oculto as codigo_producto,
-                  p.descripcion as descripcion
+                  p.descripcion as descripcion,
+                  dc.familia as familia
                 FROM
                   tb_producto AS p
                 INNER JOIN tb_comanda_detalle AS dc ON dc.codigo_producto = p.codigo_oculto
@@ -93,7 +93,8 @@ $sql_dcomanda="SELECT
                     r.nombre AS n_producto,
                     r.precio AS precio_p,
                     r.codigo_oculto as codigo_producto,
-                    r.descripcion as descripcion
+                    r.descripcion as descripcion,
+                    dc.familia as familia
                   FROM
                     tb_receta AS r
                   INNER JOIN tb_comanda_detalle AS dc ON dc.codigo_producto = r.codigo_oculto
@@ -104,15 +105,14 @@ $html="";
 $total_php=0.0;
 $comandov=Conexion::getInstance()->getDb()->prepare($sql_dcomanda);
 $comandov->execute();
+$html.='<div class="col-xs-12 col-lg-12">
+          <ul class="list-group">';
 while ($row=$comandov->fetch(PDO::FETCH_ASSOC)) {
-  $html.='<div class="col-xs-12 col-lg-12">
-          <div>
-            <h3>1     '.$row[n_producto].'    $'.$row[precio_p].' <i class="fa fa-lock"></i></h3>
-            <h5>'.$row[descripcion].'</h5>
-          </div>
-        </div>';
+  $html.='<li class="list-group-item" style="font-size: 18px;">1     '.$row[n_producto].'       $'.$row[precio_p].' <i id="anular_elemento" data-familia="'.$row[familia].'" class="fa fa-remove pull-right"></i><br>'.$row[descripcion].'</li>';
         $total_php=$total_php+$row[precio_p];
 }
+$html.='</ul>
+        </div>';
 //print_r($comanda_a);
 ?>
 
@@ -166,29 +166,33 @@ while ($row=$comandov->fetch(PDO::FETCH_ASSOC)) {
                       <div class="row">
                         <div class="widget">
                                     <div class="widget-simple themed-background-dark-fire">
-                                        <?php if($comanda_a[tipo]==1): ?>
+                                      <div class="row">
+                                        <div class="col-xs-2">
+                                          <?php if($comanda_a[tipo]==1): ?>
                                           <img id="img_tipo" src="../../img/placeholders/mesa.png" alt="avatar" class="widget-image img-circle pull-left">
                                         <?php elseif ($comanda_a[tipo]==2): ?>
                                           <img id="img_tipo" src="../../img/placeholders/llevar.png" alt="avatar" class="widget-image img-circle pull-left">
                                         <?php else: ?>
                                             <img id="img_tipo" src="../../img/placeholders/domicilio.jpg" alt="avatar" class="widget-image img-circle pull-left">
                                           <?php endif; ?>
-                                        <h4 class="widget-content">      
-                                          <a href="javascript:void(0)" >
-                                            <p id="tipo_ordenes"><?php echo $tipo; ?></p>
+                                        </div>
+                                        <div class="col-xs-8">
+                                          <p style="color: #fff; font-size: 18px;" id="tipo_ordenes"><?php echo $tipo; ?></p>
                                             <?php if($comanda_a[tipo]==1): ?>
-                                              <p id="num_mesa"><?php echo $comanda_a[n_mesa]; ?>
+                                              <p style="color: #fff; font-size: 18px;" id="num_mesa"><?php echo $comanda_a[n_mesa]; ?>
                                               </p>
-                                              <p id="para_cuantos"><?php echo $comanda_a[numero_clientes]; ?> clientes</p>
+                                              <p style="color: #fff; font-size: 18px;" id="para_cuantos"><?php echo $comanda_a[numero_clientes]; ?> clientes</p>
                                               
                                             <?php elseif ($comanda_a[tipo]==2): ?>
-                                              <p id="nome_cliente"><?php echo $comanda_a[nombre_cliente]; ?></p>
+                                              <p style="color: #fff; font-size: 18px;" id="nome_cliente"><?php echo $comanda_a[nombre_cliente]; ?></p>
                                             <?php elseif($comanda_a[tipo]==3): ?>
-                                              <p id="nome_cliente"><?php echo $comanda_a[nombre_cliente]; ?></p><p id="direc_cliente">Dirección de entrega: <?php echo $comanda_a[direccion]; ?></p>
+                                              <p style="color: #fff; font-size: 18px;" id="nome_cliente"><?php echo $comanda_a[nombre_cliente]; ?></p><p style="color: #fff; font-size: 18px;" id="direc_cliente">Dirección de entrega: <?php echo $comanda_a[direccion]; ?></p>
                                             <?php endif; ?>
-                                            </a>
+                                        </div>
+                                        <div class="col-xs-2">
                                             <a id="editar_datos_comanda" href="javascript:void(0)" class="pull-right"><img src="../../img/iconos/editar.svg" width="35px" height="35px"></a>
-                                        </h4>
+                                        </div>
+                                      </div>
                                     </div>
                                 </div>
                                 <input type="hidden" value="<?php echo $comanda_a[mesa] ?>" id="id_mesa">
@@ -197,15 +201,15 @@ while ($row=$comandov->fetch(PDO::FETCH_ASSOC)) {
                                 <input type="hidden" value="<?php echo $comanda_a[total] ?>" id="total_comanda"> 
                                 <input type="hidden" value="<?php echo $comanda_a[nombre_cliente] ?>" id="nom_cliente">
                                 <input type="hidden" value="<?php echo $comanda_a[direccion] ?>" id="direccion">
-                        <div class="col-xs-3 col-lg-3" style="height: 840px;overflow-y: auto;">
+                        <div class="col-xs-2 col-lg-2">
                           <h2>Categorías</h2>
-                          <div class="row" style="height: 700px;">
-                            <?php foreach ($categorias[2] as $categoria): ?>
+                          <div class="row" style="height: 840px;overflow-y: auto;">
+                            <?php foreach ($categorias as $categoria): ?>
                               <div class="col-xs-12 col-lg-12">
                                 <div class="widget">
                                   <div class="widget-simple themed-background-dark-amethyst">
                                     <h4 class="widget-content">
-                                        <a id="esto" data-tipo="<?php echo $categoria[id] ?>" href="javascript:void(0)" >
+                                        <a id="esto" data-tipo="<?php echo $categoria[codigo_oculto] ?>" href="javascript:void(0)" >
                                             <strong><?php echo $categoria[nombre] ?></strong>
                                         </a>
                                     </h4>
@@ -215,17 +219,18 @@ while ($row=$comandov->fetch(PDO::FETCH_ASSOC)) {
                           <?php endforeach ?>
                           </div>
                         </div>
-                        <div class="col-xs-3 col-lg-3" style="height: 840px;overflow-y: auto;">
+                        <div class="col-xs-4 col-lg-4">
                           <h2>Productos</h2>
-                          <div class="row" id="aqui">
+                          <div class="row" id="aqui" style="height: 840px;overflow-y: auto;">
                             
                           </div>
                         </div>
                         <div class="col-xs-6 col-lg-6" style="height: 840px;overflow-y: auto;">
                           <h2>Comanda</h2>
-                          <div class="row" id="comandi">
+                          <div class="row" id="">
                             <?php echo $html; ?>
                           </div>
+                          <div class="row" id="comandi"></div>
                           <h2 class="pull-right" id="totalpone">Total: $0.00</h2>
                         </div>
                       </div>

@@ -48,7 +48,7 @@ $mesas = Mesa::obtener_mesas();
           </div>
         </div>
       </div>
-      <div class="" id="aqui_busqueda">
+      <div class="" id="aqui_busqueda" style="height: 700px;">
        
       </div>
       
@@ -96,6 +96,7 @@ $mesas = Mesa::obtener_mesas();
 
     $(document).ready(function(e){
       cargar_mesas();
+      
       $("#titulo_nav").text("Mesas");
       $(document).on("click","#btn_guardar", function(e){
             var valid=$("#fm_mesas").valid();
@@ -155,6 +156,9 @@ $mesas = Mesa::obtener_mesas();
             if(json[2]){
                 $("#aqui_busqueda").empty();
                 $("#aqui_busqueda").html(json[2]);
+                $(".draggable" ).draggable({
+                  addClasses: false
+                });
                 swal.closeModal();
             }else{
                 $("#aqui_busqueda").empty();

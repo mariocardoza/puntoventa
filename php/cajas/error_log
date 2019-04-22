@@ -1,0 +1,2 @@
+[11-Feb-2019 19:43:39 UTC] PHP Parse error:  syntax error, unexpected '}' in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Caja.php on line 20
+[11-Feb-2019 19:59:28 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW) in /home1/estudjl6/public_html/sys/puntoventa/Conexion/Caja.php on line 18
